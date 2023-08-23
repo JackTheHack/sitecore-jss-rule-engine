@@ -1,0 +1,20 @@
+{
+    "$schema": "../.sitecore/schemas/ModuleFile.schema.json",
+    "namespace": "JSS.Serialization",
+    "items": {
+        "includes": [
+            {
+                "name": "templates",
+                "path": "/sitecore/templates/Feature/JSS Personalization"                
+            },
+            {
+                "name": "ruletag",
+                "path": "/sitecore/system/Settings/Rules/Definitions/Tags/JSS Personalization"
+            }, 
+            {
+                "name": "elements",
+                "path": "/sitecore/system/Settings/Rules/Definitions/Elements/JSS Personalization"
+            }
+        ]
+    }
+}
