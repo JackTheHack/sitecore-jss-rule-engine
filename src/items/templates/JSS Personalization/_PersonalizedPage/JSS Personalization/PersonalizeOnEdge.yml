@@ -1,36 +1,30 @@
 ﻿---
-ID: "f4092541-8206-40d6-8085-9d5651100ea4"
+ID: "7dc1f3f2-dd86-4228-acc3-7efbf72414a8"
 Parent: "7ddf1f75-f218-4f46-b06e-1eb2bdb06d18"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
-Path: /sitecore/templates/Feature/JSS Personalization/_PersonalizedPage/JSS Personalization/PersonalizationRules
+Path: /sitecore/templates/Feature/JSS Personalization/_PersonalizedPage/JSS Personalization/PersonalizeOnEdge
 SharedFields:
-- ID: "1eb8ae32-e190-44a6-968d-ed904c794ebf"
-  Hint: Source
-  Value: "rulespath={3C190623-7C8E-45A4-A569-1BE6752DF7FB}"
 - ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
   Hint: Type
-  Value: Rules
-- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
-  Hint: __Sortorder
-  Value: 100
+  Value: Checkbox
 Languages:
 - Language: en
   Fields:
   - ID: "19a69332-a23e-4e70-8d16-b2640cb24cc8"
     Hint: Title
-    Value: Personalization Rules
+    Value: Personalize On Edge
   - ID: "577f1689-7de4-4ad2-a15f-7fdc1759285f"
     Hint: __Long description
     Value: 
   - ID: "9541e67d-ce8c-4225-803d-33f7f29f09ef"
     Hint: __Short description
-    Value: Define the layout personalization rules
+    Value: If true the personalization would run on the Next.js edge, otherwise it would be applied on page load
   Versions:
   - Version: 1
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20230820T011919Z
+      Value: 20230825T110054Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -41,11 +35,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "31fd5a25-d883-4df3-995c-4feaa8a81805"
+      Value: "538513ae-1b85-44c4-8d09-e3bcc9486ab3"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230825T112849Z
+      Value: 20230825T112844Z
