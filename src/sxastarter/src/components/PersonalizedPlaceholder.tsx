@@ -1,34 +1,51 @@
 import React from 'react';
-import { constants, withSitecoreContext, Placeholder, LayoutServiceData, GraphQLRequestClient } from '@sitecore-jss/sitecore-jss-nextjs';
-import createRuleEngine from '../lib/rule-engine/ruleEngineProvider'
-import config from 'temp/config';
+import { withSitecoreContext, Placeholder } from '@sitecore-jss/sitecore-jss-nextjs';
+import { personalizationHelper } from 'lib/personalizationHelper';
+import createRuleEngine from 'lib/rule-engine/ruleEngineProvider'
 
-
-import { GetItemByIdQuery } from '../lib/queries/getItemById.js'
 
 class ClientSidePlaceholder extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            elements: null,
-            uid: null
+            elements: null            
         };
     }
 
-    async componentDidMount() {
+    private updatingState: boolean = false;
 
-        const personalizedRenderings = await this.shouldUpdatePlaceholder();
+    async componentDidMount() {        
+
+        var personalizeOnEdge = this.props.rendering.fields["PersonalizeOnEdge"]
+
+        if(personalizeOnEdge && personalizeOnEdge.value)
+        {
+            return;
+        }        
+
+        const personalizedRenderings = await this.personalizePlaceholder();
 
         if (personalizedRenderings) {
+            console.log('Set personalized renderings');
+            this.updatingState = true;
             this.setState({
-                elements: personalizedRenderings,
-                uid: this.guid()
+                elements: personalizedRenderings                
             });
         }
     }
 
+    shouldComponentUpdate() {
+        if (this.updatingState) {
+            this.updatingState = false;
+            return false;
+        }
+
+        return true;
+    }
+
     render() {
+
         const rendering = {
             ...this.props.rendering
         };
@@ -58,51 +75,9 @@ class ClientSidePlaceholder extends React.Component {
         return isEditing;
     }
 
-    guid() {
-        var w = () => { return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1); }
-        return `${w()}${w()}-${w()}-${w()}-${w()}-${w()}${w()}${w()}`;
-    }
+    
 
-    async getItemById(itemId: String) {
-        if (process.env.JSS_MODE === constants.JSS_MODE.DISCONNECTED) {
-            return null;
-        }
-
-        const graphQLClient = new GraphQLRequestClient(config.externalGraphQLEndpoint, {
-            apiKey: config.sitecoreApiKey,
-        });
-
-        var graphQlResponse = await graphQLClient.request(GetItemByIdQuery, {
-            "id": itemId
-        });
-        return graphQlResponse;
-    }
-
-    async populateFields(rendering: Object, originalDatasource: any) {
-
-        if (!rendering?.dataSource?.length || rendering.dataSource == originalDatasource) {
-            return;
-        }
-
-        var itemResult = await this.getItemById(rendering?.dataSource);
-
-        if (!itemResult) {
-            return;
-        }
-
-        itemResult.item.fields.forEach(async fieldObj => {
-            if (rendering.fields[fieldObj.name]?.value) {
-                rendering.fields[fieldObj.name].value = fieldObj.value;
-            } else {
-                rendering.fields[fieldObj.name] = {
-                    value: fieldObj.value
-                };
-            }
-        });
-        return rendering;
-    }
-
-    async shouldUpdatePlaceholder() {
+    async personalizePlaceholder() {
         var doRun =
             this.isClientside() &&
             !this.isDisconnectedMode() &&
@@ -112,86 +87,27 @@ class ClientSidePlaceholder extends React.Component {
             return null;
         }
 
+        
+
         var elementPlaceholderRenderings = this.props.rendering.placeholders[this.props.name];
 
-        if (!elementPlaceholderRenderings) {
-            return null;
-        }
+        var personalizationRule = this.props.rendering.fields["PersonalizationRules"]                
 
-        var personalizationRule = this.props.rendering.fields["PersonalizationRules"]
+        console.log('Running personalization on FE for renderings', elementPlaceholderRenderings);
+        
+        var ruleEngine = createRuleEngine();
+        var ruleEngineContext = ruleEngine.getRuleEngineContext();
 
-        if (personalizationRule?.value?.length > 0) {
+        ruleEngine.parseAndRunRule(personalizationRule.value, ruleEngineContext);
 
-            var ruleEngine = createRuleEngine();
-            ruleEngine.setSitecoreContext(this.props.sitecoreContext);
-            var ruleEngineContext = ruleEngine.getRuleEngineContext();
+        var placeholderPersonalizationRule = ruleEngineContext.personalization?.placeholders[this.props.name]
 
-            ruleEngine.parseAndRunRule(personalizationRule.value, ruleEngineContext);
+        console.log("Rule parsed")
 
-            var placeholderPersonalization = ruleEngineContext.personalization?.placeholders[this.props.name];
+        var elementPlaceholderRenderings = 
+        await personalizationHelper.doPersonalizePlaceholder(placeholderPersonalizationRule, elementPlaceholderRenderings, true);
 
-            if (placeholderPersonalization && placeholderPersonalization.renderings) {
-
-                for (let y = 0; y < elementPlaceholderRenderings.length; y++) {
-
-                    let renderingToUpdate = elementPlaceholderRenderings[y];
-
-                    var originalDatasource = renderingToUpdate.dataSource;
-
-                    var renderingPersonalization = placeholderPersonalization.renderings.find(i => i.name == renderingToUpdate.componentName);
-
-                    if (!renderingPersonalization) {
-                        continue;
-                    }
-
-                    if (renderingPersonalization.hide) {
-                        if (!renderingToUpdate) {
-                            console.log('Layout is missing rendering named ', renderingPersonalization.name);
-                            continue;
-                        }
-
-                        elementPlaceholderRenderings = elementPlaceholderRenderings.filter(y => y.uid != renderingToUpdate.uid);
-                    }
-
-                    if (renderingPersonalization.update) {
-                        if (!renderingToUpdate) {
-                            console.log('Layout is missing rendering named ', renderingPersonalization.name);
-                            continue;
-                        }
-
-                        if (renderingToUpdate.dataSource != renderingPersonalization.datasource) {
-
-                            renderingToUpdate.dataSource = renderingPersonalization.datasource;
-
-                            await this.populateFields(renderingToUpdate, originalDatasource);
-
-                        }
-                    }
-                }
-
-                placeholderPersonalization.renderings.filter(i => i.add).forEach(async renderingPersonalization => {
-
-                    var newRendering = {
-                        componentName: renderingPersonalization.name,
-                        dataSource: renderingPersonalization.datasource,
-                        fields: {},
-                        params: [],
-                        experiences: {},
-                        uid: this.guid()
-                    };
-
-                    await this.populateFields(newRendering, null);
-
-                    elementPlaceholderRenderings.push(newRendering);
-                });
-
-
-                return elementPlaceholderRenderings;
-
-            } else {
-                return elementPlaceholderRenderings;
-            }
-        }
+        console.log("Personalized renderings", elementPlaceholderRenderings);
 
         return elementPlaceholderRenderings;
     }
