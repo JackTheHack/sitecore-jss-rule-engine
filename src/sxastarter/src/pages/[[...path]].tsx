@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
 import NotFound from 'src/NotFound';
+import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 import Layout from 'src/Layout';
 import {
   RenderingType,
@@ -102,5 +102,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
     notFound: props.notFound, // Returns custom 404 page with a status code of 404 when true
   };
 };
+
+export const getStaticPaths: GetStaticPathsResult = async(context) => {
+
+}
 
 export default SitecorePage;

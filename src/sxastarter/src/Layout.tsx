@@ -5,9 +5,12 @@ import React from 'react';
 import Head from 'next/head';
 import { Placeholder, LayoutServiceData, Field, HTMLLink } from '@sitecore-jss/sitecore-jss-nextjs';
 import { getPublicUrl } from '@sitecore-jss/sitecore-jss-nextjs/utils';
+import config from 'temp/config'
 import Scripts from 'src/Scripts';
 
-import PersonalizedPlaceholder from 'components/PersonalizedPlaceholder';
+//@ts-ignore
+import { getRuleEngineInstance } from 'sitecore-jss-rule-engine';
+import { PersonalizedPlaceholder } from 'sitecore-jss-rule-engine-nextjs';
 
 // Prefix public assets with a public URL to enable compatibility with Sitecore Experience Editor.
 // If you're not supporting the Experience Editor, you can remove this.
@@ -29,6 +32,8 @@ const Layout = ({ layoutData, headLinks }: LayoutProps): JSX.Element => {
   const isPageEditing = layoutData.sitecore.context.pageEditing;
   const mainClassPageEditing = isPageEditing ? 'editing-mode' : 'prod-mode';
 
+  const ruleEngineInstance = getRuleEngineInstance();
+
   return (
     <>
       <Scripts />
@@ -46,7 +51,9 @@ const Layout = ({ layoutData, headLinks }: LayoutProps): JSX.Element => {
           <div id="header">{route && <Placeholder name="headless-header" rendering={route} />}</div>
         </header>
         <main>
-          <div id="content">{route && <PersonalizedPlaceholder name="headless-main" rendering={route} />}</div>
+          <div id="content">{route && <PersonalizedPlaceholder name="headless-main" rendering={route} 
+            endpointUrl={config.edgeQLEndpoint} ruleEngine={ruleEngineInstance} 
+            sitecoreApiKey={config.sitecoreApiKey}/>}</div>
         </main>
         <footer>
           <div id="footer">{route && <Placeholder name="headless-footer" rendering={route} />}</div>

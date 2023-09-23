@@ -56,7 +56,7 @@ class PersonalizePlugin implements MiddlewarePlugin {
     });
   }
 
-  async exec(req: NextRequest, res?: NextResponse): Promise<NextResponse> {
+  async exec(req: NextRequest, res?: NextResponse): Promise<NextResponse> {    
     return this.personalizeMiddleware.getHandler()(req, res);
   }
 }

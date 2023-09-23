@@ -1,4 +1,5 @@
 ﻿# may contain OAuth secrets, do not commit
+node_modules
 .sitecore/user.json
 
 # NuGet cache for Sitecore CLI

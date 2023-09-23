@@ -48,7 +48,8 @@
     "react-dom": "^18.2.0",
     "sass": "^1.52.3",
     "sass-alias": "^1.0.5",
-    "sitecore-jss-rule-engine": "^0.0.7"
+    "sitecore-jss-rule-engine": "^0.0.19",
+    "sitecore-jss-rule-engine-nextjs": "^0.0.33"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.21.8",
