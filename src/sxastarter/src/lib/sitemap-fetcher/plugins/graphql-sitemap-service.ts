@@ -1,5 +1,4 @@
 import {
-  MultisiteGraphQLSitemapService,
   StaticPath,
   constants,
   SiteInfo,
@@ -8,12 +7,13 @@ import config from 'temp/config';
 import { SitemapFetcherPlugin } from '..';
 import { GetStaticPathsContext } from 'next';
 import { siteResolver } from 'lib/site-resolver';
+import { MultisitePersonalizeGraphQLSitemapService } from '../personalized-sitemap-plugin/multisite-personalize-sitemap-fetcher';
 
 class GraphqlSitemapServicePlugin implements SitemapFetcherPlugin {
-  _graphqlSitemapService: MultisiteGraphQLSitemapService;
+  _graphqlSitemapService: MultisitePersonalizeGraphQLSitemapService;
 
   constructor() {
-    this._graphqlSitemapService = new MultisiteGraphQLSitemapService({
+    this._graphqlSitemapService = new MultisitePersonalizeGraphQLSitemapService({
       endpoint: config.graphQLEndpoint,
       apiKey: config.sitecoreApiKey,
       sites: [...new Set(siteResolver.sites.map((site: SiteInfo) => site.name))],

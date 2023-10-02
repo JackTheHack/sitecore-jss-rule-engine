@@ -24,10 +24,17 @@ export class PathExtractor {
       path = '/' + path;
     }
 
+    console.log('original path - ', path)
+
     const extractedPath = (Object.values(plugins) as Plugin[]).reduce(
-      (resultPath, plugin) => plugin.exec(resultPath),
+      (resultPath, plugin) => { 
+        console.log('Path plugin - ', plugin?.constructor.name, resultPath); 
+        return plugin? plugin.exec(resultPath) : resultPath;
+      },
       path
     );
+
+    console.log('extracted path - ', extractedPath)
 
     return extractedPath;
   }

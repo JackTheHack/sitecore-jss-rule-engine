@@ -16,5 +16,10 @@ export const config = {
    * 5. /healthz (Health check)
    * 6. all root files inside /public (e.g. /favicon.ico)
    */
+  //runtime: 'experimental-edge', // for Edge API Routes only
+  unstable_allowDynamic: [
+    '/node_modules/lodash.unescape/**', // use a glob to allow anything in the function-bind 3rd party module
+    '/node_modules/@sitecore-jss/**'
+  ],
   matcher: ['/', '/((?!api/|_next/|healthz|sitecore/api/|-/|[\\w-]+\\.\\w+).*)'],
 };

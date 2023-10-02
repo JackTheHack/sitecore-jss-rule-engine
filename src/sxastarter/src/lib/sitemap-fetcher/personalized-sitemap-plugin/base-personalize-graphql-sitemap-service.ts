@@ -1,8 +1,12 @@
 import { GraphQLClient, GraphQLRequestClient, PageInfo } from '@sitecore-jss/sitecore-jss/graphql';
 import { debug } from '@sitecore-jss/sitecore-jss';
-import { getPersonalizedRewrite } from '@sitecore-jss/sitecore-jss/personalize';
+import {getScPersonalizedVariantIds, getScPersonalizedRewrite} from '../../personalizationUtils'
+//@ts-ignore
+import { getRuleEngineInstance } from 'sitecore-jss-rule-engine'
+
 
 /** @private */
+
 export const languageError = 'The list of languages cannot be empty';
 export const siteError = 'The service needs a site name';
 
@@ -112,8 +116,12 @@ export interface SiteRouteQueryResult<T> {
 export type RouteListQueryResult = {
   path: string;
   route?: {
-    personalizationRule: string;
-    personalizeOnEdge: string;
+    personalizationRule: {
+      value: string;
+    };
+    personalizeOnEdge: { 
+      value: string; 
+    };
   };
 };
 
@@ -155,7 +163,7 @@ export type StaticPath = {
  * This list is used for SSG and Export functionality.
  * @mixes SearchQueryService<PageListQueryResult>
  */
-export abstract class BaseGraphQLSitemapService {
+export abstract class BasePersonalizeGraphQLSitemapService {
   private _graphQLClient: GraphQLClient;
 
   /**
@@ -177,7 +185,7 @@ export abstract class BaseGraphQLSitemapService {
    * @param {GraphQLSitemapServiceConfig} options instance
    */
   constructor(public options: BaseGraphQLSitemapServiceConfig) {
-    this._graphQLClient = this.getGraphQLClient();
+    this._graphQLClient = this.getGraphQLClient();    
   }
 
   /**
@@ -245,37 +253,40 @@ export abstract class BaseGraphQLSitemapService {
     formatStaticPath: (path: string[], language: string) => StaticPath,
     language: string
   ): Promise<StaticPath[]> {
-    const formatPath = (path: string) =>
-      formatStaticPath(path.replace(/^\/|\/$/g, '').split('/'), language);
 
-    const aggregatedPaths: StaticPath[] = [];
+    const formatPath = (path: string) => {
+      return formatStaticPath(path.replace(/^\/|\/$/g, '').split('/'), language);
+    }
+      
+
+    const aggregatedPaths: StaticPath[] = [];    
 
     sitePaths.forEach((item) => {
+
       if (!item) return;
 
       aggregatedPaths.push(formatPath(item.path));
 
       // check for type safety's sake - personalize may be empty depending on query type
-      if (item.route?.personalizationRule?.length) {
-        var personalizationVariationIds = this.getPersonalizedVariantIds(item.route?.personalizationRule);
-        aggregatedPaths.push(            
-            ...(personalizationVariationIds.map((varId:string) =>
-            formatPath(getPersonalizedRewrite(item.path, { variantId: varId }))
-          ) || {})
-        );
+      if (item.route?.personalizationRule?.value?.length) {
+        const ruleEngineInstance = getRuleEngineInstance();
+        const ruleEngineContext = ruleEngineInstance.getRuleEngineContext();
+        const parsedRule = ruleEngineInstance.parseRuleXml(item.route?.personalizationRule?.value, ruleEngineContext);
+        const personalizationVariationIds = getScPersonalizedVariantIds(parsedRule);                        
+        if(personalizationVariationIds)
+        {
+          aggregatedPaths.push(                      
+              ...(personalizationVariationIds.map((varId:string) =>             
+              formatPath(getScPersonalizedRewrite(item.path, varId))
+            ) || {})
+          );
+        }
       }
     });
 
     return aggregatedPaths;
   }
 
-  protected getPersonalizedVariantIds(rule:any){
-
-
-
-    var result: String[] = [];
-    return result;
-  }
 
   protected async fetchLanguageSitePaths(
     language: string,

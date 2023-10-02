@@ -15,6 +15,11 @@
   ],
   "ignorePatterns": [".generated/**/*", "**/*.d.ts", "**/*.js"],
   "rules": {
+      "prettier/prettier": "off",
+      "jsx-a11y/alt-text": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-inferrable-types": "off",
       "react/no-unescaped-entities": "off",
       "@next/next/no-page-custom-font": "off",
       "@next/next/no-img-element": "off", // Don't force next/image

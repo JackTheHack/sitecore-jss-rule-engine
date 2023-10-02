@@ -17,9 +17,22 @@ export default async function middleware(
   req: NextRequest,
   ev: NextFetchEvent
 ): Promise<NextResponse> {
+  console.log('Middleware running');
+
   const response = NextResponse.next();
 
   return (Object.values(plugins) as MiddlewarePlugin[])
     .sort((p1, p2) => p1.order - p2.order)
-    .reduce((p, plugin) => p.then((res) => plugin.exec(req, res, ev)), Promise.resolve(response));
+    .reduce((p, plugin) => p.then(
+      (res) => { 
+        try{
+        console.log('Middleware - ', plugin?.constructor.name)
+        if(!plugin)return res; 
+        return plugin?.exec(req, res, ev);
+        }catch(error)
+        {
+          console.log('Error during middleware - ', error);
+          return res;
+        }
+      }), Promise.resolve(response));
 }

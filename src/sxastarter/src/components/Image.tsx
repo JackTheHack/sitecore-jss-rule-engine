@@ -42,7 +42,7 @@ export const Banner = (props: ImageProps): JSX.Element => {
   return (
     <div className={`component hero-banner ${props.params.styles}`} id={id ? id : undefined}>
       <div className="component-content sc-sxa-image-hero-banner" style={backgroundStyle}>
-        {sitecoreContext.pageEditing ? <JssImage field={modifyImageProps} /> : ''}
+        {sitecoreContext.pageEditing ? <JssImage field={modifyImageProps}/> : ''}
       </div>
     </div>
   );
@@ -62,7 +62,7 @@ export const Default = (props: ImageProps): JSX.Element => {
             <Image />
           ) : (
             <JssLink field={props.fields.TargetUrl}>
-              <Image />
+              <Image/>
             </JssLink>
           )}
           <Text

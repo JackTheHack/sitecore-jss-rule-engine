@@ -18,7 +18,7 @@ export interface SiteResolverPlugin {
 }
 
 const sites = (Object.values(plugins) as SiteResolverPlugin[]).reduce(
-  (sites, plugin) => plugin.exec(sites),
+  (sites, plugin) => {console.log('resolver - ', plugin.constructor.name); return plugin.exec(sites);},
   []
 );
 

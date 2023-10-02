@@ -5,6 +5,8 @@
   and the component name to component mapping.
 */
 
+console.log('RUNNING BOOTSTRAP FOR ', process.env.NODE_ENV);
+
 /*
    PLUGINS GENERATION
 */

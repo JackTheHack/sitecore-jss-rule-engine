@@ -1,19 +1,26 @@
 import { GetServerSidePropsContext, GetStaticPropsContext } from 'next';
 import { SitecorePageProps } from 'lib/page-props';
 
-import config from 'temp/config'
 import * as plugins from 'temp/page-props-factory-plugins';
 //@ts-ignore
 import { getRuleEngineInstance} from 'sitecore-jss-rule-engine'
-import { RulesPersonalizationPlugin } from 'sitecore-jss-rule-engine-nextjs';
 
-var middlewarePlugins = Object.values(plugins) as Plugin[];
+import { RulesSSGPersonalizationPlugin, RulesSSRPersonalizationPlugin, ResolvePersonalizationPathPlugin } from 'sitecore-jss-rule-engine-nextjs';
 
-var ruleEngine = getRuleEngineInstance();
 
-var personalizationPlugin = new RulesPersonalizationPlugin(config.graphQLEndpoint, config.sitecoreApiKey, ruleEngine);
+import config from 'temp/config'
 
-middlewarePlugins.push(personalizationPlugin)
+const ruleEngine = getRuleEngineInstance();
+
+const ssrPersonalizationPlugin = new RulesSSRPersonalizationPlugin(config.graphQLEndpoint, config.sitecoreApiKey, ruleEngine);
+const ssgPersonalizationPlugin = new RulesSSGPersonalizationPlugin(config.graphQLEndpoint, config.sitecoreApiKey, ruleEngine);
+const resolvePersonalizationPathPlugin = new ResolvePersonalizationPathPlugin();
+
+const middlewarePlugins = Object.values(plugins) as Plugin[];
+
+middlewarePlugins.push(ssrPersonalizationPlugin);
+middlewarePlugins.push(ssgPersonalizationPlugin);
+middlewarePlugins.push(resolvePersonalizationPathPlugin);
 
 
 /**
@@ -48,14 +55,17 @@ export class SitecorePagePropsFactory {
    */
   public async create(
     context: GetServerSidePropsContext | GetStaticPropsContext
-  ): Promise<SitecorePageProps> {      
+  ): Promise<SitecorePageProps> {    
+    
 
     const extendedProps = await middlewarePlugins
       .sort((p1, p2) => p1.order - p2.order)
       .reduce(async (result, plugin) => {        
-        
         const props = await result;        
+        if(!plugin) return props;
         const newProps = await plugin.exec(props, context);
+        console.log('Page props plugin - ', plugin?.constructor.name, props.notFound);                
+        console.log('Placeholders - ', props.layoutData?.sitecore?.route?.placeholders);
         return newProps;
       }, Promise.resolve({} as SitecorePageProps));
 

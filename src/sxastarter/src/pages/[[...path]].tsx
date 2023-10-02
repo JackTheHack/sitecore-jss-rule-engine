@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import NotFound from 'src/NotFound';
-import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Layout from 'src/Layout';
 import {
   RenderingType,
@@ -69,6 +69,13 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
   let paths: StaticPath[] = [];
   let fallback: boolean | 'blocking' = 'blocking';
 
+  console.log('Fetching static paths');
+  const fetched_paths = await sitemapFetcher.fetch(context);
+  fetched_paths.forEach(x => {
+    console.log(x.params.path);
+  })
+  console.log('Done fetching static paths');
+
   if (process.env.NODE_ENV !== 'development' && !process.env.DISABLE_SSG_FETCH) {
     try {
       // Note: Next.js runs export in production mode
@@ -92,7 +99,6 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 // revalidation (or fallback) is enabled and a new request comes in.
 export const getStaticProps: GetStaticProps = async (context) => {
   const props = await sitecorePagePropsFactory.create(context);
-
   return {
     props,
     // Next.js will attempt to re-generate the page:
@@ -103,8 +109,5 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export const getStaticPaths: GetStaticPathsResult = async(context) => {
-
-}
 
 export default SitecorePage;
