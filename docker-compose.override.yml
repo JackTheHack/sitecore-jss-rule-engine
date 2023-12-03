@@ -27,6 +27,8 @@ services:
       JSS_EDITING_SECRET: ${JSS_EDITING_SECRET}
       SITECORE_API_KEY: "${SITECORE_API_KEY_xmcloudpreview}"
       DISABLE_SSG_FETCH: ${DISABLE_SSG_FETCH}
+      DEBUG: "sitecore-jss:*"
+      DEBUG_MULTILINE: "true"
     depends_on:
       - cm
       - nodejs
@@ -84,4 +86,6 @@ services:
       ## Development Environment Optimizations
       SITECORE_DEVELOPMENT_PATCHES: DevEnvOn,CustomErrorsOff,DebugOn,DiagnosticsOff,InitMessagesOff
       Sitecore_AppSettings_exmEnabled:define: "no" # remove to turn on EXM
+      DEBUG: "sitecore-jss:*"
+      DEBUG_MULTILINE: "true"
     entrypoint: powershell -Command "& C:/tools/entrypoints/iis/Development.ps1"

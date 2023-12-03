@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { MiddlewarePlugin } from '..';
 import config from 'temp/config';
 import { siteResolver } from 'lib/site-resolver';
-import { ScPersonalizeMiddleware } from '../personalized-plugin/ScPersonalizedMiddleware';
+import { ScPersonalizeMiddleware } from 'sitecore-jss-rule-engine-nextjs';
 
 /**
  * This is the personalize middleware plugin for Next.js.
@@ -21,15 +21,7 @@ class ScPersonalizePlugin implements MiddlewarePlugin {
 
   async exec(req: NextRequest, res?: NextResponse): Promise<NextResponse> {
 
-    const response = res || NextResponse.next();
-
-    console.log(response);
-
     console.log('Middleware personalize - ', req.url, this.personalizeMiddleware?.constructor.name);
-
-    //return response;
-
-    console.log('####')
 
     this.personalizeMiddleware = new ScPersonalizeMiddleware({
       // Configuration for your Sitecore Experience Edge endpoint

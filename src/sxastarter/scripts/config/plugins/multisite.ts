@@ -21,7 +21,6 @@ class MultisitePlugin implements ConfigPlugin {
         chalk.yellow('Skipping site information fetch (missing GraphQL endpoint or API key).')
       );
     } else {
-      console.log(`Fetching site information from ${endpoint}`);
       try {
         const siteInfoService = new GraphQLSiteInfoService({
           endpoint,

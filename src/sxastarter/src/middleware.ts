@@ -1,9 +1,16 @@
-import type { NextRequest, NextFetchEvent } from 'next/server';
+import { type NextRequest, type NextFetchEvent, NextResponse } from 'next/server';
 import middleware from 'lib/middleware';
+
 
 // eslint-disable-next-line
 export default async function (req: NextRequest, ev: NextFetchEvent) {
+  try{
   return middleware(req, ev);
+  }catch(e){
+    console.log('Something went wrong - ', e);
+    const response = NextResponse.next();
+    return response;
+  }
 }
 
 export const config = {

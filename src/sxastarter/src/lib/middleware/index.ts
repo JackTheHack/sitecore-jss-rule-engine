@@ -34,5 +34,6 @@ export default async function middleware(
           console.log('Error during middleware - ', error);
           return res;
         }
+        
       }), Promise.resolve(response));
 }

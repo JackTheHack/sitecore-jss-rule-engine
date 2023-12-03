@@ -7,7 +7,7 @@ import config from 'temp/config';
 import { SitemapFetcherPlugin } from '..';
 import { GetStaticPathsContext } from 'next';
 import { siteResolver } from 'lib/site-resolver';
-import { MultisitePersonalizeGraphQLSitemapService } from '../personalized-sitemap-plugin/multisite-personalize-sitemap-fetcher';
+import { MultisitePersonalizeGraphQLSitemapService} from 'sitecore-jss-rule-engine-nextjs'
 
 class GraphqlSitemapServicePlugin implements SitemapFetcherPlugin {
   _graphqlSitemapService: MultisitePersonalizeGraphQLSitemapService;

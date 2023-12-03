@@ -1,11 +1,12 @@
 import { Plugin } from '..';
-import { normalizePersonalizedRewrite } from 'lib/personalizationUtils';
+import { ScPersonalizePlugin } from 'sitecore-jss-rule-engine-nextjs';
 
-class ScPersonalizePlugin implements Plugin {
+class PersonalizePlugin implements Plugin {
   exec(path: string) {
-    // Remove personalize rewrite segment from the path
-    return normalizePersonalizedRewrite(path);
+    // Remove personalize rewrite segment from the path    
+    const plugin = new ScPersonalizePlugin();
+    return plugin.exec(path);
   }
 }
 
-export const scpersonalizePlugin = new ScPersonalizePlugin();
+export const scpersonalizePlugin = new PersonalizePlugin();

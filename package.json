@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "sitecore-jss-rule-engine-nextjs": "^0.0.49"
+    "sitecore-jss-rule-engine": "^0.0.34",
+    "sitecore-jss-rule-engine-nextjs": "^0.0.55"
   }
 }

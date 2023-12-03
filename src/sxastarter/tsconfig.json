@@ -32,6 +32,6 @@
     "incremental": true,
     "forceConsistentCasingInFileNames": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/lib/middleware/plugins/scpersonalize.tsexclude", "src/lib/middleware/plugins/scpersonalize.ts", "src/lib/middleware/plugins/scpersonalize.ts", "src/lib/middleware/plugins/scpersonalize.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/lib/middleware/plugins/scpersonalize.tsexclude", "src/lib/middleware/plugins/scpersonalize.ts", "src/lib/middleware/plugins/scpersonalize.ts", "src/lib/middleware/plugins/scpersonalize.ts", "src/pages/ssr/[[...path]].tsx.example", "src/pages/ssg/[[...path]].tsx.example", "src/pages/[[...path]].tsx.disabled"],
   "exclude": ["node_modules"]
 }

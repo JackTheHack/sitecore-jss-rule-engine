@@ -2,26 +2,8 @@ import { GetServerSidePropsContext, GetStaticPropsContext } from 'next';
 import { SitecorePageProps } from 'lib/page-props';
 
 import * as plugins from 'temp/page-props-factory-plugins';
-//@ts-ignore
-import { getRuleEngineInstance} from 'sitecore-jss-rule-engine'
-
-import { RulesSSGPersonalizationPlugin, RulesSSRPersonalizationPlugin, ResolvePersonalizationPathPlugin } from 'sitecore-jss-rule-engine-nextjs';
-
-
-import config from 'temp/config'
-
-const ruleEngine = getRuleEngineInstance();
-
-const ssrPersonalizationPlugin = new RulesSSRPersonalizationPlugin(config.graphQLEndpoint, config.sitecoreApiKey, ruleEngine);
-const ssgPersonalizationPlugin = new RulesSSGPersonalizationPlugin(config.graphQLEndpoint, config.sitecoreApiKey, ruleEngine);
-const resolvePersonalizationPathPlugin = new ResolvePersonalizationPathPlugin();
 
 const middlewarePlugins = Object.values(plugins) as Plugin[];
-
-middlewarePlugins.push(ssrPersonalizationPlugin);
-middlewarePlugins.push(ssgPersonalizationPlugin);
-middlewarePlugins.push(resolvePersonalizationPathPlugin);
-
 
 /**
  * Determines whether context is GetServerSidePropsContext (SSR) or GetStaticPropsContext (SSG)
@@ -64,8 +46,7 @@ export class SitecorePagePropsFactory {
         const props = await result;        
         if(!plugin) return props;
         const newProps = await plugin.exec(props, context);
-        console.log('Page props plugin - ', plugin?.constructor.name, props.notFound);                
-        console.log('Placeholders - ', props.layoutData?.sitecore?.route?.placeholders);
+        console.log('Page props plugin - ', plugin?.constructor.name, '# Not found - ', props.notFound);                
         return newProps;
       }, Promise.resolve({} as SitecorePageProps));
 
