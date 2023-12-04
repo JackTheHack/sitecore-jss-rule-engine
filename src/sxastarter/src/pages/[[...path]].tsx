@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import NotFound from 'src/NotFound';
-import { GetStaticPaths, GetStaticPathsContext, GetStaticPathsResult, GetStaticProps } from 'next';
+import { GetStaticPathsContext, GetStaticProps } from 'next';
 import Layout from 'src/Layout';
 import {
   RenderingType,
