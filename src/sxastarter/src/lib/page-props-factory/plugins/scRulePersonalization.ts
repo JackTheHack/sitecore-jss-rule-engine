@@ -23,10 +23,8 @@ class ScRulesPersonalization implements Plugin {
 
     // Retrieve component props using side-effects defined on components level
     if (isServerSidePropsContext(context)) {
-      console.log('SSR SSR SSR')
       return await this.ssrPersonalizePlugin.exec(props, context);
     } else {
-      console.log('SSG SSG SSG')
       return await this.ssgPersonalizePlugin.exec(props, context);
     }
   }
