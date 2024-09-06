@@ -41,8 +41,6 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 .vs/
-#Nuget packages folder
-packages/
 
 # temporary workaround
 /docker/data/cm/*
