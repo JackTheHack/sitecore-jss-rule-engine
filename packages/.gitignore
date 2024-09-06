@@ -1,0 +1,5 @@
+node_modules
+node_modules/*
+**/dist/*
+coverage/*
+sitecore-jss-rule-engine/coverage/*
