@@ -1,7 +1,9 @@
 import React from 'react';
-import { withSitecoreContext, Placeholder } from '@sitecore-jss/sitecore-jss-nextjs';
 import { PersonalizationHelper } from "../lib/index";
-import {JssRuleEngine} from "sitecore-jss-rule-engine"
+import {JssRuleEngine} from "@jss-rule-engine/core"
+import { Placeholder } from '@sitecore-jss/sitecore-jss-nextjs';
+import { withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';
+
 
 class PersonalizedPlaceholder extends React.Component<any,any> {
 
@@ -12,9 +14,9 @@ class PersonalizedPlaceholder extends React.Component<any,any> {
     constructor(props:any) {
         super(props);
 
-        this.graphQLEndpoint = props.endpointUrl;
-        this.ruleEngine = props.ruleEngine;
-        this.sitecoreApiKey = props.sitecoreApiKey;
+        this.graphQLEndpoint = props.endpointUrl as string;
+        this.ruleEngine = props.ruleEngine as JssRuleEngine;
+        this.sitecoreApiKey = props.sitecoreApiKey as string;
 
         this.state = {
             elements: null            
@@ -74,8 +76,6 @@ class PersonalizedPlaceholder extends React.Component<any,any> {
         const isEditing = this.props.sitecoreContext.pageEditing;
         return isEditing;
     }
-
-    
 
     async personalizePlaceholder() {
         var doRun =

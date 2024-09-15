@@ -1,0 +1,1 @@
+export { ScPersonalizeMiddleware, ScPersonalizeMiddlewareConfig } from './plugins/middleware/ScPersonalizedMiddleware';

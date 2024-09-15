@@ -1,6 +1,40 @@
 {
-  "dependencies": {
-    "sitecore-jss-rule-engine": "^0.0.34",
-    "sitecore-jss-rule-engine-nextjs": "^0.0.55"
+    "name": "jss-rule-engine-demo",
+    "description": "Application utilizing Sitecore JavaScript Services and Next.js",
+    "version": "21.2.0",
+    "private": true,
+    "workspaces": [
+      "./packages/*",
+      "./apps/*"
+    ],    
+    "engines": {
+      "node": ">=12",
+      "npm": ">=6"
+    },
+    "author": {
+      "name": "Sitecore Corporation",
+      "url": "https://jss.sitecore.com"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/sitecore/jss.git"
+    },
+    "bugs": {
+      "url": "https://github.com/sitecore/jss/issues"
+    },    
+    "license": "Apache-2.0",
+    "scripts": {
+        "build:core": "yarn workspace @jss-rule-engine/core build",
+        "build:next": "yarn workspace @jss-rule-engine/nextjs build",
+        "build:docs": "yarn workspace @jss-rule-engine/docs build",
+        "build:sxa": "yarn workspace sxastarter build",
+        "build:demo": "yarn workspace jsssandbox build",
+        "build": "yarn run build:core && yarn run build:nextjs",        
+        "start:sxa": "yarn workspace sxastarter next:dev",
+        "tsc:sxa": "yarn workspace sxastarter tsc",
+        "tsc:demo": "yarn workspace jsssandbox tsc",
+        "tsc:nextjs": "yarn workspace @jss-rule-engine/nextjs build",
+        "release:all": "yarn workspaces run release"
+    }
   }
-}
+  

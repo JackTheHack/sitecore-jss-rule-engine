@@ -1,6 +1,6 @@
 import { GetItemByIdQuery } from '../queries/getItemById'
 import { constants, GraphQLRequestClient } from '@sitecore-jss/sitecore-jss-nextjs';
-import { JssRuleEngine } from 'sitecore-jss-rule-engine'
+import { JssRuleEngine } from '@jss-rule-engine/core'
 
 export class PersonalizationHelper {
 

@@ -1,17 +1,30 @@
 {
-  "name": "sitecore-jss-rule-engine-nextjs",
+  "name": "@jss-rule-engine/nextjs",
   "version": "0.2.1",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./edge": "./dist/middleware.js"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "private": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run build:esm",
+    "build": "yarn run build:esm",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:babel": "babel src/lib --out-dir dist --copy-files",
-    "release": "npm run build && npm version patch && npm publish"
+    "release": "npm run build && npm version --patch && npm publish"
+  },
+  "engines": {
+      "node": ">=12",
+      "npm": ">=6"
   },
   "keywords": [
     "Sitecore",
@@ -24,26 +37,18 @@
   "license": "ISC",
   "dependencies": {
     "@sitecore-jss/sitecore-jss-nextjs": "21.2.4",
-    "memory-cache": "^0.2.0",
-    "next": "~13.4.19",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "sitecore-jss-rule-engine": "^0.2.2"
-  },
-  "peerDependencies": {
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  },
+    "memory-cache": "0.2.0",
+    "next": "^14.2.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@jss-rule-engine/core": "*"    
+  },  
   "devDependencies": {
-    "@sitecore-jss/sitecore-jss-cli": "~21.2.0",
-    "@sitecore-jss/sitecore-jss-dev-tools": "~21.2.0",
-    "@types/memory-cache": "^0.2.5",
-    "@types/react": "18.2.0",
-    "@types/react-dom": "18.2.0",
-    "typedoc": "^0.25.4"
-  },
-  "resolutions": {
-    "@types/react": "18.2.0",
-    "@types/react-dom": "18.2.0"
-  }
+    "@sitecore-jss/sitecore-jss-cli": "21.2.0",
+    "@sitecore-jss/sitecore-jss-dev-tools": "21.2.0",
+    "typedoc": "0.25.4",
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.0.5",
+    "@types/memory-cache": "0.2.5"
+  }  
 }

@@ -2,7 +2,7 @@ import { GraphQLClient, GraphQLRequestClient, PageInfo } from '@sitecore-jss/sit
 import { debug } from '@sitecore-jss/sitecore-jss';
 import {getScPersonalizedVariantIds, getScPersonalizedRewrite} from '../../lib/personalizationUtils'
 //@ts-ignore
-import { getRuleEngineInstance } from 'sitecore-jss-rule-engine'
+import { getRuleEngineInstance } from '@jss-rule-engine/core'
 
 
 /** @private */

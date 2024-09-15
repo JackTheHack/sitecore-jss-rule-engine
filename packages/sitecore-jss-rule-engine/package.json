@@ -1,6 +1,6 @@
 {
   "name": "@jss-rule-engine/core",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Rule engine for Sitecore JSS",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -14,7 +14,7 @@
     "test": "yarn run build && ava",
     "t": "yarn run build && ava --match ",
     "c8": "c8 ava",
-    "release": "yarn run build && (yarn version --patch) && yarn publish",
+    "release": "npm run build && npm version patch && npm publish",
     "build": "yarn run build:esm",
     "build:esm": "tsc && tsc-alias",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",

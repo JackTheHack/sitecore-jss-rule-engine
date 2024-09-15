@@ -3,7 +3,7 @@ import { debug } from '@sitecore-jss/sitecore-jss';
 import { isTimeoutError } from '@sitecore-jss/sitecore-jss/utils';
 import { CacheClient, CacheOptions, MemoryCacheClient } from './cache-client';
 //@ts-ignore
-import { JssRuleEngine } from 'sitecore-jss-rule-engine';
+import { JssRuleEngine } from '@jss-rule-engine/core';
 import { registerNextJS } from '../../rule-engine/ruleEngineProvider';
 import { getScPersonalizedVariantIds } from '../../lib/personalizationUtils';
 

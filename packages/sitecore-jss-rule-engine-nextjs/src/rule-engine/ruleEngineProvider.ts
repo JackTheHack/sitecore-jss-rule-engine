@@ -1,7 +1,7 @@
 import addRenderingCommand from './actions/addRenderingCommand'
 import setDataSourceCommand from './actions/setDataSourceCommand'
 import hideRenderingCommand from './actions/hideRenderingCommand'
-import { JssRuleEngine } from 'sitecore-jss-rule-engine'
+import { JssRuleEngine } from '@jss-rule-engine/core'
 
 export function registerNextJS(ruleEngine:JssRuleEngine)
 {

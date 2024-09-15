@@ -3,8 +3,6 @@ import {
   ExperienceParams,
   GraphQLPersonalizeServiceConfig,
 } from '@sitecore-jss/sitecore-jss/personalize';
-//import { debug, NativeDataFetcher } from '@sitecore-jss/sitecore-jss';
-import { debug } from '@sitecore-jss/sitecore-jss';
 import {GraphQLSCPersonalizeService} from './ScPersonalizeService'
 import { MiddlewareBase, MiddlewareBaseConfig } from './middleware';
 import { getScPersonalizedRewrite} from '../../lib/personalizationUtils'
@@ -125,7 +123,7 @@ export class ScPersonalizeMiddleware extends MiddlewareBase {
     const variantId = personalizeInfo.activeVariantid;  
 
     if (!variantId) {
-      debug.personalize('skipped (no variant identified)');
+      console.log('skipped (no variant identified)');
       return response;
     }
 

@@ -1,0 +1,20 @@
+{
+  "name": "@jss-rule-engine/docs",
+  "version": "1.0.0",
+  "description": "Javascript library to parse Sitecore rules and run them in JS",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd sitecore-jss-rule-engine && yarn run release && cd sitecore-jss-rule-engine-nextjs && yarn run release",
+    "docs": "typedoc --options ./typedoc.rule-engine.json && typedoc --options ./typedoc.rule-engine-nextjs.json",
+    "release": "echo 'skip';"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typedoc": "^0.25.4"
+  },
+  "dependencies": {
+    "@jss-rule-engine/core":"*",
+    "@jss-rule-engine/nextjs":"*"
+  }
+}

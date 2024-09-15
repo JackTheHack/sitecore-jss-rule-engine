@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext, GetStaticPropsContext } from 'next';
 import { PersonalizationHelper } from '../../lib/index';
-import { JssRuleEngine } from 'sitecore-jss-rule-engine'
+import { JssRuleEngine } from '@jss-rule-engine/core'
 import {
   DictionaryPhrases,
   ComponentPropsCollection,

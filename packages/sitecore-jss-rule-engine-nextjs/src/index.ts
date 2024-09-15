@@ -1,6 +1,6 @@
 import PersonalizedPlaceholder  from "./components/PersonalizedPlaceholder";
 import { registerNextJS } from "./rule-engine/ruleEngineProvider";
-import { getRuleEngineInstance } from 'sitecore-jss-rule-engine'
+import { getRuleEngineInstance } from '@jss-rule-engine/core'
 
 //register commands for global instance
 let ruleEngine = getRuleEngineInstance();
