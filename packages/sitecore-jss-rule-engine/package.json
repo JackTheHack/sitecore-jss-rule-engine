@@ -1,16 +1,16 @@
 {
-  "name": "sitecore-jss-rule-engine",
-  "version": "0.2.2",
+  "name": "@jss-rule-engine/core",
+  "version": "0.2.4",
   "description": "Rule engine for Sitecore JSS",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "npm run build && ava",
-    "t": "npm run build && ava --match ",
+    "test": "yarn run build && ava",
+    "t": "yarn run build && ava --match ",
     "c8": "c8 ava",
-    "release": "npm run build && npm version patch && npm publish",
-    "build": "npm run build:esm",
+    "release": "yarn run build && yarn version --patch && yarn publish",
+    "build": "yarn run build:esm",
     "build:esm": "tsc && tsc-alias",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:babel": "babel src/lib --out-dir dist --copy-files"
@@ -24,17 +24,17 @@
   "author": "Jack Spektor",
   "license": "ISC",
   "dependencies": {
-    "@rgrove/parse-xml": "^4.1.0",
-    "@types/node": "^20.8.9",
-    "apollo-boost": "^0.4.9",
-    "graphql": "^15.9.0",
-    "tsc-alias": "^1.8.10",
-    "xml-js": "^1.6.11"
+    "@rgrove/parse-xml": "4.1.0",
+    "@types/node": "20.8.9",
+    "apollo-boost": "0.4.9",
+    "graphql": "~15.8.0",
+    "tsc-alias": "1.8.10",
+    "xml-js": "1.6.11"
   },
   "devDependencies": {
-    "ava": "^5.3.1",
-    "c8": "^10.1.2",
-    "typedoc": "^0.25.4",
-    "typescript": "^5.2.2"
+    "ava": "5.3.1",
+    "c8": "10.1.2",
+    "typedoc": "0.25.4",
+    "typescript": "4.9.4"
   }
 }
