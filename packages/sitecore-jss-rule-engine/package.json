@@ -1,15 +1,20 @@
 {
   "name": "@jss-rule-engine/core",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Rule engine for Sitecore JSS",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "private": false,
   "scripts": {
     "test": "yarn run build && ava",
     "t": "yarn run build && ava --match ",
     "c8": "c8 ava",
-    "release": "yarn run build && yarn version --patch && yarn publish",
+    "release": "yarn run build && (yarn version --patch) && yarn publish",
     "build": "yarn run build:esm",
     "build:esm": "tsc && tsc-alias",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
