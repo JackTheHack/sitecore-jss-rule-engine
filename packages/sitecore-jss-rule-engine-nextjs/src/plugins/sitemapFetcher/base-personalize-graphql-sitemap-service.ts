@@ -1,6 +1,6 @@
 import { GraphQLClient, GraphQLRequestClient, PageInfo } from '@sitecore-jss/sitecore-jss/graphql';
 import { debug } from '@sitecore-jss/sitecore-jss';
-import {getScPersonalizedVariantIds, getScPersonalizedRewrite} from '../../lib/personalizationUtils'
+import {getScPersonalizedVariantIds, getScPersonalizedRewrite} from '@jss-rule-engine/edge/dist/lib/personalizationUtils'
 //@ts-ignore
 import { getRuleEngineInstance } from '@jss-rule-engine/core'
 

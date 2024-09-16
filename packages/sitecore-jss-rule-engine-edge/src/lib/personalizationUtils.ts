@@ -1,6 +1,3 @@
-//@ts-ignore
-//import { getRuleEngineInstance } from '@jss-rule-engine/core';
-
 // Function to generate all binary strings
 export function generateAllBinaryStrings(n: number, i: number, resultArr: string[], arr: number[]) {
     if (i == n) {

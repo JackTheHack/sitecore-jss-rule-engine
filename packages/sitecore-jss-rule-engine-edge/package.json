@@ -1,11 +1,11 @@
 {
-  "name": "@jss-rule-engine/nextjs",
+  "name": "@jss-rule-engine/edge",
   "version": "0.2.1",
   "description": "",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "dist/index.d.ts",  
+  "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -39,8 +39,7 @@
     "next": "^14.2.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@jss-rule-engine/core": "*",
-    "@jss-rule-engine/edge": "*"
+    "@jss-rule-engine/core": "*"    
   },  
   "devDependencies": {
     "@sitecore-jss/sitecore-jss-cli": "21.2.0",

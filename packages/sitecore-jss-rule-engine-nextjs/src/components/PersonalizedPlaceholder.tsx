@@ -1,5 +1,5 @@
 import React from 'react';
-import { PersonalizationHelper } from "../lib/index";
+import { PersonalizationHelper  } from "../lib/PersonalizationHelper";
 import {JssRuleEngine} from "@jss-rule-engine/core"
 import { Placeholder } from '@sitecore-jss/sitecore-jss-nextjs';
 import { withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';

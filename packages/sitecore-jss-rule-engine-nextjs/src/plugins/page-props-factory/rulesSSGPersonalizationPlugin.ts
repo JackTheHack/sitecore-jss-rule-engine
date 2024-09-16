@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext, GetStaticPropsContext } from 'next';
-import { PersonalizationHelper } from '../../lib/index';
+import { PersonalizationHelper } from '../../lib/PersonalizationHelper';
 import { JssRuleEngine } from '@jss-rule-engine/core'
 import {
   DictionaryPhrases,

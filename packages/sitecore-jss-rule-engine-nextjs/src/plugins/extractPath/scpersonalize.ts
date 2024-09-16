@@ -5,7 +5,7 @@ interface Plugin {
   exec(path: string): string;
 }
 
-import { normalizePersonalizedRewrite } from '../../lib/personalizationUtils';
+import { normalizePersonalizedRewrite } from '@jss-rule-engine/edge/dist/lib/personalizationUtils';
 
 export class ScPersonalizePlugin implements Plugin {
   exec(path: string) {

@@ -25,15 +25,13 @@
     "license": "Apache-2.0",
     "scripts": {
         "build:core": "yarn workspace @jss-rule-engine/core build",
-        "build:next": "yarn workspace @jss-rule-engine/nextjs build",
+        "build:edge": "yarn workspace @jss-rule-engine/edge build",
+        "build:next": "yarn workspace @jss-rule-engine/nextjs build",        
         "build:docs": "yarn workspace @jss-rule-engine/docs build",
-        "build:sxa": "yarn workspace sxastarter build",
         "build:demo": "yarn workspace jsssandbox build",
-        "build": "yarn run build:core && yarn run build:nextjs",        
-        "start:sxa": "yarn workspace sxastarter next:dev",
-        "tsc:sxa": "yarn workspace sxastarter tsc",
-        "tsc:demo": "yarn workspace jsssandbox tsc",
-        "tsc:nextjs": "yarn workspace @jss-rule-engine/nextjs build",
+        "build": "yarn run build:core && yarn run build:edge && yarn run build:next",        
+        "start:demo": "yarn run build && yarn workspace jsssandbox next:dev",
+        "tsc:demo": "yarn workspace jsssandbox tsc",        
         "release:all": "yarn workspaces run release"
     }
   }

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { MiddlewarePlugin } from '..';
 import config from 'temp/config';
 import { siteResolver } from 'lib/site-resolver';
-import { ScPersonalizeMiddleware } from '@jss-rule-engine/nextjs/dist/middleware';
+import { ScPersonalizeMiddleware } from '@jss-rule-engine/edge';
 
 /**
  * This is the personalize middleware plugin for Next.js.
@@ -49,7 +49,8 @@ class ScPersonalizePlugin implements MiddlewarePlugin {
       // You can also pass a custom point of sale resolver into middleware to override it like so:
       // getPointOfSale: (site, language) => { ... }
     });
-    return this.personalizeMiddleware.getHandler()(req, res);
+    //return this.personalizeMiddleware.getHandler()(req, res);
+    return NextResponse.next();
   }
 }
 
