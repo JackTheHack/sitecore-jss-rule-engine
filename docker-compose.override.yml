@@ -19,7 +19,7 @@ services:
       args:
         PARENT_IMAGE: ${REGISTRY}${COMPOSE_PROJECT_NAME}-nodejs:${VERSION:-latest}
     volumes:
-      - .\apps\demo:C:\app
+      - .\apps\nextjs-demo:C:\app
     environment:
       SITECORE_API_HOST: "http://cm"
       NEXTJS_DIST_DIR: ".next-container"
@@ -61,6 +61,15 @@ services:
         source: .\docker\data\solr
         target: c:\data
 
+  ruleengine-cm-assets: 
+    image: jss-rule-engine/ruleengine-cm-assets
+    build:
+      context: ./docker/build/ruleengine-cm-assets
+      args:
+        PARENT_IMAGE: mcr.microsoft.com/windows/nanoserver:ltsc2022
+    deploy:
+      replicas: 0
+
   # Use our custom CM image with added modules and solution code.
   # Folders are mounted below for code deployment and log output. See Dockerfile for details.
   # Configure for a mounted license file instead of using SITECORE_LICENSE.
@@ -71,6 +80,9 @@ services:
       args:
         PARENT_IMAGE: ${SITECORE_DOCKER_REGISTRY}sitecore-xmcloud-cm:${SITECORE_VERSION}
         TOOLS_IMAGE: ${TOOLS_IMAGE}
+        RULEENGINE_IMAGE: jss-rule-engine/ruleengine-cm-assets
+    depends_on:
+      - ruleengine-cm-assets        
     volumes:
       - ${LOCAL_DEPLOY_PATH}\platform:C:\deploy
       - ${LOCAL_DATA_PATH}\cm:C:\inetpub\wwwroot\App_Data\logs

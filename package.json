@@ -29,6 +29,7 @@
         "build:next": "yarn workspace @jss-rule-engine/nextjs build",        
         "build:docs": "yarn workspace @jss-rule-engine/docs build",
         "build:demo": "yarn workspace jsssandbox build",
+        "build:items": "dotnet sitecore itemres create -o docker/build/ruleengine-cm-assets/items/ruleengine --overwrite",
         "build": "yarn run build:core && yarn run build:edge && yarn run build:next",        
         "start:demo": "yarn run build && yarn workspace jsssandbox next:dev",
         "tsc:demo": "yarn workspace jsssandbox tsc",        
