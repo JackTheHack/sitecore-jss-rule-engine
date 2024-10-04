@@ -1,6 +1,6 @@
 {
   "name": "@jss-rule-engine/edge",
-  "version": "0.2.1",
+  "version": "0.3.1",
   "description": "",
   "type": "module",
   "main": "dist/index.js",
@@ -17,11 +17,11 @@
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:babel": "babel src/lib --out-dir dist --copy-files",
-    "release": "npm run build && npm version --patch && npm publish"
+    "release": "npm run build && npm version patch && npm publish --access public"
   },
   "engines": {
-      "node": ">=12",
-      "npm": ">=6"
+    "node": ">=12",
+    "npm": ">=6"
   },
   "keywords": [
     "Sitecore",
@@ -39,8 +39,8 @@
     "next": "^14.2.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@jss-rule-engine/core": "*"    
-  },  
+    "@jss-rule-engine/core": "*"
+  },
   "devDependencies": {
     "@sitecore-jss/sitecore-jss-cli": "21.2.0",
     "@sitecore-jss/sitecore-jss-dev-tools": "21.2.0",
@@ -48,5 +48,5 @@
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.0.5",
     "@types/memory-cache": "0.2.5"
-  }  
+  }
 }
