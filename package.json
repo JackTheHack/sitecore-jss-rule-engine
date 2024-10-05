@@ -33,7 +33,11 @@
         "build": "yarn run build:core && yarn run build:edge && yarn run build:next",        
         "start:demo": "yarn run build && yarn workspace jsssandbox next:dev",
         "tsc:demo": "yarn workspace jsssandbox tsc",        
-        "release:all": "yarn workspaces run release"
+        "release:all": "yarn workspaces run release",
+        "docker:build": "docker compose build",
+        "docker:up": "docker compose up -d",
+        "docker:login": "docker login ghcr.io -u jack.spektor@gmail.com --password-stdin",
+        "docker:push": "docker image push ghcr.io/jackthehack/ruleengine-cm-assets"
     }
   }
   

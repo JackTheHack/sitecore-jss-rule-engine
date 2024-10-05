@@ -62,7 +62,7 @@ services:
         target: c:\data
 
   ruleengine-cm-assets: 
-    image: jss-rule-engine/ruleengine-cm-assets
+    image: ghcr.io/jackthehack/ruleengine-cm-assets
     build:
       context: ./docker/build/ruleengine-cm-assets
       args:
@@ -80,7 +80,7 @@ services:
       args:
         PARENT_IMAGE: ${SITECORE_DOCKER_REGISTRY}sitecore-xmcloud-cm:${SITECORE_VERSION}
         TOOLS_IMAGE: ${TOOLS_IMAGE}
-        RULEENGINE_IMAGE: jss-rule-engine/ruleengine-cm-assets
+        RULEENGINE_IMAGE: ghcr.io/jackthehack/ruleengine-cm-assets
     depends_on:
       - ruleengine-cm-assets        
     volumes:
