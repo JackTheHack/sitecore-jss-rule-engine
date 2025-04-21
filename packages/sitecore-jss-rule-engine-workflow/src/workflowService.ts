@@ -1,5 +1,6 @@
 import { JssRuleEngine } from '@jss-rule-engine/core';
 import { DatabaseService, DatabaseServiceOptions } from './databaseService';
+import { ActionFactory } from './actionFactory';
 
 interface WorkflowServiceOptions {
     db: DatabaseServiceOptions,
@@ -36,15 +37,15 @@ export class WorkflowService {
         const state = workflow.states[stateId];
         if (!state) throw new Error('State not found');
 
-        await this.databaseService.addVisitor(visitorId, stateId);
+        await this.databaseService.addVisitor(visitorId, stateId, workflowId);
 
         if (executeActions) {
-            await this.execute(visitorId);
+            await this.execute(visitorId, workflowId);
         }
     }
 
-    async execute(visitorId: string): Promise<void> {
-        const currentStateId = await this.databaseService.getVisitorState(visitorId);
+    async execute(visitorId: string, workflowId: string): Promise<void> {
+        const currentStateId = await this.databaseService.getVisitorState(visitorId, workflowId);
         if (!currentStateId) throw new Error('Visitor not assigned to any state');
 
         const workflow = Object.values(this.workflows).find((wf) =>
@@ -62,14 +63,17 @@ export class WorkflowService {
                 ruleEngine: this.options.ruleEngine,
                 visitor: visitorObject,
                 workflowService: this,
+                workflow: workflow
             } as WorkflowConditionContext;
 
             if (await evaluateCondition(trigger.condition, workflowConditionContext)) {
                 for (const action of state.actions) {
                     if (await evaluateCondition(action.condition, workflowConditionContext)) {
-                        action.execute(visitorId);
+                        const actionCommand = ActionFactory.getAction(action.templateId);
+                        await actionCommand.execute(visitorId);
+
                         if (action.nextStateId) {
-                            await this.changeVisitorState(visitorId, action.nextStateId);
+                            await this.changeVisitorState(visitorId, action.nextStateId, workflowId);
                         }
                     }
                 }
@@ -77,19 +81,20 @@ export class WorkflowService {
         }
     }
 
-    async removeVisitorFromWorkflow(visitorId: string): Promise<void> {
-        await this.databaseService.removeVisitor(visitorId);
+    async removeVisitorFromWorkflow(visitorId: string, workflowId: string): Promise<void> {
+        await this.databaseService.removeVisitor(visitorId, workflowId);
     }
 
     async changeVisitorState(
         visitorId: string,
+        workflowId: string,
         nextStateId: string
     ): Promise<void> {
-        await this.databaseService.updateVisitorState(visitorId, nextStateId);
+        await this.databaseService.updateVisitorState(visitorId, workflowId, nextStateId);
     }
 
-    async getStateVisitors(stateId: string): Promise<string[]> {
-        return await this.databaseService.getStateVisitors(stateId);
+    async getStateVisitors(workflowId: string, stateId: string): Promise<string[]> {
+        return await this.databaseService.getStateVisitors(workflowId, stateId);
     }
 }
 

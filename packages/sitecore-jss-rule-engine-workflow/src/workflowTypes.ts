@@ -11,14 +11,14 @@ interface WorkflowState {
 }
 
 interface Trigger {
-  condition: any; // Replace with actual condition type
+  condition: string;
 }
 
 interface Action {
   id: string;
-  condition: any; // Replace with actual condition type
-  nextStateId?: string;
-  execute(visitorId: string): void;
+  templateId: string;
+  condition: string;
+  nextStateId?: string;  
 }
 
 interface WorkflowVisitor {
