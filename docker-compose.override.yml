@@ -1,23 +1,12 @@
 services:
-
-  # A Windows-based nodejs base image
-  nodejs:
-    image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-nodejs:${VERSION:-latest}
+  rendering:
+    #image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-rendering:${VERSION:-latest}
     build:
-      context: ./docker/build/nodejs
+      context: ./docker/build/rendering
+      #target: ${BUILD_CONFIGURATION}
       args:
         PARENT_IMAGE: ${NODEJS_PARENT_IMAGE}
         NODEJS_VERSION: ${NODEJS_VERSION}
-    deploy:
-      replicas: 0
-
-  rendering:
-    image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-rendering:${VERSION:-latest}
-    build:
-      context: ./docker/build/rendering
-      target: ${BUILD_CONFIGURATION}
-      args:
-        PARENT_IMAGE: ${REGISTRY}${COMPOSE_PROJECT_NAME}-nodejs:${VERSION:-latest}
     volumes:
       - .\apps\nextjs-demo:C:\app
     environment:
@@ -31,7 +20,6 @@ services:
       DEBUG_MULTILINE: "true"
     depends_on:
       - cm
-      - nodejs
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.rendering-secure.entrypoints=websecure"
@@ -79,7 +67,7 @@ services:
       context: ./docker/build/cm
       args:
         PARENT_IMAGE: ${SITECORE_DOCKER_REGISTRY}sitecore-xmcloud-cm:${SITECORE_VERSION}
-        TOOLS_IMAGE: ${TOOLS_IMAGE}
+        TOOLS_IMAGE: ${TOOLS_IMAGE}:${SITECORE_VERSION} 
         RULEENGINE_IMAGE: ${RULEENGINE_IMAGE}
     depends_on:
       - ruleengine-cm-assets        
@@ -100,4 +88,4 @@ services:
       Sitecore_AppSettings_exmEnabled:define: "no" # remove to turn on EXM
       DEBUG: "sitecore-jss:*"
       DEBUG_MULTILINE: "true"
-    entrypoint: powershell -Command "& C:/tools/entrypoints/iis/Development.ps1"
+    entrypoint: powershell -Command "& C:/tools/entrypoints/iis/XmCloudDevelopment.ps1"

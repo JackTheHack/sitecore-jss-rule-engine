@@ -2,11 +2,7 @@
     "$schema": "../.sitecore/schemas/ModuleFile.schema.json",
     "namespace": "JSS.Serialization",
     "items": {
-        "includes": [
-            {
-                "name": "templates",
-                "path": "/sitecore/templates/Feature/JSS Personalization"                
-            },
+        "includes": [           
             {
                 "name": "ruletag",
                 "path": "/sitecore/system/Settings/Rules/Definitions/Tags/JSS Personalization"
@@ -14,6 +10,15 @@
             {
                 "name": "elements",
                 "path": "/sitecore/system/Settings/Rules/Definitions/Elements/JSS Personalization"
+            },
+            {
+                "name": "core",
+                "path": "/sitecore/client/Applications/Launchpad/PageSettings/Buttons/Marketing/Workflow Editor",
+                "database": "core"
+            },
+            {
+                "name": "templates",
+                "path": "/sitecore/templates/Feature/JSS Rule Engine"
             }
         ]
     }

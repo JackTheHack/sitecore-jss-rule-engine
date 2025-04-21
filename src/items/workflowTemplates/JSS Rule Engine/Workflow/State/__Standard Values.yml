@@ -1,0 +1,41 @@
+﻿---
+ID: "47d08362-30cc-45ee-a94f-c1973536f866"
+Parent: "3a39a70f-60f4-49c6-8b29-88e8642ff544"
+Template: "3a39a70f-60f4-49c6-8b29-88e8642ff544"
+Path: /sitecore/templates/Feature/JSS Rule Engine/Workflow/State/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: |
+    {05187080-DD07-4FAF-B501-F1C53CDF90F5}
+    {B44783BE-EBC7-4CE8-80D9-EE7A08DF3245}
+    {43F79D85-4B6C-4253-B40B-D33DDC12EC63}
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "c899cbbf-862a-4bce-ac2a-5e45b229b11f"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250420T005737Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "82da158d-36f0-47b9-9983-e16001289689"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250420T012315Z

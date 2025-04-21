@@ -1,8 +1,8 @@
 ﻿---
-ID: "7ddf1f75-f218-4f46-b06e-1eb2bdb06d18"
-Parent: "2bc49721-9a84-44a3-bfad-8e9986830301"
+ID: "16505a62-bed9-4f30-81d8-f6f7a85229e8"
+Parent: "309267f5-c7e0-40d3-898b-32c1c148422f"
 Template: "e269fbb5-3750-427a-9149-7aa950b49301"
-Path: /sitecore/templates/Feature/JSS Personalization/_PersonalizedPage/JSS Personalization
+Path: /sitecore/templates/Feature/JSS Rule Engine/Workflow/Action/Workflow Action
 Languages:
 - Language: en
   Versions:
@@ -10,7 +10,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20230820T011919Z
+      Value: 20250420T004805Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -21,11 +21,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "8474240b-4ac8-4f76-92af-a1ff50fb5563"
+      Value: "70b6fc0f-ed24-4bd5-88de-a64c15d6f595"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230820T023405Z
+      Value: 20250420T012528Z
