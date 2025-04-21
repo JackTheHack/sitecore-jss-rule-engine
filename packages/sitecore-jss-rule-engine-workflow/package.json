@@ -32,7 +32,8 @@
   "author": "Jack Spektor",
   "license": "ISC",
   "dependencies": {
-    "@jss-rule-engine/core": "*"
+    "@jss-rule-engine/core": "*",
+    "@libsql/client": "0.15.4"
   },
   "devDependencies": {
     "typedoc": "0.25.4"

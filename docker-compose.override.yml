@@ -18,6 +18,9 @@ services:
       DISABLE_SSG_FETCH: ${DISABLE_SSG_FETCH}
       DEBUG: "sitecore-jss:*"
       DEBUG_MULTILINE: "true"
+      SQLITE_URL: "${SQLITE_URL}"
+      SQLITE_SYNCURL: "${SQLITE_SYNCURL}"
+      SQLITE_AUTHTOKEN: "${SQLITE_AUTHTOKEN}"
     depends_on:
       - cm
     labels:
