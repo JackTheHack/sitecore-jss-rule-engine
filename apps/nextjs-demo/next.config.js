@@ -28,7 +28,7 @@ const nextConfig = {
   },
 
   // Enable React Strict Mode
-  reactStrictMode: true,
+  reactStrictMode: true,  
 
   // use this configuration to ensure that only images from the whitelisted domains
   // can be served from the Next.js Image Optimization API

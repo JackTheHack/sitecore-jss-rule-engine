@@ -7,6 +7,7 @@ import Scripts from 'src/Scripts';
 
 import { getRuleEngineInstance } from '@jss-rule-engine/core';
 import { PersonalizedPlaceholder } from '@jss-rule-engine/nextjs';
+import ChatBotWidget from 'components/ChatBotWidget';
 
 // Prefix public assets with a public URL to enable compatibility with Sitecore editors.
 // If you're not supporting Sitecore editors, you can remove this.
@@ -35,12 +36,15 @@ const Layout = ({ layoutData, headLinks }: LayoutProps): JSX.Element => {
       <Head>
         <title>{fields.pageTitle?.value.toString() || 'Page'}</title>
         <link rel="icon" href={`${publicUrl}/favicon.ico`} />
+        <link rel="stylesheet" href={`${publicUrl}/chatbotify/style.css`} />
         {headLinks.map((headLink) => (
           <link rel={headLink.rel} key={headLink.href} href={headLink.href} />
         ))}
       </Head>
 
       <Navigation />
+      <ChatBotWidget/>
+
       {/* root placeholder for the app, which we add components to using route data */}
       <div className="container">
         {route && <PersonalizedPlaceholder

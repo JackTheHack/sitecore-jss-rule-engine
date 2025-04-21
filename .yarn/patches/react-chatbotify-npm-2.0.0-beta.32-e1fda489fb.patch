@@ -1,0 +1,9 @@
+diff --git a/dist/index.js b/dist/index.js
+index d2be17eabc0dde47b70ed47c7f4baad07061647f..5f8f0d45b1cb249add5d2ef6bf14c1d45b44b108 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -1,4 +1,3 @@
+-import "./style.css";
+ import { jsxs as z, jsx as l, Fragment as tA } from "react/jsx-runtime";
+ import * as X from "react";
+ import { forwardRef as cA, createContext as DA, useContext as EA, Fragment as YA, useRef as $, useState as I, useCallback as T, useEffect as W, isValidElement as ue, createElement as ne, useMemo as gA } from "react";

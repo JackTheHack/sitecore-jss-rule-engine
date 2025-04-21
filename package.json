@@ -4,37 +4,37 @@
     "version": "21.2.0",
     "private": true,
     "workspaces": [
-      "./packages/*",
-      "./apps/*"
-    ],    
+        "./packages/*",
+        "./apps/*"
+    ],
     "engines": {
-      "node": ">=12",
-      "npm": ">=6"
+        "node": ">=12",
+        "npm": ">=6"
     },
     "author": {
-      "name": "Sitecore Corporation",
-      "url": "https://jss.sitecore.com"
+        "name": "Sitecore Corporation",
+        "url": "https://jss.sitecore.com"
     },
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/sitecore/jss.git"
+        "type": "git",
+        "url": "git+https://github.com/sitecore/jss.git"
     },
     "bugs": {
-      "url": "https://github.com/sitecore/jss/issues"
-    },    
+        "url": "https://github.com/sitecore/jss/issues"
+    },
     "license": "Apache-2.0",
     "scripts": {
         "build:core": "yarn workspace @jss-rule-engine/core build",
         "build:edge": "yarn workspace @jss-rule-engine/edge build",
-        "build:next": "yarn workspace @jss-rule-engine/nextjs build",        
+        "build:next": "yarn workspace @jss-rule-engine/nextjs build",
         "build:docs": "yarn workspace @jss-rule-engine/docs build",
         "build:demo": "yarn workspace jsssandbox build",
         "build:editor": "yarn workspace @jss-rule-engine/editor build",
         "build:items": "dotnet sitecore itemres create -o docker/build/ruleengine-cm-assets/items/ruleengine --overwrite",
-        "build": "yarn run build:core && yarn run build:edge && yarn run build:next",        
-        "start:demo": "yarn run build && yarn workspace jsssandbox start:connected",
+        "build": "yarn run build:core && yarn run build:edge && yarn run build:next",
+        "start:demo": "yarn workspace jsssandbox build && yarn workspace jsssandbox start:connected",
         "start:editor": "yarn workspace @jss-rule-engine/editor start",
-        "tsc:demo": "yarn workspace jsssandbox tsc",        
+        "tsc:demo": "yarn workspace jsssandbox tsc",
         "release:all": "yarn workspaces run release",
         "docker:build": "docker compose build",
         "docker:up": "docker compose up -d",
@@ -43,6 +43,6 @@
         "sitecore:pull": "dotnet sitecore ser pull",
         "sitecore:push": "dotnet sitecore ser push",
         "sitecore:login": "dotnet sitecore login"
-    }
-  }
-  
+    },
+    "packageManager": "yarn@4.9.1"
+}

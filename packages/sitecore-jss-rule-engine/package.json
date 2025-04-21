@@ -9,7 +9,6 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "private": false,
   "scripts": {
     "test": "yarn run build && ava",
     "t": "yarn run build && ava --match ",

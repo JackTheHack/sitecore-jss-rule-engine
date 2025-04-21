@@ -14,7 +14,7 @@
     "typedoc": "^0.25.4"
   },
   "dependencies": {
-    "@jss-rule-engine/core":"*",
-    "@jss-rule-engine/nextjs":"*"
+    "@jss-rule-engine/core": "*",
+    "@jss-rule-engine/nextjs": "*"
   }
 }
