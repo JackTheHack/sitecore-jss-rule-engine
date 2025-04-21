@@ -84,6 +84,9 @@ export class RulesSSGPersonalizationPlugin implements Plugin {
 
   
   async exec(props: any, context: GetServerSidePropsContext | GetStaticPropsContext) {
+
+    console.log('RulesSSGPersonalizationPlugin', props, context);
+
     var doRun =
             !this.isServerSidePropsContext(context) &&
             !context.preview &&

@@ -4,6 +4,7 @@ import { ScPersonalizePlugin } from '@jss-rule-engine/nextjs';
 class PersonalizePlugin implements Plugin {
   exec(path: string) {
     // Remove personalize rewrite segment from the path    
+    console.log('ScPersonalizePlugin', path);
     const plugin = new ScPersonalizePlugin();
     return plugin.exec(path);
   }

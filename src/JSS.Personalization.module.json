@@ -19,6 +19,10 @@
             {
                 "name": "templates",
                 "path": "/sitecore/templates/Feature/JSS Rule Engine"
+            },
+            {
+                "name": "demosite",
+                "path": "/sitecore/content/ruledemo"
             }
         ]
     }

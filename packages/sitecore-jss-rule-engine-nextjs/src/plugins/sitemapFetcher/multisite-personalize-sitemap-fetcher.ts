@@ -47,6 +47,9 @@ export class MultisitePersonalizeGraphQLSitemapService extends BasePersonalizeGr
     languages: string[],
     formatStaticPath: (path: string[], language: string, isStaticRender: boolean) => StaticPath
   ): Promise<StaticPath[]> {
+
+    console.log('MultisitePersonalizeGraphQLSitemapService', this.options);
+
     const paths = new Array<StaticPath>();
     if (!languages.length) {
       throw new RangeError(languageError);

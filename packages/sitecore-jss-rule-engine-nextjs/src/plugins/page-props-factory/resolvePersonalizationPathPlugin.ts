@@ -38,7 +38,7 @@ export class ResolvePersonalizationPathPlugin implements Plugin {
   async exec(props: any, context: GetServerSidePropsContext | GetStaticPropsContext) {
     if (context.preview) return props;
 
-    console.log('ResolvePersonalizationPathPlugin', context?.params?.path);
+    console.log('ResolvePersonalizationPathPlugin', props, context);
 
     if(context?.params?.path)
     {

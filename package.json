@@ -32,14 +32,17 @@
         "build:editor": "yarn workspace @jss-rule-engine/editor build",
         "build:items": "dotnet sitecore itemres create -o docker/build/ruleengine-cm-assets/items/ruleengine --overwrite",
         "build": "yarn run build:core && yarn run build:edge && yarn run build:next",        
-        "start:demo": "yarn run build && yarn workspace jsssandbox next:dev",
+        "start:demo": "yarn run build && yarn workspace jsssandbox start:connected",
         "start:editor": "yarn workspace @jss-rule-engine/editor start",
         "tsc:demo": "yarn workspace jsssandbox tsc",        
         "release:all": "yarn workspaces run release",
         "docker:build": "docker compose build",
         "docker:up": "docker compose up -d",
         "docker:login": "docker login ghcr.io -u jack.spektor@gmail.com --password-stdin",
-        "docker:push": "docker image push ghcr.io/jackthehack/ruleengine-cm-assets"
+        "docker:push": "docker image push ghcr.io/jackthehack/ruleengine-cm-assets",
+        "sitecore:pull": "dotnet sitecore ser pull",
+        "sitecore:push": "dotnet sitecore ser push",
+        "sitecore:login": "dotnet sitecore login"
     }
   }
   

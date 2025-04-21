@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { MiddlewarePlugin } from '..';
-import config from 'temp/config';
-import { siteResolver } from 'lib/site-resolver';
+import config from '../../../temp/config';
+import { siteResolver } from '../../site-resolver';
 import { ScPersonalizeMiddleware } from '@jss-rule-engine/edge';
 
 /**
@@ -19,7 +19,7 @@ class ScPersonalizePlugin implements MiddlewarePlugin {
   // Using 1 to leave room for things like redirects to occur first
   order = 1;
 
-  async exec(req: NextRequest, res?: NextResponse): Promise<NextResponse> {
+  async exec(req: NextRequest, _res?: NextResponse): Promise<NextResponse> {
 
     console.log('Middleware personalize - ', req.url, this.personalizeMiddleware?.constructor.name);
 

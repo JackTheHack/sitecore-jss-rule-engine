@@ -72,6 +72,9 @@ export class RulesSSRPersonalizationPlugin implements Plugin {
 
 
   async exec(props: any, context: GetServerSidePropsContext | GetStaticPropsContext) {
+
+    console.log('RulesSSRPersonalizationPlugin', props, context);
+
     var doRun =
             this.isServerSidePropsContext(context) &&
             !context.preview &&

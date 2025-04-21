@@ -32,6 +32,9 @@
     "incremental": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/lib/sitemap-fetcher/plugins/graphql-sitemap-service.ts.disabled", "src/lib/middleware/plugins/scpersonalize.ts.disabled"],
+  "include": [
+    "next-env.d.ts", 
+    "**/*.ts", 
+    "**/*.tsx"],
   "exclude": ["node_modules"]
 }

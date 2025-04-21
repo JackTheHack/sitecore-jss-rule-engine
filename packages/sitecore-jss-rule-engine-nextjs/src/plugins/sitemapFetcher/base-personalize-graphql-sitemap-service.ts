@@ -1,6 +1,6 @@
 import { GraphQLClient, GraphQLRequestClient, PageInfo } from '@sitecore-jss/sitecore-jss/graphql';
 import { debug } from '@sitecore-jss/sitecore-jss';
-import {getScPersonalizedVariantIds, getScPersonalizedRewrite} from '@jss-rule-engine/edge/dist/lib/personalizationUtils'
+import {getScPersonalizedVariantIds, getScPersonalizedRewrite} from '@jss-rule-engine/edge';
 //@ts-ignore
 import { getRuleEngineInstance } from '@jss-rule-engine/core'
 
@@ -210,6 +210,8 @@ export abstract class BasePersonalizeGraphQLSitemapService {
       }
     });
 
+    console.log('BasePersonalizeGraphQLSitemapService.fetchExportSitemap', locale);
+
     return this.fetchSitemap([locale], formatPath);
   }
 
@@ -227,6 +229,8 @@ export abstract class BasePersonalizeGraphQLSitemapService {
       locale
     });
 
+    console.log('BasePersonalizeGraphQLSitemapService.fetchSSGSitemap', locales);
+
     return this.fetchSitemap(locales, formatPath);
   }
 
@@ -235,6 +239,9 @@ export abstract class BasePersonalizeGraphQLSitemapService {
     languages: string[],
     formatStaticPath: (path: string[], language: string, isStaticRender: boolean) => StaticPath
   ) {
+
+    console.log('BasePersonalizeGraphQLSitemapService.getTranformedPaths', siteName, languages);
+
     const paths = new Array<StaticPath>();
 
     for (const language of languages) {
@@ -243,6 +250,7 @@ export abstract class BasePersonalizeGraphQLSitemapService {
       }
 
       debug.sitemap('fetching sitemap data for %s %s', language, siteName);
+      console.log('fetching sitemap data for', siteName, languages);
 
       const results = await this.fetchLanguageSitePaths(language, siteName);
       const transformedPaths = await this.transformLanguageSitePaths(
@@ -266,7 +274,8 @@ export abstract class BasePersonalizeGraphQLSitemapService {
     const formatPath = (path: string, isStaticRender: boolean) => {
       return formatStaticPath(path.replace(/^\/|\/$/g, '').split('/'), language, isStaticRender);
     }
-      
+
+    console.log('BasePersonalizeGraphQLSitemapService.transformLanguageSitePaths', sitePaths, language);
 
     const aggregatedPaths: StaticPath[] = [];    
 

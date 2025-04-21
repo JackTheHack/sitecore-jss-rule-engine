@@ -68,12 +68,12 @@ class PersonalizedPlaceholder extends React.Component<any,any> {
     }
 
     isDisconnectedMode() {
-        const disconnectedMode = this.props.sitecoreContext.site.name === 'JssDisconnectedLayoutService';
+        const disconnectedMode = this.props.sitecoreContext?.site?.name === 'JssDisconnectedLayoutService';
         return disconnectedMode;
     }
 
     isPageEditing() {
-        const isEditing = this.props.sitecoreContext.pageEditing;
+        const isEditing = this.props.sitecoreContext?.pageEditing;
         return isEditing;
     }
 
