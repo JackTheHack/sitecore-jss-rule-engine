@@ -4047,6 +4047,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@jss-rule-engine/workflow@workspace:packages/sitecore-jss-rule-engine-workflow":
+  version: 0.0.0-use.local
+  resolution: "@jss-rule-engine/workflow@workspace:packages/sitecore-jss-rule-engine-workflow"
+  dependencies:
+    "@jss-rule-engine/core": "npm:*"
+    typedoc: "npm:0.25.4"
+  languageName: unknown
+  linkType: soft
+
 "@kamilkisiela/fast-url-parser@npm:^1.1.4":
   version: 1.1.4
   resolution: "@kamilkisiela/fast-url-parser@npm:1.1.4"
