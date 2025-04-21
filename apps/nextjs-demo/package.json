@@ -31,7 +31,7 @@
   "dependencies": {
     "@jss-rule-engine/core": "*",
     "@jss-rule-engine/edge": "*",
-    "@jss-rule-engine/nextjs": "*",    
+    "@jss-rule-engine/nextjs": "*",
     "@sitecore-cloudsdk/events": "^0.3.1",
     "@sitecore-cloudsdk/personalize": "^0.3.1",
     "@sitecore-feaas/clientside": "^0.5.17",
@@ -44,7 +44,7 @@
     "react": "^18.2.0",
     "react-chatbotify": "patch:react-chatbotify@npm%3A2.0.0-beta.32#~/.yarn/patches/react-chatbotify-npm-2.0.0-beta.32-e1fda489fb.patch",
     "react-dom": "^18.2.0",
-    "sharp": "0.32.6"    
+    "sharp": "0.32.6"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.0",
