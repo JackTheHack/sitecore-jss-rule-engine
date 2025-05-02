@@ -1,13 +1,7 @@
-import { JssRuleEngine } from '@jss-rule-engine/core';
-import { DatabaseService, DatabaseServiceOptions } from './databaseService';
-import { ActionFactory } from './actionFactory';
+import { DatabaseService } from './databaseService';
+import { Workflow, WorkflowState, WorkflowExecutionContext, WorkflowServiceOptions, IWorkflowService, WorkflowExecutionResult, WorkflowExecutionOptions } from './workflowTypes';
 
-interface WorkflowServiceOptions {
-    db: DatabaseServiceOptions,
-    ruleEngine: JssRuleEngine
-}
-
-export class WorkflowService {
+export class WorkflowService implements IWorkflowService {
     private workflows: Record<string, Workflow> = {};
     private databaseService: DatabaseService;
     private options: WorkflowServiceOptions;
@@ -28,8 +22,7 @@ export class WorkflowService {
     async addVisitorToState(
         workflowId: string,
         stateId: string,
-        visitorId: string,
-        executeActions: boolean
+        visitorId: string
     ): Promise<void> {
         const workflow = this.workflows[workflowId];
         if (!workflow) throw new Error('Workflow not found');
@@ -38,14 +31,10 @@ export class WorkflowService {
         if (!state) throw new Error('State not found');
 
         await this.databaseService.addVisitor(visitorId, stateId, workflowId);
-
-        if (executeActions) {
-            await this.execute(visitorId, workflowId);
-        }
     }
 
-    async execute(visitorId: string, workflowId: string): Promise<void> {
-        const currentStateId = await this.databaseService.getVisitorState(visitorId, workflowId);
+    async executeTriggers(options: WorkflowExecutionOptions): Promise<WorkflowExecutionResult> {
+        const currentStateId = await this.databaseService.getVisitorState(options.visitorId, options.workflowId);
         if (!currentStateId) throw new Error('Visitor not assigned to any state');
 
         const workflow = Object.values(this.workflows).find((wf) =>
@@ -53,29 +42,50 @@ export class WorkflowService {
         );
         if (!workflow) throw new Error('Workflow not found for the state');
 
-        const state = workflow.states[currentStateId];
-        for (const trigger of state.triggers) {
-            const visitorObject = {
-                id: visitorId,
-            };
+        const visitorObject = {
+            id: options.visitorId,
+        };
 
-            const workflowConditionContext = {
-                ruleEngine: this.options.ruleEngine,
-                visitor: visitorObject,
-                workflowService: this,
-                workflow: workflow
-            } as WorkflowConditionContext;
+        const workflowContext: WorkflowExecutionContext = {
+            ruleEngine: this.options.ruleEngine,
+            visitor: visitorObject,
+            workflowService: this,
+            workflow: workflow,
+            commands: []
+        };
 
-            if (await evaluateCondition(trigger.condition, workflowConditionContext)) {
-                for (const action of state.actions) {
-                    if (await evaluateCondition(action.condition, workflowConditionContext)) {
-                        const actionCommand = ActionFactory.getAction(action.templateId);
-                        await actionCommand.execute(visitorId);
+        const result = {
+            success: true,
+            visitorId: options.visitorId,
+            commands: [],
+            workflowId: workflow.id,
+            stateId: currentStateId,
+        } as WorkflowExecutionResult;
 
-                        if (action.nextStateId) {
-                            await this.changeVisitorState(visitorId, action.nextStateId, workflowId);
-                        }
-                    }
+        try{
+            const state = workflow.states[currentStateId];
+            for (const trigger of state.triggers) {
+                if (await evaluateCondition(trigger.condition, workflowContext)) {
+                    await this.executeActions(options.visitorId, workflowContext, state);
+                }
+            }
+            result.commands = workflowContext.commands;
+            return result;
+        }catch(ex){
+            result.success = false;
+        }
+
+        return result;
+    }
+
+    async executeActions(visitorId: string, workflowExecutionContext: WorkflowExecutionContext, state: WorkflowState): Promise<void> {
+        for (const action of state.actions) {
+            if (await evaluateCondition(action.condition, workflowExecutionContext)) {
+                const actionCommand = this.options.actionFactory.getAction(action.templateId);
+                await actionCommand.execute(workflowExecutionContext);
+
+                if (action.nextStateId) {
+                    await this.changeVisitorState(visitorId, action.nextStateId, workflowExecutionContext.workflow?.id);
                 }
             }
         }
@@ -98,16 +108,9 @@ export class WorkflowService {
     }
 }
 
-interface WorkflowConditionContext {
-    workflowService?: WorkflowService;
-    workflow?: Workflow;
-    visitor?: WorkflowVisitor;
-    ruleEngine?: JssRuleEngine;
-}
-
 async function evaluateCondition(
     condition: string,
-    context: WorkflowConditionContext
+    context: WorkflowExecutionContext
 ): Promise<boolean> {
     try {
         const ruleEngineContext = context.ruleEngine?.getRuleEngineContext();

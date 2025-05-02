@@ -32,6 +32,7 @@
     "@jss-rule-engine/core": "*",
     "@jss-rule-engine/edge": "*",
     "@jss-rule-engine/nextjs": "*",
+    "@jss-rule-engine/workflow": "*",
     "@sitecore-cloudsdk/events": "^0.3.1",
     "@sitecore-cloudsdk/personalize": "^0.3.1",
     "@sitecore-feaas/clientside": "^0.5.17",

@@ -4047,7 +4047,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@jss-rule-engine/workflow@workspace:packages/sitecore-jss-rule-engine-workflow":
+"@jss-rule-engine/workflow@npm:*, @jss-rule-engine/workflow@workspace:packages/sitecore-jss-rule-engine-workflow":
   version: 0.0.0-use.local
   resolution: "@jss-rule-engine/workflow@workspace:packages/sitecore-jss-rule-engine-workflow"
   dependencies:
@@ -14499,6 +14499,7 @@ __metadata:
     "@jss-rule-engine/core": "npm:*"
     "@jss-rule-engine/edge": "npm:*"
     "@jss-rule-engine/nextjs": "npm:*"
+    "@jss-rule-engine/workflow": "npm:*"
     "@sitecore-cloudsdk/events": "npm:^0.3.1"
     "@sitecore-cloudsdk/personalize": "npm:^0.3.1"
     "@sitecore-feaas/clientside": "npm:^0.5.17"

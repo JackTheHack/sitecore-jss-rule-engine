@@ -1,30 +1,28 @@
-export interface ActionCommand {
-    execute(visitorId: string): Promise<void>;
+import { WorkflowExecutionContext } from "./workflowTypes";
+
+export interface WorkflowActionCommand {
+    execute(context: WorkflowExecutionContext): Promise<void>;
 }
 
-export class EmailAction implements ActionCommand {
-    async execute(visitorId: string): Promise<void> {
-        console.log(`Sending email to visitor: ${visitorId}`);
-        // Add email sending logic here
+export interface IWorkflowActionFactory {
+    registerAction(templateId: string, action: new () => WorkflowActionCommand): void;
+    getAction(templateId: string): WorkflowActionCommand;
+}
+
+export class WorkflowActionFactory implements IWorkflowActionFactory {
+
+    private registeredActions: Map<string, new () => WorkflowActionCommand> = new Map();
+
+    registerAction(templateId: string, action: new () => WorkflowActionCommand): void {
+        this.registeredActions.set(templateId, action);
     }
-}
 
-export class LogAction implements ActionCommand {
-    async execute(visitorId: string): Promise<void> {
-        console.log(`Logging action for visitor: ${visitorId}`);
-        // Add logging logic here
-    }
-}
-
-export class ActionFactory {
-    static getAction(templateId: string): ActionCommand {
-        switch (templateId) {
-            case 'email':
-                return new EmailAction();
-            case 'log':
-                return new LogAction();
-            default:
-                throw new Error(`No action found for templateId: ${templateId}`);
+    getAction(templateId: string): WorkflowActionCommand {
+        const ActionClass = this.registeredActions.get(templateId);
+        if (ActionClass) {
+            return new ActionClass();
         }
+        throw new Error(`No action found for templateId: ${templateId}`);
     }
+
 }

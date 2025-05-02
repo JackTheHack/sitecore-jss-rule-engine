@@ -1,41 +1,19 @@
 import ChatBot from "react-chatbotify";
+import SitecoreChatPlugin from "./../lib/chat/plugins/sitecoreChatPluginFactory"
+import { SitecoreChatBlock } from "lib/chat/plugins/SitecoreChatBlock";
 
 const ChatBotWidget = () => {
-	let hasError = false;
 
 	// example openai conversation
 	// you can replace with other LLMs such as Google Gemini
-	const call_server = async (params: any) : Promise<void> => {
-
-        console.log('call_server', params);
-
-		try {
-			
-			// for streaming responses in parts (real-time), refer to real-time stream example
-			let userInput = "That's what you said: " + params.userInput.trim();
-
-			await params.injectMessage(userInput);
-        } catch (error) {
-			await params.injectMessage("Unable to load model, is your API Key valid?");
-			hasError = true;
-		}
-	}
 	const flow={
 		start: {
 			message: "Hello and welcome to chatbot!",
 			path: "loop"			
 		},		
 		loop: {
-			message: async (params:any) => {
-				await call_server(params);
-			},
-			path: () => {
-				if (hasError) {
-					return "start"
-				}
-				return "loop"
-			}
-		}
+			flowId: "{EBAA5C94-B003-4169-AA19-BC0EADDB05DC}"
+		} as SitecoreChatBlock
 	}
 
     const chatBotSettings = {
@@ -60,7 +38,9 @@ const ChatBotWidget = () => {
     }
 
 	return (
-		<ChatBot settings={chatBotSettings} flow={flow}/>
+		<ChatBot settings={chatBotSettings} 
+		flow={flow} 
+		plugins={[SitecoreChatPlugin({ autoConfig: true, hostUrl: process.env.PUBLIC_URL })]}/>
 	);
 };
 
