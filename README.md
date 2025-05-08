@@ -23,6 +23,13 @@
 ## Sitecore.JSS-Rule-Engine
 Javascript library to parse Sitecore rules and run them in JS
 
+### Solution structure:
+
+- `apps` - demo-projects showcasing the library capabilities
+- `packages` - NPM packages and internal libraries shared between NPM packages
+- `docker` - Dockerfiles, build scripts and data folder for container volumes
+- `src` - Sitecore instance source files - serialization items and XM instance customization logic
+
 ### Accessing rules from GraphQL
 
 Rule XML could be retrieved through GraphQL query to the item in Sitecore playground:
