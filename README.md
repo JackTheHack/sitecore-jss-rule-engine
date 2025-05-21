@@ -1,4 +1,4 @@
-# XM Cloud Starter Kit (Next JS)
+# JSS Rule Engine (XM Cloud compatible)
 
 ## QUICK START
 
@@ -20,14 +20,17 @@
 
 *** 
 
-## About this Solution
-This solution is designed to help developers learn and get started quickly
-with XMCLoud + SXA.
-
-# Sitecore.JSS-Rule-Engine
+## Sitecore.JSS-Rule-Engine
 Javascript library to parse Sitecore rules and run them in JS
 
-# Accessing rules from GraphQL
+### Solution structure:
+
+- `apps` - demo-projects showcasing the library capabilities
+- `packages` - NPM packages and internal libraries shared between NPM packages
+- `docker` - Dockerfiles, build scripts and data folder for container volumes
+- `src` - Sitecore instance source files - serialization items and XM instance customization logic
+
+### Accessing rules from GraphQL
 
 Rule XML could be retrieved through GraphQL query to the item in Sitecore playground:
 https://xmcloudcm.localhost/sitecore/api/graph/edge/ide
@@ -47,10 +50,10 @@ https://xmcloudcm.localhost/sitecore/api/graph/edge/ide
 }
 ```
 
-# How to use
+### How to use
 test.js contains unit tests (in Ava) with examples of rules being parsed and executed.
 
-# Developer docs
+### Developer docs
 https://github.com/JackTheHack/Sitecore.JSS-Rule-Engine/wiki
 
 
