@@ -34,12 +34,28 @@ export class WorkflowService implements IWorkflowService {
     }
 
     async executeTriggers(options: WorkflowExecutionOptions): Promise<WorkflowExecutionResult> {
-        const currentStateId = await this.databaseService.getVisitorState(options.visitorId, options.workflowId);
-        if (!currentStateId) throw new Error('Visitor not assigned to any state');
+        let currentStateId = await this.databaseService.getVisitorState(options.visitorId, options.workflowId);
+        
+        if (!currentStateId) {
+            //get default state
+            currentStateId = options.defaultStateId;
+
+            if(!currentStateId)
+            {
+                throw new Error("Default state is not specified.");
+            }
+
+            await this.databaseService.addVisitor(options.visitorId, currentStateId, options.workflowId);
+        };
+
+        if (!currentStateId) {
+            throw new Error('Current state ID is null or undefined.');
+        }
 
         const workflow = Object.values(this.workflows).find((wf) =>
-            Object.keys(wf.states).includes(currentStateId)
+            Object.keys(wf.states).includes(currentStateId as string)
         );
+
         if (!workflow) throw new Error('Workflow not found for the state');
 
         const visitorObject = {

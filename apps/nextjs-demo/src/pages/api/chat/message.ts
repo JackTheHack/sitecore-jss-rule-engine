@@ -3,6 +3,7 @@ import { WorkflowServiceOptions } from '@jss-rule-engine/workflow/dist/src/workf
 import { JssRuleEngine, getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {Action, ErrorResponse, Metadata, SuccessResponse} from '../../../lib/chat/types'
+import loadWorkflowFromSitecore from 'lib/chat/lib/loadWorkflowFromSitecore';
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,6 +21,9 @@ export default async function handler(
       console.log('Handling message', message, visitorId, workflowId);
 
       const ruleEngine = getRuleEngineInstance();
+
+      console.log('Rule engine: ', ruleEngine?.requestContext, ruleEngine?.sitecoreContext, ruleEngine.commandDefinitions?.size);
+
       const actionFactory = new WorkflowActionFactory();
 
       const workflowOptions: WorkflowServiceOptions = {
@@ -32,19 +36,38 @@ export default async function handler(
         actionFactory: actionFactory 
       }
 
+     
+      
+      console.log('Creating workflow service', workflowOptions?.db);
+      const workflowService = new WorkflowService(workflowOptions);
+      
+      console.log("Initializing workflow...")
+      await workflowService.init();
+
+      const sitecoreEdgeUrl = process.env.EDGE_QL_ENDPOINT || '';
+
+      const workflowConfig = await loadWorkflowFromSitecore(sitecoreEdgeUrl, workflowId);
+
       const executionOptions : WorkflowExecutionOptions = {
         visitorId: visitorId,
         eventName: "event:onmessage",
         eventParameters: JSON.stringify({ message: message }),
-        workflowId: workflowId
+        workflowId: workflowId,
+        defaultStateId: workflowConfig.defaultStateId || ''
       }
-      const workflowService = new WorkflowService(workflowOptions);
+
+      await workflowService.load(workflowConfig);
+
+      console.log('Executing triggers', executionOptions);
+
       const workflowResult = await workflowService.executeTriggers(executionOptions);
 
       if (!workflowResult.success) {
+        console.log('Failed to execute workflow triggers');
         return res.status(500).json({ success: false, error: 'Failed to execute workflow triggers' });
       }
     } catch (error) {
+      console.log('Something weird happened - ', error);
       return res.status(500).json({ success: false, error: 'Failed to execute workflow triggers' });
     }
 
@@ -59,7 +82,11 @@ export default async function handler(
       messageLength: message.length,
     };
 
-    return res.status(200).json({ success: true, actions, metadata });
+    const okResult : SuccessResponse = { success: true, actions, metadata };
+
+    console.log('Returning OK result', okResult);
+
+    return res.status(200).json(okResult);
   } else {
     res.setHeader('Allow', ['POST']);
     return res.status(405).json({ success: false, error: `Method ${req.method} not allowed` });

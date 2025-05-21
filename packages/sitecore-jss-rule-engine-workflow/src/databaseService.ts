@@ -22,6 +22,7 @@ export class DatabaseService {
     }
 
     async init(): Promise<void> {
+        console.log("Initializing database...");
         // Ensure the table exists
         await this.client.execute(`
             CREATE TABLE IF NOT EXISTS workflow_visitors (

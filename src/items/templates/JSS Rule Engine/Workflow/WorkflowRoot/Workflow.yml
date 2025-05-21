@@ -1,8 +1,8 @@
 ﻿---
-ID: "6d34771c-b500-497f-9014-3e2844d35c95"
-Parent: "290e750c-39e9-46c5-af8b-51adff8b508d"
-Template: "b44783be-ebc7-4ce8-80d9-ee7a08df3245"
-Path: /sitecore/content/ruledemo/demosite/Workflows/ChatGPT Test/Welcome/SendMessage
+ID: "43b22f7b-f8f6-4bb1-86e1-c35b968867a3"
+Parent: "215d7dbb-5671-4b1c-8dc4-27046c2ef232"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Feature/JSS Rule Engine/Workflow/WorkflowRoot/Workflow
 Languages:
 - Language: en
   Versions:
@@ -10,7 +10,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250420T012512Z
+      Value: 20250502T072737Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -19,19 +19,13 @@ Languages:
       Hint: __Created by
       Value: |
         sitecore\jack.spektor@akqa.com
-    - ID: "727101b5-29ff-4449-8615-080d4119d89f"
-      Hint: Template
-      Value: "Hello and welcome!"
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "21736308-9b2a-4871-b72d-aaed2378c5a9"
-    - ID: "982c1029-8a6a-4772-84ac-97158f0cda03"
-      Hint: NextState
-      Value: 
+      Value: "8fc269e9-3d31-4c0c-8cd1-2d1d82202bf2"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250502T073325Z
+      Value: 20250502T072739Z

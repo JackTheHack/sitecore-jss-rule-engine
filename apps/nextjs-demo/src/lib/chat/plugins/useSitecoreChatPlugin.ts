@@ -96,6 +96,7 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 			console.log('handleMessageEvent', event);
 
 			const {hostUrl } = mergedPluginConfig;
+			const nextPath = (event as RcbChangePathEvent).data.nextPath;
             const userInput = (event as RcbUserSubmitTextEvent)?.data?.inputText;
 			const currPath = event.detail.currPath;
             const flow = getFlow();
@@ -108,8 +109,18 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 
 			if(currBlock && currBlock.flowId)
 			{
-				event.preventDefault();
-				event.stopPropagation();
+				if(event.type == "rcb-user-submit-text"){
+					event.preventDefault();
+					event.stopPropagation();
+				}
+
+				if(event.type == "rcb-change-path"){
+					//load next path here and trigger event on workflow
+				}
+
+				if(event.type == "rcb-chat-load"){
+					//trigger workflow for the chatbot load event 
+				}
 
 				console.log("Flow id: ", currBlock.flowId);
 
@@ -138,11 +149,13 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 
 		// adds required events
 		window.addEventListener("rcb-user-submit-text", handleMessageEvent);
-		window.addEventListener("rcb-change-path", handleMessageEvent);
+		//window.addEventListener("rcb-change-path", handleMessageEvent);
+		//window.addEventListener("rcb-post-load-chatbot", handleMessageEvent);
 
 		return () => {
 			window.removeEventListener("rcb-user-submit-text", handleMessageEvent);
-			window.removeEventListener("rcb-change-path", handleMessageEvent);
+			//window.removeEventListener("rcb-change-path", handleMessageEvent);
+			//window.removeEventListener("rcb-post-load-chatbot", handleMessageEvent);
 		};
 	}, [getBotId, getFlow]);
 
@@ -156,8 +169,8 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 		pluginMetaData.settings = {
 			event: {
                 rcbUserSubmitText: true,
-				rcbPostInjectMessage: true,
 				rcbChangePath: true,
+				rcbPostLoadChatBot: true,
 			},
 		};
 	}

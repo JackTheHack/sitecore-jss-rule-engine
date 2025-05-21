@@ -13,4 +13,4 @@ export { WorkflowExecutionResult } from "./src/workflowTypes";
 export {Workflow} from "./src/workflowTypes";
 export {WorkflowActionCommand} from "./src/workflowTypes";
 export {WorkflowActionFactory, IWorkflowActionFactory} from "./src/actionFactory";
-export {WorkflowAction} from "./src/workflowTypes";
+export {WorkflowAction, WorkflowState, WorkflowTrigger} from "./src/workflowTypes";

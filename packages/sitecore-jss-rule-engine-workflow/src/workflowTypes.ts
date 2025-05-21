@@ -5,6 +5,7 @@ import { WorkflowActionFactory } from "./actionFactory";
 export interface Workflow {
   id: string;
   states: Record<string, WorkflowState>;
+  defaultStateId?: string;
 }
 
 export interface WorkflowExecutionContext {
@@ -16,6 +17,7 @@ export interface WorkflowExecutionContext {
     trigger?: string;
     triggerParameters?: string;
 }
+
 
 export interface WorkflowServiceOptions {
     db: DatabaseServiceOptions,
@@ -39,12 +41,17 @@ export interface WorkflowExecutionResult {
 
 export interface WorkflowState {
   id: string;
+  name: string;
   triggers: WorkflowTrigger[];
   actions: WorkflowAction[];
 }
 
 export interface WorkflowTrigger {
+  id: string;
   condition: string;
+  type: string;
+  templateId: string;
+  fields: Record<string, string>;
 }
 
 export interface WorkflowAction {
@@ -52,6 +59,7 @@ export interface WorkflowAction {
   templateId: string;
   condition: string;
   nextStateId?: string;  
+  fields: Record<string, string>;
 }
 
 export interface WorkflowVisitor {
@@ -64,6 +72,7 @@ export interface WorkflowExecutionOptions {
   workflowId: string;
   eventName: string;
   eventParameters: string;
+  defaultStateId: string;
 }
 
 export interface IWorkflowService {
