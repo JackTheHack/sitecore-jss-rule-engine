@@ -1,4 +1,5 @@
-import { JssRuleEngine } from './src/ruleEngine';
+import { JssRuleEngine, IJssRuleEngine} from './src/ruleEngine';
+import { RuleEngineContext } from './src/types/ruleEngine';
 
 var isEdgeRuntime = typeof global.EdgeRuntime == 'string';
 
@@ -16,4 +17,4 @@ export function getRuleEngineInstance() {
     return new JssRuleEngine();
 }
 
-export { JssRuleEngine }
+export { JssRuleEngine, IJssRuleEngine, RuleEngineContext }

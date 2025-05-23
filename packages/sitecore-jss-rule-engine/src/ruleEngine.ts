@@ -6,13 +6,33 @@ import ruleParser from './ruleParser'
 import ruleEngineRunner from './ruleEngineRunner'
 import { RuleEngineRequestContext, RuleEngineContext, RuleEngineSitecoreContext, ParsedRuleXmlData, OperatorFunctionDefinition, ConditionFunctionDefinition, ActionFunctionDefinition } from './types/ruleEngine'
 
-// function uniq(a:any) {
-//     return a.sort().filter(function(item:any, pos:any, ary:any) {
-//         return !pos || item != ary[pos - 1];
-//     });
-// }
+export interface IJssRuleEngine {
+    commandDefinitions: Map<string, ActionFunctionDefinition>;
+    ruleDefinitions: Map<string, ConditionFunctionDefinition>;
+    operatorDefinitions: Map<string, OperatorFunctionDefinition>;
+    debug: boolean;
+    sitecoreContext?: RuleEngineSitecoreContext;
+    requestContext?: RuleEngineRequestContext;
+    mockDate?: Date;
 
-export class JssRuleEngine {
+    setOptions(options?: RuleEngineContext): void;
+    initialize(options?: any): void;
+    registerCommand(id: string, command: ActionFunctionDefinition): void;
+    registerRule(id: string, rule: ConditionFunctionDefinition): void;
+    registerOperator(id: string, operator: OperatorFunctionDefinition): void;
+    parseRuleXml(ruleXml: string, ruleEngineContext: RuleEngineContext): ParsedRuleXmlData | null;
+    setSitecoreContext(sitecoreContext: RuleEngineSitecoreContext): void;
+    setRequestContext(requestContext?: RuleEngineRequestContext): void;
+    setMockDate(dateObj: Date): void;
+    getRuleEngineContext(): RuleEngineContext;
+    runRule(parsedRule: ParsedRuleXmlData | null, ruleEngineContext: RuleEngineContext): Promise<any>;
+    runRuleActions(parsedRule: ParsedRuleXmlData | null, ruleActions: any, ruleEngineContext: RuleEngineContext): Promise<void>;
+    prefetchItems(ruleEngineContext: RuleEngineContext): void;
+    parseAndRunRule(ruleXml: any, context?: RuleEngineContext): Promise<any>;
+    debugMessage(...args: any[]): void;
+}
+
+export class JssRuleEngine implements IJssRuleEngine {
     commandDefinitions: Map<string, ActionFunctionDefinition>
     ruleDefinitions: Map<string, ConditionFunctionDefinition>
     operatorDefinitions: Map<string, OperatorFunctionDefinition>
