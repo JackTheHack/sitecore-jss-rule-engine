@@ -1,16 +1,20 @@
-import { DatabaseService } from './databaseService';
+import { IDatabaseService } from './databaseService';
 import { Workflow, WorkflowState, WorkflowExecutionContext, WorkflowServiceOptions, IWorkflowService, WorkflowExecutionResult, WorkflowExecutionOptions } from './workflowTypes';
 
 export class WorkflowService implements IWorkflowService {
     private workflows: Record<string, Workflow> = {};
-    private databaseService: DatabaseService;
+    private databaseService: IDatabaseService;
     private options: WorkflowServiceOptions;
 
     constructor(options: WorkflowServiceOptions) {
         this.options = options;
-        this.databaseService = new DatabaseService(this.options.db);
+        this.databaseService = options.databaseService;
+    }       
+    
+    getWorkflow(workflowId: string): Workflow | null {
+        return this.workflows[workflowId] || null;
     }
-
+    
     async init(): Promise<void> {
         await this.databaseService.init();
     }
@@ -38,11 +42,17 @@ export class WorkflowService implements IWorkflowService {
         
         if (!currentStateId) {
             //get default state
-            currentStateId = options.defaultStateId;
+            currentStateId = options.defaultStateId ?? null;
 
             if(!currentStateId)
             {
-                throw new Error("Default state is not specified.");
+                return {
+                    success: true,
+                    visitorId: options.visitorId,
+                    clientCommands: [],
+                    workflowId: options.workflowId,
+                    stateId: currentStateId,
+                } as WorkflowExecutionResult;
             }
 
             await this.databaseService.addVisitor(options.visitorId, currentStateId, options.workflowId);
@@ -67,13 +77,15 @@ export class WorkflowService implements IWorkflowService {
             visitor: visitorObject,
             workflowService: this,
             workflow: workflow,
-            commands: []
+            clientCommands: [],
+            trigger: options.eventName,
+            triggerParameters: options.eventParameters,
         };
 
         const result = {
             success: true,
             visitorId: options.visitorId,
-            commands: [],
+            clientCommands: [],
             workflowId: workflow.id,
             stateId: currentStateId,
         } as WorkflowExecutionResult;
@@ -85,7 +97,7 @@ export class WorkflowService implements IWorkflowService {
                     await this.executeActions(options.visitorId, workflowContext, state);
                 }
             }
-            result.commands = workflowContext.commands;
+            result.clientCommands = workflowContext.clientCommands;
             return result;
         }catch(ex){
             result.success = false;

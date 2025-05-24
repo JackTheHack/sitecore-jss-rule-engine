@@ -1,5 +1,5 @@
 import { JssRuleEngine } from "@jss-rule-engine/core";
-import { DatabaseServiceOptions } from "./databaseService";
+import { IDatabaseService } from "./databaseService";
 import { IWorkflowActionFactory } from "./actionFactory";
 
 export type Workflow = {
@@ -13,14 +13,14 @@ export type WorkflowExecutionContext = {
     workflow: Workflow;
     visitor?: WorkflowVisitor;
     ruleEngine?: JssRuleEngine;
-    commands: WorkflowActionCommand[];
+    clientCommands: WorkflowActionCommand[];
     trigger?: string;
     triggerParameters?: string;
 }
 
 
 export type WorkflowServiceOptions = {
-    db: DatabaseServiceOptions,
+    databaseService: IDatabaseService,
     ruleEngine: JssRuleEngine,
     actionFactory: IWorkflowActionFactory
 }
@@ -34,7 +34,7 @@ export type WorkflowExecutionResult = {
     visitorId: string;
     workflowId: string;
     stateId: string;
-    commands: WorkflowActionCommand[];
+    clientCommands: WorkflowActionCommand[];
     success: boolean;
     error?: string;
 }
@@ -62,6 +62,15 @@ export type WorkflowAction = {
   fields: Record<string, string>;
 }
 
+export type WorkflowScheduledTask = {
+    id: string;
+    visitorId: string;
+    workflowId: string;
+    taskType: string;
+    scheduledTime: number;
+    payload: string | null;
+}
+
 export type WorkflowVisitor = {
     id: string;
 }
@@ -72,7 +81,7 @@ export type WorkflowExecutionOptions = {
   workflowId: string;
   eventName: string;
   eventParameters: string;
-  defaultStateId: string;
+  defaultStateId?: string;
 }
 
 export interface IWorkflowService {
@@ -83,5 +92,6 @@ export interface IWorkflowService {
     executeActions(visitorId: string, workflowExecutionContext: WorkflowExecutionContext, state: WorkflowState): Promise<void>;
     removeVisitorFromWorkflow(visitorId: string, workflowId: string): Promise<void>;
     changeVisitorState(visitorId: string, workflowId: string, nextStateId: string): Promise<void>;
-    getStateVisitors(workflowId: string, stateId: string): Promise<string[]>;
+    getStateVisitors(workflowId: string, stateId: string): Promise<string[]>;    
+    getWorkflow(workflowId: string): Workflow | null;
 }

@@ -1,4 +1,5 @@
 import { createClient, Client } from '@libsql/client';
+import { WorkflowScheduledTask } from './workflowTypes';
 
 export interface DatabaseServiceOptions {    
     url?: string;
@@ -8,6 +9,7 @@ export interface DatabaseServiceOptions {
 
 export interface IDatabaseService {
     init(): Promise<void>;
+    getScheduledTasks(workflowId: string): Promise<Array<WorkflowScheduledTask>>;
     addScheduledTask(
         id: string,
         visitorId: string,
@@ -33,6 +35,8 @@ export interface IDatabaseService {
     removeVisitor(visitorId: string, workflowId: string): Promise<void>;
     getStateVisitors(stateId: string, workflowId: string): Promise<string[]>;
     debugPrintTables(): Promise<void> 
+    cleanDb(): Promise<void>;
+    dispose() : Promise<void>;
 }
 
 export class DatabaseService implements IDatabaseService {
@@ -50,8 +54,28 @@ export class DatabaseService implements IDatabaseService {
         });
     }
 
+    async cleanDb(): Promise<void> {
+        // Delete all rows from both tables
+        await this.client.execute('DELETE FROM workflow_visitors');
+        await this.client.execute('DELETE FROM workflow_scheduled_tasks');
+    }
+
+    async getScheduledTasks(workflowId: string): Promise<Array<WorkflowScheduledTask>> {
+        const result = await this.client.execute(
+            'SELECT * FROM workflow_scheduled_tasks WHERE workflow_id = ?',
+            [workflowId]
+        );
+        return result.rows.map((row: any) => ({
+            id: row.id,
+            visitorId: row.visitor_id,
+            workflowId: row.workflow_id,
+            taskType: row.task_type,
+            scheduledTime: row.scheduled_time,
+            payload: row.payload ?? undefined
+        }));
+    }
+
     async init(): Promise<void> {
-        console.log("Initializing database...");
         // Ensure the table exists
         await this.client.execute(`
             CREATE TABLE IF NOT EXISTS workflow_visitors (
@@ -70,7 +94,7 @@ export class DatabaseService implements IDatabaseService {
             scheduled_time INTEGER NOT NULL,
             payload TEXT
             )
-        `);
+        `);        
     }
 
     async addScheduledTask(
@@ -186,5 +210,9 @@ export class DatabaseService implements IDatabaseService {
 
         const tasks = await this.client.execute('SELECT * FROM workflow_scheduled_tasks');
         console.log('workflow_scheduled_tasks:', tasks.rows);
+    }
+
+    async dispose(): Promise<void> {
+        await this.client.close();
     }
 }

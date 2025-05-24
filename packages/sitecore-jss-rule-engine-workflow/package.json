@@ -10,7 +10,8 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "test": "yarn run build&& ava",
+    "test": "yarn run build && ava --serial --verbose",
+    "t": "yarn run build && ava -m 'should run init'",
     "build": "yarn run build:esm",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
