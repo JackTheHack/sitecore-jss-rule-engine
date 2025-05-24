@@ -4,6 +4,8 @@ import { JssRuleEngine, getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {Action, ErrorResponse, Metadata, SuccessResponse} from '../../../lib/chat/types'
 import loadWorkflowFromSitecore from 'lib/chat/lib/loadWorkflowFromSitecore';
+import { DatabaseService, IDatabaseService } from '@jss-rule-engine/workflow';
+import { DevBundlerService } from 'next/dist/server/lib/dev-bundler-service';
 
 export default async function handler(
   req: NextApiRequest,
@@ -26,19 +28,21 @@ export default async function handler(
 
       const actionFactory = new WorkflowActionFactory();
 
-      const workflowOptions: WorkflowServiceOptions = {
-        db: {
+      const dbServiceOptions = {
           authToken: process.env.SQLITE_AUTHTOKEN || '',
           url: process.env.SQLITE_URL || '',
           syncUrl: process.env.SQLITE_SYNCURL || ''
-        },
+        };
+
+      const dbService = new DatabaseService(dbServiceOptions);
+
+      const workflowOptions: WorkflowServiceOptions = {
+        databaseService: dbService,
         ruleEngine: ruleEngine,
         actionFactory: actionFactory 
       }
-
-     
       
-      console.log('Creating workflow service', workflowOptions?.db);
+      console.log('Creating workflow service', dbServiceOptions);
       const workflowService = new WorkflowService(workflowOptions);
       
       console.log("Initializing workflow...")

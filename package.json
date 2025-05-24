@@ -45,6 +45,7 @@
         "docker:push": "docker image push ghcr.io/jackthehack/ruleengine-cm-assets",
         "sitecore:pull": "dotnet sitecore ser pull",
         "sitecore:push": "dotnet sitecore ser push",
+        "sitecore:validate": "dotnet sitecore ser validate --fix",
         "sitecore:login": "dotnet sitecore login"
     },
     "packageManager": "yarn@4.9.1"

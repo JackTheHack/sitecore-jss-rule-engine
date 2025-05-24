@@ -5,11 +5,27 @@
         "includes": [           
             {
                 "name": "ruletag",
-                "path": "/sitecore/system/Settings/Rules/Definitions/Tags/JSS Personalization"
+                "path": "/sitecore/system/Settings/Rules/Definitions/Tags/JSS Rule Engine - Personalization"
+            }, 
+            {
+                "name": "ruletag2",
+                "path": "/sitecore/system/Settings/Rules/Definitions/Tags/JSS Rule Engine - Workflow"
+            }, 
+            {
+                "name": "ruletag3",
+                "path": "/sitecore/system/Settings/Rules/Definitions/Tags/JSS Rule Engine - Chat"
             }, 
             {
                 "name": "elements",
-                "path": "/sitecore/system/Settings/Rules/Definitions/Elements/JSS Personalization"
+                "path": "/sitecore/system/Settings/Rules/Definitions/Elements/JSS Rule Engine Personalization"
+            },
+            {
+                "name": "elements2",
+                "path": "/sitecore/system/Settings/Rules/Definitions/Elements/JSS Rule Engine Chat"
+            },
+            {
+                "name": "elements3",
+                "path": "/sitecore/system/Settings/Rules/Definitions/Elements/JSS Rule Engine Workflow"
             },
             {
                 "name": "core",
