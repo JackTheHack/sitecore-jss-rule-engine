@@ -69,12 +69,12 @@ export type WorkflowScheduledTask = {
     taskType: string;
     scheduledTime: number;
     payload: string | null;
+    triggerDate: Date;
 }
 
 export type WorkflowVisitor = {
     id: string;
 }
-
 
 export type WorkflowExecutionOptions = {
   visitorId: string;

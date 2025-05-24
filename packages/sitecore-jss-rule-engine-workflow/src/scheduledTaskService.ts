@@ -1,9 +1,9 @@
 import { IDatabaseService } from "./databaseService";
-import { ScheduledTaskServiceOptions } from "./scheduledTaskServiceTypes";
+import { ScheduledTaskExecutionResult, ScheduledTaskServiceOptions } from "./scheduledTaskServiceTypes";
 import { IWorkflowService } from "./workflowTypes";
 
 export interface IScheduledTaskService {
-    executeTasks(workflowId: string): Promise<void>;
+    executeTasks(workflowId: string): Promise<ScheduledTaskExecutionResult>;
 }
 
 export class ScheduledTaskService implements IScheduledTaskService {
@@ -18,20 +18,14 @@ export class ScheduledTaskService implements IScheduledTaskService {
             this.databaseService = options.databaseService;
     }
 
-    async executeTasks(workflowId: string): Promise<void> {
-            const workflow = this.workflowService.getWorkflow(workflowId);
-
-            if (!workflow) {
-                throw new Error('Workflow not found');
-            }
-    
+    async executeTasks(): Promise<ScheduledTaskExecutionResult> {
             // Get all scheduled tasks for this workflow
-            const scheduledTasks = await this.databaseService.getScheduledTasks(workflowId);
+            const scheduledTasks = await this.databaseService.getScheduledTasks();
     
             for (const task of scheduledTasks) {
-                const { visitorId } = task;
+                const { id, visitorId, workflowId } = task;
     
-                if (!visitorId) {
+                if (!visitorId || !workflowId) {
                     console.warn(`Task ${task.id} has no visitorId, skipping.`);
                     continue;
                 }
@@ -39,10 +33,12 @@ export class ScheduledTaskService implements IScheduledTaskService {
                 // Execute actions for this visitor in this state if their conditions are met
                 await this.workflowService.executeTriggers({
                     eventName: 'trigger:schedule',
-                    eventParameters: task.id,
-                    visitorId: task.visitorId,
-                    workflowId: task.workflowId                
+                    eventParameters: id,
+                    visitorId: visitorId,
+                    workflowId: workflowId                
                 });
             }
+
+            return { success: true }
         }
 }

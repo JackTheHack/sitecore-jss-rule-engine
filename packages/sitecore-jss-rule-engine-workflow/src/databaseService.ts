@@ -9,7 +9,7 @@ export interface DatabaseServiceOptions {
 
 export interface IDatabaseService {
     init(): Promise<void>;
-    getScheduledTasks(workflowId: string): Promise<Array<WorkflowScheduledTask>>;
+    getScheduledTasks(): Promise<Array<WorkflowScheduledTask>>;
     addScheduledTask(
         id: string,
         visitorId: string,
@@ -60,10 +60,9 @@ export class DatabaseService implements IDatabaseService {
         await this.client.execute('DELETE FROM workflow_scheduled_tasks');
     }
 
-    async getScheduledTasks(workflowId: string): Promise<Array<WorkflowScheduledTask>> {
+    async getScheduledTasks(): Promise<Array<WorkflowScheduledTask>> {
         const result = await this.client.execute(
-            'SELECT * FROM workflow_scheduled_tasks WHERE workflow_id = ?',
-            [workflowId]
+            'SELECT * FROM workflow_scheduled_tasks'            
         );
         return result.rows.map((row: any) => ({
             id: row.id,
@@ -71,7 +70,8 @@ export class DatabaseService implements IDatabaseService {
             workflowId: row.workflow_id,
             taskType: row.task_type,
             scheduledTime: row.scheduled_time,
-            payload: row.payload ?? undefined
+            payload: row.payload ?? undefined,
+            triggerDate: row.triggerDate
         }));
     }
 
