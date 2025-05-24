@@ -1,8 +1,8 @@
 ﻿---
-ID: "b4f98cf3-08ca-4d2b-987e-4e0b4d8e72ef"
-Parent: "5642b8bd-4a30-448e-a751-61a4ae7db170"
-Template: "f90052a5-b4e6-4e6d-9812-1e1b88a6fcea"
-Path: /sitecore/system/Settings/Rules/Definitions/Elements/JSS Rule Engine Workflow/Set Workflow State
+ID: "62c3ea37-43d3-448d-bf7d-71a27087e91c"
+Parent: "d7b574fd-e271-42c3-a1e3-d399ddb235bc"
+Template: "0437fee2-44c9-46a6-abe9-28858d9fee8c"
+Path: /sitecore/templates/Feature/JSS Rule Engine/Chat/Actions
 Languages:
 - Language: en
   Versions:
@@ -10,7 +10,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250524T064654Z
+      Value: 20250524T074002Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -21,14 +21,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "78ed16b8-39a2-48f6-b48f-63abf909002a"
+      Value: "8fa6a849-4964-4505-8a3f-39f3fd7209b1"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250524T081557Z
-    - ID: "eeb36a3b-40d9-4af5-862a-de257b84dca3"
-      Hint: Text
-      Value: "send workflow state [stateName,Text,,state]"
+      Value: 20250524T074002Z

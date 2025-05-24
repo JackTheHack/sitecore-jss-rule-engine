@@ -11,6 +11,21 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20250524T063743Z
+    - ID: "2eafbb95-a22e-4d08-858b-f094b7df5a00"
+      Hint: Condition
+      Value: |
+        <ruleset>
+          <rule
+            uid="{AC02F589-4008-4FB0-851E-D38B634AA88A}">
+            <conditions>
+              <condition
+                id="{0FF3ABD2-064E-42B9-8442-1B9B2F51008E}"
+                uid="0D90EA5536C54EA4AD841D2E0740696C"
+                operatorid="{10537C58-1684-4CAB-B4C0-40C10907CE31}"
+                value="trigger:task" />
+            </conditions>
+          </rule>
+        </ruleset>
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -21,11 +36,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "63596bda-56d5-4c59-b938-225aec9931f3"
+      Value: "b44cf429-de10-4d0e-bf9b-0a09c0a2e42d"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250524T063743Z
+      Value: 20250524T073923Z

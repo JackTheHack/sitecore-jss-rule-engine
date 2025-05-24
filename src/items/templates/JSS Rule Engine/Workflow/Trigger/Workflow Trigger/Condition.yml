@@ -4,6 +4,9 @@ Parent: "3a75ce7b-06a2-4873-b024-3e641c173bea"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
 Path: /sitecore/templates/Feature/JSS Rule Engine/Workflow/Trigger/Workflow Trigger/Condition
 SharedFields:
+- ID: "1eb8ae32-e190-44a6-968d-ed904c794ebf"
+  Hint: Source
+  Value: /sitecore/system/Settings/Rules/JSS Rule Engine
 - ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
   Hint: Type
   Value: Rules
@@ -12,7 +15,7 @@ SharedFields:
   Value: 100
 - ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
   Hint: __Shared revision
-  Value: "fd4343f8-a3e8-4f9a-9552-400ceab029e0"
+  Value: "e04622cf-a135-4ba6-807b-4eaef3566930"
 Languages:
 - Language: en
   Versions:
@@ -31,11 +34,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "2d98746d-0ee5-4d18-ad65-5ca4f05feb61"
+      Value: "0445f594-6a56-4815-8957-3c088831433b"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250420T011443Z
+      Value: 20250524T072901Z

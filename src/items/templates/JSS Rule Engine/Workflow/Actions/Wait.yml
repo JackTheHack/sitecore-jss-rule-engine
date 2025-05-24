@@ -1,21 +1,18 @@
 ﻿---
-ID: "6e139722-209e-4d42-b473-4ddc33f469e5"
-Parent: "16505a62-bed9-4f30-81d8-f6f7a85229e8"
-Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
-Path: /sitecore/templates/Feature/JSS Rule Engine/Workflow/Action/Workflow Action/Condition
+ID: "f3f30f6b-2590-4588-8754-021f350a6fbf"
+Parent: "b97b51b1-f9d5-4320-a120-35fc84d9ff81"
+Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
+Path: /sitecore/templates/Feature/JSS Rule Engine/Workflow/Actions/Wait
 SharedFields:
-- ID: "1eb8ae32-e190-44a6-968d-ed904c794ebf"
-  Hint: Source
-  Value: /sitecore/system/Settings/Rules/JSS Rule Engine
-- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
-  Hint: Type
-  Value: Rules
-- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
-  Hint: __Sortorder
-  Value: 400
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: People/16x16/hourglass.png
+- ID: "12c33f3f-86c5-43a5-aeb4-5598cec45116"
+  Hint: __Base template
+  Value: "{309267F5-C7E0-40D3-898B-32C1C148422F}"
 - ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
   Hint: __Shared revision
-  Value: "cc34acd1-7b41-402b-a138-50978e4fc255"
+  Value: "4bb96424-cad3-44ca-9b89-0e2b7c570224"
 Languages:
 - Language: en
   Versions:
@@ -23,7 +20,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250420T011414Z
+      Value: 20250420T011125Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -34,11 +31,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "f6e59cc6-faba-4df7-aa86-d40d6609eb7e"
+      Value: "6d0423e6-6ed1-434a-add8-ee96b79edc72"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250524T072908Z
+      Value: 20250524T075453Z

@@ -1,8 +1,8 @@
 ﻿---
-ID: "b4f98cf3-08ca-4d2b-987e-4e0b4d8e72ef"
-Parent: "5642b8bd-4a30-448e-a751-61a4ae7db170"
-Template: "f90052a5-b4e6-4e6d-9812-1e1b88a6fcea"
-Path: /sitecore/system/Settings/Rules/Definitions/Elements/JSS Rule Engine Workflow/Set Workflow State
+ID: "c915e3f9-1788-4995-a15e-d4c561f11bb7"
+Parent: "5d7e24c7-da7c-4f14-b019-fc9980530759"
+Template: "f3f30f6b-2590-4588-8754-021f350a6fbf"
+Path: /sitecore/content/ruledemo/demosite/Workflows/Signup/Wait 3 days/Wait
 Languages:
 - Language: en
   Versions:
@@ -10,25 +10,28 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250524T064654Z
+      Value: 20250524T075640Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
         sitecore\jack.spektor@akqa.com
+    - ID: "57957d03-e7bf-4a44-8a40-1c2a1ed4e887"
+      Hint: Timeout
+      Value: 3
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "78ed16b8-39a2-48f6-b48f-63abf909002a"
+      Value: "c3db62f7-0aed-490a-be83-a7a5c56604ae"
+    - ID: "982c1029-8a6a-4772-84ac-97158f0cda03"
+      Hint: NextState
+      Value: "{CC358B52-BBD1-4CC3-A557-3993A90A1B7E}"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250524T081557Z
-    - ID: "eeb36a3b-40d9-4af5-862a-de257b84dca3"
-      Hint: Text
-      Value: "send workflow state [stateName,Text,,state]"
+      Value: 20250524T081505Z

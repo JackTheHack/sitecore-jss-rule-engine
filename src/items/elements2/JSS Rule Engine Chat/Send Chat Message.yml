@@ -21,14 +21,14 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "c4095a51-5ad0-406c-8640-f85c16c0d6c3"
+      Value: "901e2100-4013-4476-96c4-ee07e51dd3ac"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250524T064639Z
+      Value: 20250524T081549Z
     - ID: "eeb36a3b-40d9-4af5-862a-de257b84dca3"
       Hint: Text
-      Value: "send chat message [message,Text,,placeholder]"
+      Value: "send chat message [message,Text,,message]"

@@ -1,18 +1,8 @@
 ﻿---
-ID: "74465d1e-0f45-4d91-98c7-a264f8e2822a"
-Parent: "cea4e92c-342c-46eb-a746-0ef9280951a3"
-Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
-Path: /sitecore/templates/Feature/JSS Rule Engine/Workflow/Actions/AI Agent/Workflow Action/AI Context
-SharedFields:
-- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
-  Hint: Type
-  Value: "Multi-Line Text"
-- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
-  Hint: __Sortorder
-  Value: 100
-- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
-  Hint: __Shared revision
-  Value: "68e45d7f-774f-4fba-b024-4f0bdd1397db"
+ID: "d7b574fd-e271-42c3-a1e3-d399ddb235bc"
+Parent: "7f1b32af-31b1-4e66-a5c3-30007ba0e42a"
+Template: "0437fee2-44c9-46a6-abe9-28858d9fee8c"
+Path: /sitecore/templates/Feature/JSS Rule Engine/Chat
 Languages:
 - Language: en
   Versions:
@@ -20,7 +10,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250420T012034Z
+      Value: 20250524T073956Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -31,11 +21,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "8c341d90-2dee-4e47-964a-84971c5d6f9b"
+      Value: "df185ffd-6c16-437f-b105-6b850a78e0ea"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250420T012147Z
+      Value: 20250524T073956Z

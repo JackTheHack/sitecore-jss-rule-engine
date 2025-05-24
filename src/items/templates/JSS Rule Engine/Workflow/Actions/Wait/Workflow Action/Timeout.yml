@@ -1,18 +1,18 @@
 ﻿---
-ID: "05187080-dd07-4faf-b501-f1c53cdf90f5"
-Parent: "b97b51b1-f9d5-4320-a120-35fc84d9ff81"
-Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
-Path: /sitecore/templates/Feature/JSS Rule Engine/Workflow/Actions/AI Agent
+ID: "57957d03-e7bf-4a44-8a40-1c2a1ed4e887"
+Parent: "98174a9e-ec86-4e1f-963e-bba253927b3c"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Feature/JSS Rule Engine/Workflow/Actions/Wait/Workflow Action/Timeout
 SharedFields:
-- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
-  Hint: __Icon
-  Value: Network/32x32/security_agent.png
-- ID: "12c33f3f-86c5-43a5-aeb4-5598cec45116"
-  Hint: __Base template
-  Value: "{309267F5-C7E0-40D3-898B-32C1C148422F}"
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: Number
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 100
 - ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
   Hint: __Shared revision
-  Value: "bc6c92fb-478a-4cd2-ada0-ed6857e65d8b"
+  Value: "265d2508-4467-4ece-a472-ce234d4c0baa"
 Languages:
 - Language: en
   Versions:
@@ -20,7 +20,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250420T012021Z
+      Value: 20250420T011622Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -31,11 +31,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "d3b995f1-ecc2-47d1-b277-088f960c4fe1"
+      Value: "1858f8a2-1e83-4773-92b6-da62050799dc"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250420T012145Z
+      Value: 20250524T074810Z
