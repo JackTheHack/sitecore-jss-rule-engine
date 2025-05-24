@@ -1,8 +1,8 @@
 ﻿---
-ID: "a80824bb-3cca-4a38-8dbc-82e80e7fbbf3"
-Parent: "290e750c-39e9-46c5-af8b-51adff8b508d"
-Template: "a932ac3e-ddce-45dc-bf08-2c40e5ef1900"
-Path: /sitecore/content/ruledemo/demosite/Workflows/ChatGPT Test/Welcome/OnMessage
+ID: "b4f98cf3-08ca-4d2b-987e-4e0b4d8e72ef"
+Parent: "5642b8bd-4a30-448e-a751-61a4ae7db170"
+Template: "f90052a5-b4e6-4e6d-9812-1e1b88a6fcea"
+Path: /sitecore/system/Settings/Rules/Definitions/Elements/JSS Rule Engine Workflow/Set Workflow State
 Languages:
 - Language: en
   Versions:
@@ -10,7 +10,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250524T063850Z
+      Value: 20250524T064654Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -21,11 +21,14 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "f2a6df55-c64b-44e7-b2ca-0572f5f8f8bc"
+      Value: "fc89fce2-e14a-41cc-a68d-4d66c462141a"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250524T063850Z
+      Value: 20250524T064707Z
+    - ID: "eeb36a3b-40d9-4af5-862a-de257b84dca3"
+      Hint: Text
+      Value: "send workflow state [stateName,Text,,placeholder]"

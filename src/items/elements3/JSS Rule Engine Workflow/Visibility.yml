@@ -1,9 +1,13 @@
 ﻿---
-ID: "59c5535b-e83e-4d2c-8948-3e213a8b39c4"
-Parent: "475c96d4-2540-40cf-84ac-6ddc504b2e90"
+ID: "97c1d532-1f1e-4ce5-81c6-7ffb7987cdb5"
+Parent: "5642b8bd-4a30-448e-a751-61a4ae7db170"
 Template: "aa91a868-02f2-41d3-8b78-1cad91b4dcae"
-Path: /sitecore/system/Settings/Rules/Definitions/Elements/JSS Personalization/Visibility
+Path: /sitecore/system/Settings/Rules/Definitions/Elements/JSS Rule Engine Workflow/Visibility
 BranchID: "9a72c539-dbf8-4dad-96d3-a298fc04add6"
+SharedFields:
+- ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
+  Hint: __Originator
+  Value: "{283F6CD6-EFB8-47AC-946A-ABB17FA45ECB}"
 Languages:
 - Language: en
   Versions:
@@ -11,18 +15,22 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20120802T112600
+      Value: 20250524T064404Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\jack.spektor@akqa.com
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
-        sitecore\admin
+        sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "eab760b8-4865-4459-8270-5553801b6135"
+      Value: "d8e87356-1edf-4637-8fa1-603f9fadf394"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230820T031621Z
+      Value: 20250524T064404Z

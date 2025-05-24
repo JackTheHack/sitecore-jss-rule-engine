@@ -2,7 +2,7 @@
 ID: "a6372dd0-0323-4b48-bd5b-fb9b09edc91c"
 Parent: "475c96d4-2540-40cf-84ac-6ddc504b2e90"
 Template: "96c8e5dd-63c3-496b-a97c-a3e37e1dacba"
-Path: /sitecore/system/Settings/Rules/Definitions/Elements/JSS Personalization/Tags
+Path: /sitecore/system/Settings/Rules/Definitions/Elements/JSS Rule Engine Personalization/Tags
 BranchID: "9a72c539-dbf8-4dad-96d3-a298fc04add6"
 Languages:
 - Language: en

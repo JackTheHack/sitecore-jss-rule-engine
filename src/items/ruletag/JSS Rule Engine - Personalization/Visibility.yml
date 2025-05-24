@@ -2,7 +2,7 @@
 ID: "e4c92982-9a3e-4f5c-9fe6-15dd62aa710c"
 Parent: "f2ba4508-3a79-46ef-b042-05ab7cd8df41"
 Template: "aa91a868-02f2-41d3-8b78-1cad91b4dcae"
-Path: /sitecore/system/Settings/Rules/Definitions/Tags/JSS Personalization/Visibility
+Path: "/sitecore/system/Settings/Rules/Definitions/Tags/JSS Rule Engine - Personalization/Visibility"
 SharedFields:
 - ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
   Hint: __Originator

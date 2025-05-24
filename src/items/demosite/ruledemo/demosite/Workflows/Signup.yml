@@ -1,0 +1,23 @@
+﻿---
+ID: "e152a320-a100-4a67-bd55-0f99691f58d6"
+Parent: "ebc423ba-2dec-45c9-a331-db236ade3895"
+Template: "215d7dbb-5671-4b1c-8dc4-27046c2ef232"
+Path: /sitecore/content/ruledemo/demosite/Workflows/Signup
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250521T043408Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "20b79883-7b57-41ec-a534-aad65f838767"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250521T043408Z

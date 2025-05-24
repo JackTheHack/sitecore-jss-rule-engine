@@ -1,8 +1,8 @@
 ﻿---
-ID: "225168ce-c093-4f10-96c3-5b1983df5261"
-Parent: "475c96d4-2540-40cf-84ac-6ddc504b2e90"
+ID: "15911b1e-4a68-439f-83c9-a063faaf9a6c"
+Parent: "3f101f72-f2bc-4113-83d1-6f4cd6b10305"
 Template: "f90052a5-b4e6-4e6d-9812-1e1b88a6fcea"
-Path: /sitecore/system/Settings/Rules/Definitions/Elements/JSS Personalization/Set Datasource
+Path: /sitecore/system/Settings/Rules/Definitions/Elements/JSS Rule Engine Chat/Send Chat Message
 Languages:
 - Language: en
   Versions:
@@ -10,7 +10,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20230820T031703Z
+      Value: 20250524T064611Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -21,14 +21,14 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "1d335740-fb29-4f5d-9ff2-ad6796d85aaf"
+      Value: "c4095a51-5ad0-406c-8640-f85c16c0d6c3"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230820T034555Z
+      Value: 20250524T064639Z
     - ID: "eeb36a3b-40d9-4af5-862a-de257b84dca3"
       Hint: Text
-      Value: "Set [renderingName,Text,,rendering] datasource in [placeholderName,Text,,placeholder] to [datasourcePath,Tree,root=/sitecore/content,datasource]"
+      Value: "send chat message [message,Text,,placeholder]"

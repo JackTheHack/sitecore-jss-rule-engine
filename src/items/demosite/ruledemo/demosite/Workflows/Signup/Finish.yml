@@ -1,0 +1,30 @@
+﻿---
+ID: "657cd595-6cfb-4192-81de-ff14526c0ecb"
+Parent: "e152a320-a100-4a67-bd55-0f99691f58d6"
+Template: "3a39a70f-60f4-49c6-8b29-88e8642ff544"
+Path: /sitecore/content/ruledemo/demosite/Workflows/Signup/Finish
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 200
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "bd9bf902-9b75-4a85-98af-3b3d07929369"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250521T043737Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "985d69bc-4b0d-499e-933d-66ffcfaa7978"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250521T043742Z

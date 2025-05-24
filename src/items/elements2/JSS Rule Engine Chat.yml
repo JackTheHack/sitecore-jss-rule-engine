@@ -1,15 +1,19 @@
 ﻿---
-ID: "377fa43f-f50e-4842-b674-74a47dee08c8"
-Parent: "e39f428e-0aab-4fd7-ae15-0271f11cd052"
-Template: "a932ac3e-ddce-45dc-bf08-2c40e5ef1900"
-Path: /sitecore/content/ruledemo/demosite/Workflows/ChatGPT Test/AI Assistant/OnMessage
+ID: "3f101f72-f2bc-4113-83d1-6f4cd6b10305"
+Parent: "e7cbefe8-9112-4b95-a978-4e470d94c54a"
+Template: "54dae7cd-bfd8-4e69-9679-75f2ae9f9034"
+Path: /sitecore/system/Settings/Rules/Definitions/Elements/JSS Rule Engine Chat
+BranchID: "9a72c539-dbf8-4dad-96d3-a298fc04add6"
 SharedFields:
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 0
+  Value: 50
 - ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
   Hint: __Shared revision
-  Value: "49b87bdf-4edf-4a60-bdca-56fde46120fa"
+  Value: "60ca3d84-1d0c-42cb-97dc-f4d06008ce5e"
+- ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
+  Hint: __Originator
+  Value: "{8D1DB71C-9ACF-4192-8384-5F9B6D533F95}"
 Languages:
 - Language: en
   Versions:
@@ -17,7 +21,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250524T063809Z
+      Value: 20250524T064404Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -28,11 +32,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "a029945a-e551-4664-b179-433c08aa92c2"
+      Value: "e6522a4e-fbb4-4a44-b976-8d8d35b74997"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250524T063814Z
+      Value: 20250524T064429Z

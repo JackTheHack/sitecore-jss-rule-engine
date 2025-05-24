@@ -1,8 +1,8 @@
 ﻿---
-ID: "a2db53fc-d6aa-4d7c-b03c-f92954030a6b"
-Parent: "475c96d4-2540-40cf-84ac-6ddc504b2e90"
-Template: "f90052a5-b4e6-4e6d-9812-1e1b88a6fcea"
-Path: /sitecore/system/Settings/Rules/Definitions/Elements/JSS Personalization/Hide rendering
+ID: "3b89ac88-e2c7-4ee0-978f-30bb13a024b3"
+Parent: "4e23d557-f0a3-451c-9254-0980d9867e0b"
+Template: "b44783be-ebc7-4ce8-80d9-ee7a08df3245"
+Path: /sitecore/content/ruledemo/demosite/Workflows/Signup/Start/Send Welcome Email
 Languages:
 - Language: en
   Versions:
@@ -10,7 +10,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20230820T031703Z
+      Value: 20250521T043437Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -21,14 +21,14 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "8338df17-7522-4cfa-8bf0-c85ce8a9c733"
+      Value: "372e79f5-0616-4674-9787-8a4d704bd88a"
+    - ID: "982c1029-8a6a-4772-84ac-97158f0cda03"
+      Hint: NextState
+      Value: 
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20230820T034544Z
-    - ID: "eeb36a3b-40d9-4af5-862a-de257b84dca3"
-      Hint: Text
-      Value: "Hide [renderingName,Text,,rendering] in [placeholderName,Text,,placeholder]"
+      Value: 20250521T043713Z
