@@ -2,13 +2,13 @@ import { JssRuleEngine } from "@jss-rule-engine/core";
 import { DatabaseServiceOptions } from "./databaseService";
 import { IWorkflowActionFactory } from "./actionFactory";
 
-export interface Workflow {
+export type Workflow = {
   id: string;
   states: Record<string, WorkflowState>;
   defaultStateId?: string;
 }
 
-export interface WorkflowExecutionContext {
+export type WorkflowExecutionContext = {
     workflowService?: IWorkflowService;
     workflow: Workflow;
     visitor?: WorkflowVisitor;
@@ -19,18 +19,18 @@ export interface WorkflowExecutionContext {
 }
 
 
-export interface WorkflowServiceOptions {
+export type WorkflowServiceOptions = {
     db: DatabaseServiceOptions,
     ruleEngine: JssRuleEngine,
     actionFactory: IWorkflowActionFactory
 }
 
-export interface WorkflowActionCommand{
+export type WorkflowActionCommand = {
     operation: string;
     parameters: string;
 }
 
-export interface WorkflowExecutionResult {
+export type WorkflowExecutionResult = {
     visitorId: string;
     workflowId: string;
     stateId: string;
@@ -39,14 +39,14 @@ export interface WorkflowExecutionResult {
     error?: string;
 }
 
-export interface WorkflowState {
+export type WorkflowState = {
   id: string;
   name: string;
   triggers: WorkflowTrigger[];
   actions: WorkflowAction[];
 }
 
-export interface WorkflowTrigger {
+export type WorkflowTrigger = {
   id: string;
   condition: string;
   type: string;
@@ -54,7 +54,7 @@ export interface WorkflowTrigger {
   fields: Record<string, string>;
 }
 
-export interface WorkflowAction {
+export type WorkflowAction = {
   id: string;
   templateId: string;
   condition: string;
@@ -62,12 +62,12 @@ export interface WorkflowAction {
   fields: Record<string, string>;
 }
 
-export interface WorkflowVisitor {
+export type WorkflowVisitor = {
     id: string;
 }
 
 
-export interface WorkflowExecutionOptions {
+export type WorkflowExecutionOptions = {
   visitorId: string;
   workflowId: string;
   eventName: string;

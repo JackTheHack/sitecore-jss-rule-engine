@@ -32,6 +32,7 @@ export interface IDatabaseService {
     updateVisitorState(visitorId: string, nextStateId: string, workflowId: string): Promise<void>;
     removeVisitor(visitorId: string, workflowId: string): Promise<void>;
     getStateVisitors(stateId: string, workflowId: string): Promise<string[]>;
+    debugPrintTables(): Promise<void> 
 }
 
 export class DatabaseService implements IDatabaseService {
@@ -177,5 +178,13 @@ export class DatabaseService implements IDatabaseService {
         );
 
         return result.rows.map((row: any) => row.visitor_id);
+    }
+
+    async debugPrintTables(): Promise<void> {
+        const visitors = await this.client.execute('SELECT * FROM workflow_visitors');
+        console.log('workflow_visitors:', visitors.rows);
+
+        const tasks = await this.client.execute('SELECT * FROM workflow_scheduled_tasks');
+        console.log('workflow_scheduled_tasks:', tasks.rows);
     }
 }
