@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import {Action, ErrorResponse, Metadata, SuccessResponse} from '../../../lib/chat/types'
 import loadWorkflowFromSitecore from 'lib/chat/lib/loadWorkflowFromSitecore';
 import { DatabaseService, IDatabaseService } from '@jss-rule-engine/workflow';
-import { DevBundlerService } from 'next/dist/server/lib/dev-bundler-service';
+import  dbServiceOptions  from '../../../lib/db/dbOptions';
 
 export default async function handler(
   req: NextApiRequest,
@@ -26,13 +26,7 @@ export default async function handler(
 
       console.log('Rule engine: ', ruleEngine?.requestContext, ruleEngine?.sitecoreContext, ruleEngine.commandDefinitions?.size);
 
-      const actionFactory = new WorkflowActionFactory();
-
-      const dbServiceOptions = {
-          authToken: process.env.SQLITE_AUTHTOKEN || '',
-          url: process.env.SQLITE_URL || '',
-          syncUrl: process.env.SQLITE_SYNCURL || ''
-        };
+      const actionFactory = new WorkflowActionFactory();      
 
       const dbService = new DatabaseService(dbServiceOptions);
 

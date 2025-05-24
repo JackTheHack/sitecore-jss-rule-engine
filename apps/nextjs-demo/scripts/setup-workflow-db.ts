@@ -1,5 +1,5 @@
 import { DatabaseService } from '@jss-rule-engine/workflow';
-
+import  dbServiceOptions from '../src/lib/db/dbOptions';
 /*
   METADATA GENERATION
   Generates the /src/temp/metadata.json file which contains application 
@@ -11,13 +11,7 @@ function initDb(): void {
 
   try{
 
-  console.log('Initializing database...');
-
-  const dbServiceOptions = {
-    authToken: process.env.SQLITE_AUTHTOKEN || '',
-    url: process.env.SQLITE_URL || '',
-    syncUrl: process.env.SQLITE_SYNCURL || ''
-  };
+  console.log('Initializing database...');  
 
   const databaseService = new DatabaseService(dbServiceOptions);
   databaseService.init();
