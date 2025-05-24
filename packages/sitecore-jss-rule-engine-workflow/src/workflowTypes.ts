@@ -1,6 +1,6 @@
 import { JssRuleEngine } from "@jss-rule-engine/core";
 import { DatabaseServiceOptions } from "./databaseService";
-import { WorkflowActionFactory } from "./actionFactory";
+import { IWorkflowActionFactory } from "./actionFactory";
 
 export interface Workflow {
   id: string;
@@ -22,7 +22,7 @@ export interface WorkflowExecutionContext {
 export interface WorkflowServiceOptions {
     db: DatabaseServiceOptions,
     ruleEngine: JssRuleEngine,
-    actionFactory: WorkflowActionFactory
+    actionFactory: IWorkflowActionFactory
 }
 
 export interface WorkflowActionCommand{

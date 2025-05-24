@@ -1,23 +1,23 @@
 import { WorkflowExecutionContext } from "./workflowTypes";
 
-export interface WorkflowActionCommand {
+export interface IWorkflowAction {
     execute(context: WorkflowExecutionContext): Promise<void>;
 }
 
 export interface IWorkflowActionFactory {
-    registerAction(templateId: string, action: new () => WorkflowActionCommand): void;
-    getAction(templateId: string): WorkflowActionCommand;
+    registerAction(templateId: string, action: new () => IWorkflowAction): void;
+    getAction(templateId: string): IWorkflowAction;
 }
 
 export class WorkflowActionFactory implements IWorkflowActionFactory {
 
-    private registeredActions: Map<string, new () => WorkflowActionCommand> = new Map();
+    private registeredActions: Map<string, new () => IWorkflowAction> = new Map();
 
-    registerAction(templateId: string, action: new () => WorkflowActionCommand): void {
+    registerAction(templateId: string, action: new () => IWorkflowAction): void {
         this.registeredActions.set(templateId, action);
     }
 
-    getAction(templateId: string): WorkflowActionCommand {
+    getAction(templateId: string): IWorkflowAction {
         const ActionClass = this.registeredActions.get(templateId);
         if (ActionClass) {
             return new ActionClass();

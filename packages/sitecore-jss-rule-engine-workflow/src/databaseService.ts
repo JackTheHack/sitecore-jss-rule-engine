@@ -6,7 +6,35 @@ export interface DatabaseServiceOptions {
     authToken?: string;
 }
 
-export class DatabaseService {
+export interface IDatabaseService {
+    init(): Promise<void>;
+    addScheduledTask(
+        id: string,
+        visitorId: string,
+        workflowId: string,
+        taskType: string,
+        scheduledTime: number,
+        payload?: string
+    ): Promise<void>;
+    updateScheduledTask(
+        id: string,
+        fields: Partial<{
+            visitorId: string;
+            workflowId: string;
+            taskType: string;
+            scheduledTime: number;
+            payload: string;
+        }>
+    ): Promise<void>;
+    deleteScheduledTask(id: string): Promise<void>;
+    addVisitor(visitorId: string, stateId: string, workflowId: string): Promise<void>;
+    getVisitorState(visitorId: string, workflowId: string): Promise<string | null>;
+    updateVisitorState(visitorId: string, nextStateId: string, workflowId: string): Promise<void>;
+    removeVisitor(visitorId: string, workflowId: string): Promise<void>;
+    getStateVisitors(stateId: string, workflowId: string): Promise<string[]>;
+}
+
+export class DatabaseService implements IDatabaseService {
     private client: Client;
 
     constructor(options: DatabaseServiceOptions) {
@@ -31,6 +59,85 @@ export class DatabaseService {
                 workflow_id TEXT NOT NULL
             )
         `);
+
+        await this.client.execute(`
+            CREATE TABLE IF NOT EXISTS workflow_scheduled_tasks (
+            id TEXT PRIMARY KEY,
+            visitor_id TEXT NOT NULL,
+            workflow_id TEXT NOT NULL,
+            task_type TEXT NOT NULL,
+            scheduled_time INTEGER NOT NULL,
+            payload TEXT
+            )
+        `);
+    }
+
+    async addScheduledTask(
+        id: string,
+        visitorId: string,
+        workflowId: string,
+        taskType: string,
+        scheduledTime: number,
+        payload?: string
+    ): Promise<void> {
+        await this.client.execute(
+            `INSERT INTO workflow_scheduled_tasks (id, visitor_id, workflow_id, task_type, scheduled_time, payload)
+             VALUES (?, ?, ?, ?, ?, ?)`,
+            [id, visitorId, workflowId, taskType, scheduledTime, payload ?? null]
+        );
+    }
+
+    async updateScheduledTask(
+        id: string,
+        fields: Partial<{
+            visitorId: string;
+            workflowId: string;
+            taskType: string;
+            scheduledTime: number;
+            payload: string;
+        }>
+    ): Promise<void> {
+        const updates: string[] = [];
+        const values: any[] = [];
+
+        if (fields.visitorId !== undefined) {
+            updates.push('visitor_id = ?');
+            values.push(fields.visitorId);
+        }
+        if (fields.workflowId !== undefined) {
+            updates.push('workflow_id = ?');
+            values.push(fields.workflowId);
+        }
+        if (fields.taskType !== undefined) {
+            updates.push('task_type = ?');
+            values.push(fields.taskType);
+        }
+        if (fields.scheduledTime !== undefined) {
+            updates.push('scheduled_time = ?');
+            values.push(fields.scheduledTime);
+        }
+        if (fields.payload !== undefined) {
+            updates.push('payload = ?');
+            values.push(fields.payload);
+        }
+
+        if (updates.length === 0) {
+            return;
+        }
+
+        values.push(id);
+
+        await this.client.execute(
+            `UPDATE workflow_scheduled_tasks SET ${updates.join(', ')} WHERE id = ?`,
+            values
+        );
+    }
+
+    async deleteScheduledTask(id: string): Promise<void> {
+        await this.client.execute(
+            'DELETE FROM workflow_scheduled_tasks WHERE id = ?',
+            [id]
+        );
     }
 
     async addVisitor(visitorId: string, stateId: string, workflowId: string): Promise<void> {

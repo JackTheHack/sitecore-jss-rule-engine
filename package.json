@@ -24,6 +24,8 @@
     },
     "license": "Apache-2.0",
     "scripts": {
+        "test:core": "yarn workspace @jss-rule-engine/core test",
+        "test:workflow": "yarn workspace @jss-rule-engine/workflow test",
         "build:core": "yarn workspace @jss-rule-engine/core build",
         "build:edge": "yarn workspace @jss-rule-engine/edge build",
         "build:next": "yarn workspace @jss-rule-engine/nextjs build",

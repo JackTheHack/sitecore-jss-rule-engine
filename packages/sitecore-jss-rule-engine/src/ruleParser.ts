@@ -1,4 +1,3 @@
-//var xmlParser =  require('xml-js');
 import { parseXml } from '@rgrove/parse-xml';
 import { ParsedRuleXmlData, RuleActionData, RuleConditionData, RuleData, RuleEngineContext } from './types/ruleEngine';
 
