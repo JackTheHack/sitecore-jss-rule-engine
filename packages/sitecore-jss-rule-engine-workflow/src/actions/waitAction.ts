@@ -1,5 +1,5 @@
 import { IWorkflowAction } from '../actionFactory';
-import { WorkflowExecutionContext } from '../workflowTypes';
+import { WorkflowExecutionContext, WorkflowScheduledTaskParams } from '../workflowTypes';
 import { v4 as uuidv4 } from 'uuid';
 
 interface ScheduleTriggerFields {
@@ -29,16 +29,18 @@ export class WaitAction implements IWorkflowAction {
         const scheduledTime = Date.now() + (seconds * 1000);
         const taskId = uuidv4();
 
-        await context.workflowService.addScheduledTask(
+        const params: WorkflowScheduledTaskParams = {
             taskId,
-            context.visitor.id,
-            context.workflow.id,
-            'trigger:schedule',
+            visitorId: context.visitor.id,
+            workflowId: context.workflow.id,
+            triggerType: 'trigger:schedule',
             scheduledTime,
-            JSON.stringify({
+            triggerParameters: JSON.stringify({
                 triggerName: fields.triggerName,
                 triggerParameters: fields.triggerParameters || ''
             })
-        );
+        };
+
+        await context.workflowService.addScheduledTask(params);
     }
 } 

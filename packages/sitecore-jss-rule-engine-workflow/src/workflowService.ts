@@ -1,7 +1,8 @@
 import { IDatabaseService } from './databaseService';
-import { Workflow, WorkflowState, WorkflowExecutionContext, WorkflowServiceOptions, IWorkflowService, WorkflowExecutionResult, WorkflowExecutionOptions } from './workflowTypes';
+import { Workflow, WorkflowState, WorkflowExecutionContext, WorkflowServiceOptions, IWorkflowService, WorkflowExecutionResult, WorkflowExecutionOptions, WorkflowScheduledTaskParams } from './workflowTypes';
 import { GraphQLClient } from 'graphql-request';
 import {sitecoreQuery } from './workflowQuery';
+import { AddScheduledTaskParams } from './databaseService';
 
 export class WorkflowService implements IWorkflowService {
     private workflows: Record<string, Workflow> = {};
@@ -15,22 +16,16 @@ export class WorkflowService implements IWorkflowService {
         this.graphqlClient = new GraphQLClient(options.graphqlEndpoint);
     }      
     
-    async addScheduledTask(
-        taskId: string,
-        visitorId: string,
-        workflowId: string,
-        triggerType: string,
-        scheduledTime: number,
-        triggerParameters: string
-    ): Promise<void> {
-        await this.databaseService.addScheduledTask(
-            taskId,
-            visitorId,
-            workflowId,
-            triggerType,
-            scheduledTime,
-            triggerParameters
-        );
+    async addScheduledTask(params: WorkflowScheduledTaskParams): Promise<void> {
+        const dbParams: AddScheduledTaskParams = {
+            id: params.taskId,
+            visitorId: params.visitorId,
+            workflowId: params.workflowId,
+            taskType: params.triggerType,
+            scheduledTime: params.scheduledTime,
+            payload: params.triggerParameters
+        };
+        await this.databaseService.addScheduledTask(dbParams);
     }
     
     getWorkflow(workflowId: string): Workflow | null {
@@ -221,6 +216,10 @@ export class WorkflowService implements IWorkflowService {
         });
 
         return workflow;
+    }
+
+    async getSitecoreQuery(path: string, language: string): Promise<string> {
+        return sitecoreQuery(path, language);
     }
 
     async loadWorkflowFromGraphQL(path: string, language: string): Promise<void> {

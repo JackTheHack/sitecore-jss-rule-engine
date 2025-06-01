@@ -88,6 +88,15 @@ export type WorkflowExecutionOptions = {
   defaultStateId?: string;
 }
 
+export type WorkflowScheduledTaskParams = {
+    taskId: string;
+    visitorId: string;
+    workflowId: string;
+    triggerType: string;
+    scheduledTime: number;
+    triggerParameters: string;
+}
+
 export interface IWorkflowService {
     init(): Promise<void>;
     load(workflowConfig: Workflow): Promise<void>;
@@ -100,11 +109,6 @@ export interface IWorkflowService {
     getStateVisitors(workflowId: string, stateId: string): Promise<string[]>;    
     getWorkflow(workflowId: string): Workflow | null;
     parseGraphQLResponse(response: any): Promise<Workflow>;
-    addScheduledTask(
-      taskId: string,
-      visitorId: string,
-      workflowId: string,
-      triggerType: string,
-      scheduledTime: number,
-      triggerParameters: string): Promise<void>
+    getSitecoreQuery(path: string, language: string): Promise<string>;
+    addScheduledTask(params: WorkflowScheduledTaskParams): Promise<void>;
 }

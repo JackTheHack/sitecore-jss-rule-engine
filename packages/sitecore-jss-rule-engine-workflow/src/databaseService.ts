@@ -7,17 +7,19 @@ export interface DatabaseServiceOptions {
     authToken?: string;
 }
 
+export interface AddScheduledTaskParams {
+    id: string;
+    visitorId: string;
+    workflowId: string;
+    taskType: string;
+    scheduledTime: number;
+    payload?: string;
+}
+
 export interface IDatabaseService {
     init(): Promise<void>;
     getScheduledTasks(): Promise<Array<WorkflowScheduledTask>>;
-    addScheduledTask(
-        id: string,
-        visitorId: string,
-        workflowId: string,
-        taskType: string,
-        scheduledTime: number,
-        payload?: string
-    ): Promise<void>;
+    addScheduledTask(params: AddScheduledTaskParams): Promise<void>;
     updateScheduledTask(
         id: string,
         fields: Partial<{
@@ -97,18 +99,11 @@ export class DatabaseService implements IDatabaseService {
         `);        
     }
 
-    async addScheduledTask(
-        id: string,
-        visitorId: string,
-        workflowId: string,
-        taskType: string,
-        scheduledTime: number,
-        payload?: string
-    ): Promise<void> {
+    async addScheduledTask(params: AddScheduledTaskParams): Promise<void> {
         await this.client.execute(
             `INSERT INTO workflow_scheduled_tasks (id, visitor_id, workflow_id, task_type, scheduled_time, payload)
              VALUES (?, ?, ?, ?, ?, ?)`,
-            [id, visitorId, workflowId, taskType, scheduledTime, payload ?? null]
+            [params.id, params.visitorId, params.workflowId, params.taskType, params.scheduledTime, params.payload ?? null]
         );
     }
 

@@ -28,7 +28,7 @@ export class ChatbotAIAction implements IWorkflowAction {
         
         // Add the AI response as a client command
         const command: WorkflowActionCommand = {
-            operation: 'ai-response',
+            operation: 'chatbot:ai-response',
             parameters: JSON.stringify({ response })
         };
         

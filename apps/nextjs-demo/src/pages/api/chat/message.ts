@@ -3,7 +3,7 @@ import { WorkflowServiceOptions } from '@jss-rule-engine/workflow/dist/src/workf
 import { JssRuleEngine, getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {Action, ErrorResponse, Metadata, SuccessResponse} from '../../../lib/chat/types'
-import loadWorkflowFromSitecore from 'lib/chat/lib/loadWorkflow';
+import loadWorkflow from 'lib/chat/lib/loadWorkflow';
 import { DatabaseService, IDatabaseService } from '@jss-rule-engine/workflow';
 import  { getDatabaseServiceOptions}  from '../../../lib/db/dbOptions';
 
@@ -34,7 +34,9 @@ export default async function handler(
       const workflowOptions: WorkflowServiceOptions = {
         databaseService: dbService,
         ruleEngine: ruleEngine,
-        actionFactory: actionFactory 
+        actionFactory: actionFactory,
+        graphqlEndpoint: "/",
+        apiKey: "/"
       }
       
       console.log('Creating workflow service', dbServiceOptions);
@@ -43,9 +45,12 @@ export default async function handler(
       console.log("Initializing workflow...")
       await workflowService.init();
 
+
+      console.log("Loading workflow...")
+
       const sitecoreEdgeUrl = process.env.EDGE_QL_ENDPOINT || '';
 
-      const workflowConfig = await loadWorkflowFromSitecore(sitecoreEdgeUrl, workflowId);
+      const workflowConfig = await loadWorkflow(sitecoreEdgeUrl, workflowId);
 
       const executionOptions : WorkflowExecutionOptions = {
         visitorId: visitorId,
@@ -54,8 +59,6 @@ export default async function handler(
         workflowId: workflowId,
         defaultStateId: workflowConfig.defaultStateId || ''
       }
-
-      await workflowService.load(workflowConfig);
 
       console.log('Executing triggers', executionOptions);
 

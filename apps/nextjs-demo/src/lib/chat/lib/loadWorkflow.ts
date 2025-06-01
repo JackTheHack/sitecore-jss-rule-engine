@@ -2,7 +2,7 @@ import { JssRuleEngine } from '@jss-rule-engine/core';
 import { Workflow, WorkflowService, WorkflowActionFactory } from '@jss-rule-engine/workflow';
 import { DatabaseServiceOptions, DatabaseService } from '@jss-rule-engine/workflow';
 
-export default async function loadWorkflowFromSitecore(graphQlEndpoint: string, itemId: string): Promise<Workflow> {
+export default async function loadWorkflow(graphQlEndpoint: string, itemId: string): Promise<Workflow> {
 
     const apiKey = process.env.SITECORE_API_KEY;
 
@@ -16,7 +16,7 @@ export default async function loadWorkflowFromSitecore(graphQlEndpoint: string, 
 
         const dbOptions: DatabaseServiceOptions = {
             url: process.env.DATABASE_URL || 'file:workflow.sqlite'
-        }
+        }        
 
         const workflowService = new WorkflowService({
             graphqlEndpoint: graphQlEndpoint,
@@ -26,7 +26,19 @@ export default async function loadWorkflowFromSitecore(graphQlEndpoint: string, 
             ruleEngine: new JssRuleEngine()
         });
 
-        workflowService.loadWorkflowFromGraphQL(graphQlEndpoint, 'en');
+        const graphQlQuery = await workflowService.getSitecoreQuery(itemId, "en");
+
+        const graphQlResponse = await fetch(graphQlEndpoint, {
+            method: 'POST',
+            body: graphQlQuery,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
+            next: { revalidate: 3600 } // Cache for 1 hour
+        });
+
+        workflowService.parseGraphQLResponse(graphQlResponse.json());
 
         const workflow = workflowService.getWorkflow(itemId);
 
