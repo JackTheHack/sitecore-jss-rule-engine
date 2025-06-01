@@ -19,3 +19,4 @@ export {WorkflowScheduledTask, IWorkflowService} from "./src/workflowTypes";
 export {ScheduledTaskService, IScheduledTaskService} from "./src/scheduledTaskService";
 export {ScheduledTaskServiceOptions} from "./src/scheduledTaskServiceTypes";
 export {WorkflowServiceOptions} from "./src/workflowTypes";
+export {DatabaseServiceOptions} from "./src/databaseService";

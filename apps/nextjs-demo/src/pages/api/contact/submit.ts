@@ -3,7 +3,7 @@ import { WorkflowServiceOptions } from '@jss-rule-engine/workflow/dist/src/workf
 import { getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ErrorResponse, Metadata, SuccessResponse} from '../../../lib/form/types'
-import loadWorkflowFromSitecore from 'lib/chat/lib/loadWorkflowFromSitecore';
+import loadWorkflowFromSitecore from 'lib/chat/lib/loadWorkflow';
 import { DatabaseService, IDatabaseService } from '@jss-rule-engine/workflow';
 import  {getDatabaseServiceOptions}  from '../../../lib/db/dbOptions';
 

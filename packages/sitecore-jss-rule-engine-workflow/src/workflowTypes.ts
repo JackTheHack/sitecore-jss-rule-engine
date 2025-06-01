@@ -23,7 +23,8 @@ export type WorkflowServiceOptions = {
     databaseService: IDatabaseService,
     ruleEngine: JssRuleEngine,
     actionFactory: IWorkflowActionFactory,
-    graphqlEndpoint: string
+    graphqlEndpoint: string,
+    apiKey?: string
 }
 
 export type WorkflowActionCommand = {

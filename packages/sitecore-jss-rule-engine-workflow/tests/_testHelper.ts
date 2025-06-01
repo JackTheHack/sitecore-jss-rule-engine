@@ -17,7 +17,8 @@ export function getWorkflowService(){
             const workflow = new WorkflowService({
                 databaseService: dbService,
                 ruleEngine: ruleEngine,
-                actionFactory: actionFactory
+                actionFactory: actionFactory,
+                graphqlEndpoint: 'https://ruledemo.sitecorecloud.io/api/graphql'
             });
 
             return workflow;
