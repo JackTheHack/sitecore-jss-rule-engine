@@ -97,4 +97,11 @@ export interface IWorkflowService {
     getStateVisitors(workflowId: string, stateId: string): Promise<string[]>;    
     getWorkflow(workflowId: string): Workflow | null;
     parseGraphQLResponse(response: any): Promise<Workflow>;
+    addScheduledTask(
+      taskId: string,
+      visitorId: string,
+      workflowId: string,
+      triggerType: string,
+      scheduledTime: number,
+      triggerParameters: string): Promise<void>
 }

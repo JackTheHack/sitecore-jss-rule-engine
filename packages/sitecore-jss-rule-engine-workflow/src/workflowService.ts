@@ -9,7 +9,25 @@ export class WorkflowService implements IWorkflowService {
     constructor(options: WorkflowServiceOptions) {
         this.options = options;
         this.databaseService = options.databaseService;
-    }       
+    }      
+    
+    async addScheduledTask(
+        taskId: string,
+        visitorId: string,
+        workflowId: string,
+        triggerType: string,
+        scheduledTime: number,
+        triggerParameters: string
+    ): Promise<void> {
+        await this.databaseService.addScheduledTask(
+            taskId,
+            visitorId,
+            workflowId,
+            triggerType,
+            scheduledTime,
+            triggerParameters
+        );
+    }
     
     getWorkflow(workflowId: string): Workflow | null {
         return this.workflows[workflowId] || null;
