@@ -48,6 +48,7 @@ export type WorkflowState = {
 
 export type WorkflowTrigger = {
   id: string;
+  name: string;
   condition: string;
   type: string;
   templateId: string;
@@ -56,6 +57,7 @@ export type WorkflowTrigger = {
 
 export type WorkflowAction = {
   id: string;
+  name: string;
   templateId: string;
   condition: string;
   nextStateId?: string;  
@@ -94,4 +96,5 @@ export interface IWorkflowService {
     changeVisitorState(visitorId: string, workflowId: string, nextStateId: string): Promise<void>;
     getStateVisitors(workflowId: string, stateId: string): Promise<string[]>;    
     getWorkflow(workflowId: string): Workflow | null;
+    parseGraphQLResponse(response: any): Promise<Workflow>;
 }

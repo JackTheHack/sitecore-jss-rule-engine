@@ -88,6 +88,7 @@
     "bootstrap": "ts-node --require dotenv-flow/config --project tsconfig.scripts.json scripts/bootstrap.ts",
     "build": "cross-env NODE_ENV=production npm-run-all --serial bootstrap next:build",
     "graphql:update": "ts-node --project tsconfig.scripts.json ./scripts/fetch-graphql-introspection-data.ts",
+    "db:init": "ts-node --require dotenv-flow/config --project tsconfig.scripts.json scripts/init-workflow-db.ts",
     "next:build": "next build",
     "next:dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "next:start": "next start",

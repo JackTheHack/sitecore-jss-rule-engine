@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import {Action, ErrorResponse, Metadata, SuccessResponse} from '../../../lib/chat/types'
 import loadWorkflowFromSitecore from 'lib/chat/lib/loadWorkflowFromSitecore';
 import { DatabaseService, IDatabaseService } from '@jss-rule-engine/workflow';
-import  dbServiceOptions  from '../../../lib/db/dbOptions';
+import  { getDatabaseServiceOptions}  from '../../../lib/db/dbOptions';
 
 export default async function handler(
   req: NextApiRequest,
@@ -28,6 +28,7 @@ export default async function handler(
 
       const actionFactory = new WorkflowActionFactory();      
 
+      const dbServiceOptions = getDatabaseServiceOptions();
       const dbService = new DatabaseService(dbServiceOptions);
 
       const workflowOptions: WorkflowServiceOptions = {

@@ -4,7 +4,7 @@ import { getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ErrorResponse, Metadata, SuccessResponse} from '../../../lib/form/types'
 import { DatabaseService, ScheduledTaskServiceOptions } from '@jss-rule-engine/workflow';
-import  dbServiceOptions  from '../../../lib/db/dbOptions';
+import  {getDatabaseServiceOptions}  from '../../../lib/db/dbOptions';
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,7 +19,7 @@ export default async function handler(
 
       console.log('Rule engine: ', ruleEngine?.requestContext, ruleEngine?.sitecoreContext, ruleEngine.commandDefinitions?.size);
 
-     
+     const dbServiceOptions = getDatabaseServiceOptions();
 
       const dbService = new DatabaseService(dbServiceOptions);
       

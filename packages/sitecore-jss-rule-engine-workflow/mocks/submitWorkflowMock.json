@@ -1,0 +1,386 @@
+{
+  "data": {
+    "item": {
+      "name": "Signup",
+      "field": {
+        "name": "Start State",
+        "value": "{4E23D557-F0A3-451C-9254-0980D9867E0B}"
+      },
+      "stateItems": {
+        "results": [
+          {
+            "id": "4E23D557F0A3451C92540980D9867E0B",
+            "name": "Start",
+            "children": {
+              "results": [
+                {
+                  "id": "3B89AC88E2C74EE0978F30BB13A024B3",
+                  "name": "Send Welcome Email",
+                  "fields": [
+                    {
+                      "id": "727101B529FF44498615080D4119D89F",
+                      "name": "Template",
+                      "value": ""
+                    },
+                    {
+                      "id": "982C10298A6A477284AC97158F0CDA03",
+                      "name": "NextState",
+                      "value": ""
+                    },
+                    {
+                      "id": "6E139722209E4D42B4734DDC33F469E5",
+                      "name": "Condition",
+                      "value": ""
+                    },
+                    {
+                      "id": "3C558B4B88404A46862AB90B33E2D4B2",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": ""
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250521T043437Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250521T043713Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "B44783BEEBC74CE880D9EE7A08DF3245",
+                    "name": "SendMessage"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "5D7E24C7DA7C4F14B019FC9980530759",
+            "name": "Wait 3 days",
+            "children": {
+              "results": [
+                {
+                  "id": "106A983FBD23404F8AB08CB37C01A970",
+                  "name": "OnSchedule",
+                  "fields": [
+                    {
+                      "id": "16766E0D742C42DB8F99267B52AA5445",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "2EAFBB95A22E4D08858BF094B7DF5A00",
+                      "name": "Condition",
+                      "value": "<ruleset>\r\n  <rule uid=\"{AC02F589-4008-4FB0-851E-D38B634AA88A}\">\r\n    <conditions>\r\n      <condition id=\"{0FF3ABD2-064E-42B9-8442-1B9B2F51008E}\" uid=\"0D90EA5536C54EA4AD841D2E0740696C\" operatorid=\"{10537C58-1684-4CAB-B4C0-40C10907CE31}\" value=\"trigger:task\" />\r\n    </conditions>\r\n  </rule>\r\n</ruleset>"
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": ""
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250524T063743Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250524T073923Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "A932AC3EDDCE45DCBF082C40E5EF1900",
+                    "name": "Trigger"
+                  }
+                },
+                {
+                  "id": "25F6DAEFBF3C4FB9BABF4D800C9C38C0",
+                  "name": "Send 3 days email",
+                  "fields": [
+                    {
+                      "id": "727101B529FF44498615080D4119D89F",
+                      "name": "Template",
+                      "value": ""
+                    },
+                    {
+                      "id": "982C10298A6A477284AC97158F0CDA03",
+                      "name": "NextState",
+                      "value": ""
+                    },
+                    {
+                      "id": "6E139722209E4D42B4734DDC33F469E5",
+                      "name": "Condition",
+                      "value": ""
+                    },
+                    {
+                      "id": "3C558B4B88404A46862AB90B33E2D4B2",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": ""
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250521T043635Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250521T043721Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "B44783BEEBC74CE880D9EE7A08DF3245",
+                    "name": "SendMessage"
+                  }
+                },
+                {
+                  "id": "C915E3F917884995A15ED4C561F11BB7",
+                  "name": "Wait",
+                  "fields": [
+                    {
+                      "id": "57957D03E7BF4A448A401C2A1ED4E887",
+                      "name": "Timeout",
+                      "value": "3"
+                    },
+                    {
+                      "id": "13FEB8B0379B43CF9FFA758A361E8993",
+                      "name": "Recurring",
+                      "value": ""
+                    },
+                    {
+                      "id": "982C10298A6A477284AC97158F0CDA03",
+                      "name": "NextState",
+                      "value": "{CC358B52-BBD1-4CC3-A557-3993A90A1B7E}"
+                    },
+                    {
+                      "id": "6E139722209E4D42B4734DDC33F469E5",
+                      "name": "Condition",
+                      "value": ""
+                    },
+                    {
+                      "id": "3C558B4B88404A46862AB90B33E2D4B2",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": ""
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250524T075640Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250524T081505Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "F3F30F6B259045888754021F350A6FBF",
+                    "name": "Wait"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "CC358B52BBD14CC3A5573993A90A1B7E",
+            "name": "Wait 7 days",
+            "children": {
+              "results": [
+                {
+                  "id": "3B36DDFC61684A49A1BF4B1D8546FE6C",
+                  "name": "OnSchedule",
+                  "fields": [
+                    {
+                      "id": "16766E0D742C42DB8F99267B52AA5445",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "2EAFBB95A22E4D08858BF094B7DF5A00",
+                      "name": "Condition",
+                      "value": "<ruleset>\r\n  <rule uid=\"{27B524E8-DB73-4597-9BD9-2A8F06B36DC5}\">\r\n    <conditions>\r\n      <condition id=\"{0FF3ABD2-064E-42B9-8442-1B9B2F51008E}\" uid=\"55B592C3E1D84F8AB0A469D898C3E1AA\" operatorid=\"{10537C58-1684-4CAB-B4C0-40C10907CE31}\" value=\"trigger:task\" />\r\n    </conditions>\r\n  </rule>\r\n</ruleset>"
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": ""
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250524T063753Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250524T073937Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "A932AC3EDDCE45DCBF082C40E5EF1900",
+                    "name": "Trigger"
+                  }
+                },
+                {
+                  "id": "EA9DACA58DCD4D50910AEC031FB29DBF",
+                  "name": "Send 7 days email",
+                  "fields": [
+                    {
+                      "id": "727101B529FF44498615080D4119D89F",
+                      "name": "Template",
+                      "value": ""
+                    },
+                    {
+                      "id": "982C10298A6A477284AC97158F0CDA03",
+                      "name": "NextState",
+                      "value": "{657CD595-6CFB-4192-81DE-FF14526C0ECB}"
+                    },
+                    {
+                      "id": "6E139722209E4D42B4734DDC33F469E5",
+                      "name": "Condition",
+                      "value": ""
+                    },
+                    {
+                      "id": "3C558B4B88404A46862AB90B33E2D4B2",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": ""
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250521T043732Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250521T043748Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "B44783BEEBC74CE880D9EE7A08DF3245",
+                    "name": "SendMessage"
+                  }
+                },
+                {
+                  "id": "619378C85F054A8081B29E141B3C3B67",
+                  "name": "Wait",
+                  "fields": [
+                    {
+                      "id": "57957D03E7BF4A448A401C2A1ED4E887",
+                      "name": "Timeout",
+                      "value": "5"
+                    },
+                    {
+                      "id": "13FEB8B0379B43CF9FFA758A361E8993",
+                      "name": "Recurring",
+                      "value": ""
+                    },
+                    {
+                      "id": "982C10298A6A477284AC97158F0CDA03",
+                      "name": "NextState",
+                      "value": "{657CD595-6CFB-4192-81DE-FF14526C0ECB}"
+                    },
+                    {
+                      "id": "6E139722209E4D42B4734DDC33F469E5",
+                      "name": "Condition",
+                      "value": ""
+                    },
+                    {
+                      "id": "3C558B4B88404A46862AB90B33E2D4B2",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": ""
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250524T075621Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250524T081502Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "F3F30F6B259045888754021F350A6FBF",
+                    "name": "Wait"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "657CD5956CFB419281DEFF14526C0ECB",
+            "name": "Finish",
+            "children": {
+              "results": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}

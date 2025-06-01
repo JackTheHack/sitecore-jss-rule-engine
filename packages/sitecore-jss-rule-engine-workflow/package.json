@@ -10,8 +10,8 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "test": "yarn run build && ava --serial --verbose",
-    "t": "yarn run build && ava -m 'should run init'",
+    "test": "yarn run build && npx ava --serial --verbose",
+    "t": "yarn run build && npx ava --serial --verbose -m 'should load submit workflow mock data successfully'",
     "build": "yarn run build:esm",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
@@ -29,6 +29,9 @@
     "Sitecore",
     "JSS"
   ],
+  "ava": {
+    "verbose": true
+  },
   "author": "Jack Spektor",
   "license": "ISC",
   "dependencies": {
@@ -36,7 +39,7 @@
     "@libsql/client": "0.15.4"
   },
   "devDependencies": {
-    "ava": "5.3.1",
+    "ava": "6.3.0",
     "typedoc": "0.25.4",
     "typescript": "4.9.4"
   }

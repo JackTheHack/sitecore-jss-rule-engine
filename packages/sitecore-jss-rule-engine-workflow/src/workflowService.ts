@@ -38,8 +38,9 @@ export class WorkflowService implements IWorkflowService {
     }
 
     async executeTriggers(options: WorkflowExecutionOptions): Promise<WorkflowExecutionResult> {
+
         let currentStateId = await this.databaseService.getVisitorState(options.visitorId, options.workflowId);
-        
+
         if (!currentStateId) {
             //get default state
             currentStateId = options.defaultStateId ?? null;
@@ -92,9 +93,14 @@ export class WorkflowService implements IWorkflowService {
 
         try{
             const state = workflow.states[currentStateId];
+            console.log(`Checking ${state.id} triggers - ${state.triggers?.length}`);
             for (const trigger of state.triggers) {
-                if (await evaluateCondition(trigger.condition, workflowContext)) {
+                console.log(`Processing ${trigger.id}. Has condition - ${trigger.condition != null}`);
+                if (!trigger.condition || await evaluateCondition(trigger.condition, workflowContext)) {
+                    console.log(`Trigger ${trigger.id} condition is true. Executing actions.`);
                     await this.executeActions(options.visitorId, workflowContext, state);
+                } else {
+                    console.log('Trigger condition is false - skipping trigger');
                 }
             }
             result.clientCommands = workflowContext.clientCommands;
@@ -107,12 +113,21 @@ export class WorkflowService implements IWorkflowService {
     }
 
     async executeActions(visitorId: string, workflowExecutionContext: WorkflowExecutionContext, state: WorkflowState): Promise<void> {
+        console.log(`Executing actions - ${state?.actions?.length}`);
         for (const action of state.actions) {
-            if (await evaluateCondition(action.condition, workflowExecutionContext)) {
+            if (!action.condition || await evaluateCondition(action.condition, workflowExecutionContext)) {
+                console.log(`Executing action ${action.id}`);
                 const actionCommand = this.options.actionFactory.getAction(action.templateId);
-                await actionCommand.execute(workflowExecutionContext);
+
+                if(actionCommand)
+                {
+                    await actionCommand.execute(workflowExecutionContext);
+                } else {
+                    console.warn('Action command not found', action.templateId);
+                }
 
                 if (action.nextStateId) {
+                    console.log(`Changing visitor ${visitorId} state to ${action.nextStateId}`);
                     await this.changeVisitorState(visitorId, action.nextStateId, workflowExecutionContext.workflow?.id);
                 }
             }
@@ -134,6 +149,57 @@ export class WorkflowService implements IWorkflowService {
     async getStateVisitors(workflowId: string, stateId: string): Promise<string[]> {
         return await this.databaseService.getStateVisitors(workflowId, stateId);
     }
+
+    async parseGraphQLResponse(response: any): Promise<Workflow> {
+        const item = response.data.item;
+        const workflow: Workflow = {
+            id: item.name,
+            states: {},
+            defaultStateId: item.field?.value?.replace(/[{}]/g, '') // Remove curly braces from GUID
+        };
+
+        // Process each state
+        item.stateItems.results.forEach((stateItem: any) => {
+            const state: WorkflowState = {
+                id: stateItem.id,
+                name: stateItem.name,
+                triggers: [],
+                actions: []
+            };
+
+            // Process children (triggers and actions)
+            stateItem.children.results.forEach((child: any) => {
+                const fields = child.fields.reduce((acc: Record<string, string>, field: any) => {
+                    acc[field.name] = field.value;
+                    return acc;
+                }, {});
+
+                if (child.template.name === 'Trigger') {
+                    state.triggers.push({
+                        id: child.id,
+                        name: child.name,
+                        type: 'trigger',
+                        templateId: child.template.id,
+                        condition: fields.Condition || '',
+                        fields: fields
+                    });
+                } else {
+                    state.actions.push({
+                        id: child.id,
+                        name: child.name,
+                        templateId: child.template.id,
+                        condition: fields.Condition || '',
+                        nextStateId: fields.NextState?.replace(/[{}]/g, '') || undefined,
+                        fields: fields
+                    });
+                }
+            });
+
+            workflow.states[state.id] = state;
+        });
+
+        return workflow;
+    }
 }
 
 async function evaluateCondition(
@@ -141,8 +207,10 @@ async function evaluateCondition(
     context: WorkflowExecutionContext
 ): Promise<boolean> {
     try {
-        const ruleEngineContext = context.ruleEngine?.getRuleEngineContext();
+        const ruleEngineContext = context.ruleEngine?.getRuleEngineContext();        
+        console.log('Evaluating condition.');
         const result = await context.ruleEngine?.parseAndRunRule(condition, ruleEngineContext);
+        console.log('Result - ', result);
         return result ? result : false;
     } catch (error) {
         return false;

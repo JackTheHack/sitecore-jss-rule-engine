@@ -24,8 +24,3 @@ import './generate-component-builder';
   META DATA GENERATION
 */
 import './generate-metadata';
-
-/*
-  WORKFLOW DB SETUP
-*/
-import './setup-workflow-db';

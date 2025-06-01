@@ -8,6 +8,7 @@ export default {
                 name: 'Test State',
                 triggers: [{
                     id: 'test-trigger',
+                    name: 'test-trigger',
                     condition: 'test-condition',
                     type: 'test-type',
                     templateId: 'test-template-id',
@@ -18,6 +19,7 @@ export default {
                 }],
                 actions: [{
                     id: 'test-action',
+                    name: 'test-action',
                     condition: 'test-condition',
                     fields: {
                         field1: 'value1',
@@ -26,6 +28,32 @@ export default {
                     templateId: 'test-template-id',
                     nextStateId: 'next-state-id',                                        
                 }]
-            }
+            },
+        'test-state-2': {
+            id: 'test-state-2',
+            name: 'Next State',
+            triggers: [{
+                id: 'next-trigger',
+                name: 'next-trigger',
+                condition: 'next-condition',
+                type: 'next-type',
+                templateId: 'next-template-id',
+                fields: {
+                    field1: 'next-value1',
+                    field2: 'next-value2'
+                }
+            }],
+            actions: [{
+                id: 'next-action',
+                name: 'next-action',
+                condition: 'next-condition',
+                fields: {
+                    field1: 'next-value1',
+                    field2: 'next-value2'
+                },
+                templateId: 'next-template-id',
+                nextStateId: 'final-state-id'
+            }]
+        },
         },
     } as Workflow;   

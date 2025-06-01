@@ -1,0 +1,30 @@
+query {
+  item (path: "/sitecore/content/ruledemo/demosite/Workflows/Signup", language:"en") {
+    name,
+    field(name:"Start State"){
+      name,
+      value
+    }
+    stateItems: children {
+      results {
+        id,
+        name,
+        children {
+          results {
+            id,
+            name,
+            fields (ownFields: false) {
+              id,
+              name,
+              value
+            }
+            template {
+              id,
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}

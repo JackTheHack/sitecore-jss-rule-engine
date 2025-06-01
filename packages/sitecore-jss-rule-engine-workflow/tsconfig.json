@@ -18,6 +18,7 @@
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "strict":false,    
     "paths": {
       "@root/*":["./*"],      
@@ -34,6 +35,6 @@
     },
     "baseUrl": "."
   },
-  "include": ["src", "tests", "mocks", "index.ts"],
+  "include": ["src", "tests", "mocks/*.json", "index.ts"],
   "exclude": ["node_modules"]  
 }

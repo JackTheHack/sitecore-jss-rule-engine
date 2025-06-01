@@ -1,0 +1,318 @@
+{
+  "data": {
+    "item": {
+      "name": "ChatGPT Test",
+      "field": {
+        "name": "Start State",
+        "value": "{290E750C-39E9-46C5-AF8B-51ADFF8B508D}"
+      },
+      "stateItems": {
+        "results": [
+          {
+            "id": "E39F428E0AAB4FD7AE150271F11CD052",
+            "name": "AI Assistant",
+            "children": {
+              "results": [
+                {
+                  "id": "377FA43FF50E4842B67474A47DEE08C8",
+                  "name": "OnMessage",
+                  "fields": [
+                    {
+                      "id": "16766E0D742C42DB8F99267B52AA5445",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "2EAFBB95A22E4D08858BF094B7DF5A00",
+                      "name": "Condition",
+                      "value": "<ruleset>\r\n  <rule uid=\"{FE6E1C9E-C571-4AA5-BBB2-CD034C3FF3D5}\">\r\n    <conditions>\r\n      <and uid=\"F5E3E81F69D64E1E8F28452A58CF92D7\">\r\n        <condition id=\"{0FF3ABD2-064E-42B9-8442-1B9B2F51008E}\" uid=\"DA7EAF80778D4C84AB3251D899A03798\" operatorid=\"{10537C58-1684-4CAB-B4C0-40C10907CE31}\" value=\"chat:message\" />\r\n        <condition id=\"{FB533DCD-E59E-4FB5-ABD6-1ED7D130A6A6}\" uid=\"3E39759A370F4F3DB85DBCE78F5547B3\" operatorid=\"{2E67477C-440C-4BCA-A358-3D29AED89F47}\" value=\"AI\" />\r\n      </and>\r\n    </conditions>\r\n  </rule>\r\n</ruleset>"
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": "0"
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250524T063809Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250524T073714Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "A932AC3EDDCE45DCBF082C40E5EF1900",
+                    "name": "Trigger"
+                  }
+                },
+                {
+                  "id": "1BE040C21D1A48CF9A212BAF841DD053",
+                  "name": "ChatGPT Processing",
+                  "fields": [
+                    {
+                      "id": "74465D1E0F454D9198C7A264F8E2822A",
+                      "name": "AI Context",
+                      "value": ""
+                    },
+                    {
+                      "id": "982C10298A6A477284AC97158F0CDA03",
+                      "name": "NextState",
+                      "value": ""
+                    },
+                    {
+                      "id": "6E139722209E4D42B4734DDC33F469E5",
+                      "name": "Condition",
+                      "value": ""
+                    },
+                    {
+                      "id": "3C558B4B88404A46862AB90B33E2D4B2",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": ""
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250420T013649Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250420T013649Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "05187080DD074FAFB501F1C53CDF90F5",
+                    "name": "AI Agent"
+                  }
+                },
+                {
+                  "id": "9E85F9B94BFE4AE8802346608EF0D272",
+                  "name": "Exit",
+                  "fields": [
+                    {
+                      "id": "727101B529FF44498615080D4119D89F",
+                      "name": "Template",
+                      "value": "Bye!"
+                    },
+                    {
+                      "id": "982C10298A6A477284AC97158F0CDA03",
+                      "name": "NextState",
+                      "value": "{0AEE12D9-0547-4FAD-95F9-B52A42131756}"
+                    },
+                    {
+                      "id": "6E139722209E4D42B4734DDC33F469E5",
+                      "name": "Condition",
+                      "value": ""
+                    },
+                    {
+                      "id": "3C558B4B88404A46862AB90B33E2D4B2",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": ""
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250420T013743Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250420T014012Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "B44783BEEBC74CE880D9EE7A08DF3245",
+                    "name": "SendMessage"
+                  }
+                },
+                {
+                  "id": "E7C567A3B9BC44AB9A2FE51A72510A39",
+                  "name": "SendMessage",
+                  "fields": [
+                    {
+                      "id": "727101B529FF44498615080D4119D89F",
+                      "name": "Template",
+                      "value": "@ChatGPTResponse"
+                    },
+                    {
+                      "id": "982C10298A6A477284AC97158F0CDA03",
+                      "name": "NextState",
+                      "value": ""
+                    },
+                    {
+                      "id": "6E139722209E4D42B4734DDC33F469E5",
+                      "name": "Condition",
+                      "value": ""
+                    },
+                    {
+                      "id": "3C558B4B88404A46862AB90B33E2D4B2",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": ""
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250420T013743Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250420T014008Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "B44783BEEBC74CE880D9EE7A08DF3245",
+                    "name": "SendMessage"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "0AEE12D905474FAD95F9B52A42131756",
+            "name": "Exit",
+            "children": {
+              "results": []
+            }
+          },
+          {
+            "id": "290E750C39E946C5AF8B51ADFF8B508D",
+            "name": "Welcome",
+            "children": {
+              "results": [
+                {
+                  "id": "A80824BB3CCA4A388DBC82E80E7FBBF3",
+                  "name": "OnMessage",
+                  "fields": [
+                    {
+                      "id": "16766E0D742C42DB8F99267B52AA5445",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "2EAFBB95A22E4D08858BF094B7DF5A00",
+                      "name": "Condition",
+                      "value": "<ruleset>\r\n  <rule uid=\"{EF21A363-D85B-4529-BBA7-B931734690C6}\">\r\n    <conditions>\r\n      <condition id=\"{0FF3ABD2-064E-42B9-8442-1B9B2F51008E}\" uid=\"43500691A127432FAD7AF5761B9F639A\" operatorid=\"{10537C58-1684-4CAB-B4C0-40C10907CE31}\" value=\"chat:message\" />\r\n    </conditions>\r\n  </rule>\r\n</ruleset>"
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": ""
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250524T063850Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250524T073744Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "A932AC3EDDCE45DCBF082C40E5EF1900",
+                    "name": "Trigger"
+                  }
+                },
+                {
+                  "id": "6D34771CB500497F90143E2844D35C95",
+                  "name": "SendMessage",
+                  "fields": [
+                    {
+                      "id": "727101B529FF44498615080D4119D89F",
+                      "name": "Template",
+                      "value": "Hello and welcome!"
+                    },
+                    {
+                      "id": "982C10298A6A477284AC97158F0CDA03",
+                      "name": "NextState",
+                      "value": "{E39F428E-0AAB-4FD7-AE15-0271F11CD052}"
+                    },
+                    {
+                      "id": "6E139722209E4D42B4734DDC33F469E5",
+                      "name": "Condition",
+                      "value": ""
+                    },
+                    {
+                      "id": "3C558B4B88404A46862AB90B33E2D4B2",
+                      "name": "Parameters",
+                      "value": ""
+                    },
+                    {
+                      "id": "BA3F86A24A1C4D78B63D91C2779C1B5E",
+                      "name": "__Sortorder",
+                      "value": ""
+                    },
+                    {
+                      "id": "25BED78C49574165998ACA1B52F67497",
+                      "name": "__Created",
+                      "value": "20250420T012512Z"
+                    },
+                    {
+                      "id": "D9CF14B1FA164BA69288E8A174D4D522",
+                      "name": "__Updated",
+                      "value": "20250524T075715Z"
+                    },
+                    {
+                      "id": "A14F1B0C438449EC879028A440F3670C",
+                      "name": "__Semantics",
+                      "value": ""
+                    }
+                  ],
+                  "template": {
+                    "id": "B44783BEEBC74CE880D9EE7A08DF3245",
+                    "name": "SendMessage"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -63,4 +63,5 @@ const config = {};\n`;
   const configPath = path.resolve('src/temp/config.js');
   console.log(`Writing runtime config to ${configPath}`);
   fs.writeFileSync(configPath, configText, { encoding: 'utf8' });
+  console.log('Config generation complete.');
 }
