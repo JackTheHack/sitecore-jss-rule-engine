@@ -79,3 +79,4 @@ _ReSharper*/
 /src/rendering/src/temp/!GraphQLIntrospectionResult.json
 .yarn/install-state.gz
 apps/nextjs-demo/local.db
+*.sqlite

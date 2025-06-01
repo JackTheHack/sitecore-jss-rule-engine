@@ -2,18 +2,19 @@ import { JssRuleEngine } from "@jss-rule-engine/core";
 import { IWorkflowAction, IWorkflowActionFactory } from "../src/actionFactory";
 import WorkflowService from "../src/workflowService";
 import { DatabaseService } from "../src/databaseService";
+import { ExecutionContext } from "ava";
 
-export async function  resetTest(){    
+export async function  resetTest(t:ExecutionContext){    
 
-    var workflowService = getDatabaseService();
+    var workflowService = getDatabaseService(t);
     await workflowService.cleanDb();
     await workflowService.init();
 }
 
-export function getWorkflowService(){
+export function getWorkflowService(t:ExecutionContext){
     const ruleEngine = getRuleEngine();
             const actionFactory = getMockActionFactory();
-            const dbService = getDatabaseService();
+            const dbService = getDatabaseService(t);
             const workflow = new WorkflowService({
                 databaseService: dbService,
                 ruleEngine: ruleEngine,
@@ -24,10 +25,12 @@ export function getWorkflowService(){
             return workflow;
 }
 
-export function getDatabaseService(){
+export function getDatabaseService(t:ExecutionContext){    
+    const testTitle = t.title.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
     const result =  new DatabaseService({
-        url: 'file:test.sqlite'
-        //url: 'file::memory:?cache=shared'
+        //url: 'file:test.sqlite'
+        //url: `file:${testTitle}:memory:?cache=shared`
+        url: `file:./testData/${testTitle}.sqlite`
     });
     return result;
 }

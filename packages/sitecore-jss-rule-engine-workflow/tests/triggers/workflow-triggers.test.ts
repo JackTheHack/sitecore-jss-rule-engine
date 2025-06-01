@@ -19,10 +19,10 @@ const alwaysFalseRuleEngine = {
 
 test('executeTriggers: should execute actions if trigger condition is met', async t => {
 
-  await resetTest();
+  await resetTest(t);
 
   const workflowService = new WorkflowService({
-    databaseService: getDatabaseService(),
+    databaseService: getDatabaseService(t),
     ruleEngine: alwaysTrueRuleEngine,
     actionFactory: getMockActionFactory(),
   });
@@ -49,10 +49,10 @@ test('executeTriggers: should execute actions if trigger condition is met', asyn
 
 test('executeTriggers: should not execute actions if trigger condition is not met', async t => {
 
-  await resetTest();  
+  await resetTest(t);  
 
   const workflowService = new WorkflowService({
-    databaseService: getDatabaseService(),
+    databaseService: getDatabaseService(t),
     ruleEngine: alwaysFalseRuleEngine,
     actionFactory: getMockActionFactory(),
   });
@@ -75,9 +75,9 @@ test('executeTriggers: should not execute actions if trigger condition is not me
 
 test('executeActions: should execute actions and change state if condition is met', async t => {
 
-  await resetTest();
+  await resetTest(t);
 
-  const dbService = getDatabaseService();
+  const dbService = getDatabaseService(t);
   const workflowService = new WorkflowService({
     databaseService: dbService,
     ruleEngine: alwaysTrueRuleEngine,
@@ -108,9 +108,9 @@ test('executeActions: should execute actions and change state if condition is me
 
 test('executeActions: should not execute actions if condition is not met', async t => {
 
-  await resetTest();
+  await resetTest(t);
 
-  const dbService = getDatabaseService();
+  const dbService = getDatabaseService(t);
   const workflowService = new WorkflowService({
     databaseService: dbService,
     ruleEngine: alwaysFalseRuleEngine,

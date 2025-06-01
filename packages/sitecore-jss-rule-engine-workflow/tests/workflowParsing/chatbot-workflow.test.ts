@@ -5,9 +5,9 @@ import { getMockActionFactory, getRuleEngine, getWorkflowService, resetTest } fr
 import chatbotWorkflowMock from '../../mocks/chatbotWorkflowMock.json';
 
 test('should load chatbot workflow mock data successfully', async t => {
-    await resetTest();
+    await resetTest(t);
     
-    const workflowService = getWorkflowService();
+    const workflowService = getWorkflowService(t);
     await workflowService.init();
     
     // Parse the GraphQL response using the service's method

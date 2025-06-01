@@ -4,9 +4,9 @@ import { getDatabaseService, resetTest } from '../_testHelper';
 
 test('addScheduledTask and getScheduledTasks', async t => {
     
-    await resetTest();
+    await resetTest(t);
 
-    const db = getDatabaseService();
+    const db = getDatabaseService(t);
 
     await db.addScheduledTask(
         {
@@ -26,9 +26,9 @@ test('addScheduledTask and getScheduledTasks', async t => {
 });
 
 test('updateScheduledTask', async t => {
-    await resetTest();
+    await resetTest(t);
 
-    const db = getDatabaseService();
+    const db = getDatabaseService(t);
 
     const id = 'task2';
     await db.addScheduledTask({
@@ -50,9 +50,9 @@ test('updateScheduledTask', async t => {
 
 test('deleteScheduledTask', async t => {
 
-    await resetTest();
+    await resetTest(t);
 
-    const db = getDatabaseService();
+    const db = getDatabaseService(t);
 
     const id = 'task3';
     await db.addScheduledTask({

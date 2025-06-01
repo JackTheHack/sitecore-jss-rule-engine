@@ -8,9 +8,9 @@ import workflowMock from '../_workflowMock'
 
 test('should run load', async t => {
 
-    await resetTest();
+    await resetTest(t);
     
-    var workflow = getWorkflowService();
+    var workflow = getWorkflowService(t);
     await workflow.init();
     await workflow.load(workflowMock);
 

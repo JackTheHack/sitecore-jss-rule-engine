@@ -2,9 +2,9 @@ import test from 'ava';
 import { getDatabaseService, resetTest } from '../_testHelper';
 
 test('addVisitor and getVisitorState', async t => {
-    await resetTest();
+    await resetTest(t);
 
-    var db = getDatabaseService();
+    var db = getDatabaseService(t);
 
     await db.addVisitor('visitor1', 'stateA', 'wf1');
     const state = await db.getVisitorState('visitor1', 'wf1');
@@ -12,9 +12,9 @@ test('addVisitor and getVisitorState', async t => {
 });
 
 test('updateVisitorState', async t => {
-    await resetTest();
+    await resetTest(t);
 
-    var db = getDatabaseService();
+    var db = getDatabaseService(t);
 
     await db.addVisitor('visitor2', 'stateA', 'wf1');
     await db.updateVisitorState('visitor2', 'stateB', 'wf1');
@@ -23,9 +23,9 @@ test('updateVisitorState', async t => {
 });
 
 test('removeVisitor', async t => {
-    await resetTest();
+    await resetTest(t);
 
-    var db = getDatabaseService();
+    var db = getDatabaseService(t);
 
     await db.addVisitor('visitor3', 'stateA', 'wf1');
     await db.removeVisitor('visitor3', 'wf1');
@@ -35,9 +35,9 @@ test('removeVisitor', async t => {
 
 test('getStateVisitors', async t => {
     
-    await resetTest();
+    await resetTest(t);
 
-    var db = getDatabaseService();
+    var db = getDatabaseService(t);
 
     await db.addVisitor('visitor4', 'stateC', 'wf2');
     await db.addVisitor('visitor5', 'stateC', 'wf2');
