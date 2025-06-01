@@ -22,7 +22,8 @@ export type WorkflowExecutionContext = {
 export type WorkflowServiceOptions = {
     databaseService: IDatabaseService,
     ruleEngine: JssRuleEngine,
-    actionFactory: IWorkflowActionFactory
+    actionFactory: IWorkflowActionFactory,
+    graphqlEndpoint: string
 }
 
 export type WorkflowActionCommand = {
@@ -89,6 +90,7 @@ export type WorkflowExecutionOptions = {
 export interface IWorkflowService {
     init(): Promise<void>;
     load(workflowConfig: Workflow): Promise<void>;
+    loadWorkflowFromGraphQL(path: string, language: string): Promise<void>;
     addVisitorToState(workflowId: string, stateId: string, visitorId: string): Promise<void>;
     executeTriggers(options: WorkflowExecutionOptions): Promise<WorkflowExecutionResult>;
     executeActions(visitorId: string, workflowExecutionContext: WorkflowExecutionContext, state: WorkflowState): Promise<void>;

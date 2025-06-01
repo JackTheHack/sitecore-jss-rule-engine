@@ -7,7 +7,7 @@ interface AIFields {
     instructions: string;
 }
 
-export class AIAction implements IWorkflowAction {
+export class ChatbotAIAction implements IWorkflowAction {
     private aiService: VercelAIService;
 
     constructor() {

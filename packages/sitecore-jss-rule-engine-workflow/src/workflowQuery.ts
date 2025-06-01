@@ -1,5 +1,7 @@
-query {
-  item (path: "/sitecore/content/ruledemo/demosite/Workflows/Signup", language:"en") {
+import { gql } from 'graphql-request';
+
+export const sitecoreQuery = (path: string, language: string = "en") => gql`query {
+  item (path: "${path}", language:"${language}") {
     name,
     field(name:"Start State"){
       name,
@@ -27,4 +29,4 @@ query {
       }
     }
   }
-}
+}`
