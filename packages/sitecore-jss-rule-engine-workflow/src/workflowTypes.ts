@@ -99,8 +99,7 @@ export type WorkflowScheduledTaskParams = {
 
 export interface IWorkflowService {
     init(): Promise<void>;
-    load(workflowConfig: Workflow): Promise<void>;
-    loadWorkflowFromGraphQL(path: string, language: string): Promise<void>;
+    load(workflowConfig: Workflow): Promise<void>;    
     addVisitorToState(workflowId: string, stateId: string, visitorId: string): Promise<void>;
     executeTriggers(options: WorkflowExecutionOptions): Promise<WorkflowExecutionResult>;
     executeActions(visitorId: string, workflowExecutionContext: WorkflowExecutionContext, state: WorkflowState): Promise<void>;

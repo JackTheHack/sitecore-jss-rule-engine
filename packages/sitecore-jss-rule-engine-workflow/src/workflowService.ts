@@ -1,23 +1,16 @@
 import { IDatabaseService } from './databaseService';
 import { Workflow, WorkflowState, WorkflowExecutionContext, WorkflowServiceOptions, IWorkflowService, WorkflowExecutionResult, WorkflowExecutionOptions, WorkflowScheduledTaskParams } from './workflowTypes';
-import {sitecoreQuery } from './workflowQuery';
 import { AddScheduledTaskParams } from './databaseService';
+import {sitecoreQuery } from './workflowQuery';
 
 export class WorkflowService implements IWorkflowService {
     private workflows: Record<string, Workflow> = {};
     private databaseService: IDatabaseService;
     private options: WorkflowServiceOptions;
-    private graphqlClient: any;
 
     constructor(options: WorkflowServiceOptions) {
         this.options = options;
         this.databaseService = options.databaseService;
-        this.initGraphQLClient();
-    }
-
-    private async initGraphQLClient() {
-        const { GraphQLClient } = await import('graphql-request');
-        this.graphqlClient = new GraphQLClient(this.options.graphqlEndpoint);
     }
     
     async addScheduledTask(params: WorkflowScheduledTaskParams): Promise<void> {
@@ -223,25 +216,7 @@ export class WorkflowService implements IWorkflowService {
     }
 
     async getSitecoreQuery(path: string, language: string): Promise<string> {
-        if (!this.graphqlClient) {
-            await this.initGraphQLClient();
-        }
         return await sitecoreQuery(path, language);
-    }
-
-    async loadWorkflowFromGraphQL(path: string, language: string): Promise<void> {
-        try {
-            if (!this.graphqlClient) {
-                await this.initGraphQLClient();
-            }
-            const query = await sitecoreQuery(path, language);
-            const response = await this.graphqlClient.request(query);
-            const workflow = await this.parseGraphQLResponse(response);
-            await this.load(workflow);
-        } catch (error) {
-            console.error('Failed to load workflow from GraphQL:', error);
-            throw error;
-        }
     }
 }
 

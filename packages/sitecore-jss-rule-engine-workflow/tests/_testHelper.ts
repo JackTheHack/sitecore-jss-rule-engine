@@ -6,9 +6,9 @@ import { ExecutionContext } from "ava";
 
 export async function  resetTest(t:ExecutionContext){    
 
-    var workflowService = getDatabaseService(t);
-    await workflowService.cleanDb();
+    var workflowService = getDatabaseService(t);    
     await workflowService.init();
+    await workflowService.cleanDb();
 }
 
 export function getWorkflowService(t:ExecutionContext){
