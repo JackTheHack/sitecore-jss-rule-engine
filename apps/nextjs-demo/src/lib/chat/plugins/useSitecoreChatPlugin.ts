@@ -12,9 +12,9 @@ import {
 } from "react-chatbotify";
 import { PluginConfig } from "./pluginConfig";
 import { SitecoreChatBlock } from "./SitecoreChatBlock";
-import { Action, ChatConversationContext, CommandExecutionContext } from "../types";
+import { Action,  CommandExecutionContext } from "../types";
 import { ChatActionFactory } from "../chatActionFactory";
-import { getRuleEngineInstance } from "@jss-rule-engine/core";
+import { getRuleEngineInstance, RuleEngineSessionContext } from "@jss-rule-engine/core";
 import { json } from "stream/consumers";
 
 
@@ -38,7 +38,7 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 	const mergedPluginConfig = { ...pluginConfig, ...DefaultPluginConfig };
 
 	
-	async function executeActions(actions: any, chatContext: ChatConversationContext) {
+	async function executeClientActions(actions: any, chatContext: ChatConversationContext) {
 		if(!actions || !Array.isArray(actions)) return;
 
 		console.log('Executing chat actions...');
@@ -143,16 +143,18 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 				console.log('Reply - ', reply);
 
 				if(reply.success){
+
 					const chatContext: ChatConversationContext = {
 						injectMessage: injectMessage,
-						flow: flow,
+						session: new RuleEngineSessionContext(),						
 						userInput: userInput,
 						ruleEngine: ruleEngine,
 						prevPath: event.detail.prevPath || undefined,
 						currPath: event.detail.currPath || undefined,
 					}
+					chatContext.session.set("flow", flow);
 
-					await executeActions(reply.actions, chatContext);
+					await executeClientActions(reply.actions, chatContext);
 				}
 			}
 		};

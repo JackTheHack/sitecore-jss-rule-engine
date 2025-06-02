@@ -20,3 +20,4 @@ export {ScheduledTaskService, IScheduledTaskService} from "./src/scheduledTaskSe
 export {ScheduledTaskServiceOptions} from "./src/scheduledTaskServiceTypes";
 export {WorkflowServiceOptions} from "./src/workflowTypes";
 export {DatabaseServiceOptions} from "./src/databaseService";
+export {ChatConversationContext} from './src/workflowTypes'

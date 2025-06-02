@@ -1,4 +1,4 @@
-import { JssRuleEngine } from "@jss-rule-engine/core";
+import { JssRuleEngine, RuleEngineSessionContext } from "@jss-rule-engine/core";
 import { IDatabaseService } from "./databaseService";
 import { IWorkflowActionFactory } from "./actionFactory";
 
@@ -19,6 +19,15 @@ export type WorkflowExecutionContext = {
     triggerParameters?: string;
 }
 
+
+export type ChatConversationContext = {
+  injectMessage: any;
+  variables: RuleEngineSessionContext;  
+  userInput: string;
+  ruleEngine: JssRuleEngine,
+  prevPath?: string, 
+  currPath?: string
+};
 
 export type WorkflowServiceOptions = {
     databaseService: IDatabaseService,

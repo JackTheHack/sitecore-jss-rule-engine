@@ -1,14 +1,14 @@
 import { Workflow } from '../src/workflowTypes';
 
 export default {
-        id: 'test-workflow',
+        id: 'testworkflow',
         name: 'test-workflow',
         states: {
-            'test-state': {
-                id: 'test-state',
+            'teststate': {
+                id: 'teststate',
                 name: 'Test State',
                 triggers: [{
-                    id: 'test-trigger',
+                    id: 'testtrigger',
                     name: 'test-trigger',
                     condition: 'test-condition',
                     type: 'test-type',
@@ -19,7 +19,7 @@ export default {
                     }
                 }],
                 actions: [{
-                    id: 'test-action',
+                    id: 'testaction',
                     name: 'test-action',
                     condition: 'test-condition',
                     fields: {
@@ -30,11 +30,11 @@ export default {
                     nextStateId: 'next-state-id',                                        
                 }]
             },
-        'test-state-2': {
-            id: 'test-state-2',
+        'teststate2': {
+            id: 'teststate2',
             name: 'Next State',
             triggers: [{
-                id: 'next-trigger',
+                id: 'nexttrigger',
                 name: 'next-trigger',
                 condition: 'next-condition',
                 type: 'next-type',
@@ -45,7 +45,7 @@ export default {
                 }
             }],
             actions: [{
-                id: 'next-action',
+                id: 'nextaction',
                 name: 'next-action',
                 condition: 'next-condition',
                 fields: {

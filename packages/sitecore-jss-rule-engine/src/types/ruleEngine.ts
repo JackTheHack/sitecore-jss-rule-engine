@@ -1,5 +1,6 @@
 import { IItemProvider } from '../graphQl/itemProvider';
 import { JssRuleEngine } from '../ruleEngine'
+import { RuleEngineSessionContext } from './ruleEngineSessionContext';
 
 export interface RuleEngineExecutionResult {
     result?: boolean; 
@@ -39,15 +40,15 @@ export interface RuleOperatorContext {
     parameter2: any
 }
 
-type ConditionFunctionDefinition = {
+export type ConditionFunctionDefinition = {
     (conditionData: RuleConditionData, ruleContext: RuleEngineContext) : Promise<boolean | void>;
 }
 
-type OperatorFunctionDefinition = {
+export type OperatorFunctionDefinition = {
     (operatorContext: RuleOperatorContext, ruleContext?: RuleEngineContext) : Promise<boolean | void>;
 }
 
-type ActionFunctionDefinition = {
+export type ActionFunctionDefinition = {
     (actionData: RuleActionData, ruleContext: RuleEngineContext) : Promise< boolean | null | void>;
 }
 
@@ -60,7 +61,8 @@ export interface RuleEngineContext {
     sitecoreContext?: RuleEngineSitecoreContext,
     requestContext?: RuleEngineRequestContext,    
     mockDate?: Date,
-    ruleEngine?: JssRuleEngine    
+    ruleEngine?: JssRuleEngine,
+    sessionContext?: RuleEngineSessionContext
 }
 
 export interface RuleEngineRequestContext {

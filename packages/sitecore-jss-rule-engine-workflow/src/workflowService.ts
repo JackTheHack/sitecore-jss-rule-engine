@@ -54,6 +54,12 @@ export class WorkflowService implements IWorkflowService {
     }
 
     cleanId(id: string){
+
+        if(!id)
+        {
+            return id;
+        }
+
         return id.replace(/[{}]/g, '').replace(/-/g, '');
     }
 
@@ -145,6 +151,12 @@ export class WorkflowService implements IWorkflowService {
 
     async executeActions(visitorId: string, workflowExecutionContext: WorkflowExecutionContext, state: WorkflowState): Promise<void> {
         console.log(`Executing actions - ${state?.actions?.length}`);
+
+        if(!state)
+        {
+            return;
+        }
+
         for (const action of state.actions) {
             if (!action.condition || await evaluateCondition(action.condition, workflowExecutionContext)) {
                 console.log(`Executing action ${action.id}`);
@@ -254,7 +266,8 @@ async function evaluateCondition(
     context: WorkflowExecutionContext
 ): Promise<boolean> {
     try {
-        const ruleEngineContext = context.ruleEngine?.getRuleEngineContext();        
+        const ruleEngineContext = context.ruleEngine?.getRuleEngineContext();   
+                     
         console.log('Evaluating condition.');
         const result = await context.ruleEngine?.parseAndRunRule(condition, ruleEngineContext);
         console.log('Result - ', result);

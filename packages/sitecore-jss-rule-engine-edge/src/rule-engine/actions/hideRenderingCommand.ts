@@ -1,21 +1,30 @@
-export default function(command:any, ruleContext:any) {
+import { RuleActionData, RuleEngineContext } from "@jss-rule-engine/core";
+import { RuleEnginePersonalizationContext } from "../ruleEngineProvider";
+
+export default async function(command:RuleActionData, ruleContext:RuleEngineContext) {
     //parameters: renderingName, datasourcePath, placeholderName    
 
-    var placeholderName = command.placeholderName;
-    var renderingName = command.renderingName;
+    var placeholderName = command.attributes.get("placeholderName");
+    var renderingName = command.attributes.get("renderingName");
 
-    ruleContext.personalization = ruleContext.personalization ? ruleContext.personalization : {
-        placeholders: []
-    };
+    let personalizationContext = ruleContext.sessionContext?.get<RuleEnginePersonalizationContext>("personalization");
 
-    var placeholder = ruleContext.personalization.placeholders[placeholderName];
+    if (!personalizationContext) {
+        personalizationContext = {
+            placeholders: []
+        };
+    }
+
+    var placeholder = personalizationContext.placeholders[placeholderName];
 
     var placeholder = placeholder ? placeholder : {
         name: placeholderName,
         renderings: []
     };
 
-    ruleContext.personalization.placeholders[placeholderName] = placeholder;
+    personalizationContext.placeholders[placeholderName] = placeholder;
+
+    ruleContext.sessionContext?.set("personalization", personalizationContext);
 
     var rendering = placeholder.renderings.find((i:any) => i.name == renderingName);
 

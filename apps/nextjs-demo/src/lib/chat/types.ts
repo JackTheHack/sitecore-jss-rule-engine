@@ -6,14 +6,6 @@ export type CommandExecutionContext = {
     ruleEngine: JssRuleEngine;
 };
 
-export type ChatConversationContext = {
-    injectMessage: any;
-    flow: Flow;
-    userInput: string;
-    ruleEngine: JssRuleEngine,
-    prevPath?: string, 
-    currPath?: string
-};
 
 export type Action = {
   type: string;

@@ -31,18 +31,18 @@ test('executeTriggers: should execute actions if trigger condition is met', asyn
 
   const options: WorkflowExecutionOptions = {
     visitorId: 'visitor-1',
-    workflowId: 'test-workflow',
-    eventName: 'test-trigger',
+    workflowId: 'testworkflow',
+    eventName: 'testtrigger',
     eventParameters: '',
-    defaultStateId: 'test-state',
+    defaultStateId: 'teststate',
   };
 
   const result = await workflowService.executeTriggers(options);
 
   t.true(result.success);
   t.is(result.visitorId, 'visitor-1');
-  t.is(result.workflowId, 'test-workflow');
-  t.is(result.stateId, 'test-state');
+  t.is(result.workflowId, 'testworkflow');
+  t.is(result.stateId, 'teststate');
 
   t.true(Array.isArray(result.clientCommands));
 });
@@ -61,10 +61,10 @@ test('executeTriggers: should not execute actions if trigger condition is not me
 
   const options: WorkflowExecutionOptions = {
     visitorId: 'visitor-2',
-    workflowId: 'test-workflow',
-    eventName: 'test-trigger',
+    workflowId: 'testworkflow',
+    eventName: 'testtrigger',
     eventParameters: '',
-    defaultStateId: 'test-state',
+    defaultStateId: 'teststate',
   };
 
   const result = await workflowService.executeTriggers(options);
@@ -85,24 +85,24 @@ test('executeActions: should execute actions and change state if condition is me
   });
   await workflowService.init();
   await workflowService.load(workflowMock);
-  await dbService.addVisitor('visitor-3', 'test-state', 'test-workflow');
+  await dbService.addVisitor('visitor-3', 'teststate', 'testworkflow');
 
   const workflow = workflowMock;
-  const state = workflow.states['test-state'];
+  const state = workflow.states['teststate'];
   const context: WorkflowExecutionContext = {
     workflowService,
     workflow,
     visitor: { id: 'visitor-3' },
     ruleEngine: alwaysTrueRuleEngine,
     clientCommands: [],
-    trigger: 'test-trigger',
+    trigger: 'testtrigger',
     triggerParameters: '',
   };
 
   await workflowService.executeActions('visitor-3', context, state);
 
   // Should have changed state to nextStateId
-  const newState = await dbService.getVisitorState('visitor-3', 'test-workflow');
+  const newState = await dbService.getVisitorState('visitor-3', 'testworkflow');
   t.is(newState, 'next-state-id');
 });
 
@@ -118,23 +118,23 @@ test('executeActions: should not execute actions if condition is not met', async
   });
   await workflowService.init();
   await workflowService.load(workflowMock);
-  await dbService.addVisitor('visitor-4', 'test-state', 'test-workflow');
+  await dbService.addVisitor('visitor-4', 'teststate', 'testworkflow');
 
   const workflow = workflowMock;
-  const state = workflow.states['test-state'];
+  const state = workflow.states['teststate'];
   const context: WorkflowExecutionContext = {
     workflowService,
     workflow,
     visitor: { id: 'visitor-4' },
     ruleEngine: alwaysFalseRuleEngine,
     clientCommands: [],
-    trigger: 'test-trigger',
+    trigger: 'testtrigger',
     triggerParameters: '',
   };
 
   await workflowService.executeActions('visitor-4', context, state);
 
   // Should not have changed state
-  const newState = await dbService.getVisitorState('visitor-4', 'test-workflow');
-  t.is(newState, 'test-state');
+  const newState = await dbService.getVisitorState('visitor-4', 'testworkflow');
+  t.is(newState, 'teststate');
 });

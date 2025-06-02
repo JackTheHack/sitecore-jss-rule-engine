@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "yarn run build && npx ava --serial --verbose",
-    "t": "yarn run build && npx ava --serial --verbose -m 'should load submit workflow mock data successfully'",
+    "t": "yarn run build && npx ava --serial --verbose -m 'executeTriggers: should execute actions if trigger condition is met'",
     "build": "yarn run build:esm",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
