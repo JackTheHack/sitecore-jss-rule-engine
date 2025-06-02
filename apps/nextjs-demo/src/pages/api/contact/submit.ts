@@ -6,6 +6,7 @@ import { ErrorResponse, Metadata, SuccessResponse} from '../../../lib/form/types
 import loadWorkflowFromSitecore from 'lib/chat/lib/loadWorkflow';
 import { DatabaseService, IDatabaseService } from '@jss-rule-engine/workflow';
 import  {getDatabaseServiceOptions}  from '../../../lib/db/dbOptions';
+import loadWorkflow from 'lib/chat/lib/loadWorkflow';
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,7 +19,7 @@ export default async function handler(
       return res.status(400).json({ success: false, error: 'Message is required and must be a string' });
     }
 
-    try {
+    try {      
 
       console.log('Handling message', message, visitorId, workflowId);
 
@@ -46,7 +47,7 @@ export default async function handler(
 
       const sitecoreEdgeUrl = process.env.EDGE_QL_ENDPOINT || '';
 
-      const workflowConfig = await loadWorkflowFromSitecore(sitecoreEdgeUrl, workflowId);
+      const workflowConfig = await loadWorkflow(sitecoreEdgeUrl, workflowId, workflowService);
 
       const executionOptions : WorkflowExecutionOptions = {
         visitorId: visitorId,
@@ -54,9 +55,7 @@ export default async function handler(
         eventParameters: JSON.stringify({ message: message }),
         workflowId: workflowId,
         defaultStateId: workflowConfig.defaultStateId || ''
-      }
-
-      await workflowService.load(workflowConfig);
+      }      
 
       console.log('Executing triggers', executionOptions);
 

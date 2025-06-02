@@ -34,9 +34,6 @@ test('should load submit workflow mock data successfully', async t => {
 
     // Verify Wait 3 days state exists and has correct triggers and actions
 
-    debugger;
-
-
     const wait3DaysState = loadedWorkflow.states['5D7E24C7DA7C4F14B019FC9980530759'];
     t.truthy(wait3DaysState);
     t.is(wait3DaysState.name, 'Wait 3 days');

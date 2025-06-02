@@ -55,7 +55,7 @@ const Layout = ({ layoutData, headLinks }: LayoutProps): JSX.Element => {
           sitecoreApiKey={config.sitecoreApiKey}
           suppressHydrationWarning
         />}
-        {route && <Placeholder name="jss-main" rendering={route} />}
+        {route && <Placeholder name="headless-main" rendering={route} />}
       </div>
     </>
   );

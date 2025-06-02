@@ -6,7 +6,9 @@ import {
 	Plugin,
 	useMessages,
 	useSettings,
-	RcbChangePathEvent
+	RcbChangePathEvent,
+	RcbPostLoadChatBotEvent,
+	RcbPreLoadChatBotEvent
 } from "react-chatbotify";
 import { PluginConfig } from "./pluginConfig";
 import { SitecoreChatBlock } from "./SitecoreChatBlock";
@@ -23,7 +25,7 @@ import { json } from "stream/consumers";
  */
 const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 	const { getBotId } = useBotId();
-	const { injectMessage } = useMessages();
+	const { injectMessage, messages } = useMessages();	
     const { getFlow } = useFlow();
 
 	const actionFactory = new ChatActionFactory();
@@ -83,6 +85,14 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 	}
 
 	useEffect(() => {
+
+		console.log("Loading Chatbotify component.");
+
+		const handlePostLoadEvent = async (
+			event: RcbUserSubmitTextEvent | RcbChangePathEvent | RcbPostLoadChatBotEvent | RcbPreLoadChatBotEvent
+		) => {
+			console.log('Post load', event);
+		}
 
 		/**
 		 * Handles message events and adds wrapper to render markdown if applicable.
@@ -146,16 +156,20 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 				}
 			}
 		};
+ 
+		
 
-		// adds required events
+   	    // adds required events
 		window.addEventListener("rcb-user-submit-text", handleMessageEvent);
-		//window.addEventListener("rcb-change-path", handleMessageEvent);
-		//window.addEventListener("rcb-post-load-chatbot", handleMessageEvent);
+		window.addEventListener("rcb-change-path", handlePostLoadEvent);
+		window.addEventListener("rcb-post-load-chatbot", handlePostLoadEvent);
+		window.addEventListener("rcb-pre-load-chatbot", handlePostLoadEvent);
 
 		return () => {
 			window.removeEventListener("rcb-user-submit-text", handleMessageEvent);
-			//window.removeEventListener("rcb-change-path", handleMessageEvent);
-			//window.removeEventListener("rcb-post-load-chatbot", handleMessageEvent);
+			window.removeEventListener("rcb-change-path", handlePostLoadEvent);
+			window.removeEventListener("rcb-post-load-chatbot", handlePostLoadEvent);
+			window.removeEventListener("rcb-pre-load-chatbot", handlePostLoadEvent);
 		};
 	}, [getBotId, getFlow]);
 
@@ -171,6 +185,7 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
                 rcbUserSubmitText: true,
 				rcbChangePath: true,
 				rcbPostLoadChatBot: true,
+				rcbPreLoadChatBot: true
 			},
 		};
 	}

@@ -1,6 +1,7 @@
 export const sitecoreQuery = async (path: string, language: string = "en") => {
     return `query {
         item (path: "${path}", language:"${language}") {
+            id,
             name,
             field(name:"Start State"){
                 name,

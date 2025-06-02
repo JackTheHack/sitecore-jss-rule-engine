@@ -1,0 +1,37 @@
+﻿---
+ID: "82df7029-cc10-4555-bf79-ea1ea4752c85"
+Parent: "820a102f-d96f-4aaa-9333-60a27d47d11e"
+Template: "b07ac4fd-e287-45fb-9c53-18a3df5355b5"
+Path: /sitecore/content/ruledemo/demosite/Data/Chatbots/Test
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250602T020803Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "9480d00a-1143-4032-bc94-2dcceb0c0242"
+    - ID: "9b0e337a-3c24-45c2-81f5-be1f931c1dbd"
+      Hint: WelcomeMessage
+      Value: Hello and welcome
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d75f7759-1618-44fc-bbc8-a56ec40cf571"
+      Hint: Workflow
+      Value: "{EBAA5C94-B003-4169-AA19-BC0EADDB05DC}"
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250602T020815Z

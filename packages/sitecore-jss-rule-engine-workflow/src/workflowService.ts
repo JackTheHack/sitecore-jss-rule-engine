@@ -26,7 +26,8 @@ export class WorkflowService implements IWorkflowService {
     }
     
     getWorkflow(workflowId: string): Workflow | null {
-        return this.workflows[workflowId] || null;
+        const id = this.cleanId(workflowId);        
+        return this.workflows[id] || null;
     }
     
     async init(): Promise<void> {
@@ -35,6 +36,7 @@ export class WorkflowService implements IWorkflowService {
 
     async load(workflowConfig: Workflow): Promise<void> {
         this.workflows[workflowConfig.id] = workflowConfig;
+        console.log('Loaded ', workflowConfig.id)
     }
 
     async addVisitorToState(
@@ -49,6 +51,10 @@ export class WorkflowService implements IWorkflowService {
         if (!state) throw new Error('State not found');
 
         await this.databaseService.addVisitor(visitorId, stateId, workflowId);
+    }
+
+    cleanId(id: string){
+        return id.replace(/[{}]/g, '').replace(/-/g, '');
     }
 
     async executeTriggers(options: WorkflowExecutionOptions): Promise<WorkflowExecutionResult> {
@@ -68,7 +74,7 @@ export class WorkflowService implements IWorkflowService {
                     workflowId: options.workflowId,
                     stateId: currentStateId,
                 } as WorkflowExecutionResult;
-            }
+            }            
 
             await this.databaseService.addVisitor(options.visitorId, currentStateId, options.workflowId);
         };
@@ -77,11 +83,15 @@ export class WorkflowService implements IWorkflowService {
             throw new Error('Current state ID is null or undefined.');
         }
 
-        const workflow = Object.values(this.workflows).find((wf) =>
-            Object.keys(wf.states).includes(currentStateId as string)
-        );
+        currentStateId = this.cleanId(currentStateId);
 
-        if (!workflow) throw new Error('Workflow not found for the state');
+        const cleanWorkflowId = this.cleanId(options.workflowId);
+
+        console.log('Workflows - ', this.workflows);
+
+        const workflow = this.workflows[cleanWorkflowId];        
+
+        if (!workflow) throw new Error('Workflow not found for the state '+ currentStateId + ' ' + options.workflowId);
 
         const visitorObject = {
             id: options.visitorId,
@@ -101,15 +111,21 @@ export class WorkflowService implements IWorkflowService {
             success: true,
             visitorId: options.visitorId,
             clientCommands: [],
-            workflowId: workflow.id,
+            workflowId: this.cleanId(workflow.id),
             stateId: currentStateId,
         } as WorkflowExecutionResult;
 
-        try{
+        try{            
             const state = workflow.states[currentStateId];
+
+            if(!state){
+                throw new Error("Can't find the state in workflow "+ currentStateId);
+            }
+
             console.log(`Checking ${state.id} triggers - ${state.triggers?.length}`);
             for (const trigger of state.triggers) {
                 console.log(`Processing ${trigger.id}. Has condition - ${trigger.condition != null}`);
+                console.log(trigger.condition);
                 if (!trigger.condition || await evaluateCondition(trigger.condition, workflowContext)) {
                     console.log(`Trigger ${trigger.id} condition is true. Executing actions.`);
                     await this.executeActions(options.visitorId, workflowContext, state);
@@ -120,6 +136,7 @@ export class WorkflowService implements IWorkflowService {
             result.clientCommands = workflowContext.clientCommands;
             return result;
         }catch(ex){
+            console.log('Error - ',ex);
             result.success = false;
         }
 
@@ -165,17 +182,26 @@ export class WorkflowService implements IWorkflowService {
     }
 
     async parseGraphQLResponse(response: any): Promise<Workflow> {
-        const item = response.data.item;
+        const item = response?.data?.item;
+
+        if(!item)
+        {
+            console.warn("Can't find valid GraphQL response");
+            throw new Error("Invalid GraphQL response");
+        }
+
         const workflow: Workflow = {
-            id: item.name,
+            id: this.cleanId(item.id),
+            name: item.name,
             states: {},
-            defaultStateId: item.field?.value?.replace(/[{}]/g, '') // Remove curly braces from GUID
+            defaultStateId: this.cleanId(item.field?.value) // Remove curly braces from GUID
         };
 
         // Process each state
         item.stateItems.results.forEach((stateItem: any) => {
+            console.log("Parsing state - ", stateItem?.id);
             const state: WorkflowState = {
-                id: stateItem.id,
+                id: this.cleanId(stateItem.id),
                 name: stateItem.name,
                 triggers: [],
                 actions: []
@@ -183,6 +209,7 @@ export class WorkflowService implements IWorkflowService {
 
             // Process children (triggers and actions)
             stateItem.children.results.forEach((child: any) => {
+                console.log("Parsing state child item - ", child?.id);
                 const fields = child.fields.reduce((acc: Record<string, string>, field: any) => {
                     acc[field.name] = field.value;
                     return acc;
@@ -190,20 +217,20 @@ export class WorkflowService implements IWorkflowService {
 
                 if (child.template.name === 'Trigger') {
                     state.triggers.push({
-                        id: child.id,
+                        id: this.cleanId(child.id),
                         name: child.name,
                         type: 'trigger',
-                        templateId: child.template.id,
+                        templateId: this.cleanId(child.template.id),
                         condition: fields.Condition || '',
                         fields: fields
                     });
                 } else {
                     state.actions.push({
-                        id: child.id,
+                        id: this.cleanId(child.id),
                         name: child.name,
-                        templateId: child.template.id,
+                        templateId: this.cleanId(child.template.id),
                         condition: fields.Condition || '',
-                        nextStateId: fields.NextState?.replace(/[{}]/g, '') || undefined,
+                        nextStateId: this.cleanId(fields.NextState) || undefined,
                         fields: fields
                     });
                 }
@@ -211,6 +238,8 @@ export class WorkflowService implements IWorkflowService {
 
             workflow.states[state.id] = state;
         });
+
+        console.log("Parsed workflow - ", workflow.id);
 
         return workflow;
     }

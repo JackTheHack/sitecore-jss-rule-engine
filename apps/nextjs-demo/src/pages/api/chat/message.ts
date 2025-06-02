@@ -18,13 +18,18 @@ export default async function handler(
       return res.status(400).json({ success: false, error: 'Message is required and must be a string' });
     }
 
-    try {
+    
+    // Example logic to process the message and generate actions/metadata
+    const actions: Action[] = [];
+
+    try {      
 
       console.log('Handling message', message, visitorId, workflowId);
 
       const ruleEngine = getRuleEngineInstance();
+      ruleEngine.debug = true;
 
-      console.log('Rule engine: ', ruleEngine?.requestContext, ruleEngine?.sitecoreContext, ruleEngine.commandDefinitions?.size);
+      console.log(`Rule engine: (commands - ${ruleEngine.commandDefinitions?.size}) `);
 
       const actionFactory = new WorkflowActionFactory();      
 
@@ -45,16 +50,17 @@ export default async function handler(
       console.log("Initializing workflow...")
       await workflowService.init();
 
-
       console.log("Loading workflow...")
 
       const sitecoreEdgeUrl = process.env.EDGE_QL_ENDPOINT || '';
 
-      const workflowConfig = await loadWorkflow(sitecoreEdgeUrl, workflowId);
+      const workflowConfig = await loadWorkflow(sitecoreEdgeUrl, workflowId, workflowService);
+
+      console.log('Workflow loaded.');
 
       const executionOptions : WorkflowExecutionOptions = {
         visitorId: visitorId,
-        eventName: "event:onmessage",
+        eventName: "chat:message",
         eventParameters: JSON.stringify({ message: message }),
         workflowId: workflowId,
         defaultStateId: workflowConfig.defaultStateId || ''
@@ -63,21 +69,27 @@ export default async function handler(
       console.log('Executing triggers', executionOptions);
 
       const workflowResult = await workflowService.executeTriggers(executionOptions);
-
+      
       if (!workflowResult.success) {
         console.log('Failed to execute workflow triggers');
         return res.status(500).json({ success: false, error: 'Failed to execute workflow triggers' });
       }
+      
+      if (workflowResult.clientCommands && workflowResult.clientCommands.length > 0) {
+        for (const command of workflowResult.clientCommands) {
+          const action: Action = {
+            type: command.operation,
+            content: command.parameters
+          };
+          actions.push(action);
+        }
+      }
+
+      
     } catch (error) {
       console.log('Something weird happened - ', error);
       return res.status(500).json({ success: false, error: 'Failed to execute workflow triggers' });
     }
-
-    // Example logic to process the message and generate actions/metadata
-    const actions: Action[] = [
-      { type: 'reply', content: `You said: ${message}` },
-      { type: 'suggestion', content: 'Would you like to learn more?' },
-    ];
 
     const metadata: Metadata = {
       timestamp: new Date().toISOString(),

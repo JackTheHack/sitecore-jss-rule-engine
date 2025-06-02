@@ -2,6 +2,7 @@ import { Workflow } from '../src/workflowTypes';
 
 export default {
         id: 'test-workflow',
+        name: 'test-workflow',
         states: {
             'test-state': {
                 id: 'test-state',

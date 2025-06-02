@@ -4,6 +4,7 @@ import { IWorkflowActionFactory } from "./actionFactory";
 
 export type Workflow = {
   id: string;
+  name: string;
   states: Record<string, WorkflowState>;
   defaultStateId?: string;
 }

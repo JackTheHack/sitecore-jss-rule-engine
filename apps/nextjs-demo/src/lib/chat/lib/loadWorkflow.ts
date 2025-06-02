@@ -1,8 +1,9 @@
-import { JssRuleEngine } from '@jss-rule-engine/core';
-import { Workflow, WorkflowService, WorkflowActionFactory } from '@jss-rule-engine/workflow';
-import { DatabaseServiceOptions, DatabaseService } from '@jss-rule-engine/workflow';
+import { Workflow, IWorkflowService } from '@jss-rule-engine/workflow';
 
-export default async function loadWorkflow(graphQlEndpoint: string, itemId: string): Promise<Workflow> {
+export default async function loadWorkflow(
+    graphQlEndpoint: string, 
+    itemId: string, 
+    workflowService: IWorkflowService): Promise<Workflow> {
 
     const apiKey = process.env.SITECORE_API_KEY;
 
@@ -12,33 +13,32 @@ export default async function loadWorkflow(graphQlEndpoint: string, itemId: stri
 
     try {
         console.log('Loading workflow from Sitecore - ', itemId);
-
-
-        const dbOptions: DatabaseServiceOptions = {
-            url: process.env.DATABASE_URL || 'file:workflow.sqlite'
-        }        
-
-        const workflowService = new WorkflowService({
-            graphqlEndpoint: graphQlEndpoint,
-            apiKey: apiKey,
-            actionFactory: new WorkflowActionFactory(),
-            databaseService: new DatabaseService(dbOptions),
-            ruleEngine: new JssRuleEngine()
-        });
+        console.log('GraphQL endpoint - ', graphQlEndpoint);                
 
         const graphQlQuery = await workflowService.getSitecoreQuery(itemId, "en");
 
         const graphQlResponse = await fetch(graphQlEndpoint, {
             method: 'POST',
-            body: graphQlQuery,
+            body: JSON.stringify({query: graphQlQuery}),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
+                'sc_apikey': `${apiKey}`
             },
             next: { revalidate: 3600 } // Cache for 1 hour
         });
 
-        workflowService.parseGraphQLResponse(graphQlResponse.json());
+        if(!graphQlResponse.ok)
+        {
+            throw new Error("GraphQL request failed.");
+        }
+
+        const jsonResponse = await graphQlResponse.json();
+
+        console.log(jsonResponse);
+
+        const workflowConfig = await workflowService.parseGraphQLResponse(jsonResponse);    
+        
+        await workflowService.load(workflowConfig);
 
         const workflow = workflowService.getWorkflow(itemId);
 
