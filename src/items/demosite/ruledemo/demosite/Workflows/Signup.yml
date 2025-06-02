@@ -13,11 +13,14 @@ Languages:
       Value: 20250521T043408Z
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "20b79883-7b57-41ec-a534-aad65f838767"
+      Value: "703dacf0-bcf1-4f4a-815c-95dadb81ed88"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
+    - ID: "cbc05c3e-f26a-43d5-8ff2-70909761a21a"
+      Hint: Start State
+      Value: "{4E23D557-F0A3-451C-9254-0980D9867E0B}"
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250521T043408Z
+      Value: 20250530T224404Z

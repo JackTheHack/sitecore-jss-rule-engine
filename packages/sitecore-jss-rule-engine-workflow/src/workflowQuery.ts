@@ -1,6 +1,5 @@
 export const sitecoreQuery = async (path: string, language: string = "en") => {
-    const { gql } = await import('graphql-request');
-    return gql`query {
+    return `query {
         item (path: "${path}", language:"${language}") {
             name,
             field(name:"Start State"){

@@ -28,7 +28,8 @@ export default async function handler(
       const workflowOptions: WorkflowServiceOptions = {
         databaseService: dbService,
         ruleEngine: ruleEngine,
-        actionFactory: actionFactory 
+        actionFactory: actionFactory,
+        graphqlEndpoint: "/"
       }
       
       console.log('Creating workflow service', dbServiceOptions);
