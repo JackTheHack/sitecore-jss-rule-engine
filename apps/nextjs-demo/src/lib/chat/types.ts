@@ -15,6 +15,9 @@ export type Action = {
 export type Metadata = {
   timestamp: string;
   messageLength: number;
+  stateId: string;
+  visitorId: string;
+  triggerName: string;
 };
 
 export type SuccessResponse = {

@@ -16,6 +16,7 @@ import { Action,  CommandExecutionContext } from "../types";
 import { ChatActionFactory } from "../chatActionFactory";
 import { getRuleEngineInstance, RuleEngineSessionContext } from "@jss-rule-engine/core";
 import { json } from "stream/consumers";
+import { ChatConversationContext } from "@jss-rule-engine/workflow";
 
 
 /**
@@ -146,13 +147,13 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 
 					const chatContext: ChatConversationContext = {
 						injectMessage: injectMessage,
-						session: new RuleEngineSessionContext(),						
+						variables: new RuleEngineSessionContext(),
 						userInput: userInput,
 						ruleEngine: ruleEngine,
 						prevPath: event.detail.prevPath || undefined,
 						currPath: event.detail.currPath || undefined,
 					}
-					chatContext.session.set("flow", flow);
+					chatContext.variables.set("flow", flow);
 
 					await executeClientActions(reply.actions, chatContext);
 				}

@@ -5,6 +5,7 @@ import operatorFactory from './operators/initializeOperators'
 import ruleParser from './ruleParser'
 import ruleEngineRunner from './ruleEngineRunner'
 import { RuleEngineRequestContext, RuleEngineContext, RuleEngineSitecoreContext, ParsedRuleXmlData, OperatorFunctionDefinition, ConditionFunctionDefinition, ActionFunctionDefinition } from './types/ruleEngine'
+import { RuleEngineSessionContext } from './types/ruleEngineSessionContext'
 
 export interface IJssRuleEngine {
     commandDefinitions: Map<string, ActionFunctionDefinition>;
@@ -132,6 +133,7 @@ export class JssRuleEngine implements IJssRuleEngine {
             sitecoreContext: this.sitecoreContext,
             requestContext: this.requestContext,
             dateTime: dateObj,
+            sessionContext: new RuleEngineSessionContext(),
             //env: process.env,
             ruleEngine: this as JssRuleEngine,                        
         };

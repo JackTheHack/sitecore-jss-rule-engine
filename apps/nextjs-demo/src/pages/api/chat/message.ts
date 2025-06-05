@@ -1,4 +1,4 @@
-import { WorkflowService, WorkflowExecutionOptions, WorkflowActionFactory } from '@jss-rule-engine/workflow';
+import { WorkflowService, WorkflowExecutionOptions, WorkflowActionFactory, registerWorkflowRuleEngine, registerActions, registerWorkflowActions } from '@jss-rule-engine/workflow';
 import { WorkflowServiceOptions } from '@jss-rule-engine/workflow/dist/src/workflowTypes';
 import { JssRuleEngine, getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -27,11 +27,13 @@ export default async function handler(
       console.log('Handling message', message, visitorId, workflowId);
 
       const ruleEngine = getRuleEngineInstance();
+      registerWorkflowRuleEngine(ruleEngine);
       ruleEngine.debug = true;
 
       console.log(`Rule engine: (commands - ${ruleEngine.commandDefinitions?.size}) `);
 
       const actionFactory = new WorkflowActionFactory();      
+      registerWorkflowActions(actionFactory);
 
       const dbServiceOptions = getDatabaseServiceOptions();
       const dbService = new DatabaseService(dbServiceOptions);
@@ -85,22 +87,27 @@ export default async function handler(
         }
       }
 
+        
+      const metadata: Metadata = {
+        timestamp: new Date().toISOString(),
+        messageLength: message.length,
+        visitorId: workflowResult?.visitorId,
+        stateId: workflowResult?.stateId,
+        triggerName: executionOptions.eventName
+      };
+
+      const okResult : SuccessResponse = { success: true, actions, metadata };
+
+      console.log('Returning OK result', okResult);
+
+      return res.status(200).json(okResult);
+
       
     } catch (error) {
       console.log('Something weird happened - ', error);
       return res.status(500).json({ success: false, error: 'Failed to execute workflow triggers' });
     }
 
-    const metadata: Metadata = {
-      timestamp: new Date().toISOString(),
-      messageLength: message.length,
-    };
-
-    const okResult : SuccessResponse = { success: true, actions, metadata };
-
-    console.log('Returning OK result', okResult);
-
-    return res.status(200).json(okResult);
   } else {
     res.setHeader('Allow', ['POST']);
     return res.status(405).json({ success: false, error: `Method ${req.method} not allowed` });

@@ -232,7 +232,7 @@ export class WorkflowService implements IWorkflowService {
                         id: this.cleanId(child.id),
                         name: child.name,
                         type: 'trigger',
-                        templateId: this.cleanId(child.template.id),
+                        templateId: child.template.id,
                         condition: fields.Condition || '',
                         fields: fields
                     });
@@ -240,7 +240,7 @@ export class WorkflowService implements IWorkflowService {
                     state.actions.push({
                         id: this.cleanId(child.id),
                         name: child.name,
-                        templateId: this.cleanId(child.template.id),
+                        templateId: child.template.id,
                         condition: fields.Condition || '',
                         nextStateId: this.cleanId(fields.NextState) || undefined,
                         fields: fields
@@ -267,6 +267,7 @@ async function evaluateCondition(
 ): Promise<boolean> {
     try {
         const ruleEngineContext = context.ruleEngine?.getRuleEngineContext();   
+        ruleEngineContext?.sessionContext?.set('workflowContext', context);
                      
         console.log('Evaluating condition.');
         const result = await context.ruleEngine?.parseAndRunRule(condition, ruleEngineContext);

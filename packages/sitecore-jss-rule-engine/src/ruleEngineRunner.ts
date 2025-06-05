@@ -27,10 +27,13 @@ export default async function (parsedRule:ParsedRuleXmlData | null, ruleEngineCo
 
                 var conditionFunction = ruleEngineContext.ruleEngine?.ruleDefinitions.get(conditionId);
 
-                if (typeof (conditionFunction) === "undefined" || !condition) {
+                if (typeof (conditionFunction) === "undefined" || !conditionFunction || !condition) {
                     console.warn('Rule definitions missing for id ' + conditionId);
+                    ruleEngineContext.ruleEngine?.debugMessage('Rule definitions missing for id ' + conditionId)
                     throw new Error('Rule definitions missing for id ' + conditionId);
                 }                
+
+                ruleEngineContext.ruleEngine?.debugMessage('Running condition function:', conditionFunction)
 
                 var conditionResult = await conditionFunction(condition, ruleEngineContext);
 

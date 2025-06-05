@@ -1,7 +1,8 @@
-import { RuleData, RuleEngineContext } from "@jss-rule-engine/core";
+import { RuleConditionData } from "@jss-rule-engine/core";
+import { RuleEngineContext } from "@jss-rule-engine/core";
 import { ChatConversationContext, WorkflowExecutionContext } from "@root/src/workflowTypes";
 
-export default async function(rule:RuleData, ruleContext: RuleEngineContext) {
+export default async function(rule:RuleConditionData, ruleContext: RuleEngineContext) {
     const workflowContext = ruleContext.sessionContext?.get<WorkflowExecutionContext>("workflowContext");    
 
     if (!workflowContext) {
@@ -13,6 +14,8 @@ export default async function(rule:RuleData, ruleContext: RuleEngineContext) {
     if (!chatContext) {
         throw new Error("Rule engine context missing chat context.");
     }
+
+    ruleContext.ruleEngine?.debugMessage('Running chatMessageComparesToRule ', rule.attributes);
 
     const messageText = rule.attributes?.get("value");
     const comparisonValue = rule.attributes?.get("ParameterName");
@@ -26,10 +29,12 @@ export default async function(rule:RuleData, ruleContext: RuleEngineContext) {
         const currentMessage = chatContext.userInput;
         
         if (!currentMessage) {
+            ruleContext.ruleEngine?.debugMessage('Chat messsage is empty. Skipping.');
             return false;
         }
 
         // Compare the messages
+        ruleContext.ruleEngine?.debugMessage('Comparing ', currentMessage, ' with ', messageText);
         return currentMessage.toLowerCase() === messageText.toLowerCase();
     } catch (error) {
         console.error('Error in chatMessageComparesToRule:', error);

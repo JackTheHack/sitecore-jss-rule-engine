@@ -121,7 +121,7 @@ export default function (ruleXml: string, ruleEngineContext: RuleEngineContext) 
 
         if (conditionsRootNode && conditionsRootNode.children) {
 
-            ruleEngineContext.ruleEngine?.debugMessage(conditionsRootNode);
+            //ruleEngineContext.ruleEngine?.debugMessage(conditionsRootNode);
 
             conditionsRootNode.children.filter((x: any) => x.type == "element").forEach((conditionXmlNode: any) => {
                 
