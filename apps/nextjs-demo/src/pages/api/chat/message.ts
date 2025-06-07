@@ -1,10 +1,10 @@
-import { WorkflowService, WorkflowExecutionOptions, WorkflowActionFactory, registerWorkflowRuleEngine, registerActions, registerWorkflowActions } from '@jss-rule-engine/workflow';
+import { WorkflowService, WorkflowExecutionOptions, WorkflowActionFactory, registerWorkflowRuleEngine, registerWorkflowActions } from '@jss-rule-engine/workflow';
 import { WorkflowServiceOptions } from '@jss-rule-engine/workflow/dist/src/workflowTypes';
-import { JssRuleEngine, getRuleEngineInstance } from '@jss-rule-engine/core';
+import { JssRuleEngine, RuleEngineSessionContext, getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {Action, ErrorResponse, Metadata, SuccessResponse} from '../../../lib/chat/types'
 import loadWorkflow from 'lib/chat/lib/loadWorkflow';
-import { DatabaseService, IDatabaseService } from '@jss-rule-engine/workflow';
+import { DatabaseService, IDatabaseService, ChatConversationContext} from '@jss-rule-engine/workflow';
 import  { getDatabaseServiceOptions}  from '../../../lib/db/dbOptions';
 
 export default async function handler(
@@ -27,7 +27,17 @@ export default async function handler(
       console.log('Handling message', message, visitorId, workflowId);
 
       const ruleEngine = getRuleEngineInstance();
-      registerWorkflowRuleEngine(ruleEngine);
+      registerWorkflowRuleEngine(ruleEngine);      
+
+      const ruleEngineContext = ruleEngine.getRuleEngineContext();
+      const chatContext = {
+        ruleEngine: ruleEngine,
+        userInput: message,
+        variables: new RuleEngineSessionContext()        
+      } as ChatConversationContext;
+
+      ruleEngineContext?.sessionContext?.set('chatContext', chatContext);
+
       ruleEngine.debug = true;
 
       console.log(`Rule engine: (commands - ${ruleEngine.commandDefinitions?.size}) `);
@@ -41,6 +51,7 @@ export default async function handler(
       const workflowOptions: WorkflowServiceOptions = {
         databaseService: dbService,
         ruleEngine: ruleEngine,
+        ruleEngineContext: ruleEngineContext,
         actionFactory: actionFactory,
         graphqlEndpoint: "/",
         apiKey: "/"
@@ -65,7 +76,7 @@ export default async function handler(
         eventName: "chat:message",
         eventParameters: JSON.stringify({ message: message }),
         workflowId: workflowId,
-        defaultStateId: workflowConfig.defaultStateId || ''
+        defaultStateId: workflowConfig.defaultStateId || ''        
       }
 
       console.log('Executing triggers', executionOptions);
@@ -92,7 +103,8 @@ export default async function handler(
         timestamp: new Date().toISOString(),
         messageLength: message.length,
         visitorId: workflowResult?.visitorId,
-        stateId: workflowResult?.stateId,
+        newStateId: workflowResult?.newStateId,
+        prevStateId: workflowResult?.prevStateId,
         triggerName: executionOptions.eventName
       };
 

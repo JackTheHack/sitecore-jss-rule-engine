@@ -1,7 +1,8 @@
-import { WorkflowExecutionContext } from "./workflowTypes";
+import { cleanId } from "./lib/helper";
+import { WorkflowAction, WorkflowExecutionContext } from "./workflowTypes";
 
 export interface IWorkflowAction {
-    execute(context: WorkflowExecutionContext): Promise<void>;
+    execute(action: WorkflowAction, context: WorkflowExecutionContext): Promise<void>;
 }
 
 export interface IWorkflowActionFactory {
@@ -14,11 +15,17 @@ export class WorkflowActionFactory implements IWorkflowActionFactory {
     private registeredActions: Map<string, new () => IWorkflowAction> = new Map();
 
     registerAction(templateId: string, action: new () => IWorkflowAction): void {
-        this.registeredActions.set(templateId, action);
+
+        const id = cleanId(templateId);
+
+        this.registeredActions.set(id, action);
     }
 
     getAction(templateId: string): IWorkflowAction {
-        const ActionClass = this.registeredActions.get(templateId);
+
+        const id = cleanId(templateId);
+
+        const ActionClass = this.registeredActions.get(id);
         if (ActionClass) {
             return new ActionClass();
         }

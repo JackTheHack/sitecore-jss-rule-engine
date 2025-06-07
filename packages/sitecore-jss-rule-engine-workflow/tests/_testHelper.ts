@@ -12,7 +12,7 @@ export async function  resetTest(t:ExecutionContext){
 }
 
 export function getWorkflowService(t:ExecutionContext){
-    const ruleEngine = getRuleEngine();
+    const ruleEngine = getRuleEngine();    
             const actionFactory = getMockActionFactory();
             const dbService = getDatabaseService(t);
             const workflow = new WorkflowService({

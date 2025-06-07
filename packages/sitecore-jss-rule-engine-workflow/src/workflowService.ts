@@ -1,7 +1,8 @@
 import { IDatabaseService } from './databaseService';
 import { Workflow, WorkflowState, WorkflowExecutionContext, WorkflowServiceOptions, IWorkflowService, WorkflowExecutionResult, WorkflowExecutionOptions, WorkflowScheduledTaskParams } from './workflowTypes';
 import { AddScheduledTaskParams } from './databaseService';
-import {sitecoreQuery } from './workflowQuery';
+import { sitecoreQuery } from './workflowQuery';
+import { cleanId } from './lib/helper';
 
 export class WorkflowService implements IWorkflowService {
     private workflows: Record<string, Workflow> = {};
@@ -15,9 +16,9 @@ export class WorkflowService implements IWorkflowService {
     
     async addScheduledTask(params: WorkflowScheduledTaskParams): Promise<void> {
         const dbParams: AddScheduledTaskParams = {
-            id: params.taskId,
-            visitorId: params.visitorId,
-            workflowId: params.workflowId,
+            id: cleanId(params.taskId),
+            visitorId: cleanId(params.visitorId),
+            workflowId: cleanId(params.workflowId),
             taskType: params.triggerType,
             scheduledTime: params.scheduledTime,
             payload: params.triggerParameters
@@ -26,7 +27,7 @@ export class WorkflowService implements IWorkflowService {
     }
     
     getWorkflow(workflowId: string): Workflow | null {
-        const id = this.cleanId(workflowId);        
+        const id = cleanId(workflowId);        
         return this.workflows[id] || null;
     }
     
@@ -35,7 +36,7 @@ export class WorkflowService implements IWorkflowService {
     }
 
     async load(workflowConfig: Workflow): Promise<void> {
-        this.workflows[workflowConfig.id] = workflowConfig;
+        this.workflows[cleanId(workflowConfig.id)] = workflowConfig;
         console.log('Loaded ', workflowConfig.id)
     }
 
@@ -44,28 +45,23 @@ export class WorkflowService implements IWorkflowService {
         stateId: string,
         visitorId: string
     ): Promise<void> {
-        const workflow = this.workflows[workflowId];
+        const workflow = this.getWorkflow(workflowId);
         if (!workflow) throw new Error('Workflow not found');
 
-        const state = workflow.states[stateId];
+        const state = workflow.states[cleanId(stateId)];
         if (!state) throw new Error('State not found');
 
-        await this.databaseService.addVisitor(visitorId, stateId, workflowId);
-    }
-
-    cleanId(id: string){
-
-        if(!id)
-        {
-            return id;
-        }
-
-        return id.replace(/[{}]/g, '').replace(/-/g, '');
+        await this.databaseService.addVisitor(
+            cleanId(visitorId), 
+            cleanId(stateId), 
+            cleanId(workflowId));
     }
 
     async executeTriggers(options: WorkflowExecutionOptions): Promise<WorkflowExecutionResult> {
 
-        let currentStateId = await this.databaseService.getVisitorState(options.visitorId, options.workflowId);
+        let currentStateId = await this.databaseService.getVisitorState(
+            cleanId(options.visitorId), 
+            cleanId(options.workflowId));        
 
         if (!currentStateId) {
             //get default state
@@ -77,21 +73,24 @@ export class WorkflowService implements IWorkflowService {
                     success: true,
                     visitorId: options.visitorId,
                     clientCommands: [],
-                    workflowId: options.workflowId,
-                    stateId: currentStateId,
+                    workflowId: options.workflowId,                    
+                    newStateId: currentStateId                    
                 } as WorkflowExecutionResult;
             }            
 
-            await this.databaseService.addVisitor(options.visitorId, currentStateId, options.workflowId);
+            await this.databaseService.addVisitor(
+                cleanId(options.visitorId), 
+                cleanId(currentStateId), 
+                cleanId(options.workflowId));
         };
 
         if (!currentStateId) {
             throw new Error('Current state ID is null or undefined.');
         }
 
-        currentStateId = this.cleanId(currentStateId);
+        currentStateId = cleanId(currentStateId);
 
-        const cleanWorkflowId = this.cleanId(options.workflowId);
+        const cleanWorkflowId = cleanId(options.workflowId);
 
         console.log('Workflows - ', this.workflows);
 
@@ -111,14 +110,22 @@ export class WorkflowService implements IWorkflowService {
             clientCommands: [],
             trigger: options.eventName,
             triggerParameters: options.eventParameters,
+            metadata: {
+                newStateId: currentStateId
+            },
+            ruleEngineContext: this.options.ruleEngineContext
         };
+
+        const ruleEngineContext = this.options.ruleEngineContext ? this.options.ruleEngineContext : this.options.ruleEngine?.getRuleEngineContext();   
+        ruleEngineContext?.sessionContext?.set('workflowContext', workflowContext);
 
         const result = {
             success: true,
             visitorId: options.visitorId,
             clientCommands: [],
-            workflowId: this.cleanId(workflow.id),
-            stateId: currentStateId,
+            workflowId: cleanId(workflow.id),
+            prevStateId: currentStateId,
+            newStateId: currentStateId,
         } as WorkflowExecutionResult;
 
         try{            
@@ -139,6 +146,9 @@ export class WorkflowService implements IWorkflowService {
                     console.log('Trigger condition is false - skipping trigger');
                 }
             }
+
+            result.newStateId = workflowContext.metadata.newStateId;
+
             result.clientCommands = workflowContext.clientCommands;
             return result;
         }catch(ex){
@@ -164,29 +174,39 @@ export class WorkflowService implements IWorkflowService {
 
                 if(actionCommand)
                 {
-                    await actionCommand.execute(workflowExecutionContext);
+                    await actionCommand.execute(action, workflowExecutionContext);
                 } else {
                     console.warn('Action command not found', action.templateId);
                 }
 
-                if (action.nextStateId) {
-                    console.log(`Changing visitor ${visitorId} state to ${action.nextStateId}`);
-                    await this.changeVisitorState(visitorId, action.nextStateId, workflowExecutionContext.workflow?.id);
+                if (action.nextStateId) {                                        
+                    await this.changeVisitorState(
+                        cleanId(visitorId), 
+                        cleanId(workflowExecutionContext.workflow?.id),
+                        cleanId(action.nextStateId),                         
+                        workflowExecutionContext);
                 }
             }
         }
     }
 
     async removeVisitorFromWorkflow(visitorId: string, workflowId: string): Promise<void> {
-        await this.databaseService.removeVisitor(visitorId, workflowId);
+        await this.databaseService.removeVisitor(
+            cleanId(visitorId), 
+            cleanId(workflowId));
     }
 
     async changeVisitorState(
         visitorId: string,
         workflowId: string,
-        nextStateId: string
+        nextStateId: string,
+        context: WorkflowExecutionContext
     ): Promise<void> {
-        await this.databaseService.updateVisitorState(visitorId, workflowId, nextStateId);
+        context.metadata.newStateId = cleanId(nextStateId);
+        await this.databaseService.updateVisitorState(
+            cleanId(visitorId), 
+            cleanId(nextStateId), 
+            cleanId(workflowId));
     }
 
     async getStateVisitors(workflowId: string, stateId: string): Promise<string[]> {
@@ -203,48 +223,51 @@ export class WorkflowService implements IWorkflowService {
         }
 
         const workflow: Workflow = {
-            id: this.cleanId(item.id),
+            id: cleanId(item.id),
             name: item.name,
             states: {},
-            defaultStateId: this.cleanId(item.field?.value) // Remove curly braces from GUID
+            defaultStateId: cleanId(item.field?.value) // Remove curly braces from GUID
         };
 
         // Process each state
         item.stateItems.results.forEach((stateItem: any) => {
             console.log("Parsing state - ", stateItem?.id);
             const state: WorkflowState = {
-                id: this.cleanId(stateItem.id),
+                id: cleanId(stateItem.id),
                 name: stateItem.name,
                 triggers: [],
                 actions: []
             };
 
             // Process children (triggers and actions)
-            stateItem.children.results.forEach((child: any) => {
-                console.log("Parsing state child item - ", child?.id);
+            stateItem.children.results.forEach((child: any) => {                
                 const fields = child.fields.reduce((acc: Record<string, string>, field: any) => {
                     acc[field.name] = field.value;
                     return acc;
                 }, {});
 
                 if (child.template.name === 'Trigger') {
-                    state.triggers.push({
-                        id: this.cleanId(child.id),
+                    const triggerObj = {
+                        id: cleanId(child.id),
                         name: child.name,
                         type: 'trigger',
                         templateId: child.template.id,
                         condition: fields.Condition || '',
                         fields: fields
-                    });
+                    };
+                    console.log("Parsing trigger item: ", triggerObj);
+                    state.triggers.push(triggerObj);
                 } else {
-                    state.actions.push({
-                        id: this.cleanId(child.id),
+                    const actionObj = {
+                        id: cleanId(child.id),
                         name: child.name,
                         templateId: child.template.id,
                         condition: fields.Condition || '',
-                        nextStateId: this.cleanId(fields.NextState) || undefined,
+                        nextStateId: cleanId(fields.NextState) || undefined,
                         fields: fields
-                    });
+                    }
+                    console.log("Parsing action item: ", actionObj);
+                    state.actions.push(actionObj);
                 }
             });
 
@@ -265,12 +288,10 @@ async function evaluateCondition(
     condition: string,
     context: WorkflowExecutionContext
 ): Promise<boolean> {
-    try {
-        const ruleEngineContext = context.ruleEngine?.getRuleEngineContext();   
-        ruleEngineContext?.sessionContext?.set('workflowContext', context);
-                     
+    try {                                 
+
         console.log('Evaluating condition.');
-        const result = await context.ruleEngine?.parseAndRunRule(condition, ruleEngineContext);
+        const result = await context.ruleEngine?.parseAndRunRule(condition, context.ruleEngineContext);
         console.log('Result - ', result);
         return result ? result : false;
     } catch (error) {

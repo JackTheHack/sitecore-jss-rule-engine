@@ -1,5 +1,5 @@
 import { RuleActionData, RuleEngineContext } from "@jss-rule-engine/core";
-import { WorkflowExecutionContext } from "@root/src/workflowTypes";
+import { WorkflowExecutionContext } from "../../workflowTypes";
 
 export default async function(command:RuleActionData, ruleContext:RuleEngineContext) {
     
@@ -30,7 +30,12 @@ export default async function(command:RuleActionData, ruleContext:RuleEngineCont
         }
 
         // Set the workflow state
-        await workflowService.changeVisitorState(workflowContext.visitor?.id, workflowContext.workflow?.id, stateId);
+        await workflowService.changeVisitorState(
+            workflowContext.visitor?.id, 
+            workflowContext.workflow?.id, 
+            stateId,
+            workflowContext);        
+
     } catch (error) {
         console.error('Error in setWorkflowStateAction:', error);
         throw error;

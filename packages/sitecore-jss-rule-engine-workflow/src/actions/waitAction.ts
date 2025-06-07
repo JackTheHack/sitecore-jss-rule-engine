@@ -1,23 +1,21 @@
 import { IWorkflowAction } from '../actionFactory';
-import { WorkflowExecutionContext, WorkflowScheduledTaskParams } from '../workflowTypes';
+import { WorkflowAction, WorkflowExecutionContext, WorkflowScheduledTaskParams } from '../workflowTypes';
 import { v4 as uuidv4 } from 'uuid';
 
-interface ScheduleTriggerFields {
+/* interface ScheduleTriggerFields {
     seconds: string;
     triggerName: string;
     triggerParameters?: string;
 }
-
+ */
 export class WaitAction implements IWorkflowAction {
-    async execute(context: WorkflowExecutionContext): Promise<void> {
+    async execute(action: WorkflowAction,  context: WorkflowExecutionContext): Promise<void> {
         if (!context.workflowService || !context.visitor) {
             console.warn('Missing required context for schedule trigger action');
             return;
         }
 
-        const { fields } = context.workflow.states[context.workflow.defaultStateId || ''].actions.find(
-            action => action.templateId === 'schedule-trigger-action'
-        ) || { fields: {} as ScheduleTriggerFields };
+        const { fields } = action;
 
         const seconds = parseInt(fields.seconds || '0');
         

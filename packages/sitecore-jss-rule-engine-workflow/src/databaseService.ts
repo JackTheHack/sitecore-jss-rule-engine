@@ -177,6 +177,7 @@ export class DatabaseService implements IDatabaseService {
     }
 
     async updateVisitorState(visitorId: string, nextStateId: string, workflowId: string): Promise<void> {
+        console.log(`Changing visitor ${visitorId} state ${nextStateId} for workflow ${workflowId}`);
         await this.client.execute(
             'UPDATE workflow_visitors SET state_id = ? WHERE visitor_id = ? AND workflow_id = ?',
             [nextStateId, visitorId, workflowId]

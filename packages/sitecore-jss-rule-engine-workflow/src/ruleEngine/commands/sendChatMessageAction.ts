@@ -15,7 +15,6 @@ export default async function (command: RuleActionData, ruleContext: RuleEngineC
         return;
     }
 
-
     // Get the workflow service from context
     workflowContext.clientCommands.push({
         operation: "chat:sendmessage",

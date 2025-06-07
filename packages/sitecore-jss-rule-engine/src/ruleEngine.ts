@@ -193,6 +193,7 @@ export class JssRuleEngine implements IJssRuleEngine {
 
     async parseAndRunRule(ruleXml:any, context?:RuleEngineContext){
         let ruleEngineContext = context ? context : this.getRuleEngineContext();        
+        this.debugMessage('Context vars: ', ruleEngineContext.sessionContext?.keys());
         let parsedRule = this.parseRuleXml(ruleXml, ruleEngineContext);
         this.prefetchItems(ruleEngineContext);
         var ruleResult = await this.runRule(parsedRule, ruleEngineContext);        

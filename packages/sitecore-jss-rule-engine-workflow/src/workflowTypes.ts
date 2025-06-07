@@ -1,4 +1,4 @@
-import { JssRuleEngine, RuleEngineSessionContext } from "@jss-rule-engine/core";
+import { JssRuleEngine, RuleEngineContext, RuleEngineSessionContext } from "@jss-rule-engine/core";
 import { IDatabaseService } from "./databaseService";
 import { IWorkflowActionFactory } from "./actionFactory";
 
@@ -9,6 +9,10 @@ export type Workflow = {
   defaultStateId?: string;
 }
 
+export type WorkflowExecutionMetadata = {
+  newStateId: string;
+}
+
 export type WorkflowExecutionContext = {
     workflowService?: IWorkflowService;
     workflow: Workflow;
@@ -17,6 +21,8 @@ export type WorkflowExecutionContext = {
     clientCommands: WorkflowActionCommand[];
     trigger?: string;
     triggerParameters?: string;
+    metadata: WorkflowExecutionMetadata;
+    ruleEngineContext?: RuleEngineContext;
 }
 
 
@@ -32,6 +38,7 @@ export type ChatConversationContext = {
 export type WorkflowServiceOptions = {
     databaseService: IDatabaseService,
     ruleEngine: JssRuleEngine,
+    ruleEngineContext?: RuleEngineContext,
     actionFactory: IWorkflowActionFactory,
     graphqlEndpoint: string,
     apiKey?: string
@@ -45,7 +52,8 @@ export type WorkflowActionCommand = {
 export type WorkflowExecutionResult = {
     visitorId: string;
     workflowId: string;
-    stateId: string;
+    prevStateId?: string;
+    newStateId?: string;
     clientCommands: WorkflowActionCommand[];
     success: boolean;
     error?: string;
@@ -114,7 +122,7 @@ export interface IWorkflowService {
     executeTriggers(options: WorkflowExecutionOptions): Promise<WorkflowExecutionResult>;
     executeActions(visitorId: string, workflowExecutionContext: WorkflowExecutionContext, state: WorkflowState): Promise<void>;
     removeVisitorFromWorkflow(visitorId: string, workflowId: string): Promise<void>;
-    changeVisitorState(visitorId: string, workflowId: string, nextStateId: string): Promise<void>;
+    changeVisitorState(visitorId: string, workflowId: string, nextStateId: string, context: WorkflowExecutionContext): Promise<void>;
     getStateVisitors(workflowId: string, stateId: string): Promise<string[]>;    
     getWorkflow(workflowId: string): Workflow | null;
     parseGraphQLResponse(response: any): Promise<Workflow>;

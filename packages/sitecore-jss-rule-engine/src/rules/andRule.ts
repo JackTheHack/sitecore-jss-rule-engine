@@ -3,7 +3,7 @@ import { RuleData, RuleEngineContext } from "../types/ruleEngine";
 export default async function (rule: RuleData, ruleEngineContext: RuleEngineContext) {
     var ruleResult = true;
 
-    ruleEngineContext.ruleEngine?.debugMessage('running AND rule')
+    ruleEngineContext.ruleEngine?.debugMessage('running AND rule - ', rule.conditions?.length)
 
     if (rule.conditions && rule.conditions.length > 0) {
 
@@ -13,6 +13,7 @@ export default async function (rule: RuleData, ruleEngineContext: RuleEngineCont
             var conditionFunction = ruleEngineContext.ruleEngine?.ruleDefinitions.get(conditionId);
 
             if (!conditionFunction) {
+                ruleEngineContext.ruleEngine?.debugMessage('Rule definition is missing for id ' + conditionId);
                 throw new Error('Rule definitions missing for id ' + conditionId);
             }
 

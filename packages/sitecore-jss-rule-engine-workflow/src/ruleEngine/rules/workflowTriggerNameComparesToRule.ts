@@ -38,15 +38,17 @@ const workflowTriggerNameComparesTo : ConditionFunctionDefinition = async functi
             return false;
         }
 
-        // Compare the messages
-        ruleContext.ruleEngine?.debugMessage('Current trigger - ', currentTriggerName, ' Expected: ', messageText);
+        // Compare the messages        
 
         const operatorContext = {
             parameter1: currentTriggerName?.toLowerCase(),
-            parameter2: messageText
+            parameter2: messageText?.toLowerCase()
         };
     
         const result = await operator(operatorContext, ruleContext) as boolean;        
+
+        ruleContext.ruleEngine?.debugMessage('Current trigger - ', currentTriggerName, ' Expected: ', messageText, ' Result: ', result);
+
         return result;
     } catch (error) {
         console.error('Error in chatMessageComparesToRule:', error);

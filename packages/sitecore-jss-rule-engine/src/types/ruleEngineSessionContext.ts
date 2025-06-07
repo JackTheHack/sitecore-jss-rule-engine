@@ -1,4 +1,3 @@
-
 export class RuleEngineSessionContext {
     private variables: Map<string, any>;
 
@@ -24,5 +23,9 @@ export class RuleEngineSessionContext {
 
     public clear(): void {
         this.variables.clear();
+    }
+
+    public keys(): Array<string> {
+        return Array.from(this.variables.keys());
     }
 }
