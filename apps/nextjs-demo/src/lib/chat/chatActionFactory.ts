@@ -1,33 +1,28 @@
-import { WorkflowActionFactory, IWorkflowActionFactory } from "@jss-rule-engine/workflow";
-import sendMessage from "./actions/sendMessage";
-import sendOptions from "./actions/sendOptions";
 import { CommandExecutionContext } from "./types";
 import { cleanId } from "./lib/helper";
 
-export interface ChatActionCommand {
+export interface IChatActionCommand {
     execute(context: CommandExecutionContext): Promise<void>;
 }
 
 export class ChatActionFactory  {
-  private registeredActions: Map<string, new () => ChatActionCommand> = new Map();
+  private registeredActions: Map<string, new () => IChatActionCommand> = new Map();
 
-  registerAction(templateId: string, action: new () => ChatActionCommand): void {
-
-      const id = cleanId(templateId);
-
-      this.registeredActions.set(id, action);
+  registerAction(commandName: string, action: new () => IChatActionCommand): void {
+      this.registeredActions.set(commandName, action);
   }
 
-  getAction(templateId: string): ChatActionCommand {
+  getAction(commandName: string): IChatActionCommand {
 
-      const id = cleanId(templateId);
-
-      const ActionClass = this.registeredActions.get(id);
+    console.log('Registered action', this.registeredActions)
       
-      if (ActionClass) {
-          return new ActionClass();
+
+      const actionClass = this.registeredActions.get(commandName);
+
+      if (actionClass) {
+          return new actionClass();
       }
-      throw new Error(`No action found for templateId: ${templateId}`);
+      throw new Error(`No action found for templateId: ${commandName}`);
   }
 
 }

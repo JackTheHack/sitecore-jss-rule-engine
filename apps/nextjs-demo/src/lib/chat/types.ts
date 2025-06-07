@@ -3,7 +3,8 @@ import { Flow } from "react-chatbotify";
 
 
 export type CommandExecutionContext = {
-    ruleEngine: JssRuleEngine;
+    action: Action;
+    injectMessage: (content: string | JSX.Element, sender?: string) => Promise<string | null>;
 };
 
 

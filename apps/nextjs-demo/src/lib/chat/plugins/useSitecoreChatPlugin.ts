@@ -5,18 +5,18 @@ import {
 	RcbUserSubmitTextEvent,
 	Plugin,
 	useMessages,
-	useSettings,
 	RcbChangePathEvent,
 	RcbPostLoadChatBotEvent,
-	RcbPreLoadChatBotEvent
+	RcbPreLoadChatBotEvent,
+	useTextArea
 } from "react-chatbotify";
 import { PluginConfig } from "./pluginConfig";
 import { SitecoreChatBlock } from "./SitecoreChatBlock";
 import { Action,  CommandExecutionContext } from "../types";
 import { ChatActionFactory } from "../chatActionFactory";
 import { getRuleEngineInstance, RuleEngineSessionContext } from "@jss-rule-engine/core";
-import { json } from "stream/consumers";
 import { ChatConversationContext } from "@jss-rule-engine/workflow";
+import { registerChatActions } from "../registerChatActions";
 
 
 /**
@@ -26,10 +26,17 @@ import { ChatConversationContext } from "@jss-rule-engine/workflow";
  */
 const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 	const { getBotId } = useBotId();
-	const { injectMessage, messages } = useMessages();	
+	const { injectMessage } = useMessages();	
+	const { setTextAreaValue } = useTextArea();
     const { getFlow } = useFlow();
 
-	const actionFactory = new ChatActionFactory();
+	const actionFactory = new ChatActionFactory();	
+	
+
+	useEffect(() => {
+		registerChatActions(actionFactory);
+	})
+
 	const ruleEngine = getRuleEngineInstance();
 
     const DefaultPluginConfig = {
@@ -40,16 +47,17 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 
 	
 	async function executeClientActions(actions: any, chatContext: ChatConversationContext) {
-		if(!actions || !Array.isArray(actions)) return;
+		if(!actions || !Array.isArray(actions)) return;		
 
-		console.log('Executing chat actions...');
-		console.log(chatContext);
+		console.log('Executing chat actions...', chatContext);		
 
 		actions.forEach(async (action: Action) => {
 			const actionCommand = actionFactory.getAction(action.type);
 			const commandContext: CommandExecutionContext = { 
-				ruleEngine: chatContext.ruleEngine,
+				action,
+				injectMessage
 			}
+			console.log('Executing client action', actionCommand, commandContext);
 			actionCommand.execute(commandContext);
 		});
 	}
@@ -60,6 +68,8 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 
 		try {
 			console.log('Calling /api/chat/message', sitecoreUrl, params);
+
+			await injectMessage(userInput, "user");
 
 			const response = await fetch(`${sitecoreUrl}/api/chat/message`, {
 				method: "POST",
@@ -93,6 +103,7 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 			event: RcbUserSubmitTextEvent | RcbChangePathEvent | RcbPostLoadChatBotEvent | RcbPreLoadChatBotEvent
 		) => {
 			console.log('Post load', event);
+			await injectMessage('Post load message.');
 		}
 
 		/**
@@ -138,6 +149,8 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 				const jsonBody = { flow: currBlock.flowId, userInput: userInput };
 
 				console.log('Calling Sitecore workflow api....', jsonBody)
+
+				await setTextAreaValue('');
 
 				const reply = await getWorkflowResponse(hostUrl, jsonBody);
 

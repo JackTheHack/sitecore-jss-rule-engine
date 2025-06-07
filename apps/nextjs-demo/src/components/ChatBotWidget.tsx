@@ -49,8 +49,10 @@ const ChatBotWidget = () => {
         header: {
             showAvatar: false,
             title: "Peter The Bot",
-
-        }
+        },
+		chatWindow: {
+			showTypingIndicator: true
+		}
     }
 
 	return (
