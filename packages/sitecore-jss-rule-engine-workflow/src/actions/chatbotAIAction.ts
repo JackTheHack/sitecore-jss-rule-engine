@@ -36,7 +36,8 @@ export class ChatbotAIAction implements IWorkflowAction {
 
         const aiOptions: AIOptions = {
             message: fields["Message"] || chatContext.userInput,
-            instructions: fields["AI Context"]
+            instructions: fields["AI Context"],
+            dontSendMessage: fields["Dont Send Response"]
         };
 
         context.ruleEngine?.debugMessage('Making AI request .', aiOptions);
@@ -44,13 +45,17 @@ export class ChatbotAIAction implements IWorkflowAction {
         const response = await this.aiService.generateResponse(aiOptions);
 
         context.ruleEngine?.debugMessage('AI response - .', response);
+
+        chatContext.variables.set("aiResponse", response);
         
-        // Add the AI response as a client command
-        const command: WorkflowActionCommand = {
-            operation: 'chatbot:ai-response',
-            parameters: JSON.stringify({ response })
-        };
+        if(aiOptions.dontSendMessage != "1"){
+            // Add the AI response as a client command
+            const command: WorkflowActionCommand = {
+                operation: 'chatbot:ai-response',
+                parameters: JSON.stringify({ response })
+            };
+            context.clientCommands.push(command);
+        }        
         
-        context.clientCommands.push(command);
     }
 } 

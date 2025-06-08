@@ -112,6 +112,12 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 			const {hostUrl } = mergedPluginConfig;
 			const nextPath = (event as RcbChangePathEvent).data.nextPath;
             const userInput = (event as RcbUserSubmitTextEvent)?.data?.inputText;
+
+			if(!userInput || userInput.length == 0)
+			{
+				return;
+			}
+
 			const currPath = event.detail.currPath;
             const flow = getFlow();
 

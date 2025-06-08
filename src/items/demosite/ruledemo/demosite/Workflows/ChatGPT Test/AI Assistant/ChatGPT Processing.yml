@@ -19,13 +19,41 @@ Languages:
       Hint: __Created by
       Value: |
         sitecore\jack.spektor@akqa.com
+    - ID: "6e139722-209e-4d42-b473-4ddc33f469e5"
+      Hint: Condition
+      Value: |
+        <ruleset>
+          <rule
+            uid="{F19D375C-EB6D-46C6-B2F7-D1625D067C98}">
+            <conditions>
+              <condition
+                id="{FB533DCD-E59E-4FB5-ABD6-1ED7D130A6A6}"
+                uid="93DD357E9E224EB5B9508664311E8C88"
+                operatorid="{A6AC5A6B-F409-48B0-ACE7-C3E8C5EC6406}"
+                value="Exit" />
+            </conditions>
+          </rule>
+        </ruleset>
+    - ID: "74465d1e-0f45-4d91-98c7-a264f8e2822a"
+      Hint: AI Context
+      Value: |
+        You are an AI chatbot tasked with responding to user input.
+        
+        Analyze user input and return one of the following options that best fit user query - "Account", "Billing", "Support", "Contact Us".
+        
+        If the user query is not clear - respond with "[OPTIONS]"
+        
+        Only return the response specified in the requirements.
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "773aff72-d1e3-4149-9395-cbad226d177a"
+      Value: "0c50f007-25f7-4992-816a-20a2f77e0afd"
+    - ID: "9c641a14-fd7f-4b2d-b27b-dd27e87d7133"
+      Hint: Dont Send Response
+      Value: 1
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250420T013649Z
+      Value: 20250608T084256Z

@@ -25,19 +25,11 @@ Languages:
           <rule
             uid="{FE6E1C9E-C571-4AA5-BBB2-CD034C3FF3D5}">
             <conditions>
-              <and
-                uid="F5E3E81F69D64E1E8F28452A58CF92D7">
-                <condition
-                  id="{0FF3ABD2-064E-42B9-8442-1B9B2F51008E}"
-                  uid="DA7EAF80778D4C84AB3251D899A03798"
-                  operatorid="{10537C58-1684-4CAB-B4C0-40C10907CE31}"
-                  value="chat:message" />
-                <condition
-                  id="{FB533DCD-E59E-4FB5-ABD6-1ED7D130A6A6}"
-                  uid="3E39759A370F4F3DB85DBCE78F5547B3"
-                  operatorid="{2E67477C-440C-4BCA-A358-3D29AED89F47}"
-                  value="AI" />
-              </and>
+              <condition
+                id="{0FF3ABD2-064E-42B9-8442-1B9B2F51008E}"
+                uid="DA7EAF80778D4C84AB3251D899A03798"
+                operatorid="{10537C58-1684-4CAB-B4C0-40C10907CE31}"
+                value="chat:message" />
             </conditions>
           </rule>
         </ruleset>
@@ -51,11 +43,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "d530b9c6-7e52-488a-9475-88c6f565823c"
+      Value: "a7e98739-2476-410a-8ae9-042da7333e7a"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250524T073714Z
+      Value: 20250607T105124Z

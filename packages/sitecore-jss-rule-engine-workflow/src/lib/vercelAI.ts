@@ -4,6 +4,7 @@ import { anthropic } from '@ai-sdk/anthropic';
 export interface AIOptions {
     message: string;
     instructions?: string;
+    dontSendMessage? :string;
 }
 
 export class VercelAIService {

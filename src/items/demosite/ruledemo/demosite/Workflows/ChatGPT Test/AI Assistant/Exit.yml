@@ -19,12 +19,27 @@ Languages:
       Hint: __Created by
       Value: |
         sitecore\jack.spektor@akqa.com
+    - ID: "6e139722-209e-4d42-b473-4ddc33f469e5"
+      Hint: Condition
+      Value: |
+        <ruleset>
+          <rule
+            uid="{E2C9491A-41FA-4782-B75B-EE63EE14DE03}">
+            <conditions>
+              <condition
+                id="{FB533DCD-E59E-4FB5-ABD6-1ED7D130A6A6}"
+                uid="4A8769EB74A54993921096D2FA0575D2"
+                operatorid="{10537C58-1684-4CAB-B4C0-40C10907CE31}"
+                value="Exit" />
+            </conditions>
+          </rule>
+        </ruleset>
     - ID: "727101b5-29ff-4449-8615-080d4119d89f"
       Hint: Template
       Value: "Bye!"
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "6183b22c-3bf0-4693-8c90-376510f6dc7e"
+      Value: "57934dfa-0724-4496-b04f-a6454fc31ed4"
     - ID: "982c1029-8a6a-4772-84ac-97158f0cda03"
       Hint: NextState
       Value: "{0AEE12D9-0547-4FAD-95F9-B52A42131756}"
@@ -34,4 +49,4 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250420T014012Z
+      Value: 20250607T105112Z

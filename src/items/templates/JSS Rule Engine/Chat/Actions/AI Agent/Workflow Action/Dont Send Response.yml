@@ -1,8 +1,18 @@
 ﻿---
-ID: "e7c567a3-b9bc-44ab-9a2f-e51a72510a39"
-Parent: "e39f428e-0aab-4fd7-ae15-0271f11cd052"
-Template: "b44783be-ebc7-4ce8-80d9-ee7a08df3245"
-Path: /sitecore/content/ruledemo/demosite/Workflows/ChatGPT Test/AI Assistant/SendMessage
+ID: "9c641a14-fd7f-4b2d-b27b-dd27e87d7133"
+Parent: "cea4e92c-342c-46eb-a746-0ef9280951a3"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Feature/JSS Rule Engine/Chat/Actions/AI Agent/Workflow Action/Dont Send Response
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: Checkbox
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 300
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "59faa224-c203-4273-8c41-b5ca6a7f40cb"
 Languages:
 - Language: en
   Versions:
@@ -10,7 +20,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250420T013743Z
+      Value: 20250608T084041Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -19,19 +29,13 @@ Languages:
       Hint: __Created by
       Value: |
         sitecore\jack.spektor@akqa.com
-    - ID: "727101b5-29ff-4449-8615-080d4119d89f"
-      Hint: Template
-      Value: @ChatGPTResponse
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "77aae5b5-b92d-4c9b-88c2-532b1da8bed2"
-    - ID: "982c1029-8a6a-4772-84ac-97158f0cda03"
-      Hint: NextState
-      Value: 
+      Value: "4c73f416-d9db-45a0-a0c6-d40bf105d8e7"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250420T014008Z
+      Value: 20250608T084041Z

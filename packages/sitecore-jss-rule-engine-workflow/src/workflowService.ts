@@ -1,7 +1,7 @@
 import { IDatabaseService } from './databaseService';
 import { Workflow, WorkflowState, WorkflowExecutionContext, WorkflowServiceOptions, IWorkflowService, WorkflowExecutionResult, WorkflowExecutionOptions, WorkflowScheduledTaskParams } from './workflowTypes';
 import { AddScheduledTaskParams } from './databaseService';
-import { sitecoreQuery } from './workflowQuery';
+import { sitecoreQuery } from './graphql/workflowQuery';
 import { cleanId } from './lib/helper';
 
 export class WorkflowService implements IWorkflowService {
