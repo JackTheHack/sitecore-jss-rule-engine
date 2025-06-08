@@ -6,9 +6,11 @@ import { SitecoreChatBlock } from "../client/plugins/SitecoreChatBlock";
 interface ChatBotWidgetProps {
 	welcomeMessage: string;
 	iconUrl?: string;
+	flowId: string;
+	title: string;
 }
 
-export const ChatBotWidget = ({ welcomeMessage, iconUrl }: ChatBotWidgetProps) => {
+export const ChatBotWidget = ({ welcomeMessage, iconUrl, flowId, title }: ChatBotWidgetProps) => {
 
 	// example openai conversation
 	// you can replace with other LLMs such as Google Gemini
@@ -20,7 +22,7 @@ export const ChatBotWidget = ({ welcomeMessage, iconUrl }: ChatBotWidgetProps) =
 			path: "loop"
 		},
 		loop: {
-			flowId: "{EBAA5C94-B003-4169-AA19-BC0EADDB05DC}"
+			flowId: flowId
 		} as SitecoreChatBlock
 	}
 
@@ -45,7 +47,7 @@ export const ChatBotWidget = ({ welcomeMessage, iconUrl }: ChatBotWidgetProps) =
 		},
 		header: {
 			showAvatar: false,
-			title: "Peter The Bot",
+			title: title,
 		},
 		chatWindow: {
 			showTypingIndicator: true

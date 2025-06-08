@@ -46,6 +46,8 @@ const Layout = ({ layoutData, headLinks }: LayoutProps): JSX.Element => {
       
       <ChatBotWidget 
         welcomeMessage="Hi! I'm Peter, your friendly chatbot, and ready to answer any of your questions." 
+        flowId="{EBAA5C94-B003-4169-AA19-BC0EADDB05DC}"
+        title="Peter The Bot"
         iconUrl={`${publicUrl}/chatbotify/icons8-sitecore.svg`}/>
 
       {/* root placeholder for the app, which we add components to using route data */}
