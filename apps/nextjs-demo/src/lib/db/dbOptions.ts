@@ -1,4 +1,4 @@
-import { DatabaseServiceOptions } from "@jss-rule-engine/workflow/dist/src/databaseService";
+import { DatabaseServiceOptions } from "@jss-rule-engine/workflow";
 
 export function getDatabaseServiceOptions(env?:any): DatabaseServiceOptions {
 

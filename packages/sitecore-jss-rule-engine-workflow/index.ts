@@ -12,7 +12,7 @@ export {WorkflowExecutionOptions} from "./src/workflowTypes";
 export {WorkflowExecutionResult} from "./src/workflowTypes";
 export {Workflow} from "./src/workflowTypes";
 export {WorkflowActionCommand} from "./src/workflowTypes";
-export {WorkflowActionFactory, IWorkflowActionFactory} from "./src/actionFactory";
+export {WorkflowActionFactory, IWorkflowActionFactory, IWorkflowAction} from "./src/actionFactory";
 export {WorkflowAction, WorkflowState, WorkflowTrigger} from "./src/workflowTypes";
 export {DatabaseService, IDatabaseService} from "./src/databaseService";
 export {WorkflowScheduledTask, IWorkflowService} from "./src/workflowTypes";
@@ -21,5 +21,5 @@ export {ScheduledTaskServiceOptions} from "./src/scheduledTaskServiceTypes";
 export {WorkflowServiceOptions} from "./src/workflowTypes";
 export {DatabaseServiceOptions} from "./src/databaseService";
 export {ChatConversationContext} from './src/workflowTypes'
-export {registerWorkflowActions} from './src/registerActions'
-export {registerWorkflowRuleEngine} from './src/ruleEngine/registerWorkflowRuleEngine'
+export {registerWorkflowActions} from './src/registerWorkflowActions'
+export {registerWorkflowRuleEngine} from './src/registerWorkflowRuleEngine'

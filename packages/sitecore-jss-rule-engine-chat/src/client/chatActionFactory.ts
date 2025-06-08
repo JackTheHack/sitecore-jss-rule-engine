@@ -1,5 +1,4 @@
 import { CommandExecutionContext } from "./types";
-import { cleanId } from "./lib/helper";
 
 export interface IChatActionCommand {
     execute(context: CommandExecutionContext): Promise<void>;

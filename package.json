@@ -29,6 +29,7 @@
         "test:w": "yarn workspace @jss-rule-engine/workflow t",
         "build:core": "yarn workspace @jss-rule-engine/core build",
         "build:edge": "yarn workspace @jss-rule-engine/edge build",
+        "build:chat": "yarn workspace @jss-rule-engine/chat build",
         "build:next": "yarn workspace @jss-rule-engine/nextjs build",
         "build:docs": "yarn workspace @jss-rule-engine/docs build",
         "build:workflow": "yarn workspace @jss-rule-engine/workflow build",

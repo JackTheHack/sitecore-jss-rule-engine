@@ -1,10 +1,10 @@
 import { WorkflowService, WorkflowExecutionOptions, WorkflowActionFactory, registerWorkflowRuleEngine, registerWorkflowActions } from '@jss-rule-engine/workflow';
-import { WorkflowServiceOptions } from '@jss-rule-engine/workflow/dist/src/workflowTypes';
+import { WorkflowServiceOptions } from '@jss-rule-engine/workflow';
 import { JssRuleEngine, RuleEngineSessionContext, getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
-import {Action, ErrorResponse, Metadata, SuccessResponse} from '../../../lib/chat/types'
-import loadWorkflow from 'lib/chat/lib/loadWorkflow';
-import { DatabaseService, IDatabaseService, ChatConversationContext} from '@jss-rule-engine/workflow';
+import {Action, ErrorResponse, Metadata, SuccessResponse} from '@jss-rule-engine/chat'
+import { loadWorkflow, registerChatActions, registerChatRuleEngine } from '@jss-rule-engine/chat';
+import { DatabaseService, ChatConversationContext} from '@jss-rule-engine/workflow';
 import  { getDatabaseServiceOptions}  from '../../../lib/db/dbOptions';
 
 export default async function handler(
@@ -28,6 +28,7 @@ export default async function handler(
 
       const ruleEngine = getRuleEngineInstance();
       registerWorkflowRuleEngine(ruleEngine);      
+      registerChatRuleEngine(ruleEngine);
 
       const ruleEngineContext = ruleEngine.getRuleEngineContext();
       const chatContext = {
@@ -44,6 +45,7 @@ export default async function handler(
 
       const actionFactory = new WorkflowActionFactory();      
       registerWorkflowActions(actionFactory);
+      registerChatActions(actionFactory);      
 
       const dbServiceOptions = getDatabaseServiceOptions();
       const dbService = new DatabaseService(dbServiceOptions);
@@ -97,7 +99,6 @@ export default async function handler(
           actions.push(action);
         }
       }
-
         
       const metadata: Metadata = {
         timestamp: new Date().toISOString(),

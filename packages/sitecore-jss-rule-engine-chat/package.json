@@ -1,0 +1,49 @@
+{
+  "name": "@jss-rule-engine/chat",
+  "version": "0.3.1",
+  "description": "",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "test": "yarn run build && npx ava --serial --verbose",
+    "build": "yarn run build:esm",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "build:babel": "babel src/lib --out-dir dist --copy-files",
+    "release": "npm run build && npm version patch && npm publish --access public"
+  },
+  "engines": {
+    "node": ">=12",
+    "npm": ">=6"
+  },
+  "keywords": [
+    "Sitecore",
+    "NextJS",
+    "XMCloud",
+    "Sitecore",
+    "JSS"
+  ],
+  "ava": {
+    "verbose": true
+  },
+  "author": "Jack Spektor",
+  "license": "ISC",
+  "dependencies": {
+    "@jss-rule-engine/core": "*",
+    "@jss-rule-engine/workflow": "*",
+    "react": "^18.2.0",
+    "react-chatbotify": "patch:react-chatbotify@npm%3A2.0.0-beta.38#~/.yarn/patches/react-chatbotify-npm-2.0.0-beta.38-f73bfcee3e.patch",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "ava": "6.3.0",
+    "typedoc": "0.25.4",
+    "typescript": "4.9.4"
+  }
+}

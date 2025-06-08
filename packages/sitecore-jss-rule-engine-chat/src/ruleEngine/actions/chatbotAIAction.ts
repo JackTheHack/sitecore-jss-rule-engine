@@ -1,6 +1,6 @@
-import { IWorkflowAction } from '../actionFactory';
-import { WorkflowExecutionContext, WorkflowActionCommand, WorkflowAction, ChatConversationContext } from '../workflowTypes';
-import { VercelAIService, AIOptions } from '../lib/vercelAI';
+import { ChatConversationContext, IWorkflowAction, WorkflowAction } from '@jss-rule-engine/workflow';
+import { WorkflowExecutionContext, WorkflowActionCommand } from '@jss-rule-engine/workflow';
+import { VercelAIService, AIOptions } from '../../lib/vercelAI';
 
 /* interface AIFields {
     message: string;

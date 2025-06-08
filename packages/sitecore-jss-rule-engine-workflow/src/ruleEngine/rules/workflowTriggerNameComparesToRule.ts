@@ -1,6 +1,6 @@
 import { ConditionFunctionDefinition } from "@jss-rule-engine/core";
 import { RuleConditionData,RuleEngineContext } from "@jss-rule-engine/core";
-import { WorkflowExecutionContext } from "@root/src/workflowTypes";
+import { WorkflowExecutionContext } from "../../workflowTypes";
 
 const workflowTriggerNameComparesTo : ConditionFunctionDefinition = async function(rule:RuleConditionData, ruleContext: RuleEngineContext) : Promise<boolean> {
 

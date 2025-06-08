@@ -1,13 +1,14 @@
+import React from 'react';
 import ChatBot from "react-chatbotify";
-import SitecoreChatPlugin from "./../lib/chat/plugins/sitecoreChatPluginFactory"
-import { SitecoreChatBlock } from "lib/chat/plugins/SitecoreChatBlock";
+import SitecoreChatPlugin from "../client/plugins/sitecoreChatPluginFactory"
+import { SitecoreChatBlock } from "../client/plugins/SitecoreChatBlock";
 
 interface ChatBotWidgetProps {
 	welcomeMessage: string;
 	iconUrl?: string;
 }
 
-const ChatBotWidget = ({ welcomeMessage, iconUrl }: ChatBotWidgetProps) => {
+export const ChatBotWidget = ({ welcomeMessage, iconUrl }: ChatBotWidgetProps) => {
 
 	// example openai conversation
 	// you can replace with other LLMs such as Google Gemini

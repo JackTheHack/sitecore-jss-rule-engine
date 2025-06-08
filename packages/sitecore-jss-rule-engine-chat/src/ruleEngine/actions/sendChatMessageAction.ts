@@ -1,5 +1,5 @@
 import { RuleActionData, RuleEngineContext } from "@jss-rule-engine/core";
-import { WorkflowExecutionContext } from "@root/src/workflowTypes";
+import { WorkflowExecutionContext } from "@jss-rule-engine/workflow";
 
 export default async function (command: RuleActionData, ruleContext: RuleEngineContext) {
     const workflowContext = ruleContext.sessionContext?.get<WorkflowExecutionContext>("workflowContext");    

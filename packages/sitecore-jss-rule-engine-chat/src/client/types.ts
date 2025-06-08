@@ -1,5 +1,4 @@
-import { JssRuleEngine } from "@jss-rule-engine/core";
-import { Flow, Message } from "react-chatbotify";
+import { Message } from "react-chatbotify";
 
 
 export type CommandExecutionContext = {
@@ -9,9 +8,7 @@ export type CommandExecutionContext = {
       simulateStreamMessage: (content: string, sender?: string, simulateStreamChunker?: ((content: string) => Array<string>) | null) => Promise<Message | null>;
       toggleIsBotTyping: (active?: boolean) => Promise<void>;
     }
-    
 };
-
 
 export type Action = {
   type: string;

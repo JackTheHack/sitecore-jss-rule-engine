@@ -6,8 +6,6 @@ import {
 	Plugin,
 	useMessages,
 	RcbChangePathEvent,
-	RcbPostLoadChatBotEvent,
-	RcbPreLoadChatBotEvent,
 	useTextArea,
 	useChatWindow
 } from "react-chatbotify";
@@ -17,7 +15,7 @@ import { Action,  CommandExecutionContext } from "../types";
 import { ChatActionFactory } from "../chatActionFactory";
 import { getRuleEngineInstance, RuleEngineSessionContext } from "@jss-rule-engine/core";
 import { ChatConversationContext } from "@jss-rule-engine/workflow";
-import { registerChatActions } from "../registerChatActions";
+import { registerChatCommands } from "../../registerChatCommands";
 
 
 /**
@@ -35,8 +33,8 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 	const actionFactory = new ChatActionFactory();	
 	
 
-	useEffect(() => {
-		registerChatActions(actionFactory);
+	useEffect(() => {		
+		registerChatCommands(actionFactory);
 	})
 
 	const ruleEngine = getRuleEngineInstance();
@@ -110,7 +108,7 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 			console.log('handleMessageEvent', event);
 
 			const {hostUrl } = mergedPluginConfig;
-			const nextPath = (event as RcbChangePathEvent).data.nextPath;
+			//const nextPath = (event as RcbChangePathEvent).data.nextPath;
             const userInput = (event as RcbUserSubmitTextEvent)?.data?.inputText;
 
 			if(!userInput || userInput.length == 0)
@@ -171,14 +169,14 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 		};
 
 		// Remove any existing event listeners first to prevent duplicates
-		window.removeEventListener("rcb-user-submit-text", handleMessageEvent);
+		window.removeEventListener("rcb-user-submit-text", handleMessageEvent as any);
 
 		// Add event listeners
-		window.addEventListener("rcb-user-submit-text", handleMessageEvent);
+		window.addEventListener("rcb-user-submit-text", handleMessageEvent as any);
 
 		// Cleanup function to remove event listeners when component unmounts
 		return () => {
-			window.removeEventListener("rcb-user-submit-text", handleMessageEvent);
+			window.removeEventListener("rcb-user-submit-text", handleMessageEvent as any);
 		};
 	}, []); // Add dependencies to prevent stale closures
 

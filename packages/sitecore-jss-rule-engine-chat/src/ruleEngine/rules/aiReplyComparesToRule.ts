@@ -1,6 +1,6 @@
 import { ConditionFunctionDefinition, RuleConditionData } from "@jss-rule-engine/core";
 import { RuleEngineContext } from "@jss-rule-engine/core";
-import { ChatConversationContext, WorkflowExecutionContext } from "@root/src/workflowTypes";
+import { ChatConversationContext, WorkflowExecutionContext } from "@jss-rule-engine/workflow";
 
 const aiReplyComparesToRule : ConditionFunctionDefinition = async function(rule:RuleConditionData, ruleContext: RuleEngineContext) {
     const workflowContext = ruleContext.sessionContext?.get<WorkflowExecutionContext>("workflowContext");    

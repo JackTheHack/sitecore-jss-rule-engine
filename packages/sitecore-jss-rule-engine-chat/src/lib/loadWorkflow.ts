@@ -1,6 +1,6 @@
 import { Workflow, IWorkflowService } from '@jss-rule-engine/workflow';
 
-export default async function loadWorkflow(
+export async function loadWorkflow(
     graphQlEndpoint: string, 
     itemId: string, 
     workflowService: IWorkflowService): Promise<Workflow> {
@@ -25,7 +25,7 @@ export default async function loadWorkflow(
                 'sc_apikey': `${apiKey}`
             },
             next: { revalidate: 3600 } // Cache for 1 hour
-        });
+        } as any);
 
         if(!graphQlResponse.ok)
         {

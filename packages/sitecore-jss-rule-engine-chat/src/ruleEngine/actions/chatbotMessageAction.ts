@@ -1,5 +1,5 @@
-import { IWorkflowAction } from '../actionFactory';
-import { WorkflowExecutionContext, WorkflowActionCommand, WorkflowAction } from '../workflowTypes';
+import { IWorkflowAction } from '@jss-rule-engine/workflow';
+import { WorkflowExecutionContext, WorkflowActionCommand, WorkflowAction } from '@jss-rule-engine/workflow';
 
 export class ChatbotMessageAction implements IWorkflowAction {
     async execute(action: WorkflowAction, context: WorkflowExecutionContext): Promise<void> {

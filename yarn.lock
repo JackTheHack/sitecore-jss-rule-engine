@@ -1993,6 +1993,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jss-rule-engine/chat@npm:*, @jss-rule-engine/chat@workspace:packages/sitecore-jss-rule-engine-chat":
+  version: 0.0.0-use.local
+  resolution: "@jss-rule-engine/chat@workspace:packages/sitecore-jss-rule-engine-chat"
+  dependencies:
+    "@jss-rule-engine/core": "npm:*"
+    "@jss-rule-engine/workflow": "npm:*"
+    ava: "npm:6.3.0"
+    react: "npm:^18.2.0"
+    react-chatbotify: "patch:react-chatbotify@npm%3A2.0.0-beta.38#~/.yarn/patches/react-chatbotify-npm-2.0.0-beta.38-f73bfcee3e.patch"
+    react-dom: "npm:^18.2.0"
+    typedoc: "npm:0.25.4"
+    typescript: "npm:4.9.4"
+  languageName: unknown
+  linkType: soft
+
 "@jss-rule-engine/core@npm:*, @jss-rule-engine/core@workspace:packages/sitecore-jss-rule-engine":
   version: 0.0.0-use.local
   resolution: "@jss-rule-engine/core@workspace:packages/sitecore-jss-rule-engine"
@@ -8657,6 +8672,7 @@ __metadata:
     "@graphql-codegen/typescript-operations": "npm:^4.0.1"
     "@graphql-codegen/typescript-resolvers": "npm:^4.0.1"
     "@graphql-typed-document-node/core": "npm:^3.2.0"
+    "@jss-rule-engine/chat": "npm:*"
     "@jss-rule-engine/core": "npm:*"
     "@jss-rule-engine/edge": "npm:*"
     "@jss-rule-engine/nextjs": "npm:*"
@@ -8692,7 +8708,6 @@ __metadata:
     npm-run-all: "npm:~4.1.5"
     prettier: "npm:^2.8.3"
     react: "npm:^18.2.0"
-    react-chatbotify: "patch:react-chatbotify@npm%3A2.0.0-beta.38#~/.yarn/patches/react-chatbotify-npm-2.0.0-beta.38-f73bfcee3e.patch"
     react-dom: "npm:^18.2.0"
     sharp: "npm:0.32.6"
     ts-node: "npm:^10.9.1"
