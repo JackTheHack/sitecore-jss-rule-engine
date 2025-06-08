@@ -43,7 +43,7 @@
     "next": "^14.2.7",
     "next-localization": "^0.12.0",
     "react": "^18.2.0",
-    "react-chatbotify": "patch:react-chatbotify@npm%3A2.0.0-beta.32#~/.yarn/patches/react-chatbotify-npm-2.0.0-beta.32-e1fda489fb.patch",
+    "react-chatbotify": "patch:react-chatbotify@npm%3A2.0.0-beta.38#~/.yarn/patches/react-chatbotify-npm-2.0.0-beta.38-f73bfcee3e.patch",
     "react-dom": "^18.2.0",
     "sharp": "0.32.6"
   },

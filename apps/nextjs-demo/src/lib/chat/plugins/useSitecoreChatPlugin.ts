@@ -8,7 +8,8 @@ import {
 	RcbChangePathEvent,
 	RcbPostLoadChatBotEvent,
 	RcbPreLoadChatBotEvent,
-	useTextArea
+	useTextArea,
+	useChatWindow
 } from "react-chatbotify";
 import { PluginConfig } from "./pluginConfig";
 import { SitecoreChatBlock } from "./SitecoreChatBlock";
@@ -26,9 +27,10 @@ import { registerChatActions } from "../registerChatActions";
  */
 const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 	const { getBotId } = useBotId();
-	const { injectMessage } = useMessages();	
+	const { injectMessage, simulateStreamMessage } = useMessages();	
 	const { setTextAreaValue } = useTextArea();
     const { getFlow } = useFlow();
+	const { toggleIsBotTyping } = useChatWindow();
 
 	const actionFactory = new ChatActionFactory();	
 	
@@ -55,7 +57,11 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 			const actionCommand = actionFactory.getAction(action.type);
 			const commandContext: CommandExecutionContext = { 
 				action,
-				injectMessage
+				messageApis: {
+					injectMessage,
+					simulateStreamMessage,
+					toggleIsBotTyping
+				}				
 			}
 			console.log('Executing client action', actionCommand, commandContext);
 			actionCommand.execute(commandContext);
@@ -96,25 +102,11 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 	}
 
 	useEffect(() => {
+		
 
-		console.log("Loading Chatbotify component.");
-
-		const handlePostLoadEvent = async (
-			event: RcbUserSubmitTextEvent | RcbChangePathEvent | RcbPostLoadChatBotEvent | RcbPreLoadChatBotEvent
-		) => {
-			console.log('Post load', event);
-			await injectMessage('Post load message.');
-		}
-
-		/**
-		 * Handles message events and adds wrapper to render markdown if applicable.
-		 * 
-		 * @param event message event received
-		 */
 		const handleMessageEvent = async (
 			event: RcbUserSubmitTextEvent | RcbChangePathEvent
 		) => {
-
 			console.log('handleMessageEvent', event);
 
 			const {hostUrl } = mergedPluginConfig;
@@ -157,7 +149,6 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 				console.log('Reply - ', reply);
 
 				if(reply.success){
-
 					const chatContext: ChatConversationContext = {
 						injectMessage: injectMessage,
 						variables: new RuleEngineSessionContext(),
@@ -172,22 +163,18 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 				}
 			}
 		};
- 
-		
 
-   	    // adds required events
+		// Remove any existing event listeners first to prevent duplicates
+		window.removeEventListener("rcb-user-submit-text", handleMessageEvent);
+
+		// Add event listeners
 		window.addEventListener("rcb-user-submit-text", handleMessageEvent);
-		window.addEventListener("rcb-change-path", handlePostLoadEvent);
-		window.addEventListener("rcb-post-load-chatbot", handlePostLoadEvent);
-		window.addEventListener("rcb-pre-load-chatbot", handlePostLoadEvent);
 
+		// Cleanup function to remove event listeners when component unmounts
 		return () => {
 			window.removeEventListener("rcb-user-submit-text", handleMessageEvent);
-			window.removeEventListener("rcb-change-path", handlePostLoadEvent);
-			window.removeEventListener("rcb-post-load-chatbot", handlePostLoadEvent);
-			window.removeEventListener("rcb-pre-load-chatbot", handlePostLoadEvent);
 		};
-	}, [getBotId, getFlow]);
+	}, []); // Add dependencies to prevent stale closures
 
 	// initializes plugin metadata with plugin name
 	const pluginMetaData: ReturnType<Plugin> = {
@@ -198,10 +185,7 @@ const useSitecoreChatPlugin = (pluginConfig?: PluginConfig) => {
 	if (mergedPluginConfig?.autoConfig) {
 		pluginMetaData.settings = {
 			event: {
-                rcbUserSubmitText: true,
-				rcbChangePath: true,
-				rcbPostLoadChatBot: true,
-				rcbPreLoadChatBot: true
+                rcbUserSubmitText: true				
 			},
 		};
 	}

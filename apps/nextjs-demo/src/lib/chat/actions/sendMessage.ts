@@ -8,7 +8,9 @@ export default class sendMessageCommand implements IChatActionCommand {
             const parsedContent = JSON.parse(context.action.content);
             const responseText = parsedContent.message;
 
-            await context.injectMessage(responseText);
+            await context.messageApis.toggleIsBotTyping(true);
+            await context.messageApis.simulateStreamMessage(responseText);
+            await context.messageApis.toggleIsBotTyping(false);
         }catch(e)
         {
             console.error("Failed to process ", context.action.type);
