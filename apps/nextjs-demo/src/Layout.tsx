@@ -43,7 +43,10 @@ const Layout = ({ layoutData, headLinks }: LayoutProps): JSX.Element => {
       </Head>
 
       <Navigation />
-      <ChatBotWidget/>
+      
+      <ChatBotWidget 
+        welcomeMessage="Hi! I'm Peter, your friendly chatbot, and ready to answer any of your questions." 
+        iconUrl={`${publicUrl}/chatbotify/icons8-sitecore.svg`}/>
 
       {/* root placeholder for the app, which we add components to using route data */}
       <div className="container">
