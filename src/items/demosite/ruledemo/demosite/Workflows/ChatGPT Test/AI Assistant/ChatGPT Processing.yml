@@ -3,6 +3,13 @@ ID: "1be040c2-1d1a-48cf-9a21-2baf841dd053"
 Parent: "e39f428e-0aab-4fd7-ae15-0271f11cd052"
 Template: "05187080-dd07-4faf-b501-f1c53cdf90f5"
 Path: /sitecore/content/ruledemo/demosite/Workflows/ChatGPT Test/AI Assistant/ChatGPT Processing
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 200
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "04701953-9dc7-422c-a197-176783e46aa0"
 Languages:
 - Language: en
   Versions:
@@ -21,19 +28,7 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "6e139722-209e-4d42-b473-4ddc33f469e5"
       Hint: Condition
-      Value: |
-        <ruleset>
-          <rule
-            uid="{F19D375C-EB6D-46C6-B2F7-D1625D067C98}">
-            <conditions>
-              <condition
-                id="{FB533DCD-E59E-4FB5-ABD6-1ED7D130A6A6}"
-                uid="93DD357E9E224EB5B9508664311E8C88"
-                operatorid="{A6AC5A6B-F409-48B0-ACE7-C3E8C5EC6406}"
-                value="Exit" />
-            </conditions>
-          </rule>
-        </ruleset>
+      Value: <ruleset />
     - ID: "74465d1e-0f45-4d91-98c7-a264f8e2822a"
       Hint: AI Context
       Value: |
@@ -44,9 +39,12 @@ Languages:
         If the user query is not clear - respond with "[OPTIONS]"
         
         Only return the response specified in the requirements.
+    - ID: "7f0c2f0c-8d11-4d02-8d6c-1de82100bf81"
+      Hint: On Response
+      Value: <ruleset />
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "0c50f007-25f7-4992-816a-20a2f77e0afd"
+      Value: "36cd89bb-a4e5-45fa-baeb-09dcc23febcb"
     - ID: "9c641a14-fd7f-4b2d-b27b-dd27e87d7133"
       Hint: Dont Send Response
       Value: 1
@@ -56,4 +54,4 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250608T084256Z
+      Value: 20250608T092815Z

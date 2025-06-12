@@ -1,8 +1,8 @@
 ﻿---
-ID: "ea9daca5-8dcd-4d50-910a-ec031fb29dbf"
-Parent: "cc358b52-bbd1-4cc3-a557-3993a90a1b7e"
-Template: "de1a6157-8d0f-42ca-8951-941e8af1bb82"
-Path: /sitecore/content/ruledemo/demosite/Workflows/Signup/Wait 7 days/Send 7 days email
+ID: "1f99246f-8e0f-4cb5-9d04-c842fa9c92b0"
+Parent: "de03e622-f581-4184-aa88-9fbb1b839c71"
+Template: "b44783be-ebc7-4ce8-80d9-ee7a08df3245"
+Path: /sitecore/content/ruledemo/demosite/Workflows/ChatGPT Test/Support/ThankYou
 Languages:
 - Language: en
   Versions:
@@ -10,7 +10,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250521T043732Z
+      Value: 20250608T085154Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -19,16 +19,22 @@ Languages:
       Hint: __Created by
       Value: |
         sitecore\jack.spektor@akqa.com
+    - ID: "6e139722-209e-4d42-b473-4ddc33f469e5"
+      Hint: Condition
+      Value: <ruleset />
+    - ID: "727101b5-29ff-4449-8615-080d4119d89f"
+      Hint: Template
+      Value: "Thank you! We received your query and we'll get to you shortly."
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "b71605a4-fe34-45cc-b33e-0988d667efc8"
+      Value: "95a09edc-41f0-463a-875a-2624974d51c2"
     - ID: "982c1029-8a6a-4772-84ac-97158f0cda03"
       Hint: NextState
-      Value: "{657CD595-6CFB-4192-81DE-FF14526C0ECB}"
+      Value: "{E39F428E-0AAB-4FD7-AE15-0271F11CD052}"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250612T031724Z
+      Value: 20250608T091213Z

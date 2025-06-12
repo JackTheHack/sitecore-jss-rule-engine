@@ -1,7 +1,7 @@
 ﻿---
 ID: "3b89ac88-e2c7-4ee0-978f-30bb13a024b3"
 Parent: "4e23d557-f0a3-451c-9254-0980d9867e0b"
-Template: "b44783be-ebc7-4ce8-80d9-ee7a08df3245"
+Template: "de1a6157-8d0f-42ca-8951-941e8af1bb82"
 Path: /sitecore/content/ruledemo/demosite/Workflows/Signup/Start/Send Welcome Email
 Languages:
 - Language: en
@@ -11,6 +11,12 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20250521T043437Z
+    - ID: "3328f555-5f0a-4096-8da1-19acd937ed2d"
+      Hint: HtmlTemplate
+      Value: Email test
+    - ID: "41e2d6a2-0f79-4c48-973d-1614813a34b6"
+      Hint: To
+      Value: test@gmail.com
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -21,7 +27,7 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "372e79f5-0616-4674-9787-8a4d704bd88a"
+      Value: "9178b0b1-df10-4a3f-8641-7fc39671bdc5"
     - ID: "982c1029-8a6a-4772-84ac-97158f0cda03"
       Hint: NextState
       Value: 
@@ -31,4 +37,10 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250521T043713Z
+      Value: 20250612T040823Z
+    - ID: "f2ff4de3-19e6-4063-af5f-5da05f9399f2"
+      Hint: From
+      Value: noreply@ruleengine.com
+    - ID: "f7ca26af-45a5-43db-b144-3a13dee34b0a"
+      Hint: Subject
+      Value: Test Email

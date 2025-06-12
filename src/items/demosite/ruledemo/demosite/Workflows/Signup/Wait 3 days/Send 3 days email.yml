@@ -1,7 +1,7 @@
 ﻿---
 ID: "25f6daef-bf3c-4fb9-babf-4d800c9c38c0"
 Parent: "5d7e24c7-da7c-4f14-b019-fc9980530759"
-Template: "b44783be-ebc7-4ce8-80d9-ee7a08df3245"
+Template: "de1a6157-8d0f-42ca-8951-941e8af1bb82"
 Path: /sitecore/content/ruledemo/demosite/Workflows/Signup/Wait 3 days/Send 3 days email
 Languages:
 - Language: en
@@ -21,11 +21,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "6123ceff-c640-4c0e-adcd-7050b832910c"
+      Value: "e9df3e88-66cd-4781-b836-094c357c4811"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250521T043721Z
+      Value: 20250612T031708Z

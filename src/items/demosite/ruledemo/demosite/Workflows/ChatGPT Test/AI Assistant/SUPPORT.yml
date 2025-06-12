@@ -1,0 +1,59 @@
+﻿---
+ID: "133e0e6a-659d-451e-a3dc-f6b6c9855b87"
+Parent: "e39f428e-0aab-4fd7-ae15-0271f11cd052"
+Template: "b44783be-ebc7-4ce8-80d9-ee7a08df3245"
+Path: /sitecore/content/ruledemo/demosite/Workflows/ChatGPT Test/AI Assistant/SUPPORT
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 250
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "6469554d-5fd9-4de9-a8cd-a41c5ee166d8"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250608T085707Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "6e139722-209e-4d42-b473-4ddc33f469e5"
+      Hint: Condition
+      Value: |
+        <ruleset>
+          <rule
+            uid="{27188042-BA46-484A-8634-1EFE3E08AD66}">
+            <conditions>
+              <condition
+                id="{32682081-1438-4DC1-8817-4330A3A883BE}"
+                uid="7CAA6D4AC7F3490B8AC5EC9E9B3FD399"
+                operatorid="{10537C58-1684-4CAB-B4C0-40C10907CE31}"
+                value="Support" />
+            </conditions>
+          </rule>
+        </ruleset>
+    - ID: "727101b5-29ff-4449-8615-080d4119d89f"
+      Hint: Template
+      Value: Please specify your support request
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "9e03e4a8-f9b5-4aeb-a7c3-6e72484d3f3f"
+    - ID: "982c1029-8a6a-4772-84ac-97158f0cda03"
+      Hint: NextState
+      Value: "{DE03E622-F581-4184-AA88-9FBB1B839C71}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250608T092125Z

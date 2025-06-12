@@ -1,8 +1,8 @@
 ﻿---
-ID: "ea9daca5-8dcd-4d50-910a-ec031fb29dbf"
-Parent: "cc358b52-bbd1-4cc3-a557-3993a90a1b7e"
-Template: "de1a6157-8d0f-42ca-8951-941e8af1bb82"
-Path: /sitecore/content/ruledemo/demosite/Workflows/Signup/Wait 7 days/Send 7 days email
+ID: "236df629-d856-4666-aaa8-0679f6a4bd8c"
+Parent: "4e23d557-f0a3-451c-9254-0980d9867e0b"
+Template: "a932ac3e-ddce-45dc-bf08-2c40e5ef1900"
+Path: /sitecore/content/ruledemo/demosite/Workflows/Signup/Start/OnSubmit
 Languages:
 - Language: en
   Versions:
@@ -10,7 +10,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250521T043732Z
+      Value: 20250612T031032Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -21,14 +21,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "b71605a4-fe34-45cc-b33e-0988d667efc8"
-    - ID: "982c1029-8a6a-4772-84ac-97158f0cda03"
-      Hint: NextState
-      Value: "{657CD595-6CFB-4192-81DE-FF14526C0ECB}"
+      Value: "419df69e-c8e5-498a-bf6d-fe4624c85d67"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250612T031724Z
+      Value: 20250612T031032Z

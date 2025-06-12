@@ -1,8 +1,15 @@
 ﻿---
-ID: "9e85f9b9-4bfe-4ae8-8023-46608ef0d272"
+ID: "d991d47e-a1a0-494d-b63a-4f06163abc3c"
 Parent: "e39f428e-0aab-4fd7-ae15-0271f11cd052"
 Template: "b44783be-ebc7-4ce8-80d9-ee7a08df3245"
-Path: /sitecore/content/ruledemo/demosite/Workflows/ChatGPT Test/AI Assistant/Exit
+Path: /sitecore/content/ruledemo/demosite/Workflows/ChatGPT Test/AI Assistant/BILLING
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 250
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "6469554d-5fd9-4de9-a8cd-a41c5ee166d8"
 Languages:
 - Language: en
   Versions:
@@ -10,7 +17,7 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250420T013743Z
+      Value: 20250608T085707Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -24,29 +31,29 @@ Languages:
       Value: |
         <ruleset>
           <rule
-            uid="{E2C9491A-41FA-4782-B75B-EE63EE14DE03}">
+            uid="{0E7620F5-E2B6-41F7-8F80-6B325112BF88}">
             <conditions>
               <condition
-                id="{FB533DCD-E59E-4FB5-ABD6-1ED7D130A6A6}"
-                uid="4A8769EB74A54993921096D2FA0575D2"
+                id="{32682081-1438-4DC1-8817-4330A3A883BE}"
+                uid="3BF1A5039FDF49A596178088AD784CA5"
                 operatorid="{10537C58-1684-4CAB-B4C0-40C10907CE31}"
-                value="Exit" />
+                value="Billing" />
             </conditions>
           </rule>
         </ruleset>
     - ID: "727101b5-29ff-4449-8615-080d4119d89f"
       Hint: Template
-      Value: "Bye!"
+      Value: |
+        Your account balance is 150$
+        
+        What's your next question?
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "57934dfa-0724-4496-b04f-a6454fc31ed4"
-    - ID: "982c1029-8a6a-4772-84ac-97158f0cda03"
-      Hint: NextState
-      Value: "{0AEE12D9-0547-4FAD-95F9-B52A42131756}"
+      Value: "6c5657d6-54a9-4a53-84d6-4f7ca04090ea"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250607T105112Z
+      Value: 20250608T092102Z
