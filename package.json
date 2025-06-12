@@ -48,7 +48,8 @@
         "sitecore:pull": "dotnet sitecore ser pull",
         "sitecore:push": "dotnet sitecore ser push",
         "sitecore:validate": "dotnet sitecore ser validate --fix",
-        "sitecore:login": "dotnet sitecore login"
+        "sitecore:login": "dotnet sitecore login",
+        "poll": "node scripts/pollUrl.js"
     },
     "packageManager": "yarn@4.9.1"
 }

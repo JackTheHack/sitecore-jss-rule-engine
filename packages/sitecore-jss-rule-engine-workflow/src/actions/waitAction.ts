@@ -17,7 +17,7 @@ export class WaitAction implements IWorkflowAction {
 
         const { fields } = action;
 
-        const seconds = parseInt(fields.seconds || '0');
+        const seconds = parseInt(fields["Timeout"] || '0');
         
         if (isNaN(seconds) || seconds <= 0) {
             console.warn('Invalid seconds value for schedule trigger action');

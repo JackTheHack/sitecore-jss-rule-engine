@@ -2083,11 +2083,14 @@ __metadata:
     "@ai-sdk/anthropic": "npm:1.2.12"
     "@jss-rule-engine/core": "npm:*"
     "@libsql/client": "npm:0.15.4"
+    "@types/nodemailer": "npm:6.4.17"
     "@types/uuid": "npm:^10.0.0"
     ai: "npm:^4.3.16"
     ava: "npm:6.3.0"
     form-data: "npm:^4.0.0"
+    ignore-loader: "npm:0.1.2"
     mailgun.js: "npm:^9.3.0"
+    nodemailer: "npm:7.0.3"
     typedoc: "npm:0.25.4"
     typescript: "npm:4.9.4"
   languageName: unknown
@@ -3090,6 +3093,15 @@ __metadata:
   dependencies:
     undici-types: "npm:~6.21.0"
   checksum: 10c0/11979f5c4c626555351352fe1b30846700ca018747272a7ff425f883f102805b7f07737d5b7fa3c6deb0ddaeb94e367bb9a633a3d1e1d5c517de9a6283c6f21c
+  languageName: node
+  linkType: hard
+
+"@types/nodemailer@npm:6.4.17":
+  version: 6.4.17
+  resolution: "@types/nodemailer@npm:6.4.17"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10c0/689abb3005cf36cf89c2abe56f0aa4469a37e0814633a73fbeb35732e856f4b0d7ab32b6d91585038b6941f5b70db58ec2bd147ebe9f73e528eb6c99604f4e82
   languageName: node
   linkType: hard
 
@@ -7672,6 +7684,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ignore-loader@npm:0.1.2":
+  version: 0.1.2
+  resolution: "ignore-loader@npm:0.1.2"
+  checksum: 10c0/0ba7f0fbcd4d796e68cc05723279b662dea32f229f5912c6ce4fbcc5a50f592d2b6f32baaf047b47b24dccdfdc9faf2db504b48cb6eb886a4969bfc293739cab
+  languageName: node
+  linkType: hard
+
 "ignore@npm:^5.1.4, ignore@npm:^5.2.0":
   version: 5.3.2
   resolution: "ignore@npm:5.3.2"
@@ -9748,6 +9767,13 @@ __metadata:
   version: 2.0.19
   resolution: "node-releases@npm:2.0.19"
   checksum: 10c0/52a0dbd25ccf545892670d1551690fe0facb6a471e15f2cfa1b20142a5b255b3aa254af5f59d6ecb69c2bec7390bc643c43aa63b13bf5e64b6075952e716b1aa
+  languageName: node
+  linkType: hard
+
+"nodemailer@npm:7.0.3":
+  version: 7.0.3
+  resolution: "nodemailer@npm:7.0.3"
+  checksum: 10c0/835492262328471b94a080cea43ea20f4232e19a915400cd71c7f4f4ab93a7d361775154eebe30a8fc40379eecf11a0bbc73e6cf4bbee9dccb6dd1cf7a1dc792
   languageName: node
   linkType: hard
 

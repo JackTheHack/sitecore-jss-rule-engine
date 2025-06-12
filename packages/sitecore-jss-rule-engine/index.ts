@@ -1,5 +1,5 @@
 import { JssRuleEngine, IJssRuleEngine} from './src/ruleEngine';
-import { RuleData, RuleActionData, RuleEngineContext, RuleConditionData, ConditionFunctionDefinition, ActionFunctionDefinition, OperatorFunctionDefinition } from './src/types/ruleEngine';
+import { RuleData, RuleActionData, ClientCommand, RuleEngineContext, RuleConditionData, ConditionFunctionDefinition, ActionFunctionDefinition, OperatorFunctionDefinition } from './src/types/ruleEngine';
 import {RuleEngineSessionContext} from './src/types/ruleEngineSessionContext'
 
 var isEdgeRuntime = typeof global.EdgeRuntime == 'string';
@@ -18,4 +18,4 @@ export function getRuleEngineInstance() {
     return new JssRuleEngine();
 }
 
-export { JssRuleEngine, IJssRuleEngine, RuleEngineContext, RuleConditionData, RuleData, RuleActionData, RuleEngineSessionContext, ConditionFunctionDefinition, ActionFunctionDefinition, OperatorFunctionDefinition }
+export { JssRuleEngine, IJssRuleEngine, RuleEngineContext, ClientCommand, RuleConditionData, RuleData, RuleActionData, RuleEngineSessionContext, ConditionFunctionDefinition, ActionFunctionDefinition, OperatorFunctionDefinition }

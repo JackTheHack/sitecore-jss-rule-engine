@@ -1,4 +1,4 @@
-import { WorkflowService, WorkflowExecutionOptions, WorkflowActionFactory } from '@jss-rule-engine/workflow';
+import { WorkflowService, WorkflowExecutionOptions, WorkflowActionFactory, registerWorkflowRuleEngine, registerWorkflowActions } from '@jss-rule-engine/workflow';
 import { WorkflowServiceOptions } from '@jss-rule-engine/workflow';
 import { getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -20,13 +20,17 @@ export default async function handler(
 
     try {      
 
-      console.log('Handling message', message, visitorId, workflowId);
+      console.log('Handling workflow submit', message, visitorId, workflowId);
 
       const ruleEngine = getRuleEngineInstance();
+      registerWorkflowRuleEngine(ruleEngine);      
 
       console.log('Rule engine: ', ruleEngine?.requestContext, ruleEngine?.sitecoreContext, ruleEngine.commandDefinitions?.size);
 
       const actionFactory = new WorkflowActionFactory();
+      registerWorkflowActions(actionFactory);
+
+      const ruleEngineContext = ruleEngine.getRuleEngineContext();
 
       const dbServiceOptions = getDatabaseServiceOptions();
       const dbService = new DatabaseService(dbServiceOptions);
@@ -35,7 +39,8 @@ export default async function handler(
         databaseService: dbService,
         ruleEngine: ruleEngine,
         actionFactory: actionFactory,
-        graphqlEndpoint: "/"
+        graphqlEndpoint: "/",
+        ruleEngineContext: ruleEngineContext
       }
       
       console.log('Creating workflow service', dbServiceOptions);
@@ -50,7 +55,7 @@ export default async function handler(
 
       const executionOptions : WorkflowExecutionOptions = {
         visitorId: visitorId,
-        eventName: "form:onmessage",
+        eventName: "form:submit",
         eventParameters: JSON.stringify({ message: message }),
         workflowId: workflowId,
         defaultStateId: workflowConfig.defaultStateId || ''

@@ -135,7 +135,8 @@ export class JssRuleEngine implements IJssRuleEngine {
             dateTime: dateObj,
             sessionContext: new RuleEngineSessionContext(),
             //env: process.env,
-            ruleEngine: this as JssRuleEngine,                        
+            ruleEngine: this as JssRuleEngine,  
+            clientCommands: []                      
         };
     }
 

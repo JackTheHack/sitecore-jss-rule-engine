@@ -52,6 +52,11 @@ export type ActionFunctionDefinition = {
     (actionData: RuleActionData, ruleContext: RuleEngineContext) : Promise< boolean | null | void>;
 }
 
+export type ClientCommand = {
+    commandName: string;
+    parameters: string;
+}
+
 export interface RuleEngineContext {
     //location: Location | undefined | null;
     dateTime?: RuleEngineDateContext;
@@ -62,7 +67,8 @@ export interface RuleEngineContext {
     requestContext?: RuleEngineRequestContext,    
     mockDate?: Date,
     ruleEngine?: JssRuleEngine,
-    sessionContext?: RuleEngineSessionContext
+    sessionContext?: RuleEngineSessionContext,
+    clientCommands: Array<ClientCommand>
 }
 
 export interface RuleEngineRequestContext {

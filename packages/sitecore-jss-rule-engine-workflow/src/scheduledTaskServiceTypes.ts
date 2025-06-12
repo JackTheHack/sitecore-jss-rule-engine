@@ -8,4 +8,10 @@ export type ScheduledTaskServiceOptions = {
 
 export type ScheduledTaskExecutionResult = {
     success: boolean;
+    errorMessage?: string;
+    tasksExecuted: {
+        succeded: string[],
+        failed: string[]
+    },
+    totalTasks: number;
 }

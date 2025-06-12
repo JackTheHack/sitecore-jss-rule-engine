@@ -1,7 +1,7 @@
 import formData from 'form-data';
 import Mailgun from 'mailgun.js';
 
-export interface EmailOptions {
+export interface MailgunEmailOptions {
     to: string;
     subject: string;
     text?: string;
@@ -27,7 +27,7 @@ export class MailgunService {
         return MailgunService.instance;
     }
 
-    public async sendEmail(options: EmailOptions): Promise<void> {
+    public async sendEmail(options: MailgunEmailOptions): Promise<void> {
         if (!this.domain || !this.apiKey) {
             throw new Error('Mailgun configuration is missing');
         }
