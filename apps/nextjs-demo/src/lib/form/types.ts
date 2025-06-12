@@ -6,14 +6,24 @@ export type CommandExecutionContext = {
 
 export type Metadata = {
   timestamp: string;
+}
+
+export type ScheduleRunMetadata = {
+  timestamp: string;
+  totalTasks?: number;
+  tasksExecuted?: {
+    succeded: string[];
+    failed: string[];
+};
 };
 
 export type SuccessResponse = {
   success: true;
-  metadata: Metadata;
+  metadata: Metadata | ScheduleRunMetadata;
 };
 
 export type ErrorResponse = {
   success: false;
   error: string;
+  metadata?: Metadata | ScheduleRunMetadata;
 };

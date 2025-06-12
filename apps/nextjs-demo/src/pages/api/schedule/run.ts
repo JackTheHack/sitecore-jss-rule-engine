@@ -2,7 +2,7 @@ import { WorkflowService, WorkflowActionFactory, ScheduledTaskService, registerW
 import { WorkflowServiceOptions } from '@jss-rule-engine/workflow';
 import { getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ErrorResponse, Metadata, SuccessResponse} from '../../../lib/form/types'
+import { ErrorResponse, Metadata, ScheduleRunMetadata, SuccessResponse} from '../../../lib/form/types'
 import { DatabaseService, ScheduledTaskServiceOptions } from '@jss-rule-engine/workflow';
 import  {getDatabaseServiceOptions}  from '../../../lib/db/dbOptions';
 
@@ -59,11 +59,13 @@ export default async function handler(
         console.log('Failed to execute workflow triggers');
         return res.status(500).json({ 
           success: false, 
-          error: 'Failed to execute workflow triggers' });
+          error: 'Failed to execute workflow triggers'});
       }      
 
-      const metadata: Metadata = {
-        timestamp: new Date().toISOString()
+      const metadata: ScheduleRunMetadata = {
+        timestamp: new Date().toISOString(),
+        tasksExecuted: workflowResult?.tasksExecuted,
+        totalTasks: workflowResult?.totalTasks
       };
 
       const okResult : SuccessResponse = { 
