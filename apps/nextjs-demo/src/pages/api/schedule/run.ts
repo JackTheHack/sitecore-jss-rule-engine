@@ -1,4 +1,4 @@
-import { WorkflowService, WorkflowActionFactory, ScheduledTaskService, registerWorkflowRuleEngine } from '@jss-rule-engine/workflow';
+import { WorkflowService, WorkflowActionFactory, ScheduledTaskService, registerWorkflowRuleEngine, loadWorkflowFromSitecore, registerWorkflowActions } from '@jss-rule-engine/workflow';
 import { WorkflowServiceOptions } from '@jss-rule-engine/workflow';
 import { getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -21,6 +21,8 @@ export default async function handler(
       const ruleEngine = getRuleEngineInstance();
       registerWorkflowRuleEngine(ruleEngine);      
 
+      const ruleEngineContext = ruleEngine.getRuleEngineContext();
+
       console.log('Rule engine: ', ruleEngine?.requestContext, ruleEngine?.sitecoreContext, ruleEngine.commandDefinitions?.size);
 
       const dbServiceOptions = getDatabaseServiceOptions();
@@ -28,12 +30,14 @@ export default async function handler(
       const dbService = new DatabaseService(dbServiceOptions);
       
       const actionFactory = new WorkflowActionFactory();
+      registerWorkflowActions(actionFactory);
 
       const workflowOptions: WorkflowServiceOptions = {
         databaseService: dbService,
         ruleEngine: ruleEngine,
         actionFactory: actionFactory,
-        graphqlEndpoint: "/"
+        graphqlEndpoint: process.env.EDGE_QL_ENDPOINT || '',
+        ruleEngineContext: ruleEngineContext
       }
       
       console.log('Creating workflow service', dbServiceOptions);
@@ -41,7 +45,8 @@ export default async function handler(
       
       const scheduleServiceOptions: ScheduledTaskServiceOptions = {
         databaseService: dbService,
-        workflowService: workflowService
+        workflowService: workflowService,
+        graphqlEndpoint: process.env.EDGE_QL_ENDPOINT || '',
       }
       
       const scheduledService = new ScheduledTaskService(scheduleServiceOptions);      
@@ -49,14 +54,13 @@ export default async function handler(
       console.log("Initializing workflow...")
       await workflowService.init();
 
-      const sitecoreEdgeUrl = process.env.EDGE_QL_ENDPOINT || '';
-      
       console.log('Executing triggers', scheduleServiceOptions);
 
       const workflowResult = await scheduledService.executeTasks();
 
+      
       if (!workflowResult.success) {
-        console.log('Failed to execute workflow triggers');
+        console.log('Failed to execute workflow triggers', workflowResult.errorMessage);
         return res.status(500).json({ 
           success: false, 
           error: 'Failed to execute workflow triggers'});

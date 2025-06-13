@@ -1,6 +1,5 @@
 export { ChatBotWidget } from './src/components/ChatBotWidget'
 export {ChatActionFactory, IChatActionCommand} from './src/client/chatActionFactory'
-export {loadWorkflow} from './src/lib/loadWorkflow'
 export {registerChatActions} from './src/registerChatActions'
 export {registerChatCommands} from './src/registerChatCommands'
 export {registerChatRuleEngine} from './src/registerChatRuleEngine'

@@ -1,6 +1,6 @@
-import { Workflow, IWorkflowService } from '@jss-rule-engine/workflow';
+import { IWorkflowService, Workflow } from "../workflowTypes";
 
-export async function loadWorkflow(
+export async function loadWorkflowFromSitecore(
     graphQlEndpoint: string, 
     itemId: string, 
     workflowService: IWorkflowService): Promise<Workflow> {

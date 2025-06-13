@@ -1,11 +1,10 @@
-import { WorkflowService, WorkflowExecutionOptions, WorkflowActionFactory, registerWorkflowRuleEngine, registerWorkflowActions } from '@jss-rule-engine/workflow';
+import { WorkflowService, WorkflowExecutionOptions, WorkflowActionFactory, registerWorkflowRuleEngine, registerWorkflowActions, loadWorkflowFromSitecore } from '@jss-rule-engine/workflow';
 import { WorkflowServiceOptions } from '@jss-rule-engine/workflow';
 import { getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ErrorResponse, Metadata, SuccessResponse} from '../../../lib/form/types'
 import { DatabaseService, IDatabaseService } from '@jss-rule-engine/workflow';
 import  {getDatabaseServiceOptions}  from '../../../lib/db/dbOptions';
-import { loadWorkflow } from '@jss-rule-engine/chat';
 
 export default async function handler(
   req: NextApiRequest,
@@ -51,7 +50,7 @@ export default async function handler(
 
       const sitecoreEdgeUrl = process.env.EDGE_QL_ENDPOINT || '';
 
-      const workflowConfig = await loadWorkflow(sitecoreEdgeUrl, workflowId, workflowService);
+      const workflowConfig = await loadWorkflowFromSitecore(sitecoreEdgeUrl, workflowId, workflowService);
 
       const executionOptions : WorkflowExecutionOptions = {
         visitorId: visitorId,
@@ -66,7 +65,7 @@ export default async function handler(
       const workflowResult = await workflowService.executeTriggers(executionOptions);
 
       if (!workflowResult.success) {
-        console.log('Failed to execute workflow triggers');
+        console.log('Failed to execute workflow triggers', workflowResult.error);
         return res.status(500).json({ success: false, error: 'Failed to execute workflow triggers' });
       }
     } catch (error) {

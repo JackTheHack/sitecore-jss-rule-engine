@@ -72,8 +72,7 @@ export class DatabaseService implements IDatabaseService {
             workflowId: row.workflow_id,
             taskType: row.task_type,
             scheduledTime: row.scheduled_time,
-            payload: row.payload ?? undefined,
-            triggerDate: row.triggerDate
+            payload: row.payload ?? undefined
         }));
     }
 

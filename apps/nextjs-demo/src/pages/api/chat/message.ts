@@ -3,7 +3,8 @@ import { WorkflowServiceOptions } from '@jss-rule-engine/workflow';
 import { JssRuleEngine, RuleEngineSessionContext, getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {Action, ErrorResponse, Metadata, SuccessResponse} from '@jss-rule-engine/chat'
-import { loadWorkflow, registerChatActions, registerChatRuleEngine } from '@jss-rule-engine/chat';
+import { registerChatActions, registerChatRuleEngine } from '@jss-rule-engine/chat';
+import {loadWorkflowFromSitecore} from '@jss-rule-engine/workflow'
 import { DatabaseService, ChatConversationContext} from '@jss-rule-engine/workflow';
 import  { getDatabaseServiceOptions}  from '../../../lib/db/dbOptions';
 
@@ -69,7 +70,7 @@ export default async function handler(
 
       const sitecoreEdgeUrl = process.env.EDGE_QL_ENDPOINT || '';
 
-      const workflowConfig = await loadWorkflow(sitecoreEdgeUrl, workflowId, workflowService);
+      const workflowConfig = await loadWorkflowFromSitecore(sitecoreEdgeUrl, workflowId, workflowService);
 
       console.log('Workflow loaded.');
 
@@ -86,7 +87,7 @@ export default async function handler(
       const workflowResult = await workflowService.executeTriggers(executionOptions);
       
       if (!workflowResult.success) {
-        console.log('Failed to execute workflow triggers');
+        console.log('Failed to execute workflow triggers', workflowResult.error);
         return res.status(500).json({ success: false, error: 'Failed to execute workflow triggers' });
       }
       

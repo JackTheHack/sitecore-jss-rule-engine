@@ -4,6 +4,7 @@ import { IWorkflowService } from "./workflowTypes";
 export type ScheduledTaskServiceOptions = {
     workflowService: IWorkflowService;
     databaseService: IDatabaseService;
+    graphqlEndpoint: string;
 }
 
 export type ScheduledTaskExecutionResult = {

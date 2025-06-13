@@ -91,7 +91,6 @@ export type WorkflowScheduledTask = {
     taskType: string;
     scheduledTime: Date;
     payload: string | null;
-    triggerDate: Date;
 }
 
 export type WorkflowVisitor = {

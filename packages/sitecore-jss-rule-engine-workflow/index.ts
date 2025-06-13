@@ -23,3 +23,4 @@ export {DatabaseServiceOptions} from "./src/databaseService";
 export {ChatConversationContext} from './src/workflowTypes'
 export {registerWorkflowActions} from './src/registerWorkflowActions'
 export {registerWorkflowRuleEngine} from './src/registerWorkflowRuleEngine'
+export {loadWorkflowFromSitecore} from './src/lib/loadWorkflow'

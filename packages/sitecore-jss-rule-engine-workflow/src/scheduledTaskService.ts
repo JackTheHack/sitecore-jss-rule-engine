@@ -1,4 +1,5 @@
 import { IDatabaseService } from "./databaseService";
+import { loadWorkflowFromSitecore } from "./lib/loadWorkflow";
 import { ScheduledTaskExecutionResult, ScheduledTaskServiceOptions } from "./scheduledTaskServiceTypes";
 import { IWorkflowService } from "./workflowTypes";
 
@@ -36,7 +37,10 @@ export class ScheduledTaskService implements IScheduledTaskService {
             result.totalTasks = scheduledTasks.length;
 
             for (const task of scheduledTasks) {
-                const { id, visitorId, workflowId, triggerDate } = task;
+
+                console.log('Task: ', task);
+
+                const { id, visitorId, workflowId, scheduledTime } = task;
 
                 if (!visitorId || !workflowId) {
                     console.warn(`Task ${task.id} has no visitorId, skipping.`);
@@ -44,7 +48,14 @@ export class ScheduledTaskService implements IScheduledTaskService {
                     continue;
                 }
 
-                if (triggerDate > new Date()) {
+                const workflowConfig = await loadWorkflowFromSitecore(this.options.graphqlEndpoint, workflowId, this.workflowService);
+
+                const now = new Date();
+
+                console.log('Now - ', now);
+                console.log('Task due - ', new Date(scheduledTime));
+
+                if (now > scheduledTime) {
 
                     console.log(`Executing task ${id}`);
 
@@ -53,7 +64,8 @@ export class ScheduledTaskService implements IScheduledTaskService {
                         eventName: 'trigger:schedule',
                         eventParameters: id,
                         visitorId: visitorId,
-                        workflowId: workflowId
+                        workflowId: workflowId,
+                        defaultStateId: workflowConfig.defaultStateId
                     });
 
                     if (workflowResult.success) {
