@@ -12,7 +12,7 @@ export interface AddScheduledTaskParams {
     visitorId: string;
     workflowId: string;
     taskType: string;
-    scheduledTime: number;
+    scheduledTime: Date;
     payload?: string;
 }
 
@@ -26,7 +26,7 @@ export interface IDatabaseService {
             visitorId: string;
             workflowId: string;
             taskType: string;
-            scheduledTime: number;
+            scheduledTime: Date;
             payload: string;
         }>
     ): Promise<void>;
@@ -113,7 +113,7 @@ export class DatabaseService implements IDatabaseService {
             visitorId: string;
             workflowId: string;
             taskType: string;
-            scheduledTime: number;
+            scheduledTime: Date;
             payload: string;
         }>
     ): Promise<void> {

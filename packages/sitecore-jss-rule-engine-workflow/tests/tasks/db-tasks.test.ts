@@ -14,7 +14,7 @@ test('addScheduledTask and getScheduledTasks', async t => {
             visitorId: 'visitor1',
             workflowId: 'wf1',
             taskType: 'typeA',
-            scheduledTime: 12345,
+            scheduledTime: new Date(),
             payload: 'payload'
         }
     );
@@ -36,16 +36,16 @@ test('updateScheduledTask', async t => {
         visitorId: 'visitor2',
         workflowId: 'wf2',
         taskType: 'typeB',
-        scheduledTime: 12345,
+        scheduledTime: new Date(),
         payload: 'old'
     });
-    await db.updateScheduledTask(id, { payload: 'new-payload', scheduledTime: 54321 });
+    await db.updateScheduledTask(id, { payload: 'new-payload', scheduledTime: new Date() });
 
     const tasks = await db.getScheduledTasks();
 
     t.is(tasks.length, 1);
     t.is(tasks[0].payload, 'new-payload');
-    t.is(tasks[0].scheduledTime, 54321);
+    t.is(tasks[0].scheduledTime, new Date());
 });
 
 test('deleteScheduledTask', async t => {
@@ -60,7 +60,7 @@ test('deleteScheduledTask', async t => {
         visitorId: 'visitor3',
         workflowId: 'wf3',
         taskType: 'typeC',
-        scheduledTime: 11111,
+        scheduledTime: new Date(),
         payload: 'to-delete'
     });
     await db.deleteScheduledTask(id);

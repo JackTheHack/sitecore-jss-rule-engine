@@ -24,8 +24,10 @@ export class WaitAction implements IWorkflowAction {
             return;
         }
 
-        const scheduledTime = Date.now() + (seconds * 1000);
+        const scheduledTime = new Date(Date.now() + (seconds * 1000));
         const taskId = uuidv4();
+
+        console.log('Scheduling task for ', scheduledTime)
 
         const params: WorkflowScheduledTaskParams = {
             taskId,

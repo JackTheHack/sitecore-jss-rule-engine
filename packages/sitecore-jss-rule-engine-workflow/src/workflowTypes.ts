@@ -89,7 +89,7 @@ export type WorkflowScheduledTask = {
     visitorId: string;
     workflowId: string;
     taskType: string;
-    scheduledTime: number;
+    scheduledTime: Date;
     payload: string | null;
     triggerDate: Date;
 }
@@ -111,7 +111,7 @@ export type WorkflowScheduledTaskParams = {
     visitorId: string;
     workflowId: string;
     triggerType: string;
-    scheduledTime: number;
+    scheduledTime: Date;
     triggerParameters: string;
 }
 
