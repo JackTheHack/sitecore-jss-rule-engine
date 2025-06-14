@@ -33,7 +33,7 @@ export default async function (parsedRule:ParsedRuleXmlData | null, ruleEngineCo
                     throw new Error('Rule definitions missing for id ' + conditionId);
                 }                
 
-                ruleEngineContext.ruleEngine?.debugMessage('Running condition function:', conditionFunction)
+                ruleEngineContext.ruleEngine?.debugMessage('Running condition function')
 
                 var conditionResult = await conditionFunction(condition, ruleEngineContext);
 
@@ -53,6 +53,7 @@ export default async function (parsedRule:ParsedRuleXmlData | null, ruleEngineCo
         ruleResult = ruleResult && result;
 
         ruleEngineContext.ruleEngine?.debugMessage('Rule result:', ruleResult);
+        console.log('Rule result: ', ruleResult);
         ruleEngineContext.ruleExecutionResult?.ruleResults?.push(result);
 
         if (result && !ruleEngineContext.skipActions && rule.actions && rule.actions.length > 0) {
@@ -71,6 +72,8 @@ export default async function (parsedRule:ParsedRuleXmlData | null, ruleEngineCo
                 actionFunction(ruleAction, ruleEngineContext);
             })
         }
+
+        console.log('Rule execution result', ruleEngineContext.ruleExecutionResult);
 
     }))
 

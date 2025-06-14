@@ -136,7 +136,7 @@ export class GraphQLSCPersonalizeService {
     if (personalizeOnEdge == "1") {
       console.log("Personalizing on edge", personalizeOnEdge)
 
-      const ruleEngineInstance: any = new JssRuleEngine();
+      const ruleEngineInstance = new JssRuleEngine();
 
       if (ruleEngineInstance) {
         console.log('Registering NextJS commands for rule engine')
@@ -157,11 +157,11 @@ export class GraphQLSCPersonalizeService {
 
         console.log('Parsing rule');
 
-        ruleEngineInstance.parseAndRunRule(ruleXml, ruleEngineContext);
+        await ruleEngineInstance.parseAndRunRule(ruleXml, ruleEngineContext);
 
         if (ruleEngineContext.ruleExecutionResult &&
           ruleEngineContext.ruleExecutionResult.parsedRule) {
-          console.log('Rule parsed - getting variant ids');
+          console.log('Rule parsed - getting variant ids', ruleEngineContext.ruleExecutionResult);
           activeVariantid = this.getActiveVariantId(ruleEngineContext.ruleExecutionResult);
           console.log('Active variant id - ', activeVariantid)
           variantIds = getScPersonalizedVariantIds(ruleEngineContext.ruleExecutionResult.parsedRule);
@@ -191,6 +191,8 @@ export class GraphQLSCPersonalizeService {
 
     const ruleResults = ruleExecutionResults.ruleResults;
 
+    console.log('Getting active variant for ', ruleResults);
+
     let result = "";
     let isAnyRuleTrue = false;
     if (ruleResults && ruleResults.forEach) {
@@ -199,6 +201,9 @@ export class GraphQLSCPersonalizeService {
         if(ruleRes) isAnyRuleTrue = true;
       });
     }
+
+    console.log("Active variant result: ", isAnyRuleTrue, result)
+
 
     return isAnyRuleTrue ? result : null;
   }

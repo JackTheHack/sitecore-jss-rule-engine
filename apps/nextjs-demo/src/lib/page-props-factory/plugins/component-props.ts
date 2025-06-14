@@ -32,6 +32,8 @@ class ComponentPropsPlugin implements Plugin {
       });
     }
 
+    console.log('props', props.componentProps)
+
     const errors = Object.keys(props.componentProps)
       .map((id) => {
         const component = props.componentProps[id] as ComponentPropsError;

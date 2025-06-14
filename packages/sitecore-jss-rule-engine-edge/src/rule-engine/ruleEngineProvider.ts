@@ -11,5 +11,5 @@ export function registerNextJS(ruleEngine:JssRuleEngine)
 }
 
 export type RuleEnginePersonalizationContext = {
-    placeholders: Array<any>;
+    placeholders: any;
 }

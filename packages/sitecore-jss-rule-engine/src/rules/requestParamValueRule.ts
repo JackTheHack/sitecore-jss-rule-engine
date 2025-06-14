@@ -12,6 +12,8 @@ export default async function(rule:RuleData, ruleContext: RuleEngineContext) {
     var key = rule.attributes?.get('ParameterName');
     var value = rule.attributes?.get('value');
 
+    console.log('Checking request param rule', key, value, ruleContext?.requestContext?.url);
+
     if(!ruleContext.requestContext || 
        !ruleContext.requestContext.urlParams ||
        !ruleContext.requestContext.urlParams.get)
@@ -24,5 +26,9 @@ export default async function(rule:RuleData, ruleContext: RuleEngineContext) {
         parameter2: value
     };
 
-    return await operator(operatorContext, ruleContext);
+    console.log('Operator context', operatorContext);
+
+    const result = await operator(operatorContext, ruleContext);
+    console.log('Param rule result - ', result)
+    return result;
 }

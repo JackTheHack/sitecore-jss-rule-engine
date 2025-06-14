@@ -8,6 +8,13 @@ export default async function(command:RuleActionData, ruleContext:RuleEngineCont
     var renderingName = command.attributes.get("renderingName");
     var datasourcePath = command.attributes.get("datasourcePath");
 
+    if(!ruleContext.sessionContext)
+    {
+        throw new Error("Session context is missing");
+    }
+
+    console.log('Running set datasource rendering command');
+
     let personalizationContext = ruleContext.sessionContext?.get<RuleEnginePersonalizationContext>("personalization");
 
     if (!personalizationContext) {
@@ -23,9 +30,9 @@ export default async function(command:RuleActionData, ruleContext:RuleEngineCont
         renderings: []
     };
 
-    personalizationContext.placeholders[placeholderName] = placeholder;
 
-    ruleContext.sessionContext?.set("personalization", personalizationContext);
+
+
 
     var rendering = placeholder.renderings.find((x:any) => x.name == renderingName);
 
@@ -42,4 +49,9 @@ export default async function(command:RuleActionData, ruleContext:RuleEngineCont
         };
         placeholder.renderings.push(newPersonalization);
     }
+
+    personalizationContext.placeholders[placeholderName] = placeholder;
+    console.log('Updated personalization ', personalizationContext)
+    ruleContext.sessionContext?.set("personalization", personalizationContext);
+
 }

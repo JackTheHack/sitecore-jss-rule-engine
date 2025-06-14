@@ -7,14 +7,19 @@ class ContentStylesPlugin implements Plugin {
   order = 2;
 
   async exec(props: SitecorePageProps) {
-    // Get content stylessheet link, empty if styles are not used on the page
-    const contentStyles = getContentStylesheetLink(
-      props.layoutData,
-      config.sitecoreEdgeContextId,
-      config.sitecoreEdgeUrl
-    );
 
-    contentStyles && props.headLinks.push(contentStyles);
+    try{
+      // Get content stylessheet link, empty if styles are not used on the page
+      const contentStyles = getContentStylesheetLink(
+        props.layoutData,
+        config.sitecoreEdgeContextId,
+        config.sitecoreEdgeUrl
+      );
+
+      contentStyles && props.headLinks.push(contentStyles);
+    }catch(error){
+      console.warn('Content styles error ', error);
+    }
 
     return props;
   }

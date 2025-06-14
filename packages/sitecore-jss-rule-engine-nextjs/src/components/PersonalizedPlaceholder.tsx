@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { PersonalizationHelper  } from "../lib/PersonalizationHelper";
-import {JssRuleEngine} from "@jss-rule-engine/core"
-import { Placeholder } from '@sitecore-jss/sitecore-jss-nextjs';
+import {JssRuleEngine, RuleEngineContext} from "@jss-rule-engine/core"
+import { Placeholder, PlaceholderComponentProps, useComponentProps } from '@sitecore-jss/sitecore-jss-nextjs';
 import { withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';
+import { RuleEnginePersonalizationContext } from '@jss-rule-engine/edge/dist/src/rule-engine/ruleEngineProvider';
 
 
-class PersonalizedPlaceholder extends React.Component<any,any> {
+export interface PersonalizedPlaceholderComponentProps extends PlaceholderComponentProps
+{
+    
+}
+
+export class PersonalizedPlaceholder extends React.Component<any,any> {
 
     graphQLEndpoint:string;
     sitecoreApiKey:string;
     ruleEngine:JssRuleEngine;
 
-    constructor(props:any) {
+    constructor(props:PersonalizedPlaceholderComponentProps) {
         super(props);
 
         this.graphQLEndpoint = props.endpointUrl as string;
@@ -35,7 +41,7 @@ class PersonalizedPlaceholder extends React.Component<any,any> {
         const personalizedRenderings = await this.personalizePlaceholder();
 
         if (personalizedRenderings) {
-            console.log('Set personalized renderings');            
+            console.log('Set personalized renderings', personalizedRenderings);            
             this.setState({
                 elements: personalizedRenderings                
             });
@@ -55,12 +61,14 @@ class PersonalizedPlaceholder extends React.Component<any,any> {
         rendering.placeholders[this.props.name] = this.state.elements ? this.state.elements :
             this.props.hideInitialContents ? [] : rendering.placeholders[this.props.name];
 
-        const placeholderProps = {
+
+        const placeholderProps: PlaceholderComponentProps = {
             ...this.props,
-            rendering
+            rendering,
+            name: this.props.name,
         }
 
-        return <Placeholder name={this.props.name} {...placeholderProps} />
+        return <Placeholder {...placeholderProps}  />
     }
 
     isClientside() {
@@ -97,7 +105,7 @@ class PersonalizedPlaceholder extends React.Component<any,any> {
             })
         }
 
-        var ruleEngineContext = this.ruleEngine.getRuleEngineContext() as any;
+        var ruleEngineContext = this.ruleEngine.getRuleEngineContext() as RuleEngineContext;
 
 
         if(!personalizationRule?.value)
@@ -107,11 +115,14 @@ class PersonalizedPlaceholder extends React.Component<any,any> {
         
         try {
             
-            this.ruleEngine.parseAndRunRule(personalizationRule.value, ruleEngineContext);
+            await this.ruleEngine.parseAndRunRule(personalizationRule.value, ruleEngineContext);
 
-            var placeholderPersonalizationRule = ruleEngineContext.personalization?.placeholders[this.props.name]
+            const personalization = ruleEngineContext.sessionContext?.get<RuleEnginePersonalizationContext>("personalization");
+            console.log('Personalization data', personalization);
+
+            var placeholderPersonalizationRule = personalization?.placeholders[this.props.name]
     
-            console.log("Rule parsed");
+            console.log("Rule parsed", placeholderPersonalizationRule);
 
             var personalizationHelper = new PersonalizationHelper(this.graphQLEndpoint, this.sitecoreApiKey);
             var elementPlaceholderRenderings = 

@@ -68,7 +68,7 @@ export interface RuleEngineContext {
     mockDate?: Date,
     ruleEngine?: JssRuleEngine,
     sessionContext?: RuleEngineSessionContext,
-    clientCommands: Array<ClientCommand>
+    clientCommands?: Array<ClientCommand>
 }
 
 export interface RuleEngineRequestContext {

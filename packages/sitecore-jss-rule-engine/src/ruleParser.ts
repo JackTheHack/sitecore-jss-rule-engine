@@ -128,7 +128,6 @@ export default function (ruleXml: string, ruleEngineContext: RuleEngineContext) 
                 var parsedCondition = parseCondition(conditionXmlNode, ruleEngineContext);
                 if (parsedCondition) {
                     ruleEngineContext.ruleEngine?.debugMessage('Parsed condition element:');
-                    ruleEngineContext.ruleEngine?.debugMessage(parsedCondition);
                     rule.conditions?.push(parsedCondition);
                 } else {
                     throw new Error('Condition wasnt parsed ' + conditionXmlNode);
@@ -145,7 +144,6 @@ export default function (ruleXml: string, ruleEngineContext: RuleEngineContext) 
                 var parsedAction = parseAction(actionXmlNode, ruleEngineContext);
                 if (parsedAction) {
                     ruleEngineContext.ruleEngine?.debugMessage('Parsed action element:');
-                    ruleEngineContext.ruleEngine?.debugMessage(parsedAction);
                     rule.actions?.push(parsedAction);
                 } else {
                     throw new Error('Condition wasnt parsed ' + actionXmlNode);

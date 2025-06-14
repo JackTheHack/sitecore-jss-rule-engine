@@ -108,9 +108,12 @@ export class JssRuleEngine implements IJssRuleEngine {
         if(this.requestContext && 
            this.requestContext.url)            
         {            
+            console.log('Setting up request context', this.requestContext?.url)
             var queryString = this.requestContext.url.indexOf('?')>=0 ? this.requestContext.url.split('?')[1] : '';
+            console.log('Query string ', queryString)
             this.requestContext.queryString = queryString;
-            const urlParams = new URLSearchParams(this.requestContext.queryString);
+            const urlParams = new URLSearchParams(queryString);
+            console.log('Url params', urlParams?.size)
             this.requestContext.urlParams = urlParams;
             this.requestContext.cookies = requestContext?.cookies;
         }
@@ -147,7 +150,7 @@ export class JssRuleEngine implements IJssRuleEngine {
 
     async runRuleActions(parsedRule:ParsedRuleXmlData | null, ruleActions:any, ruleEngineContext:RuleEngineContext) {
 
-        console.log('#### runRuleActions');
+        console.log('#### runRuleActions ### ', parsedRule?.rules?.length, ruleActions.length);
 
         if(!parsedRule?.rules || parsedRule.rules.length != ruleActions.length)
         {
@@ -169,13 +172,16 @@ export class JssRuleEngine implements IJssRuleEngine {
 
             if(ruleActions[i] && rule.actions)
             {
+                console.log('Running rule actions for rule ', i);
                 await Promise.all(rule.actions.map(async(ruleAction)=> {
+                    console.log('Running rule action', ruleAction.id)
                     var actionFunction = ruleEngineContext.ruleEngine?.commandDefinitions.get(ruleAction.id);
     
                     if (typeof(actionFunction) === "undefined" || !ruleAction) {
                         throw new Error('Rule definitions missing for id ' + ruleAction.id);
                     }
                     
+                    console.log('Running action function');
                     await actionFunction(ruleAction, ruleEngineContext);
                 }));                
             }

@@ -9,6 +9,14 @@ export default async function (command: RuleActionData, ruleContext: RuleEngineC
     var renderingName = command.attributes.get("renderingName");
     var datasourcePath = command.attributes.get("datasourcePath");
 
+    
+    if(!ruleContext.sessionContext)
+        {
+            throw new Error("Session context is missing");
+        }
+
+        console.log('Running add rendering command');
+
     let personalizationContext = ruleContext.sessionContext?.get<RuleEnginePersonalizationContext>("personalization");
 
     if (!personalizationContext) {

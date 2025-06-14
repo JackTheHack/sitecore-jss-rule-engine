@@ -5,6 +5,8 @@ import config from 'temp/config';
 import Navigation from 'src/Navigation';
 import Scripts from 'src/Scripts';
 
+import { componentBuilder } from 'temp/componentBuilder';
+
 import { getRuleEngineInstance } from '@jss-rule-engine/core';
 import { PersonalizedPlaceholder } from '@jss-rule-engine/nextjs';
 import { ChatBotWidget } from '@jss-rule-engine/chat';
@@ -29,6 +31,8 @@ const Layout = ({ layoutData, headLinks }: LayoutProps): JSX.Element => {
   const ruleEngineInstance = getRuleEngineInstance();
 
   const fields = route?.fields as RouteFields;
+
+  const isEditing = layoutData.sitecore.context.pageEditing;
 
   return (
     <>
@@ -58,9 +62,10 @@ const Layout = ({ layoutData, headLinks }: LayoutProps): JSX.Element => {
           endpointUrl={config.edgeQLEndpoint}
           ruleEngine={ruleEngineInstance}
           sitecoreApiKey={config.sitecoreApiKey}
+          componentFactory={componentBuilder.getComponentFactory({ isEditing })}
           suppressHydrationWarning
-        />}
-        {route && <Placeholder name="headless-main" rendering={route} />}
+        />}   
+       {/*   {route && <Placeholder name="headless-main" rendering={route} />} */}
       </div>
     </>
   );

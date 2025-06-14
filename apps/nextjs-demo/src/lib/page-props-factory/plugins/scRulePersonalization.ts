@@ -19,6 +19,7 @@ class ScRulesPersonalization implements Plugin {
   }
 
   async exec(props: SitecorePageProps, context: GetServerSidePropsContext | GetStaticPropsContext) {
+    
     if (!props.layoutData.sitecore.route) return props;
 
     // Retrieve component props using side-effects defined on components level

@@ -19,7 +19,7 @@ class ScPersonalizePlugin implements MiddlewarePlugin {
   // Using 1 to leave room for things like redirects to occur first
   order = 1;
 
-  async exec(req: NextRequest, _res?: NextResponse): Promise<NextResponse> {
+  async exec(req: NextRequest, res?: NextResponse): Promise<NextResponse> {
 
     console.log('Middleware personalize - ', req.url, this.personalizeMiddleware?.constructor.name);
 
@@ -49,7 +49,7 @@ class ScPersonalizePlugin implements MiddlewarePlugin {
       // You can also pass a custom point of sale resolver into middleware to override it like so:
       // getPointOfSale: (site, language) => { ... }
     });
-    //return this.personalizeMiddleware.getHandler()(req, res);
+    return this.personalizeMiddleware.getHandler()(req, res);
     return NextResponse.next();
   }
 }

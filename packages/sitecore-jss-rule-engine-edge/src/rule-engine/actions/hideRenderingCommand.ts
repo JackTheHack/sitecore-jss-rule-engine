@@ -7,11 +7,19 @@ export default async function(command:RuleActionData, ruleContext:RuleEngineCont
     var placeholderName = command.attributes.get("placeholderName");
     var renderingName = command.attributes.get("renderingName");
 
+    
+    if(!ruleContext.sessionContext)
+        {
+            throw new Error("Session context is missing");
+        }
+
+        console.log('Running hide rendering command');
+
     let personalizationContext = ruleContext.sessionContext?.get<RuleEnginePersonalizationContext>("personalization");
 
     if (!personalizationContext) {
         personalizationContext = {
-            placeholders: []
+            placeholders: {}
         };
     }
 

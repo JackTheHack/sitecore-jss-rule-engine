@@ -68,6 +68,7 @@ export class RulesSSGPersonalizationPlugin implements Plugin {
     for (let i = 0; i < values.length; i++) {
       result.push(values[i]=="1");
     }
+    console.log('extract rule actions result ', result)
     return result;
   }
 
@@ -120,7 +121,7 @@ export class RulesSSGPersonalizationPlugin implements Plugin {
           console.log('Extracting rule actions')
           var ruleActions = this.extractRuleActions(activeVariantId);
           var personalizationHelper = new PersonalizationHelper(this.graphQLEndpoint, this.sitecoreApiKey);
-          await personalizationHelper.runRuleActions(this.ruleEngine, props, personalizationRule, ruleActions);      
+          await personalizationHelper.runRuleActions(this.ruleEngine, props, personalizationRule, ruleActions);
         }
       } 
     }
