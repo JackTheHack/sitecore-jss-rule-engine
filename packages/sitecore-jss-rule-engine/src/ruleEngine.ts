@@ -18,8 +18,8 @@ export interface IJssRuleEngine {
 
     setOptions(options?: RuleEngineContext): void;
     initialize(options?: any): void;
-    registerCommand(id: string, command: ActionFunctionDefinition): void;
-    registerRule(id: string, rule: ConditionFunctionDefinition): void;
+    registerAction(id: string, command: ActionFunctionDefinition): void;
+    registerCondition(id: string, rule: ConditionFunctionDefinition): void;
     registerOperator(id: string, operator: OperatorFunctionDefinition): void;
     parseRuleXml(ruleXml: string, ruleEngineContext: RuleEngineContext): ParsedRuleXmlData | null;
     setSitecoreContext(sitecoreContext: RuleEngineSitecoreContext): void;
@@ -79,11 +79,11 @@ export class JssRuleEngine implements IJssRuleEngine {
         operatorFactory(this);
     }
 
-    registerCommand(id:string, command:ActionFunctionDefinition) {
+    registerAction(id:string, command:ActionFunctionDefinition) {
         this.commandDefinitions.set(id, command);
     }
 
-    registerRule(id:string, rule:ConditionFunctionDefinition) {
+    registerCondition(id:string, rule:ConditionFunctionDefinition) {
         this.ruleDefinitions.set(id, rule);
     }
 

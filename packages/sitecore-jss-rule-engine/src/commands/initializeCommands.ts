@@ -6,6 +6,6 @@ import { commandIds } from '../constants'
 
 
 export default function(ruleEngine:JssRuleEngine) {
-    ruleEngine.registerCommand(commandIds.runScript, runScriptCommand)
-    ruleEngine.registerCommand(commandIds.logMessage, logMessageCommand)            
+    ruleEngine.registerAction(commandIds.runScript, runScriptCommand)
+    ruleEngine.registerAction(commandIds.logMessage, logMessageCommand)            
 }

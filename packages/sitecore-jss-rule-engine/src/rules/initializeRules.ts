@@ -34,56 +34,56 @@ import { JssRuleEngine } from '../ruleEngine'
 
 export default function(ruleEngine:JssRuleEngine) {
     //conditions
-    ruleEngine.registerRule(ruleIds.and, andRule) //covered
-    ruleEngine.registerRule(ruleIds.or, orRule) //covered
+    ruleEngine.registerCondition(ruleIds.and, andRule) //covered
+    ruleEngine.registerCondition(ruleIds.or, orRule) //covered
     
     //context    
-    ruleEngine.registerRule(ruleIds.websiteName, websiteNameRule)
+    ruleEngine.registerCondition(ruleIds.websiteName, websiteNameRule)
 
     //dates
-    ruleEngine.registerRule(ruleIds.dateHasPassed, dateHasPassedRule) //covered
-    ruleEngine.registerRule(ruleIds.dayOfMonth, dayOfMonthRule) //covered
-    ruleEngine.registerRule(ruleIds.dayOfWeek, dayOfWeekRule) //covered
-    ruleEngine.registerRule(ruleIds.monthOfYear, monthOfYearRule) //covered
+    ruleEngine.registerCondition(ruleIds.dateHasPassed, dateHasPassedRule) //covered
+    ruleEngine.registerCondition(ruleIds.dayOfMonth, dayOfMonthRule) //covered
+    ruleEngine.registerCondition(ruleIds.dayOfWeek, dayOfWeekRule) //covered
+    ruleEngine.registerCondition(ruleIds.monthOfYear, monthOfYearRule) //covered
 
     //device
-    ruleEngine.registerRule(ruleIds.deviceQueryString, deviceQueryStringRule)
-    ruleEngine.registerRule(ruleIds.deviceUserAgent, deviceUserAgentRule)
+    ruleEngine.registerCondition(ruleIds.deviceQueryString, deviceQueryStringRule)
+    ruleEngine.registerCondition(ruleIds.deviceUserAgent, deviceUserAgentRule)
 
     //fields
-    ruleEngine.registerRule(ruleIds.fieldComparesTo, fieldComparesToRule)
-    ruleEngine.registerRule(ruleIds.fieldIsEmpty, fieldIsEmptyRule)
-    ruleEngine.registerRule(ruleIds.fieldType, fieldTypeRule)
+    ruleEngine.registerCondition(ruleIds.fieldComparesTo, fieldComparesToRule)
+    ruleEngine.registerCondition(ruleIds.fieldIsEmpty, fieldIsEmptyRule)
+    ruleEngine.registerCondition(ruleIds.fieldType, fieldTypeRule)
     
     //item hierarchy
-    ruleEngine.registerRule(ruleIds.itemAncestorOrSelf, itemAncestorOrSelfRule)
-    ruleEngine.registerRule(ruleIds.itemDescendantOrSelf, itemDescendantOrSelfRule)
-    ruleEngine.registerRule(ruleIds.itemLevel, itemLevelRule)
-    ruleEngine.registerRule(ruleIds.itemPath, itemPathRule)
-    ruleEngine.registerRule(ruleIds.itemParentName, itemParentNameRule)
-    ruleEngine.registerRule(ruleIds.itemParentTemplate, itemParentTemplateRule)
-    ruleEngine.registerRule(ruleIds.itemIsInSiteContext, itemIsInSiteContextRule)
+    ruleEngine.registerCondition(ruleIds.itemAncestorOrSelf, itemAncestorOrSelfRule)
+    ruleEngine.registerCondition(ruleIds.itemDescendantOrSelf, itemDescendantOrSelfRule)
+    ruleEngine.registerCondition(ruleIds.itemLevel, itemLevelRule)
+    ruleEngine.registerCondition(ruleIds.itemPath, itemPathRule)
+    ruleEngine.registerCondition(ruleIds.itemParentName, itemParentNameRule)
+    ruleEngine.registerCondition(ruleIds.itemParentTemplate, itemParentTemplateRule)
+    ruleEngine.registerCondition(ruleIds.itemIsInSiteContext, itemIsInSiteContextRule)
 
     //item information
-    ruleEngine.registerRule(ruleIds.itemBaseTemplate, itemBaseTemplateRule)
-    ruleEngine.registerRule(ruleIds.itemId, itemIdRule)
-    ruleEngine.registerRule(ruleIds.itemName, itemNameRule)
-    ruleEngine.registerRule(ruleIds.itemTemplate, itemTemplateRule)
+    ruleEngine.registerCondition(ruleIds.itemBaseTemplate, itemBaseTemplateRule)
+    ruleEngine.registerCondition(ruleIds.itemId, itemIdRule)
+    ruleEngine.registerCondition(ruleIds.itemName, itemNameRule)
+    ruleEngine.registerCondition(ruleIds.itemTemplate, itemTemplateRule)
 
     //item version
-    ruleEngine.registerRule(ruleIds.itemLanguage, itemLanguageRule)
+    ruleEngine.registerCondition(ruleIds.itemLanguage, itemLanguageRule)
 
     //request
-    ruleEngine.registerRule(ruleIds.requestCookieExists, requestCookieExistsRule) //covered
-    ruleEngine.registerRule(ruleIds.requestCookieValue, requestCookieValueRule) //covered
-    ruleEngine.registerRule(ruleIds.requestReferrer, requestReferrerRule) //covered
-    ruleEngine.registerRule(ruleIds.requestParamExists, requestParamExistsRule) //covered
-    ruleEngine.registerRule(ruleIds.requestParamValue, requestParamValueRule) //covered
+    ruleEngine.registerCondition(ruleIds.requestCookieExists, requestCookieExistsRule) //covered
+    ruleEngine.registerCondition(ruleIds.requestCookieValue, requestCookieValueRule) //covered
+    ruleEngine.registerCondition(ruleIds.requestReferrer, requestReferrerRule) //covered
+    ruleEngine.registerCondition(ruleIds.requestParamExists, requestParamExistsRule) //covered
+    ruleEngine.registerCondition(ruleIds.requestParamValue, requestParamValueRule) //covered
 
     //sitecore query
-    ruleEngine.registerRule(ruleIds.sitecoreQuery, sitecoreQueryRule)
+    ruleEngine.registerCondition(ruleIds.sitecoreQuery, sitecoreQueryRule)
 
     //system
-    ruleEngine.registerRule(ruleIds.true, trueRule)  //covered
+    ruleEngine.registerCondition(ruleIds.true, trueRule)  //covered
 
 }
