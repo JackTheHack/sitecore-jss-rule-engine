@@ -40,7 +40,7 @@
         "start:demo": "yarn workspace jsssandbox build && yarn workspace jsssandbox start:connected",
         "start:editor": "yarn workspace @jss-rule-engine/editor start",
         "tsc:demo": "yarn workspace jsssandbox tsc",
-        "release:all": "yarn workspaces run release",
+        "release:all": "yarn workspaces foreach -A run release",
         "docker:build": "docker compose build",
         "docker:up": "docker compose up -d",
         "docker:login": "docker login ghcr.io -u jack.spektor@gmail.com --password-stdin",

@@ -1,6 +1,6 @@
 {
   "name": "@jss-rule-engine/nextjs",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "",
   "type": "module",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:babel": "babel src/lib --out-dir dist --copy-files",
-    "release": "npm run build && npm version patch && npm publish"
+    "release": "yarn run build && yarn version patch && yarn npm publish"
   },
   "engines": {
     "node": ">=12",

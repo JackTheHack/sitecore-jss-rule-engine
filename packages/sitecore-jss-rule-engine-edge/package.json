@@ -1,6 +1,6 @@
 {
   "name": "@jss-rule-engine/edge",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -15,7 +15,7 @@
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "build:babel": "babel src/lib --out-dir dist --copy-files",
-    "release": "npm run build && npm version patch && npm publish --access public"
+    "release": "yarn run build && yarn version patch && yarn npm publish --access public"
   },
   "engines": {
     "node": ">=12",
