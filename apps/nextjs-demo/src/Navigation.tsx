@@ -7,7 +7,7 @@ const publicUrl = config.publicUrl;
 const Navigation = (): JSX.Element => (
   <div>
     <nav>
-          <a href="https://sitecore.com">
+          <a href={publicUrl}>
             <img src={`${publicUrl}/sc_logo.svg`} alt="Sitecore" />
           </a>      
     </nav>

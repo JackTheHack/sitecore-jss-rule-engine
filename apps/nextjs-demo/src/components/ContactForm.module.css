@@ -1,0 +1,80 @@
+.contactForm {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submitButton {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submitButton:hover {
+  background-color: #0051a8;
+}
+
+.submitButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.successMessage {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #e6ffe6;
+  color: #006600;
+  border-radius: 4px;
+  border: 1px solid #00cc00;
+}
+
+.errorMessage {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #ffe6e6;
+  color: #cc0000;
+  border-radius: 4px;
+  border: 1px solid #ff0000;
+} 
