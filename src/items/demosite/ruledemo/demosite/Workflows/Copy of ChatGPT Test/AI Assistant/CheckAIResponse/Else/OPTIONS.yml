@@ -1,0 +1,56 @@
+﻿---
+ID: "8a91b0c5-2368-4cf9-b3f7-a82e17f154bd"
+Parent: "116a8dde-feed-44e1-abab-415cab3f84e1"
+Template: "b44783be-ebc7-4ce8-80d9-ee7a08df3245"
+Path: /sitecore/content/ruledemo/demosite/Workflows/Copy of ChatGPT Test/AI Assistant/CheckAIResponse/Else/OPTIONS
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 300
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "7ad59b35-2228-4ad0-b42f-addea905d801"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250608T085646Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "6e139722-209e-4d42-b473-4ddc33f469e5"
+      Hint: Condition
+      Value: |
+        <ruleset>
+          <rule
+            uid="{A7FD26D0-549C-442B-80C1-1EC316585B48}">
+            <conditions>
+              <condition
+                id="{32682081-1438-4DC1-8817-4330A3A883BE}"
+                uid="CBB353120E994DEA99656E96F8B78953"
+                operatorid="{10537C58-1684-4CAB-B4C0-40C10907CE31}"
+                value="[OPTIONS]" />
+            </conditions>
+          </rule>
+        </ruleset>
+    - ID: "727101b5-29ff-4449-8615-080d4119d89f"
+      Hint: Template
+      Value: "Please select one of the options - Account, Billing, Support, Contact Us"
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "66f2bfe8-366b-4743-aa1c-4861687e8770"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250707T064554Z

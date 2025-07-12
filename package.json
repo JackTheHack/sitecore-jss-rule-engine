@@ -38,6 +38,7 @@
         "build:items": "dotnet sitecore itemres create -o docker/build/ruleengine-cm-assets/items/ruleengine --overwrite",
         "build": "yarn run build:core && yarn run build:edge && yarn run build:next  && yarn run build:workflow",
         "start:demo": "yarn workspace jsssandbox build && yarn workspace jsssandbox start:connected",
+        "start:demo:dbinit": "yarn workspace jsssandbox db:init",
         "start:editor": "yarn workspace @jss-rule-engine/editor start",
         "tsc:demo": "yarn workspace jsssandbox tsc",
         "release:all": "yarn workspaces foreach -A run release",

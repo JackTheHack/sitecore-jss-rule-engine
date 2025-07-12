@@ -1,0 +1,40 @@
+﻿---
+ID: "1e9e8261-dc34-4330-9ec4-7dc7b15d4519"
+Parent: "cb346709-5c7c-4636-b017-22bc90320a23"
+Template: "61f58ef4-55c5-42cb-8942-550ab410563e"
+Path: /sitecore/content/ruledemo/demosite/Settings/RAG Settings/FAQ
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250705T081010Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "5913f9a5-50b6-4edc-92ae-78298923b7f4"
+    - ID: "a681f2f1-2bd0-46ed-8ad2-453394538af0"
+      Hint: IndexedFieldIDs
+      Value: Text
+    - ID: "b25162ca-1aea-4c19-9e92-42665def15e7"
+      Hint: Source
+      Value: "{16A7A74E-9E54-46D9-92FF-8407A08F088A}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "bd45a113-e801-411c-aed4-40d2116c4c88"
+      Hint: Enabled
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250705T091937Z

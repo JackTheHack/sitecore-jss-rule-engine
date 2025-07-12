@@ -1,4 +1,4 @@
-import ApolloClient from 'apollo-boost'
+import { GraphQLRequestClient } from '@sitecore-jss/sitecore-jss/graphql';
 import { IItemProvider } from './itemProvider';
 import { itemAncestorsByIdQuery } from "./queries/itemAncestorsById"
 import { itemDescendantsByIdQuery } from "./queries/itemDescendantsById"
@@ -55,25 +55,14 @@ export class GraphQLItemProvider implements IItemProvider {
 
   async runQuery(query: any, variables: any) {
     
-    let client = new ApolloClient({
-      uri: this.endpointUrl,
-      request: operation => {
-        operation.setContext({
-          headers: {
-            sc_apikey: this.apiKey,
-          },
-        });
-      }
+    let client = new GraphQLRequestClient(this.endpointUrl, {
+      apiKey: this.apiKey,
     });
 
-    const response = await client.query({
-      query: query,
-      variables: variables,
-    });
+    const response = await client.request(query, variables);
 
-    const json = await response.data;
-    console.log(json.data);
+    console.log(response);
 
-    return json;
+    return response;
   }
 }

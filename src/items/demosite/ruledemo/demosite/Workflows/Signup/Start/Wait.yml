@@ -17,14 +17,14 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "57957d03-e7bf-4a44-8a40-1c2a1ed4e887"
       Hint: Timeout
-      Value: 3
+      Value: 30
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "b8eeb35f-1f5b-45d8-a541-19f6c3e9cfe5"
+      Value: "4c163156-47ae-4418-b5da-d52a8215cdb7"
     - ID: "982c1029-8a6a-4772-84ac-97158f0cda03"
       Hint: NextState
       Value: "{5D7E24C7-DA7C-4F14-B019-FC9980530759}"
@@ -34,4 +34,4 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250612T031107Z
+      Value: 20250616T083809Z

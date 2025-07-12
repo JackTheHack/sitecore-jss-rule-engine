@@ -1,0 +1,53 @@
+﻿---
+ID: "6b1a546a-77ac-49d0-acc7-aaae01818176"
+Parent: "f7632773-10c6-49df-a50d-7f9493e74a1d"
+Template: "a932ac3e-ddce-45dc-bf08-2c40e5ef1900"
+Path: /sitecore/content/ruledemo/demosite/Workflows/Copy of ChatGPT Test/Support/OnMessage
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "49b87bdf-4edf-4a60-bdca-56fde46120fa"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250524T063809Z
+    - ID: "2eafbb95-a22e-4d08-858b-f094b7df5a00"
+      Hint: Condition
+      Value: |
+        <ruleset>
+          <rule
+            uid="{FE6E1C9E-C571-4AA5-BBB2-CD034C3FF3D5}">
+            <conditions>
+              <condition
+                id="{0FF3ABD2-064E-42B9-8442-1B9B2F51008E}"
+                uid="DA7EAF80778D4C84AB3251D899A03798"
+                operatorid="{10537C58-1684-4CAB-B4C0-40C10907CE31}"
+                value="chat:message" />
+            </conditions>
+          </rule>
+        </ruleset>
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "a7e98739-2476-410a-8ae9-042da7333e7a"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250607T105124Z

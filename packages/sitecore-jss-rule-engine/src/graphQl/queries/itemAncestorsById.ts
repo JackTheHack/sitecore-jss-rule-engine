@@ -1,6 +1,4 @@
-import { gql } from "apollo-boost"
-
-export const itemAncestorsByIdQuery = gql`{
+export const itemAncestorsByIdQuery = `
   query itemAncestorsById($id: String) {
     item(path: $id, language: "en") {
         id,
@@ -16,4 +14,5 @@ export const itemAncestorsByIdQuery = gql`{
           }
         },
     }
-  }}`
+  }
+`;

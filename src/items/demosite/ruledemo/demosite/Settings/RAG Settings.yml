@@ -1,0 +1,23 @@
+﻿---
+ID: "cb346709-5c7c-4636-b017-22bc90320a23"
+Parent: "765fc7e7-2bd4-4b23-af63-683bc2c4874f"
+Template: "12fbc11e-1b12-42d8-9bd2-3878b0dc52f8"
+Path: /sitecore/content/ruledemo/demosite/Settings/RAG Settings
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250705T080958Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "967ee601-fa9e-4473-8f98-788bb384503f"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250705T080958Z

@@ -11,6 +11,12 @@ Languages:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20250521T043635Z
+    - ID: "3328f555-5f0a-4096-8da1-19acd937ed2d"
+      Hint: HtmlTemplate
+      Value: &nbsp;3 days email
+    - ID: "41e2d6a2-0f79-4c48-973d-1614813a34b6"
+      Hint: To
+      Value: test@gmail.com
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -21,11 +27,17 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "e9df3e88-66cd-4781-b836-094c357c4811"
+      Value: "1959d2ea-2692-4594-8967-d91b3bc4e5ca"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250612T031708Z
+      Value: 20250613T123924Z
+    - ID: "f2ff4de3-19e6-4063-af5f-5da05f9399f2"
+      Hint: From
+      Value: noreply@test.com
+    - ID: "f7ca26af-45a5-43db-b144-3a13dee34b0a"
+      Hint: Subject
+      Value: 3 days email

@@ -1,5 +1,5 @@
 import { JssRuleEngine, RuleEngineContext, RuleEngineSessionContext } from "@jss-rule-engine/core";
-import { IDatabaseService } from "./databaseService";
+import { IDatabaseService, RAGItem } from "./databaseService";
 import { IWorkflowActionFactory } from "./actionFactory";
 
 export type Workflow = {
@@ -75,6 +75,13 @@ export type WorkflowTrigger = {
   fields: Record<string, string>;
 }
 
+export type WorkflowActionSubitem = {
+  id: string;
+  name: string;
+  templateId: string;
+  fields: Record<string, string>;
+}
+
 export type WorkflowAction = {
   id: string;
   name: string;
@@ -82,6 +89,7 @@ export type WorkflowAction = {
   condition: string;
   nextStateId?: string;  
   fields: Record<string, string>;
+  subitems?: WorkflowActionSubitem[]
 }
 
 export type WorkflowScheduledTask = {
@@ -120,6 +128,8 @@ export interface IWorkflowService {
     addVisitorToState(workflowId: string, stateId: string, visitorId: string): Promise<void>;
     executeTriggers(options: WorkflowExecutionOptions): Promise<WorkflowExecutionResult>;
     executeActions(visitorId: string, workflowExecutionContext: WorkflowExecutionContext, state: WorkflowState): Promise<void>;
+    executeAction(visitorId: string, action: WorkflowAction, workflowExecutionContext: WorkflowExecutionContext): Promise<void>;
+    parseWorkflowItem(child: any): WorkflowAction | WorkflowTrigger | null;
     removeVisitorFromWorkflow(visitorId: string, workflowId: string): Promise<void>;
     changeVisitorState(visitorId: string, workflowId: string, nextStateId: string, context: WorkflowExecutionContext): Promise<void>;
     getStateVisitors(workflowId: string, stateId: string): Promise<string[]>;    
@@ -127,4 +137,5 @@ export interface IWorkflowService {
     parseGraphQLResponse(response: any): Promise<Workflow>;
     getSitecoreQuery(path: string, language: string): Promise<string>;
     addScheduledTask(params: WorkflowScheduledTaskParams): Promise<void>;
+    findRelevantEmbeddings(data: string, indexId: string, topN: number, thresold: number): Promise<RAGItem[]>;    
 }

@@ -1,0 +1,26 @@
+﻿---
+ID: "c880d84b-a088-454c-9fb0-78236a81b573"
+Parent: "ebc423ba-2dec-45c9-a331-db236ade3895"
+Template: "215d7dbb-5671-4b1c-8dc4-27046c2ef232"
+Path: /sitecore/content/ruledemo/demosite/Workflows/Copy of ChatGPT Test
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250420T011916Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "19a0894b-0244-4144-9fbd-0ad64fb913dd"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "cbc05c3e-f26a-43d5-8ff2-70909761a21a"
+      Hint: Start State
+      Value: "{E39F428E-0AAB-4FD7-AE15-0271F11CD052}"
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250608T083312Z

@@ -1,0 +1,40 @@
+﻿---
+ID: "b75517bf-ca28-4dd5-94f8-8a3e7a9f39ce"
+Parent: "e39f428e-0aab-4fd7-ae15-0271f11cd052"
+Template: "24dfc1f6-7f92-475a-9867-492e78051faf"
+Path: /sitecore/content/ruledemo/demosite/Workflows/ChatGPT Test/AI Assistant/RAG Search
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250707T084243Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "57f171b1-dce6-4a7d-beca-58f33dbb324e"
+    - ID: "91ecfdc2-41f1-41d3-9d30-798fc4db07a3"
+      Hint: TopN
+      Value: 5
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250707T094655Z
+    - ID: "da53967e-6ec5-4dcb-bee9-aeaa234c59ed"
+      Hint: Thresold
+      Value: 0.5
+    - ID: "dd95ed3e-1b57-41ca-b0e5-edd72a87ab53"
+      Hint: RAG Index
+      Value: "{1E9E8261-DC34-4330-9EC4-7DC7B15D4519}"

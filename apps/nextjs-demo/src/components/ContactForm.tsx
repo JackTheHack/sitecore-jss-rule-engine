@@ -4,8 +4,7 @@ import { useState } from 'react';
 import styles from './ContactForm.module.css';
 
 type ContactFormProps = ComponentProps & {
-  fields: {
-  };
+  fields: Record<string, never>;
 };
 
 const ContactForm = (props: ContactFormProps): JSX.Element => {

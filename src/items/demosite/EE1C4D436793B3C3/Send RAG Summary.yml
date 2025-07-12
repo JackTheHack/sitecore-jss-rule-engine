@@ -1,0 +1,60 @@
+﻿---
+ID: "c6b5f81b-e65f-4b49-8c3d-4d77f3e79aff"
+Parent: "b54cadd0-5b7c-4420-b9a1-a7a879ce44f0"
+Template: "05187080-dd07-4faf-b501-f1c53cdf90f5"
+Path: /sitecore/content/ruledemo/demosite/Workflows/Copy of ChatGPT Test/AI Assistant/CheckAIResponse/FAQ RAG Search/Send RAG Summary
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 200
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "04701953-9dc7-422c-a197-176783e46aa0"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "152ed449-5fd5-459e-a7fc-b80304107a18"
+      Hint: RAG Tools
+      Value: "{4F1128AE-A9E0-46D5-BE65-2A8440C44A81}"
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250420T013649Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "6e139722-209e-4d42-b473-4ddc33f469e5"
+      Hint: Condition
+      Value: <ruleset />
+    - ID: "74465d1e-0f45-4d91-98c7-a264f8e2822a"
+      Hint: AI Context
+      Value: |
+        You are an AI chatbot tasked with responding to user questions based on the knowledge base.
+        
+        Use only information based on the following data:
+        
+        ```@aiRagContent```
+        
+        Only return the response specified in the requirements.
+    - ID: "7f0c2f0c-8d11-4d02-8d6c-1de82100bf81"
+      Hint: On Response
+      Value: <ruleset />
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "667c65e4-96b7-4646-bfb6-f8d79eac6486"
+    - ID: "9c641a14-fd7f-4b2d-b27b-dd27e87d7133"
+      Hint: Dont Send Response
+      Value: 1
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250712T072106Z

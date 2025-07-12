@@ -1,10 +1,15 @@
-import { gql } from "apollo-boost";
-
-export const itemByIdQuery = gql`{
-    query itemByIdQuery($id: String) {
+export const itemByIdQuery = `
+  query itemByIdQuery($id: String) {
     item(path: $id, language: "en") {
         id,
         name,
+        parent {
+          id
+        },
+        fields {
+          name,
+          value
+        },
         children {
           total,
           results{
@@ -20,5 +25,5 @@ export const itemByIdQuery = gql`{
         }
     }
   }
- }`
+`;
 

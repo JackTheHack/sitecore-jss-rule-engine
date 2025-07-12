@@ -1,0 +1,45 @@
+﻿---
+ID: "b54cadd0-5b7c-4420-b9a1-a7a879ce44f0"
+Parent: "53d92f1f-0a80-4b63-9705-693720c8d116"
+Template: "c9b52e75-6107-4168-9890-5fccc02fb64b"
+Path: /sitecore/content/ruledemo/demosite/Workflows/Copy of ChatGPT Test/AI Assistant/CheckAIResponse/FAQ RAG Search
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 0
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "12adb9b8-cc81-49ca-a2fd-11c0f3e57c3f"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250712T061136Z
+    - ID: "493a3066-6793-4b6a-bb99-db1c50652ef5"
+      Hint: Condition
+      Value: |
+        <ruleset>
+          <rule
+            uid="{0744D6EE-39A3-4021-BD9B-B7B0B6FBE8FE}">
+            <conditions>
+              <condition
+                id="{8B68C1DC-19E2-475D-A980-1BA383BA649D}"
+                uid="20D68A23CD6942E3B629CDEC93BC765C"
+                operatorid="{B88CD556-082E-4385-BB76-E4D1B565F290}"
+                value="0.9" />
+            </conditions>
+          </rule>
+        </ruleset>
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "981d2ec2-1af7-4f0e-be14-ac47ed71506a"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250712T061500Z

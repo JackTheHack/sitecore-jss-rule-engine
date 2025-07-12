@@ -1,0 +1,30 @@
+﻿---
+ID: "53d92f1f-0a80-4b63-9705-693720c8d116"
+Parent: "ac6062db-25be-4219-b537-8c2dc43ca8a6"
+Template: "634d3227-1d66-477b-b4b2-5820f206a412"
+Path: /sitecore/content/ruledemo/demosite/Workflows/Copy of ChatGPT Test/AI Assistant/CheckAIResponse
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 225
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "dfdfd556-30b6-455a-bb78-924c14f49743"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250707T064328Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "638ed71d-f33c-488f-acd2-8544e499e6ea"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250707T064334Z

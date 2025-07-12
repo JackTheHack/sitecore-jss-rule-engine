@@ -8,11 +8,28 @@ SharedFields:
   Hint: __Thumbnail
   Value: |
     <image mediaid="{20ED4B9E-CC3B-464E-A1CB-CEE977AFBCDE}" />
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "4d979112-47d9-451b-b167-f2df8a6ce49d"
 Languages:
 - Language: en
   Versions:
   - Version: 1
     Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{FD8B9E49-DDE5-4B69-888F-D14EF40AC669}"
+              s:id="{50447709-9E4F-4A24-B296-D19ED7F9F95B}"
+              s:par="CSSStyles"
+              s:ph="headless-main" />
+          </d>
+        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20250602T001907Z
@@ -21,7 +38,7 @@ Languages:
       Value: Form
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "c885b088-6107-42c4-a17c-a63b79851008"
+      Value: "2e08fd45-6bcf-468a-b1dc-a278e1d3ce80"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
@@ -31,4 +48,4 @@ Languages:
       Value: Form
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250602T001907Z
+      Value: 20250617T070009Z

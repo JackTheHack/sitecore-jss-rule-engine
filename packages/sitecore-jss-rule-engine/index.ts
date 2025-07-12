@@ -18,4 +18,5 @@ export function getRuleEngineInstance() {
     return new JssRuleEngine();
 }
 
-export { JssRuleEngine, IJssRuleEngine, RuleEngineContext, ClientCommand, RuleConditionData, RuleData, RuleActionData, RuleEngineSessionContext, ConditionFunctionDefinition, ActionFunctionDefinition, OperatorFunctionDefinition }
+export { JssRuleEngine, IJssRuleEngine, RuleEngineContext, ClientCommand, RuleConditionData, RuleData, RuleActionData, RuleEngineSessionContext, ConditionFunctionDefinition, ActionFunctionDefinition, OperatorFunctionDefinition };
+export { GraphQLItemProvider } from './src/graphQl/graphQLItemProvider';

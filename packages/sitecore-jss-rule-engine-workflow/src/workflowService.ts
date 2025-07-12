@@ -1,5 +1,5 @@
-import { IDatabaseService } from './databaseService';
-import { Workflow, WorkflowState, WorkflowExecutionContext, WorkflowServiceOptions, IWorkflowService, WorkflowExecutionResult, WorkflowExecutionOptions, WorkflowScheduledTaskParams } from './workflowTypes';
+import { IDatabaseService, RAGItem } from './databaseService';
+import { Workflow, WorkflowState, WorkflowExecutionContext, WorkflowServiceOptions, IWorkflowService, WorkflowExecutionResult, WorkflowExecutionOptions, WorkflowScheduledTaskParams, WorkflowAction, WorkflowActionSubitem, WorkflowTrigger } from './workflowTypes';
 import { AddScheduledTaskParams } from './databaseService';
 import { sitecoreQuery } from './graphql/workflowQuery';
 import { cleanId } from './lib/helper';
@@ -12,6 +12,10 @@ export class WorkflowService implements IWorkflowService {
     constructor(options: WorkflowServiceOptions) {
         this.options = options;
         this.databaseService = options.databaseService;
+    }
+
+    async findRelevantEmbeddings(data: string, indexId: string, topN: number, thresold: number): Promise<RAGItem[]> {        
+        return await this.databaseService.findRelevantEmbeddings(data, indexId, topN, thresold);
     }
     
     async addScheduledTask(params: WorkflowScheduledTaskParams): Promise<void> {
@@ -34,6 +38,8 @@ export class WorkflowService implements IWorkflowService {
     async init(): Promise<void> {
         await this.databaseService.init();
     }
+
+    
 
     async load(workflowConfig: Workflow): Promise<void> {
         this.workflows[cleanId(workflowConfig.id)] = workflowConfig;
@@ -159,6 +165,8 @@ export class WorkflowService implements IWorkflowService {
         return result;
     }
 
+    
+
     async executeActions(visitorId: string, workflowExecutionContext: WorkflowExecutionContext, state: WorkflowState): Promise<void> {
         console.log(`Executing actions - ${state?.actions?.length}`);
 
@@ -169,24 +177,28 @@ export class WorkflowService implements IWorkflowService {
 
         for (const action of state.actions) {
             if (!action.condition || await evaluateCondition(action.condition, workflowExecutionContext)) {
-                console.log(`Executing action ${action.id}`);
-                const actionCommand = this.options.actionFactory.getAction(action.templateId);
-
-                if(actionCommand)
-                {
-                    await actionCommand.execute(action, workflowExecutionContext);
-                } else {
-                    console.warn('Action command not found', action.templateId);
-                }
-
-                if (action.nextStateId) {                                        
-                    await this.changeVisitorState(
-                        cleanId(visitorId), 
-                        cleanId(workflowExecutionContext.workflow?.id),
-                        cleanId(action.nextStateId),                         
-                        workflowExecutionContext);
-                }
+                await this.executeAction(visitorId, action, workflowExecutionContext);
             }
+        }
+    }
+
+    async executeAction(visitorId: string, action: WorkflowAction, workflowExecutionContext: WorkflowExecutionContext): Promise<void> {
+        console.log(`Executing action ${action.id}`);
+        const actionCommand = this.options.actionFactory.getAction(action.templateId);
+
+        if(actionCommand)
+        {
+            await actionCommand.execute(action, workflowExecutionContext);
+        } else {
+            console.warn('Action command not found', action.templateId);
+        }
+
+        if (action.nextStateId) {                                        
+            await this.changeVisitorState(
+                cleanId(visitorId), 
+                cleanId(workflowExecutionContext.workflow?.id),
+                cleanId(action.nextStateId),                         
+                workflowExecutionContext);
         }
     }
 
@@ -240,34 +252,14 @@ export class WorkflowService implements IWorkflowService {
             };
 
             // Process children (triggers and actions)
-            stateItem.children.results.forEach((child: any) => {                
-                const fields = child.fields.reduce((acc: Record<string, string>, field: any) => {
-                    acc[field.name] = field.value;
-                    return acc;
-                }, {});
-
-                if (child.template.name === 'Trigger') {
-                    const triggerObj = {
-                        id: cleanId(child.id),
-                        name: child.name,
-                        type: 'trigger',
-                        templateId: child.template.id,
-                        condition: fields.Condition || '',
-                        fields: fields
-                    };
-                    console.log("Parsing trigger item: ", triggerObj);
-                    state.triggers.push(triggerObj);
-                } else {
-                    const actionObj = {
-                        id: cleanId(child.id),
-                        name: child.name,
-                        templateId: child.template.id,
-                        condition: fields.Condition || '',
-                        nextStateId: cleanId(fields.NextState) || undefined,
-                        fields: fields
+            stateItem.children.results.forEach((child: any) => {                                
+                const parsedItem = this.parseWorkflowItem(child);
+                if (parsedItem) {
+                    if (child.template.name === 'Trigger') {
+                        state.triggers.push(parsedItem as WorkflowTrigger);
+                    } else {
+                        state.actions.push(parsedItem as WorkflowAction);
                     }
-                    console.log("Parsing action item: ", actionObj);
-                    state.actions.push(actionObj);
                 }
             });
 
@@ -277,6 +269,58 @@ export class WorkflowService implements IWorkflowService {
         console.log("Parsed workflow - ", workflow.id);
 
         return workflow;
+    }
+
+    parseWorkflowItem(child: any): WorkflowAction | WorkflowTrigger | null {
+
+        const fields = child.fields.reduce((acc: Record<string, string>, field: any) => {
+            acc[field.name] = field.value;
+            return acc;
+        }, {});
+
+        const id = cleanId(child.id);
+        const name = child.name;
+        const templateId = child.template.id;
+
+        if (child.template.name === 'Trigger') {
+            const trigger: WorkflowTrigger = {
+                id: id,
+                name: name,
+                type: 'trigger',
+                templateId: templateId,
+                condition: fields.Condition || '',
+                fields: fields
+            };
+            return trigger;
+        } else {
+            // Map children items to actionObj.subitems with id, name, template (id, name), and fields (id, name, value)
+            let subitems: WorkflowActionSubitem[] = [];
+            if (Array.isArray(child.children)) {
+                subitems = child.children.map((subitem: any) => ({
+                    id: cleanId(subitem.id),
+                    name: subitem.name,
+                    templateId: subitem?.template?.id,
+                    fields: Array.isArray(subitem.fields)
+                        ? subitem.fields.map((field: any) => ({
+                            id: field.id,
+                            name: field.name,
+                            value: field.value
+                        }))
+                        : []
+                } as WorkflowActionSubitem));
+            }
+
+            const action: WorkflowAction = {
+                id: id,
+                name: name,
+                templateId: templateId,
+                condition: fields.Condition || '',
+                nextStateId: cleanId(fields.NextState) || undefined,
+                fields: fields,
+                subitems: subitems
+            };
+            return action;
+        }
     }
 
     async getSitecoreQuery(path: string, language: string): Promise<string> {

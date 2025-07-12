@@ -1,0 +1,31 @@
+﻿---
+ID: "737ce3c8-7623-4201-a065-23ce84e8d534"
+Parent: "449f0fa7-3dd0-4eb7-80d4-c85d8eac18ae"
+Template: "1500430c-e78f-4fb4-8a1f-f57e9bb26ccb"
+Path: /sitecore/content/ruledemo/demosite/Data/RAGToolsFolder
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250703T113743Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "c377bb46-210c-4ecc-8f24-66235f7ad1f9"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250705T080839Z

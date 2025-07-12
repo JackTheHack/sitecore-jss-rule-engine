@@ -83,7 +83,7 @@ export class ScheduledTaskService implements IScheduledTaskService {
             return result;
         } catch (err) {
             result.success = false;
-            result.errorMessage = err;
+            result.errorMessage = err?.toString() || '';
             return result;
         }
     }

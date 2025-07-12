@@ -22,7 +22,7 @@ Languages:
                 id="{0FF3ABD2-064E-42B9-8442-1B9B2F51008E}"
                 uid="0D90EA5536C54EA4AD841D2E0740696C"
                 operatorid="{10537C58-1684-4CAB-B4C0-40C10907CE31}"
-                value="trigger:task" />
+                value="trigger:schedule" />
             </conditions>
           </rule>
         </ruleset>
@@ -36,11 +36,11 @@ Languages:
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "b44cf429-de10-4d0e-bf9b-0a09c0a2e42d"
+      Value: "9fc293cf-c14d-4465-8249-cbbd4c1b6595"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250524T073923Z
+      Value: 20250613T123618Z

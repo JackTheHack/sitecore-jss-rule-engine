@@ -1,8 +1,8 @@
 ﻿---
-ID: "619378c8-5f05-4a80-81b2-9e141b3c3b67"
-Parent: "cc358b52-bbd1-4cc3-a557-3993a90a1b7e"
-Template: "f3f30f6b-2590-4588-8754-021f350a6fbf"
-Path: /sitecore/content/ruledemo/demosite/Workflows/Signup/Wait 7 days/Wait
+ID: "d0e838c6-15ed-43b1-bfdb-32b65add3156"
+Parent: "bf19a5fd-de16-41e0-b52e-a533ccc31b84"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Feature/JSS Rule Engine/Chat/Actions/Send RAG Summary/JSS Rule Engine
 Languages:
 - Language: en
   Versions:
@@ -10,28 +10,22 @@ Languages:
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20250524T075621Z
+      Value: 20250707T065030Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
         sitecore\jack.spektor@akqa.com
-    - ID: "57957d03-e7bf-4a44-8a40-1c2a1ed4e887"
-      Hint: Timeout
-      Value: 5
     - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
       Hint: __Created by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "98fced11-2475-4e5e-94c9-a539acaed95a"
-    - ID: "982c1029-8a6a-4772-84ac-97158f0cda03"
-      Hint: NextState
-      Value: "{657CD595-6CFB-4192-81DE-FF14526C0ECB}"
+      Value: "afc6e231-f1d1-46fe-a033-3c170cd838f5"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jack.spektor@akqa.com
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20250524T081502Z
+      Value: 20250712T060116Z

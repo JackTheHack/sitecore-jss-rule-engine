@@ -47,13 +47,13 @@ const aiReplyComparesToRule : ConditionFunctionDefinition = async function(rule:
         }        
         
         const operatorContext = {
-            parameter1: currentMessage?.toLowerCase(),
-            parameter2: messageText?.toLowerCase()
+            parameter1: currentMessage?.trim().toLowerCase(),
+            parameter2: messageText?.trim().toLowerCase()
         };
 
         const result = await operator(operatorContext, ruleContext) as boolean;        
 
-        ruleContext.ruleEngine?.debugMessage('AI message - ', currentMessage, ' Expected: ', messageText, ' Result: ', result);
+        ruleContext.ruleEngine?.debugMessage('AI message - "', currentMessage, '" Expected: "', messageText, '" Result: ', result);
 
         return result;
     } catch (error) {

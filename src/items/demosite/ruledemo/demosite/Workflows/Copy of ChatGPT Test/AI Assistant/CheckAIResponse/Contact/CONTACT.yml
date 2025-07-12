@@ -1,0 +1,60 @@
+﻿---
+ID: "19e8a0c4-a8ab-4ea7-8b57-2b31d287a3af"
+Parent: "b87adf5d-24f7-4b46-9db1-f7aae55268f4"
+Template: "b44783be-ebc7-4ce8-80d9-ee7a08df3245"
+Path: /sitecore/content/ruledemo/demosite/Workflows/Copy of ChatGPT Test/AI Assistant/CheckAIResponse/Contact/CONTACT
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 250
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "6469554d-5fd9-4de9-a8cd-a41c5ee166d8"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20250608T085707Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "6e139722-209e-4d42-b473-4ddc33f469e5"
+      Hint: Condition
+      Value: |
+        <ruleset>
+          <rule
+            uid="{6415612F-BC5C-4220-A6E8-431066613BA9}">
+            <conditions>
+              <condition
+                id="{32682081-1438-4DC1-8817-4330A3A883BE}"
+                uid="EF221FCF525C42E493874D2D6433AEB6"
+                operatorid="{10537C58-1684-4CAB-B4C0-40C10907CE31}"
+                value="Contact Us" />
+            </conditions>
+          </rule>
+        </ruleset>
+    - ID: "727101b5-29ff-4449-8615-080d4119d89f"
+      Hint: Template
+      Value: |
+        You can contact us during business hours with the following number:
+        +64 123 456 789
+        
+        Do you have more questions for me?
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "98cf5ed0-b82a-4d5b-865a-8cdb8037ecb5"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\jack.spektor@akqa.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20250707T064451Z
