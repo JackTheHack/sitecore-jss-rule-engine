@@ -1,8 +1,6 @@
 import { IWorkflowAction } from '../actionFactory';
-import { cleanId } from '../lib/helper';
 import { WorkflowAction, WorkflowActionSubitem, WorkflowExecutionContext } from '../workflowTypes';
 import { conditionActionQuery } from '../graphql/conditionActionQuery';
-import { parse } from 'uuid';
 
 /* interface ScheduleTriggerFields {
     seconds: string;
