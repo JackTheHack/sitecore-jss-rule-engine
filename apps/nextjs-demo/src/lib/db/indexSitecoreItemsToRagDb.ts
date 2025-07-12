@@ -19,12 +19,18 @@ interface IndexSitecoreItemOptions {
 }
 
 function concatenateItemFields(itemData: any, indexedFieldIds: string[]): string {
-  let concatenatedFields = '';
+  let concatenatedFields = `name: ${itemData?.item?.name}\npath: ${itemData?.item?.path}\n`;
+  
+  // Check if itemData and fields exist
+  if (!itemData?.item?.fields || !Array.isArray(itemData.item.fields)) {
+    console.warn('No fields found for item:', itemData?.item?.id);
+    return concatenatedFields;
+  }
   
   for (const fieldId of indexedFieldIds) {
-    const field = itemData.item.fields?.find((f: any) => f.name === fieldId);
+    const field = itemData.item.fields.find((f: any) => f.name === fieldId);
     if (field && field?.value) {
-      concatenatedFields += `#${fieldId}#\n${field?.value}\n\n`;
+      concatenatedFields += "```\n" + `#${fieldId}#\n${field?.value}\n` + "```\n\n";
     }
   }
   
@@ -90,13 +96,12 @@ async function indexSitecoreItem(options: IndexSitecoreItemOptions) {
       await dbService.addEmbedding(
         {
           content: concatenatedFields,
-          id: itemData.item.id,
-          parentId: itemData.item.parent.id,
+          id: itemData?.item?.id || '',
+          parentId: itemData?.item?.parent?.id || '',
           indexId: indexId,
-          name: itemData.item.name,
-          path: itemData.item.path
+          name: itemData?.item?.name || '',
+          path: itemData?.item?.path || ''          
         });
-
       console.log(`Would re-index item ${child.id}`);
     }
   }
@@ -125,8 +130,8 @@ async function indexSitecoreItem(options: IndexSitecoreItemOptions) {
         id: itemId, 
         parentId: rootParentId,
         indexId: indexId,
-        name: rootItemData.item?.name,
-        path: rootItemData.item?.path,
+        name: rootItemData?.item?.name || '',
+        path: rootItemData?.item?.path || '',
         content: concatenatedFields
       });
       console.log('Indexing completed.');

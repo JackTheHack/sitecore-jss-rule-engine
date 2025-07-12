@@ -14,10 +14,12 @@ type ChatbotWidgetProps = ComponentProps & {
 // If you're not supporting Sitecore editors, you can remove this.
 const publicUrl = config.publicUrl;
 
+const workflowId = process.env['CHAT_WORKFLOW_ID'] || '{C880D84B-A088-454C-9FB0-78236A81B573}';
+
 const ChatbotWidget = (props: ChatbotWidgetProps): JSX.Element => (
   <ChatBotWidget 
         welcomeMessage="Hi! I'm Peter, your friendly chatbot, and ready to answer any of your questions." 
-        flowId="{EBAA5C94-B003-4169-AA19-BC0EADDB05DC}"
+        flowId={workflowId}
         title="Peter The Bot"
         iconUrl={`${publicUrl}/chatbotify/icons8-sitecore.svg`}/>
 );

@@ -26,6 +26,8 @@ export class ConditionAction implements IWorkflowAction {
         const conditionBranchTemplateId = "{C9B52E75-6107-4168-9890-5FCCC02FB64B}";
         const conditionElseBranchTemplateId = "{828EF052-F55C-4E01-B301-5D01FD1F5F44}"
 
+        const breakOnFirstMatch = action.fields["BreakOnFirstMatch"] == "1";
+
         // Get all children items of template named ConditionBranch
 
         if (!action.subitems) {
@@ -74,7 +76,8 @@ export class ConditionAction implements IWorkflowAction {
                     }
                 }
                 branchMatched = true;
-                break;
+                
+                if(breakOnFirstMatch) break;
             }
         }
 

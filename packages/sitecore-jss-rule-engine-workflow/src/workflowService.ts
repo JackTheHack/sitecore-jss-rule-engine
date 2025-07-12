@@ -226,6 +226,8 @@ export class WorkflowService implements IWorkflowService {
     }
 
     async parseGraphQLResponse(response: any): Promise<Workflow> {
+
+
         const item = response?.data?.item;
 
         if(!item)
@@ -295,8 +297,8 @@ export class WorkflowService implements IWorkflowService {
         } else {
             // Map children items to actionObj.subitems with id, name, template (id, name), and fields (id, name, value)
             let subitems: WorkflowActionSubitem[] = [];
-            if (Array.isArray(child.children)) {
-                subitems = child.children.map((subitem: any) => ({
+            if (child.children && child.children.results && Array.isArray(child.children.results)) {
+                subitems = child.children.results.map((subitem: any) => ({
                     id: cleanId(subitem.id),
                     name: subitem.name,
                     templateId: subitem?.template?.id,

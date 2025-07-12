@@ -3,6 +3,7 @@ export const itemDescendantsByIdQuery = `
     item(path: $id, language: "en") {
         id,
         name,
+        path,
         children {
           total,
           results{

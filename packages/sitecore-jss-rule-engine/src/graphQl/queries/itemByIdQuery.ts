@@ -3,6 +3,7 @@ export const itemByIdQuery = `
     item(path: $id, language: "en") {
         id,
         name,
+        path,
         parent {
           id
         },

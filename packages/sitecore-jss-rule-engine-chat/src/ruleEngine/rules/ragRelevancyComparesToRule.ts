@@ -17,20 +17,7 @@ const ragRelevancyComparesToRule : ConditionFunctionDefinition = async function(
         throw new Error("Rule engine context missing chat context.");
     }
 
-    const aiRagResults = chatContext.variables.get<string>('aiRagResults');    
-
-    let maxRelevancy = 0;
-
-    if (aiRagResults && Array.isArray(aiRagResults) && aiRagResults.length > 0) {
-        // Find the result with the maximum relevancy
-        let maxResult = aiRagResults[0];
-        for (let i = 1; i < aiRagResults.length; i++) {
-            if (aiRagResults[i].relevancy > maxResult.relevancy) {
-                maxResult = aiRagResults[i];
-            }
-        }
-        maxRelevancy = maxResult.relevancy;
-    }
+    const maxDistance = chatContext.variables.get<number>('aiRagMaxDistance');    
 
     const operatorId = rule.attributes?.get('operatorid');
     const operator = ruleContext.ruleEngine?.operatorDefinitions.get(operatorId);
@@ -53,13 +40,13 @@ const ragRelevancyComparesToRule : ConditionFunctionDefinition = async function(
     try {
         
         const operatorContext = {
-            parameter1: maxRelevancy?.toString(),
-            parameter2: valueText?.trim().toLowerCase()
+            parameter1: maxDistance,
+            parameter2: Number(valueText)
         };
 
         const result = await operator(operatorContext, ruleContext) as boolean;        
 
-        ruleContext.ruleEngine?.debugMessage('AI message - "', maxRelevancy, '" Expected: "', valueText, '" Result: ', result);
+        ruleContext.ruleEngine?.debugMessage('AI message - "', maxDistance, '" Expected: "', valueText, '" Result: ', result);
 
         return result;
     } catch (error) {

@@ -1,6 +1,6 @@
 import { WorkflowService, WorkflowExecutionOptions, WorkflowActionFactory, registerWorkflowRuleEngine, registerWorkflowActions } from '@jss-rule-engine/workflow';
 import { WorkflowServiceOptions } from '@jss-rule-engine/workflow';
-import { JssRuleEngine, RuleEngineSessionContext, getRuleEngineInstance } from '@jss-rule-engine/core';
+import { GraphQLItemProvider, RuleEngineSessionContext, getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {Action, ErrorResponse, Metadata, SuccessResponse} from '@jss-rule-engine/chat'
 import { registerChatActions, registerChatRuleEngine } from '@jss-rule-engine/chat';
@@ -25,19 +25,29 @@ export default async function handler(
 
     try {      
 
+      const sitecoreEdgeUrl = process.env.EDGE_QL_ENDPOINT || '';
+      const sitecoreApiKey = process.env.SITECORE_API_KEY || '';
+
       console.log('Handling message', message, visitorId, workflowId);
 
-      const ruleEngine = getRuleEngineInstance();
+      const ruleEngine = getRuleEngineInstance();            
+      ruleEngine.setSitecoreContext({
+        itemProvider: new GraphQLItemProvider({
+          apiKey: sitecoreApiKey,
+          graphEndpoint: sitecoreEdgeUrl
+        })
+      })
+      
       registerWorkflowRuleEngine(ruleEngine);      
       registerChatRuleEngine(ruleEngine);
-
+      
       const ruleEngineContext = ruleEngine.getRuleEngineContext();
       const chatContext = {
         ruleEngine: ruleEngine,
         userInput: message,
         variables: new RuleEngineSessionContext()        
       } as ChatConversationContext;
-
+      
       ruleEngineContext?.sessionContext?.set('chatContext', chatContext);
 
       ruleEngine.debug = true;
@@ -56,8 +66,8 @@ export default async function handler(
         ruleEngine: ruleEngine,
         ruleEngineContext: ruleEngineContext,
         actionFactory: actionFactory,
-        graphqlEndpoint: "/",
-        apiKey: "/"
+        graphqlEndpoint: sitecoreEdgeUrl,
+        apiKey: sitecoreApiKey
       }
       
       console.log('Creating workflow service', dbServiceOptions);
@@ -67,8 +77,7 @@ export default async function handler(
       await workflowService.init();
 
       console.log("Loading workflow...")
-
-      const sitecoreEdgeUrl = process.env.EDGE_QL_ENDPOINT || '';
+      
 
       const workflowConfig = await loadWorkflowFromSitecore(sitecoreEdgeUrl, workflowId, workflowService);
 

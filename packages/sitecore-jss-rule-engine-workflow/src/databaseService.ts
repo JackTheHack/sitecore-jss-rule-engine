@@ -24,7 +24,7 @@ export interface RAGItem{
     parentId: string;
     indexId: string;
     content: string;
-    distance: Number;
+    distance?: Number;
 }
 
 export interface IDatabaseService {
@@ -88,9 +88,20 @@ export class DatabaseService implements IDatabaseService {
 
             const model = await generateEmbeddings(item.content);
             console.log('Generated embedding.')
+            
+            const args = [
+                item.id || '', 
+                item.name || '', 
+                item.path || '', 
+                item.parentId || '', 
+                item.content, 
+                new Float32Array(model.embedding.embedding).buffer as ArrayBuffer, 
+                item.indexId || ''
+            ];
+                        
             const sqlResponse = await this.client.execute({
-                sql: 'INSERT OR REPLACE INTO rag_embeddings (id, name, path, parent_id, content, embedding, index_id) VALUES (?, ?, ?, ?, ?)',
-                args: [item.id, item.name, item.path, item.parentId, item.content, new Float32Array(model.embedding.embedding).buffer as ArrayBuffer, item.indexId]
+                sql: 'INSERT OR REPLACE INTO rag_embeddings (id, name, path, parent_id, content, embedding, index_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                args: args
             });
             console.log('Added to db - ', sqlResponse);
         } catch (error) {
@@ -109,7 +120,6 @@ export class DatabaseService implements IDatabaseService {
                     ORDER BY distance ASC LIMIT ?`,
                 args: [new Float32Array(model.embedding.embedding).buffer as ArrayBuffer, indexId, thresold, topN]
             });
-            console.log('Found results - ', result);
             const resultArr = result.rows.map((row: any) => ({
                 id: row.id,
                 name: row.name,
@@ -187,10 +197,12 @@ export class DatabaseService implements IDatabaseService {
         await this.client.execute(`
             CREATE TABLE IF NOT EXISTS rag_embeddings (
                 id TEXT PRIMARY KEY,
+                name TEXT NOT NULL,
+                path TEXT NOT NULL,
                 parent_id TEXT NOT NULL,
-                index_id TEXT NOT NULL,
                 content TEXT NOT NULL,
-                embedding F32_BLOB(768)
+                embedding F32_BLOB(768),
+                index_id TEXT NOT NULL
             );`);
 
         await this.client.execute(`                        

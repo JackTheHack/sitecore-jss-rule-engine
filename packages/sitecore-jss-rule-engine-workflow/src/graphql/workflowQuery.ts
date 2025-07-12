@@ -23,19 +23,6 @@ export const sitecoreQuery = async (path: string, language: string = "en") => {
                             template {
                                 id,
                                 name
-                            },
-                            children {
-                                id,
-                                name,
-                                template {
-                                    id,
-                                    name
-                                },
-                                fields (ownFields: false) {
-                                    id,
-                                    name,
-                                    value
-                                }
                             }
                         }
                     }

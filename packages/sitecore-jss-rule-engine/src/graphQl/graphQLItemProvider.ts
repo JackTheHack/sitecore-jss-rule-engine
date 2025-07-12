@@ -4,12 +4,17 @@ import { itemAncestorsByIdQuery } from "./queries/itemAncestorsById"
 import { itemDescendantsByIdQuery } from "./queries/itemDescendantsById"
 import { itemByIdQuery } from "./queries/itemByIdQuery"
 
+type GraphQLItemProviderOptions ={
+  graphEndpoint: string;
+  apiKey: string;
+}
+
 export class GraphQLItemProvider implements IItemProvider {
   endpointUrl: any;
   apiKey: any;
   cache: Map<string, any> = new Map<string, any>()
 
-  constructor(options: any) {
+  constructor(options: GraphQLItemProviderOptions) {
     this.endpointUrl = options.graphEndpoint;
     this.apiKey = options.apiKey;
   }

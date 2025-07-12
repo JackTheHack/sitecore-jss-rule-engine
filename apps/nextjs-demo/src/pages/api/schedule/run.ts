@@ -1,6 +1,6 @@
 import { WorkflowService, WorkflowActionFactory, ScheduledTaskService, registerWorkflowRuleEngine, loadWorkflowFromSitecore, registerWorkflowActions } from '@jss-rule-engine/workflow';
 import { WorkflowServiceOptions } from '@jss-rule-engine/workflow';
-import { getRuleEngineInstance } from '@jss-rule-engine/core';
+import { getRuleEngineInstance, GraphQLItemProvider } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ErrorResponse, Metadata, ScheduleRunMetadata, SuccessResponse} from '../../../lib/form/types'
 import { DatabaseService, ScheduledTaskServiceOptions } from '@jss-rule-engine/workflow';
@@ -15,11 +15,20 @@ export default async function handler(
 
     try {
 
+      const sitecoreEdgeUrl = process.env.EDGE_QL_ENDPOINT || '';
+      const sitecoreApiKey = process.env.SITECORE_API_KEY || '';
 
       console.log('Triggering workflow actions');
 
       const ruleEngine = getRuleEngineInstance();
       registerWorkflowRuleEngine(ruleEngine);      
+
+      ruleEngine.setSitecoreContext({
+        itemProvider: new GraphQLItemProvider({
+          apiKey: sitecoreApiKey,
+          graphEndpoint: sitecoreEdgeUrl
+        })
+      })
 
       const ruleEngineContext = ruleEngine.getRuleEngineContext();
 
@@ -36,7 +45,7 @@ export default async function handler(
         databaseService: dbService,
         ruleEngine: ruleEngine,
         actionFactory: actionFactory,
-        graphqlEndpoint: process.env.EDGE_QL_ENDPOINT || '',
+        graphqlEndpoint: sitecoreEdgeUrl,
         ruleEngineContext: ruleEngineContext
       }
       
