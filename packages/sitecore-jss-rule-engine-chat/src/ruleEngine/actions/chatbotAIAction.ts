@@ -40,6 +40,12 @@ export class ChatbotAIAction implements IWorkflowAction {
             dontSendMessage: fields["Dont Send Response"]
         };
 
+        if(aiOptions.instructions?.indexOf('@aiRagContent'))
+        {
+            const aiRagContent = chatContext.variables.get<string>("aiRagContent");
+            aiOptions.instructions = aiOptions.instructions.replace('@aiRagContent', aiRagContent);
+        }
+
         context.ruleEngine?.debugMessage('Making AI request .', aiOptions);
 
         const response = await this.aiService.generateResponse(aiOptions);

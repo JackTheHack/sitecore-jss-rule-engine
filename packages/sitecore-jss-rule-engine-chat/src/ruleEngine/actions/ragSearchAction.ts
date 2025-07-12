@@ -46,19 +46,19 @@ export class RAGSearchAction implements IWorkflowAction {
             }
             
                     
-            // Calculate max distance for the results array
-            let maxDistance = 0;
+            // Calculate min distance for the results array
+            let minDistance = 1;
             if (Array.isArray(results) && results.length > 0) {
-                maxDistance = Math.max(...results.map(r => typeof r.distance === 'number' ? r.distance : 0));
+                minDistance = Math.min(...results.map(r => typeof r.distance === 'number' ? r.distance : 1));
             }
                     
 
-            console.log('Results:');
+            console.log('RAG Results:');
             results?.forEach( x => console.log(`path: ${x.path} distance: ${x.distance}`));
 
             chatContext.variables.set("aiRagContent", aiRagContent);
             chatContext.variables.set("aiRagResults", results);
-            chatContext.variables.set("aiRagMaxDistance", maxDistance);
+            chatContext.variables.set("aiRagMinDistance", minDistance);
 
         } catch (err) {
             console.error("Error searching RAG table with findRelevantEmbeddings:", err);

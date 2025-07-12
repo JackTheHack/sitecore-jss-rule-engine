@@ -135,10 +135,14 @@ export class WorkflowService implements IWorkflowService {
         } as WorkflowExecutionResult;
 
         try{            
-            const state = workflow.states[currentStateId];
+            let state = workflow.states[currentStateId];
 
             if(!state){
-                throw new Error("Can't find the state in workflow "+ currentStateId);
+                console.warn("Can't find the state in workflow "+ currentStateId);
+                if(workflow.defaultStateId)
+                {
+                    state = workflow.states[workflow.defaultStateId]
+                }
             }
 
             console.log(`Checking ${state.id} triggers - ${state.triggers?.length}`);
@@ -183,7 +187,7 @@ export class WorkflowService implements IWorkflowService {
     }
 
     async executeAction(visitorId: string, action: WorkflowAction, workflowExecutionContext: WorkflowExecutionContext): Promise<void> {
-        console.log(`Executing action ${action.id}`);
+        console.log(`Executing action ${action.id} ${action.templateId}`);
         const actionCommand = this.options.actionFactory.getAction(action.templateId);
 
         if(actionCommand)

@@ -21,7 +21,11 @@ export const itemByIdQuery = `
             template {
               id, 
               name
-            }
+            },
+            fields (ownFields: false) {
+              name,
+              value
+            },
           }
         }
     }

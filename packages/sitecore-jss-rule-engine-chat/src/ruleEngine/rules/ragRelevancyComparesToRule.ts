@@ -17,7 +17,7 @@ const ragRelevancyComparesToRule : ConditionFunctionDefinition = async function(
         throw new Error("Rule engine context missing chat context.");
     }
 
-    const maxDistance = chatContext.variables.get<number>('aiRagMaxDistance');    
+    const minDistance = chatContext.variables.get<number>('aiRagMinDistance');    
 
     const operatorId = rule.attributes?.get('operatorid');
     const operator = ruleContext.ruleEngine?.operatorDefinitions.get(operatorId);
@@ -40,13 +40,13 @@ const ragRelevancyComparesToRule : ConditionFunctionDefinition = async function(
     try {
         
         const operatorContext = {
-            parameter1: maxDistance,
+            parameter1: minDistance,
             parameter2: Number(valueText)
         };
 
         const result = await operator(operatorContext, ruleContext) as boolean;        
 
-        ruleContext.ruleEngine?.debugMessage('AI message - "', maxDistance, '" Expected: "', valueText, '" Result: ', result);
+        ruleContext.ruleEngine?.debugMessage('AI message - "', minDistance, '" Expected: "', valueText, '" Result: ', result);
 
         return result;
     } catch (error) {

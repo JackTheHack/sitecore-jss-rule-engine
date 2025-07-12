@@ -130,6 +130,7 @@ export class DatabaseService implements IDatabaseService {
                 indexId: row.index_id,
                 distance: row.distance
             } as RAGItem));
+            console.log('Found relevant embeddings - ', resultArr?.length);
             return resultArr;
         } catch (error) {
             console.error('Failed to find relevant embeddings:', error);            

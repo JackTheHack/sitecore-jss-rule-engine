@@ -7,6 +7,15 @@ export const conditionActionQuery = async (path: string, language: string = "en"
                 results {
                     id,
                     name,
+                    fields (ownFields: false) {
+                                id,
+                                name,
+                                value
+                            },
+                    template {
+                                id,
+                                name
+                            }
                     children {
                         results {
                             id,
@@ -19,19 +28,6 @@ export const conditionActionQuery = async (path: string, language: string = "en"
                             template {
                                 id,
                                 name
-                            },
-                            children {
-                                id,
-                                name,
-                                template {
-                                    id,
-                                    name
-                                },
-                                fields (ownFields: false) {
-                                    id,
-                                    name,
-                                    value
-                                }
                             }
                         }
                     }

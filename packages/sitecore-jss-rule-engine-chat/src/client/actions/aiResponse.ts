@@ -9,7 +9,7 @@ export default class aiResponseCommand implements IChatActionCommand {
             const responseText = parsedContent.response;
 
             await context.messageApis.toggleIsBotTyping(true);
-            await context.messageApis.simulateStreamMessage(responseText);
+            await context.messageApis.injectMessage(responseText);
             await context.messageApis.toggleIsBotTyping(false);
         }catch(e)
         {

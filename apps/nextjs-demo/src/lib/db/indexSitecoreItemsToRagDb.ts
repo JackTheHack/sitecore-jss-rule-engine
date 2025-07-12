@@ -30,7 +30,9 @@ function concatenateItemFields(itemData: any, indexedFieldIds: string[]): string
   for (const fieldId of indexedFieldIds) {
     const field = itemData.item.fields.find((f: any) => f.name === fieldId);
     if (field && field?.value) {
-      concatenatedFields += "```\n" + `#${fieldId}#\n${field?.value}\n` + "```\n\n";
+      // Strip HTML tags from the field value before concatenating
+      const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '');
+      concatenatedFields += "```\n" + `#${fieldId}#\n${stripHtml(field?.value)}\n` + "```\n\n";
     }
   }
   
