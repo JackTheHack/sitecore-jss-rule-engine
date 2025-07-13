@@ -78,6 +78,63 @@ const nextConfig = {
       },
     ];
   },
+
+  // Webpack configuration to handle Node.js modules in browser environment
+  webpack: (config, { isServer }) => {
+
+    // Add rule to handle TypeScript declaration files
+    config.module.rules.push({
+      test: /\.d\.ts$/,
+      loader: 'ignore-loader',
+    });
+
+    // Handle @libsql/client package specifically
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@libsql/client': false,
+    };
+
+    // Handle Node.js modules that should not be bundled for client-side
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+        crypto: false,
+        stream: false,
+        url: false,
+        zlib: false,
+        http: false,
+        https: false,
+        assert: false,
+        os: false,
+        path: false,
+        util: false,
+        buffer: false,
+        events: false,
+        querystring: false,
+        child_process: false,
+        cluster: false,
+        dgram: false,
+        dns: false,
+        domain: false,
+        module: false,
+        punycode: false,
+        readline: false,
+        repl: false,
+        string_decoder: false,
+        sys: false,
+        timers: false,
+        tty: false,
+        v8: false,
+        vm: false,
+        worker_threads: false,
+      };
+    }
+
+    return config;
+  },
 };
 
 module.exports = () => {

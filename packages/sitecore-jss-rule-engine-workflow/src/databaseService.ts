@@ -70,6 +70,7 @@ export class DatabaseService implements IDatabaseService {
         }
 
         this.client = createClient({
+            fetch: fetch,
             url: options.url,
             authToken: options.authToken,
         });

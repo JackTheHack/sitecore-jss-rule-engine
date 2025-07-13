@@ -37,7 +37,7 @@
   "dependencies": {
     "@ai-sdk/google": "1.2.12",
     "@jss-rule-engine/core": "*",
-    "@libsql/client": "0.15.4",
+    "@libsql/client": "0.15.9",
     "@types/uuid": "^10.0.0",
     "ai": "^4.3.16",
     "form-data": "^4.0.0",
