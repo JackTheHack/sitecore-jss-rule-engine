@@ -1,24 +1,20 @@
 import { GraphQLItemProvider, JssRuleEngine } from '@jss-rule-engine/core';
 
 // Placeholder: import or define your RAG DB service here
-import { DatabaseService } from '@jss-rule-engine/workflow'
 import { getDatabaseServiceOptions } from './dbOptions';
+import { DatabaseService } from '../databaseService';
 
-interface IndexSitecoreItemsToRagDbOptions {
-  itemId: string;  
-  sitecoreApiEndpoint: string;
-  sitecoreApiKey: string;  
-}
 
-interface IndexSitecoreItemOptions {
+export interface IndexSitecoreItemOptions {
   itemId: string;
   itemProvider: GraphQLItemProvider;
   indexId: string;
   indexingRule: string;
   indexedFieldIds: string[];
+  ruleEngine: JssRuleEngine
 }
 
-function concatenateItemFields(itemData: any, indexedFieldIds: string[]): string {
+export function concatenateItemFields(itemData: any, indexedFieldIds: string[]): string {
   let concatenatedFields = `name: ${itemData?.item?.name}\npath: ${itemData?.item?.path}\n`;
   
   // Check if itemData and fields exist
@@ -39,7 +35,7 @@ function concatenateItemFields(itemData: any, indexedFieldIds: string[]): string
   return concatenatedFields;
 }
 
-async function indexSitecoreItem(options: IndexSitecoreItemOptions) {
+export async function indexSitecoreItem(options: IndexSitecoreItemOptions) {
   const { itemId, itemProvider, indexingRule, indexedFieldIds, indexId } = options;
 
     // 2. Get children of RootItemId
@@ -71,7 +67,7 @@ async function indexSitecoreItem(options: IndexSitecoreItemOptions) {
     }
   }
 
-  const ruleEngine = new JssRuleEngine();    
+  const ruleEngine = options.ruleEngine;      
 
   console.log("Indexing children...");
 
@@ -142,72 +138,3 @@ async function indexSitecoreItem(options: IndexSitecoreItemOptions) {
     }
   }
 }
-
-export async function indexSitecoreItemsToRagDb(options: IndexSitecoreItemsToRagDbOptions) {
-  
-  const { itemId, sitecoreApiEndpoint, sitecoreApiKey } = options;
-  
-  const itemProvider = new GraphQLItemProvider({
-    graphEndpoint: sitecoreApiEndpoint,
-    apiKey: sitecoreApiKey,
-  });
-  
-  const configItemId = process.env.RAG_CONFIG_ITEMID;
-
-  if(!configItemId){
-    console.warn("RAG_CONFIG_ITEMID is not configured. Skipping RAG indexing.");
-    return;
-  }
-
-  // Get all RAG Index items from the config item
-  const ragIndexItems = await itemProvider.getItemDescendantsInfoById(configItemId);  
-  
-  if (!ragIndexItems || !ragIndexItems?.item?.children || ragIndexItems?.item?.children?.total === 0) {
-    console.warn("No RAG Index items found in config. Skipping RAG indexing.");
-    return;
-  }
-
-  // Process each RAG Index item
-  for (const ragIndex of ragIndexItems?.item?.children?.results) {
-    // Get the full RAG Index item data to access its fields
-    const ragIndexData = await itemProvider.getItemById(ragIndex.id);
-
-    console.log('RAG Index data - ', ragIndexData);
-    
-    if (!ragIndexData || !ragIndexData?.item?.fields) {
-      console.warn(`RAG Index item ${ragIndex.id} has no fields. Skipping.`);
-      continue;
-    }
-
-    const fields = ragIndexData?.item?.fields;
-
-    console.log("Index fields - ", fields);
-
-    // Extract indexing rule and field IDs from the RAG Index item
-    const indexingRule = fields?.find((x:any) => x.name =="IndexingRule")?.value;
-    const indexedFieldIdsRaw = fields?.find((x:any) => x.name =="IndexedFieldIDs")?.value || '';
-    const enabled = fields?.find((x:any) => x.name =="Enabled")?.value == "1";
-
-    console.log(`Processing RAG Index: ${ragIndex.id}`);
-    console.log(`Indexing rule:`, indexingRule, indexedFieldIdsRaw, enabled);
-
-    const indexedFieldIds = indexedFieldIdsRaw
-      .split(',')
-      .map((id: string) => id.trim())
-      .filter((id: string) => !!id);
-
-    
-    console.log(`Indexed field IDs: ${indexedFieldIds.join(', ')}`);
-
-    // Index the target item using this RAG Index configuration
-    await indexSitecoreItem({
-      itemId,
-      itemProvider,
-      indexId: ragIndex.id,
-      indexingRule,
-      indexedFieldIds
-    });
-  }
-
-  return { success: true };
-} 

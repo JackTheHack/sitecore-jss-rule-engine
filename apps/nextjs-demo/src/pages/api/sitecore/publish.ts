@@ -1,4 +1,4 @@
-import { indexSitecoreItemsToRagDb } from 'lib/db/indexSitecoreItemsToRagDb';
+import { ragItemsIndexingHandler } from '@jss-rule-engine/workflow';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 // Example: You may want to validate a secret/token from Sitecore
@@ -29,24 +29,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             console.error('Invalid or missing event type - ', eventType)
             return res.status(400).json({ success: false, error: 'Invalid or missing event type' });
         }
+        
+        console.log("Indexing options - ", rootItemId)
 
-        // Example logic: Log, trigger workflow, clear cache, etc.
-        // TODO: Replace with your actual logic
-        console.log('Processing publish event for item:', rootItemId|| '[unknown]');
+        const runResult = await ragItemsIndexingHandler({itemId: rootItemId});
 
+        if(runResult.success){
+            return res.status(200).json({ success: true });
+        }else {
+            return res.status(runResult.errorCode || 500).json({ success: false, message: runResult.errorMessage || 'Something bad happened.' });
 
-        const indexingOptions = {
-            itemId: rootItemId,
-            sitecoreApiEndpoint: process.env.EDGE_QL_ENDPOINT || '',
-            sitecoreApiKey: process.env.SITECORE_API_KEY || '',
-        };
-
-        console.log("Indexing options - ", indexingOptions)
-
-        await indexSitecoreItemsToRagDb(indexingOptions);
+        }
 
         // Respond to Sitecore
-        return res.status(200).json({ success: true, message: 'Publish event processed' });
     } catch (error) {
         console.error('Error processing Sitecore publish webhook:', error);
         return res.status(500).json({ success: false, error: error instanceof Error ? error.message : 'Internal server error' });

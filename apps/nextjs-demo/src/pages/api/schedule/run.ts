@@ -1,97 +1,35 @@
-import { WorkflowService, WorkflowActionFactory, ScheduledTaskService, registerWorkflowRuleEngine, loadWorkflowFromSitecore, registerWorkflowActions } from '@jss-rule-engine/workflow';
-import { WorkflowServiceOptions } from '@jss-rule-engine/workflow';
-import { getRuleEngineInstance, GraphQLItemProvider } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ErrorResponse, Metadata, ScheduleRunMetadata, SuccessResponse} from '../../../lib/form/types'
-import { DatabaseService, ScheduledTaskServiceOptions } from '@jss-rule-engine/workflow';
-import  {getDatabaseServiceOptions}  from '../../../lib/db/dbOptions';
+import { ErrorResponse, SuccessResponse} from '../../../lib/form/types'
+import {handleScheduledTasks} from '@jss-rule-engine/workflow'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<SuccessResponse | ErrorResponse>
 ) {
   if (req.method === 'POST') {
-    const {  } = req.body;
+    
+      var runResult = await handleScheduledTasks();
 
-    try {
+      if(runResult.success){
 
-      const sitecoreEdgeUrl = process.env.EDGE_QL_ENDPOINT || '';
-      const sitecoreApiKey = process.env.SITECORE_API_KEY || '';
-
-      console.log('Triggering workflow actions');
-
-      const ruleEngine = getRuleEngineInstance();
-      registerWorkflowRuleEngine(ruleEngine);      
-
-      ruleEngine.setSitecoreContext({
-        itemProvider: new GraphQLItemProvider({
-          apiKey: sitecoreApiKey,
-          graphEndpoint: sitecoreEdgeUrl
-        })
-      })
-
-      const ruleEngineContext = ruleEngine.getRuleEngineContext();
-
-      console.log('Rule engine: ', ruleEngine?.requestContext, ruleEngine?.sitecoreContext, ruleEngine.commandDefinitions?.size);
-
-      const dbServiceOptions = getDatabaseServiceOptions();
-
-      const dbService = new DatabaseService(dbServiceOptions);
-      
-      const actionFactory = new WorkflowActionFactory();
-      registerWorkflowActions(actionFactory);
-
-      const workflowOptions: WorkflowServiceOptions = {
-        databaseService: dbService,
-        ruleEngine: ruleEngine,
-        actionFactory: actionFactory,
-        graphqlEndpoint: sitecoreEdgeUrl,
-        ruleEngineContext: ruleEngineContext
+        const okResult : SuccessResponse = {
+          success: true,
+          metadata: {
+            timestamp: runResult?.metadata?.timestamp,
+            tasksExecuted: runResult?.metadata?.tasksExecuted,
+            totalTasks: runResult?.metadata?.totalTasks
+          }          
+        }
+        return res.status(200).json(okResult);
+      } else {
+        const errorResult: ErrorResponse = {
+          success: false,
+          error: runResult?.errorMessage || 'Something bad happened'
+        }
+        return res.status(runResult.errorCode || 500).json(errorResult);
       }
-      
-      console.log('Creating workflow service', dbServiceOptions);
-      const workflowService = new WorkflowService(workflowOptions);
-      
-      const scheduleServiceOptions: ScheduledTaskServiceOptions = {
-        databaseService: dbService,
-        workflowService: workflowService,
-        graphqlEndpoint: process.env.EDGE_QL_ENDPOINT || '',
-      }
-      
-      const scheduledService = new ScheduledTaskService(scheduleServiceOptions);      
-      
-      console.log("Initializing workflow...")
-      await workflowService.init();
 
-      console.log('Executing triggers', scheduleServiceOptions);
-
-      const workflowResult = await scheduledService.executeTasks();
-
-      
-      if (!workflowResult.success) {
-        console.log('Failed to execute workflow triggers', workflowResult.errorMessage);
-        return res.status(500).json({ 
-          success: false, 
-          error: 'Failed to execute workflow triggers'});
-      }      
-
-      const metadata: ScheduleRunMetadata = {
-        timestamp: new Date().toISOString(),
-        tasksExecuted: workflowResult?.tasksExecuted,
-        totalTasks: workflowResult?.totalTasks
-      };
-
-      const okResult : SuccessResponse = { 
-        success: true, 
-        metadata };
-
-      console.log('Returning OK result', okResult);
-
-      return res.status(200).json(okResult);
-    } catch (error) {
-      console.log('Something weird happened - ', error);
-      return res.status(500).json({ success: false, error: 'Failed to execute workflow triggers' });
-    }
+    
   } else {
     res.setHeader('Allow', ['POST']);
     return res.status(405).json({ success: false, error: `Method ${req.method} not allowed` });

@@ -14,7 +14,7 @@ type ChatbotWidgetProps = ComponentProps & {
 // If you're not supporting Sitecore editors, you can remove this.
 const publicUrl = config.publicUrl;
 
-const workflowId = process.env['CHAT_WORKFLOW_ID'] || '{C880D84B-A088-454C-9FB0-78236A81B573}';
+const workflowId = process.env.CHAT_WORKFLOW_ID || '{C880D84B-A088-454C-9FB0-78236A81B573}';
 
 const ChatbotWidget = (props: ChatbotWidgetProps): JSX.Element => (
   <ChatBotWidget 

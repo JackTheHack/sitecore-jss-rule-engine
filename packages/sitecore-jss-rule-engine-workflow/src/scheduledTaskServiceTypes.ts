@@ -5,6 +5,7 @@ export type ScheduledTaskServiceOptions = {
     workflowService: IWorkflowService;
     databaseService: IDatabaseService;
     graphqlEndpoint: string;
+    sitecoreApiKey: string;
 }
 
 export type ScheduledTaskExecutionResult = {

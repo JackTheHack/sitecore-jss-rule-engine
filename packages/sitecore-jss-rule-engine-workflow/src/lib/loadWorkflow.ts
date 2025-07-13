@@ -2,14 +2,9 @@ import { IWorkflowService, Workflow } from "../workflowTypes";
 
 export async function loadWorkflowFromSitecore(
     graphQlEndpoint: string, 
+    apiKey: string,
     itemId: string, 
     workflowService: IWorkflowService): Promise<Workflow> {
-
-    const apiKey = process.env.SITECORE_API_KEY;
-
-    if (!apiKey) {
-        throw new Error('SITECORE_API_KEY is not defined in the environment variables');
-    }
 
     try {
         console.log('Loading workflow from Sitecore - ', itemId);

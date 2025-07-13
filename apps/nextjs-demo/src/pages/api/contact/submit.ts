@@ -1,10 +1,6 @@
-import { WorkflowService, WorkflowExecutionOptions, WorkflowActionFactory, registerWorkflowRuleEngine, registerWorkflowActions, loadWorkflowFromSitecore } from '@jss-rule-engine/workflow';
-import { WorkflowServiceOptions } from '@jss-rule-engine/workflow';
-import { getRuleEngineInstance } from '@jss-rule-engine/core';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ErrorResponse, Metadata, SuccessResponse} from '../../../lib/form/types'
-import { DatabaseService, IDatabaseService } from '@jss-rule-engine/workflow';
-import  {getDatabaseServiceOptions}  from '../../../lib/db/dbOptions';
+import { ErrorResponse, SuccessResponse} from '../../../lib/form/types'
+import { handleWorkflowRun } from '@jss-rule-engine/workflow';
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,73 +11,37 @@ export default async function handler(
 
     if (!message || typeof message !== 'string') {
       return res.status(400).json({ success: false, error: 'Message is required and must be a string' });
-    }
+    }    
 
-    try {      
+    const runResult = await handleWorkflowRun({
+      message,
+      visitorId,
+      workflowId
+    })
 
-      console.log('Handling workflow submit', message, visitorId, workflowId);
+    if(runResult.success){
+      const okResult : SuccessResponse = { 
+        success: true, 
+        metadata: {
+          timestamp: runResult.metadata?.timestamp || '',
+          }
+      };
 
-      const ruleEngine = getRuleEngineInstance();
-      registerWorkflowRuleEngine(ruleEngine);      
-
-      console.log('Rule engine: ', ruleEngine?.requestContext, ruleEngine?.sitecoreContext, ruleEngine.commandDefinitions?.size);
-
-      const actionFactory = new WorkflowActionFactory();
-      registerWorkflowActions(actionFactory);
-
-      const ruleEngineContext = ruleEngine.getRuleEngineContext();
-
-      const dbServiceOptions = getDatabaseServiceOptions();
-      const dbService = new DatabaseService(dbServiceOptions);
-
-      const workflowOptions: WorkflowServiceOptions = {
-        databaseService: dbService,
-        ruleEngine: ruleEngine,
-        actionFactory: actionFactory,
-        graphqlEndpoint: "/",
-        ruleEngineContext: ruleEngineContext
-      }
+      console.log('Returning OK result', okResult);
       
-      console.log('Creating workflow service', dbServiceOptions);
-      const workflowService = new WorkflowService(workflowOptions);
-      
-      console.log("Initializing workflow...")
-      await workflowService.init();
-
-      const sitecoreEdgeUrl = process.env.EDGE_QL_ENDPOINT || '';
-
-      const workflowConfig = await loadWorkflowFromSitecore(sitecoreEdgeUrl, workflowId, workflowService);
-
-      const executionOptions : WorkflowExecutionOptions = {
-        visitorId: visitorId,
-        eventName: "form:submit",
-        eventParameters: JSON.stringify({ message: message }),
-        workflowId: workflowId,
-        defaultStateId: workflowConfig.defaultStateId || ''
-      }      
-
-      console.log('Executing triggers', executionOptions);
-
-      const workflowResult = await workflowService.executeTriggers(executionOptions);
-
-      if (!workflowResult.success) {
-        console.log('Failed to execute workflow triggers', workflowResult.error);
-        return res.status(500).json({ success: false, error: 'Failed to execute workflow triggers' });
+      return res.status(200).json(okResult);
+    }else {
+      const errorResult : ErrorResponse = {
+        success: false,
+        error: runResult.errorMessage || 'Something bad happened.',
+        metadata: {
+          timestamp: runResult.metadata?.timestamp || ''
+        }
       }
-    } catch (error) {
-      console.log('Something weird happened - ', error);
-      return res.status(500).json({ success: false, error: 'Failed to execute workflow triggers' });
-    }
 
-    const metadata: Metadata = {
-      timestamp: new Date().toISOString(),
-    };
+      return res.status(runResult.errorCode || 500).json(errorResult)
+    }    
 
-    const okResult : SuccessResponse = { success: true, metadata };
-
-    console.log('Returning OK result', okResult);
-
-    return res.status(200).json(okResult);
   } else {
     res.setHeader('Allow', ['POST']);
     return res.status(405).json({ success: false, error: `Method ${req.method} not allowed` });

@@ -17,11 +17,11 @@ export type Action = {
 
 export type Metadata = {
   timestamp: string;
-  messageLength: number;
+  messageLength?: number;
   newStateId?: string;
   prevStateId?: string;
-  visitorId: string;
-  triggerName: string;
+  visitorId?: string;
+  triggerName?: string;
 };
 
 export type SuccessResponse = {

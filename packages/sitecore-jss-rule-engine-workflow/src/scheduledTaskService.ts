@@ -48,7 +48,11 @@ export class ScheduledTaskService implements IScheduledTaskService {
                     continue;
                 }
 
-                const workflowConfig = await loadWorkflowFromSitecore(this.options.graphqlEndpoint, workflowId, this.workflowService);
+                const workflowConfig = await loadWorkflowFromSitecore(
+                    this.options.graphqlEndpoint, 
+                    this.options.sitecoreApiKey,
+                    workflowId, 
+                    this.workflowService);
 
                 const now = new Date();
 
