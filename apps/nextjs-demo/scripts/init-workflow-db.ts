@@ -1,5 +1,4 @@
-import { DatabaseService } from '@jss-rule-engine/workflow';
-import  {getDatabaseServiceOptions} from '../src/lib/db/dbOptions';
+import { DatabaseService, getDatabaseServiceOptions } from '@jss-rule-engine/workflow';
 import * as dotenv from 'dotenv';
 /*
   METADATA GENERATION

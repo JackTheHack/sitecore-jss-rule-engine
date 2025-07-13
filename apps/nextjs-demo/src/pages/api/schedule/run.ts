@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     
-      var runResult = await handleScheduledTasks();
+      const runResult = await handleScheduledTasks();
 
       if(runResult.success){
 
