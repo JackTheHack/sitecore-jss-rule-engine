@@ -79,7 +79,7 @@ const nextConfig = {
     ];
   },
 
-  // Webpack configuration to handle Node.js modules in browser environment
+  /* // Webpack configuration to handle Node.js modules in browser environment
   webpack: (config, { isServer }) => {
 
     // Add rule to handle TypeScript declaration files
@@ -134,7 +134,7 @@ const nextConfig = {
     }
 
     return config;
-  },
+  }, */
 };
 
 module.exports = () => {

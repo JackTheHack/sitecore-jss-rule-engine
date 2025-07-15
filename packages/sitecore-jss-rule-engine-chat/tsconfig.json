@@ -23,7 +23,7 @@
     ],
     "jsx": "react",
     "declaration": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "noUnusedLocals": false,
     "noUnusedParameters": true,
     "esModuleInterop": true,
@@ -37,7 +37,8 @@
   },
   "include": [
     "src",
-    "index.ts"   
+    "index.ts",
+    "client.ts"   
    ],
   "exclude": [
     "node_modules"

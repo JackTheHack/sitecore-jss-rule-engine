@@ -9,7 +9,6 @@ import { componentBuilder } from 'temp/componentBuilder';
 
 import { getRuleEngineInstance } from '@jss-rule-engine/core';
 import { PersonalizedPlaceholder } from '@jss-rule-engine/nextjs';
-import { ChatBotWidget } from '@jss-rule-engine/chat';
 
 // Prefix public assets with a public URL to enable compatibility with Sitecore editors.
 // If you're not supporting Sitecore editors, you can remove this.

@@ -1,4 +1,3 @@
-export { ChatBotWidget } from './src/components/ChatBotWidget'
 export {ChatActionFactory, IChatActionCommand} from './src/client/chatActionFactory'
 export {registerChatActions} from './src/registerChatActions'
 export {registerChatCommands} from './src/registerChatCommands'
