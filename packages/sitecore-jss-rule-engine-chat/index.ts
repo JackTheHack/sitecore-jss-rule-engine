@@ -1,4 +1,5 @@
-export {ChatActionFactory, IChatActionCommand} from './src/client/chatActionFactory'
+export {ChatActionFactory} from './src/client/chatActionFactory'
+export type { IChatActionCommand } from './src/client/chatActionFactory'
 export {registerChatActions} from './src/registerChatActions'
 export {registerChatCommands} from './src/registerChatCommands'
 export {registerChatRuleEngine} from './src/registerChatRuleEngine'
