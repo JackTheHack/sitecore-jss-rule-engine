@@ -2,6 +2,11 @@ import { JssRuleEngine, IJssRuleEngine} from './src/ruleEngine';
 import { RuleData, RuleActionData, ClientCommand, RuleEngineContext, RuleConditionData, ConditionFunctionDefinition, ActionFunctionDefinition, OperatorFunctionDefinition } from './src/types/ruleEngine';
 import {RuleEngineSessionContext} from './src/types/ruleEngineSessionContext'
 
+declare global {
+    var EdgeRuntime: string;
+    var JssEngine: JssRuleEngine;
+}
+
 var isEdgeRuntime = typeof global.EdgeRuntime == 'string';
 
 if(!isEdgeRuntime && !global.JssEngine)
