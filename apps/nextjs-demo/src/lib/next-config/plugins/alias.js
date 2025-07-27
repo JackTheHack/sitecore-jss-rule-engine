@@ -8,6 +8,8 @@ const aliasPlugin = (nextConfig = {}) => {
   return Object.assign({}, nextConfig, {
     webpack: (config, options) => {
 
+      console.log("Processing alias plugin");
+
       const path = require('path');
       
       if (!config.resolve.alias) {
