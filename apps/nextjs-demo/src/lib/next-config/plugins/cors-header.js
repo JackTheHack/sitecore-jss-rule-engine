@@ -14,11 +14,11 @@ const corsHeaderPlugin = (nextConfig = {}) => {
       return [
         ...(await extendHeaders),
         {
-          source: '/_next/:path*',
+          source: '/:path*',
           headers: [
             {
               key: 'Access-Control-Allow-Origin',
-              value: config.sitecoreApiHost.replace(/\/$/, ''),
+              value: config.publicUrl.replace(/\/$/, ''),
             },
           ],
         },
