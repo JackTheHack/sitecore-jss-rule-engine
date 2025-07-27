@@ -3,7 +3,7 @@ import { PersonalizationHelper  } from "../lib/PersonalizationHelper";
 import {JssRuleEngine, RuleEngineContext} from "@jss-rule-engine/core"
 import { Placeholder, PlaceholderComponentProps, useComponentProps } from '@sitecore-jss/sitecore-jss-nextjs';
 import { withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';
-import { RuleEnginePersonalizationContext } from '@jss-rule-engine/edge/dist/src/rule-engine/ruleEngineProvider';
+import { RuleEnginePersonalizationContext } from '@jss-rule-engine/edge';
 
 
 export interface PersonalizedPlaceholderComponentProps extends PlaceholderComponentProps
