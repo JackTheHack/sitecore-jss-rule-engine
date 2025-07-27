@@ -28,5 +28,7 @@ export const createGraphQLClientFactory = (config: JssConfig) => {
     );
   }
 
+  console.log('GraphQL client config: ', clientConfig)
+
   return GraphQLRequestClient.createClientFactory(clientConfig);
 };
