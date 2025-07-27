@@ -1,11 +1,7 @@
 import { JssRuleEngine, IJssRuleEngine} from './src/ruleEngine';
 import { RuleData, RuleActionData, ClientCommand, RuleEngineContext, RuleConditionData, ConditionFunctionDefinition, ActionFunctionDefinition, OperatorFunctionDefinition } from './src/types/ruleEngine';
 import {RuleEngineSessionContext} from './src/types/ruleEngineSessionContext'
-
-declare global {
-    var EdgeRuntime: string;
-    var JssEngine: JssRuleEngine;
-}
+import "./src/types/global"
 
 var isEdgeRuntime = typeof global.EdgeRuntime == 'string';
 
@@ -23,5 +19,6 @@ export function getRuleEngineInstance() {
     return new JssRuleEngine();
 }
 
-export { JssRuleEngine, IJssRuleEngine, RuleEngineContext, ClientCommand, RuleConditionData, RuleData, RuleActionData, RuleEngineSessionContext, ConditionFunctionDefinition, ActionFunctionDefinition, OperatorFunctionDefinition };
+export { JssRuleEngine, RuleEngineSessionContext };
+export type { IJssRuleEngine, RuleEngineContext, ClientCommand, RuleConditionData, RuleData, RuleActionData, ConditionFunctionDefinition, ActionFunctionDefinition, OperatorFunctionDefinition };
 export { GraphQLItemProvider } from './src/graphQl/graphQLItemProvider';
