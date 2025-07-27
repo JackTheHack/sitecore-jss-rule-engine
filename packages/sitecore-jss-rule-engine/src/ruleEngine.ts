@@ -211,7 +211,7 @@ export class JssRuleEngine implements IJssRuleEngine {
     {
         if(this.debug && typeof(console) !== 'undefined')
         {            
-            console.log.apply(console, arguments);
+            console.log(..._args);
         }
     }
 }
