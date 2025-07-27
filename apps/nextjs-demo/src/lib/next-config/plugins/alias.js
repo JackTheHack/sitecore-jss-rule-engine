@@ -14,8 +14,10 @@ const aliasPlugin = (nextConfig = {}) => {
         config.resolve.alias = {};
       }
 
-      config.resolve.alias['@src'] = path.resolve(__dirname, 'src');
-      config.resolve.alias['@utils'] = path.resolve(__dirname, 'src/utils');
+      config.resolve.alias['@src'] = path.resolve(__dirname, '../../../../../../src');
+      config.resolve.alias['@utils'] = path.resolve(__dirname, '../../../../../../src/utils');
+
+      console.log('Webpack config: ', config.resolve.alias);
 
       return config;
     }
