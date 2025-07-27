@@ -140,5 +140,6 @@ const nextConfig = {
 module.exports = () => {
   // Run the base config through any configured plugins
   let result = Object.values(plugins).reduce((acc, plugin) => plugin(acc), nextConfig);
+  console.log('Generating nextjs config.');
   return result;
 };
