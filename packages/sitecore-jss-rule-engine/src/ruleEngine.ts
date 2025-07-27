@@ -37,7 +37,7 @@ export class JssRuleEngine implements IJssRuleEngine {
     commandDefinitions: Map<string, ActionFunctionDefinition>
     ruleDefinitions: Map<string, ConditionFunctionDefinition>
     operatorDefinitions: Map<string, OperatorFunctionDefinition>
-    debug: boolean
+    debug: boolean = false
     sitecoreContext?: RuleEngineSitecoreContext
     requestContext?: RuleEngineRequestContext
     mockDate?: Date
