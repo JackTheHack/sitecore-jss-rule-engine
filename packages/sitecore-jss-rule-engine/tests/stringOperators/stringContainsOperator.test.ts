@@ -1,7 +1,7 @@
 
 import test from 'ava'
 
-import { operatorIds } from '@src/constants'
+import { operatorIds } from '@coresrc/constants'
 
 import { getOperator} from '../_testHelpers'
 

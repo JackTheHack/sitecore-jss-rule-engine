@@ -1,4 +1,4 @@
-import { RuleData, RuleEngineContext } from "@src/types/ruleEngine";
+import { RuleData, RuleEngineContext } from "../types/ruleEngine";
 
 function getItemFieldValue(ruleContext: RuleEngineContext, fieldName: any){
     var field = ruleContext.sitecoreContext?.route?.fields[fieldName];

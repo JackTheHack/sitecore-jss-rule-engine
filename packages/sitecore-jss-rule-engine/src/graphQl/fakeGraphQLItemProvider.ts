@@ -1,5 +1,5 @@
 import { IItemProvider } from './itemProvider';
-import { getItemAncestorsByIdMock, getItemByIdMock, getItemDescendantsByIdMock } from '@root/mocks/graphQLMocks';
+import { getItemAncestorsByIdMock, getItemByIdMock, getItemDescendantsByIdMock } from '@coreroot/mocks/graphQLMocks';
 
 export class FakeGraphQLItemProvider implements IItemProvider {
   constructor() {

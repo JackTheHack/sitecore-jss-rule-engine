@@ -1,5 +1,5 @@
-import { FakeGraphQLItemProvider } from "@root/src/graphQl/fakeGraphQLItemProvider";
-import { IItemProvider } from "@root/src/graphQl/itemProvider";
+import { FakeGraphQLItemProvider } from "@coresrc/graphQl/fakeGraphQLItemProvider";
+import { IItemProvider } from "@coresrc/graphQl/itemProvider";
 
 class SitecoreContextMockBuilder {
     

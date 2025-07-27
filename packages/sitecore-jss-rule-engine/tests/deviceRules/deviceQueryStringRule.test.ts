@@ -4,7 +4,7 @@ import test from 'ava'
 import { parseAndRun} from '../_testHelpers'
 
 
-import * as ruleMocks from '@root/mocks/ruleMocks'
+import * as ruleMocks from '@coreroot/mocks/ruleMocks'
 
 test('deviceQueryStringRule', async t => {
     var xml = ruleMocks.deviceQueryStringRuleXml;

@@ -1,9 +1,9 @@
 
 import test from 'ava'
 
-import * as ruleMocks from '@root/mocks/ruleMocks'
-import { parseAndRun } from '@root/tests/_testHelpers';
-import { sitecoreContextMockBuilder } from '@root/mocks/itemMockBuilder';
+import * as ruleMocks from '@coreroot/mocks/ruleMocks'
+import { parseAndRun } from '@coreroot/tests/_testHelpers';
+import { sitecoreContextMockBuilder } from '@coreroot/mocks/itemMockBuilder';
 
 
 test('itemAncestorOrSelfRule', async t => {

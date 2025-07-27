@@ -2,7 +2,7 @@
 import test from 'ava'
 
 import { getOperator} from '../_testHelpers'
-import { operatorIds } from '@src/constants'
+import { operatorIds } from '@coresrc/constants'
 
 test('isNotEqualToOperator', async t=> {
     var operator = getOperator(operatorIds.isNotEqualTo)

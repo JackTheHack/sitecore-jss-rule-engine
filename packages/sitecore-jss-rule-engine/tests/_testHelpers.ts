@@ -1,6 +1,6 @@
 
-import { JssRuleEngine }  from '@src/ruleEngine';
-import { RuleEngineContext } from '@src/types/ruleEngine';
+import { JssRuleEngine }  from '@coresrc/ruleEngine';
+import { RuleEngineContext } from '@coresrc/types/ruleEngine';
 
 // #region Help functions
 export function getOperator(operatorId:string){

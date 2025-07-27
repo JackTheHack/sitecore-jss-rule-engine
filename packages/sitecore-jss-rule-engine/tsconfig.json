@@ -21,8 +21,8 @@
     "allowSyntheticDefaultImports": true,
     "strict":false,
     "paths": {
-      "@root/*":["./*"],      
-      "@src/*":["./src/*"]      
+      "@coreroot/*":["./*"],      
+      "@coresrc/*":["./src/*"]      
     },
     "baseUrl": "."
   },
