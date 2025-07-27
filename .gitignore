@@ -78,9 +78,13 @@ _ReSharper*/
 /src/rendering/src/temp/!GraphQLFragmentTypes.json
 /src/rendering/src/temp/!GraphQLIntrospectionResult.json
 .yarn/install-state.gz
+
 apps/nextjs-demo/local.db
 *.sqlite
 
 /.env
 /apps/nextjs-demo/.env
 .env
+
+!.yarn/releases
+.yarnrc.yml

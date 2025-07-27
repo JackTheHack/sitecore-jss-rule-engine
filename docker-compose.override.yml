@@ -92,4 +92,9 @@ services:
       Sitecore_GraphQL_ExposePlayground: “true”
       DEBUG: "sitecore-jss:*"
       DEBUG_MULTILINE: "true"
+    labels:
+      - "traefik.http.routers.cm-proxy.entrypoints=websecure"
+      - "traefik.http.routers.cm-proxy.tls=true"
+      - "traefik.http.routers.cm-proxy.middlewares=force-STS-Header"
+      - "traefik.http.routers.cm-proxy.rule=Host(`${CM_PROXY_HOST}`)"
     entrypoint: powershell -Command "& C:/tools/entrypoints/iis/XmCloudDevelopment.ps1"

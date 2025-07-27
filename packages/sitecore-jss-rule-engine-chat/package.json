@@ -1,6 +1,6 @@
 {
   "name": "@jss-rule-engine/chat",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "description": "",
   "type": "module",
   "main": "dist/index.js",
@@ -10,7 +10,9 @@
     ".": "./dist/index.js",
     "./client": "./dist/client.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

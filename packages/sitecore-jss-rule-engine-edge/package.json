@@ -1,6 +1,6 @@
 {
   "name": "@jss-rule-engine/edge",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.js",
