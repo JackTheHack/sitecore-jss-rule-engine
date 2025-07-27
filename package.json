@@ -26,7 +26,6 @@
     "scripts": {
         "test:core": "yarn workspace @jss-rule-engine/core test",
         "test:workflow": "yarn workspace @jss-rule-engine/workflow test",
-        "test:w": "yarn workspace @jss-rule-engine/workflow t",
         "build:core": "yarn workspace @jss-rule-engine/core build",
         "build:edge": "yarn workspace @jss-rule-engine/edge build",
         "build:chat": "yarn workspace @jss-rule-engine/chat build",
