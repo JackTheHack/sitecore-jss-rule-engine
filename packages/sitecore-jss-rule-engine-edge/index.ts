@@ -1,4 +1,13 @@
-export { GraphQLPersonalizeServiceConfig, GraphQLSCPersonalizeService, PersonalizeInfo, PersonalizeContext } from './src/plugins/middleware/ScPersonalizeService'
+export {
+    GraphQLPersonalizeServiceConfig,
+    GraphQLSCPersonalizeService
+  } from './src/plugins/middleware/ScPersonalizeService';
+  
+export type {
+    PersonalizeInfo,
+    PersonalizeContext
+} from './src/plugins/middleware/ScPersonalizeService';
+
 export { ScPersonalizeMiddlewareConfig } from './src/plugins/middleware/ScPersonalizedMiddleware';
 export { ScPersonalizeMiddleware } from './src/plugins/middleware/ScPersonalizedMiddleware';
 export { registerNextJS } from './src/rule-engine/ruleEngineProvider';
