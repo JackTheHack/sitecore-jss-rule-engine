@@ -24,6 +24,7 @@
     "jsx": "react",
     "declaration": true,
     "moduleResolution": "Node",
+    "isolatedModules": true,
     "noUnusedLocals": false,
     "noUnusedParameters": true,
     "esModuleInterop": true,

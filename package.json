@@ -36,7 +36,7 @@
         "build:demo": "yarn workspace jsssandbox build",
         "build:editor": "yarn workspace @jss-rule-engine/editor build",
         "build:items": "dotnet sitecore itemres create -o docker/build/ruleengine-cm-assets/items/ruleengine --overwrite",
-        "build": "yarn run build:core && yarn run build:edge && yarn run build:next  && yarn run build:workflow",
+        "build": "yarn run build:core && yarn run build:edge && yarn run build:next  && yarn run build:workflow && yarn run build:chat",
         "start:demo": "yarn workspace jsssandbox build && yarn workspace jsssandbox start:connected",
         "start:demo:dbinit": "yarn workspace jsssandbox db:init",
         "start:editor": "yarn workspace @jss-rule-engine/editor start",

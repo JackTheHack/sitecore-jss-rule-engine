@@ -15,6 +15,8 @@ export { RulesSSRPersonalizationPlugin } from "./plugins/page-props-factory/rule
 export { RulesSSGPersonalizationPlugin } from "./plugins/page-props-factory/rulesSSGPersonalizationPlugin";
 export { ResolvePersonalizationPathPlugin } from "./plugins/page-props-factory/resolvePersonalizationPathPlugin";
 export { ScPersonalizePlugin, scpersonalizePlugin } from './plugins/extractPath/scpersonalize'
-export { BaseGraphQLSitemapServiceConfig, BasePersonalizeGraphQLSitemapService } from './plugins/sitemapFetcher/base-personalize-graphql-sitemap-service'
-export { MultisiteGraphQLSitemapServiceConfig, MultisitePersonalizeGraphQLSitemapService } from './plugins/sitemapFetcher/multisite-personalize-sitemap-fetcher'
+export { BasePersonalizeGraphQLSitemapService } from './plugins/sitemapFetcher/base-personalize-graphql-sitemap-service';
+export type { BaseGraphQLSitemapServiceConfig } from './plugins/sitemapFetcher/base-personalize-graphql-sitemap-service';
+export { MultisitePersonalizeGraphQLSitemapService } from './plugins/sitemapFetcher/multisite-personalize-sitemap-fetcher';
+export type { MultisiteGraphQLSitemapServiceConfig } from './plugins/sitemapFetcher/multisite-personalize-sitemap-fetcher';
 

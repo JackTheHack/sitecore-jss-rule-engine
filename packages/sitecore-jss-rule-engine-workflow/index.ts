@@ -7,20 +7,23 @@ registerNextJS(ruleEngine);
 
 //module index.js
 export {WorkflowService} from "./src/workflowService";
-export {WorkflowExecutionContext} from "./src/workflowTypes";
-export {WorkflowExecutionOptions} from "./src/workflowTypes";
-export {WorkflowExecutionResult} from "./src/workflowTypes";
-export {Workflow} from "./src/workflowTypes";
-export {WorkflowActionCommand} from "./src/workflowTypes";
-export {WorkflowActionFactory, IWorkflowActionFactory, IWorkflowAction} from "./src/actionFactory";
-export {WorkflowAction, WorkflowState, WorkflowTrigger} from "./src/workflowTypes";
-export {DatabaseService, IDatabaseService} from "./src/databaseService";
-export {WorkflowScheduledTask, IWorkflowService} from "./src/workflowTypes";
-export {ScheduledTaskService, IScheduledTaskService} from "./src/scheduledTaskService";
-export {ScheduledTaskServiceOptions} from "./src/scheduledTaskServiceTypes";
-export {WorkflowServiceOptions} from "./src/workflowTypes";
-export {DatabaseServiceOptions} from "./src/databaseService";
-export {ChatConversationContext} from './src/workflowTypes'
+export type {WorkflowExecutionContext} from "./src/workflowTypes";
+export type {WorkflowExecutionOptions} from "./src/workflowTypes";
+export type {WorkflowExecutionResult} from "./src/workflowTypes";
+export type {Workflow} from "./src/workflowTypes";
+export type {WorkflowActionCommand} from "./src/workflowTypes";
+export { WorkflowActionFactory } from "./src/actionFactory";
+export type { IWorkflowActionFactory, IWorkflowAction } from "./src/actionFactory";
+export type {WorkflowAction, WorkflowState, WorkflowTrigger} from "./src/workflowTypes";
+export { DatabaseService } from "./src/databaseService";
+export type { IDatabaseService } from "./src/databaseService";
+export type {WorkflowScheduledTask, IWorkflowService} from "./src/workflowTypes";
+export { ScheduledTaskService } from "./src/scheduledTaskService";
+export type { IScheduledTaskService } from "./src/scheduledTaskService";
+export type {ScheduledTaskServiceOptions} from "./src/scheduledTaskServiceTypes";
+export type {WorkflowServiceOptions} from "./src/workflowTypes";
+export type {DatabaseServiceOptions} from "./src/databaseService";
+export type {ChatConversationContext} from './src/workflowTypes'
 export {registerWorkflowActions} from './src/registerWorkflowActions'
 export {registerWorkflowRuleEngine} from './src/registerWorkflowRuleEngine'
 export {loadWorkflowFromSitecore} from './src/lib/loadWorkflow'

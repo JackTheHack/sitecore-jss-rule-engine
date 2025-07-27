@@ -8,6 +8,7 @@
     "declaration": true,
     "sourceMap":true,
     "moduleResolution": "node",
+    "isolatedModules": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "esModuleInterop": true,
