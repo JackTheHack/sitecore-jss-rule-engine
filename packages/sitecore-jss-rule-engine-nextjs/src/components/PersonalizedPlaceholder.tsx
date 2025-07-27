@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { ComponentType, useContext } from 'react';
 import { PersonalizationHelper  } from "../lib/PersonalizationHelper";
 import {JssRuleEngine, RuleEngineContext} from "@jss-rule-engine/core"
-import { Placeholder, PlaceholderComponentProps, useComponentProps } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Placeholder, PlaceholderComponentProps, useComponentProps, WithSitecoreContextProps } from '@sitecore-jss/sitecore-jss-nextjs';
 import { withSitecoreContext } from '@sitecore-jss/sitecore-jss-react';
 import { RuleEnginePersonalizationContext } from '@jss-rule-engine/edge';
 
@@ -139,4 +139,5 @@ export class PersonalizedPlaceholder extends React.Component<any,any> {
     }
 }
 
-export default withSitecoreContext()(PersonalizedPlaceholder);
+//export default withSitecoreContext()(PersonalizedPlaceholder);
+export default withSitecoreContext()(PersonalizedPlaceholder as unknown as ComponentType<WithSitecoreContextProps>);
