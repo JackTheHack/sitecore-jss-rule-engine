@@ -1,5 +1,6 @@
 {
   "compilerOptions": {    
+    "baseUrl": ".",
     "paths": {
       "@jss-rule-engine/core": [
         "../sitecore-jss-rule-engine/*",
