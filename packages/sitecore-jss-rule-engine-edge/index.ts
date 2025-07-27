@@ -1,8 +1,11 @@
 export {
-    GraphQLPersonalizeServiceConfig,
     GraphQLSCPersonalizeService
   } from './src/plugins/middleware/ScPersonalizeService';
   
+export type {
+    GraphQLPersonalizeServiceConfig
+} from './src/plugins/middleware/ScPersonalizeService';
+
 export type {
     PersonalizeInfo,
     PersonalizeContext
