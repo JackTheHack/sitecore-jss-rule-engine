@@ -19,6 +19,7 @@ const workflowId = process.env.CHAT_WORKFLOW_ID || '{C880D84B-A088-454C-9FB0-782
 const ChatbotWidget = (_props: ChatbotWidgetProps): JSX.Element => (
   <ChatBotWidget 
         welcomeMessage="Hi! I'm Peter, your friendly chatbot, and ready to answer any of your questions." 
+        startOptions={["My account", "Support", "Billing"]}
         flowId={workflowId}
         title="Peter The Bot"
         iconUrl={`${publicUrl}/chatbotify/icons8-sitecore.svg`}/>
