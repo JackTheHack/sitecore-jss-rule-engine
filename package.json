@@ -49,7 +49,8 @@
         "sitecore:push": "dotnet sitecore ser push",
         "sitecore:validate": "dotnet sitecore ser validate --fix",
         "sitecore:login": "dotnet sitecore login",
-        "poll": "POLL_URL=http://localhost:3000/api/schedule/run node scripts/pollUrl.js"
+        "poll": "POLL_URL=http://localhost:3000/api/schedule/run node scripts/pollUrl.js",
+        "tunnel": "powershell ./tunnel.ps1"
     },
     "packageManager": "yarn@4.9.1"
 }

@@ -87,5 +87,5 @@ apps/nextjs-demo/local.db
 .env
 
 !.yarn/releases
-.yarnrc.yml
 .npmrc
+.yarnrc.yml

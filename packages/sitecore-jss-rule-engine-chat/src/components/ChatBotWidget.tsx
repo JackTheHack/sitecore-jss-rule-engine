@@ -5,18 +5,22 @@ import { SitecoreChatBlock } from "../client/plugins/SitecoreChatBlock";
 
 interface ChatBotWidgetProps {
 	welcomeMessage: string;
+	startOptions: string[];
 	iconUrl?: string;
 	flowId: string;
 	title: string;
 }
 
-export const ChatBotWidget = ({ welcomeMessage, iconUrl, flowId, title }: ChatBotWidgetProps) => {
+export const ChatBotWidget = ({ welcomeMessage, startOptions, iconUrl, flowId, title }: ChatBotWidgetProps) => {
 
 	// example openai conversation
 	// you can replace with other LLMs such as Google Gemini
 	const flow = {
 		start: {
 			message: welcomeMessage,
+			opstions: {
+				items: startOptions
+			},
 			chatDisabled: true,
 			transition: 0,
 			path: "loop"
