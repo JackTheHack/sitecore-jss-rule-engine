@@ -67,6 +67,7 @@ export async function ragItemsIndexingHandler({
             const indexingRule = fields?.find((x: any) => x.name == "IndexingRule")?.value;
             const indexedFieldIdsRaw = fields?.find((x: any) => x.name == "IndexedFieldIDs")?.value || '';
             const enabled = fields?.find((x: any) => x.name == "Enabled")?.value == "1";
+            const source = fields?.find((x:any) => x.name == "Source")?.value;
 
             console.log(`Processing RAG Index: ${ragIndex.id}`);
             console.log(`Indexing rule:`, indexingRule, indexedFieldIdsRaw, enabled);
@@ -79,11 +80,14 @@ export async function ragItemsIndexingHandler({
 
             console.log(`Indexed field IDs: ${indexedFieldIds.join(', ')}`);
 
+            
+
             // Index the target item using this RAG Index configuration
             await indexSitecoreItem({
                 itemId,
                 itemProvider,
                 indexId: ragIndex.id,
+                indexSource: source,
                 indexingRule,
                 indexedFieldIds,
                 ruleEngine

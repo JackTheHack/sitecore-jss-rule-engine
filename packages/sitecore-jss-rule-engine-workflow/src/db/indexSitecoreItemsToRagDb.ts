@@ -9,6 +9,7 @@ export interface IndexSitecoreItemOptions {
   itemId: string;
   itemProvider: GraphQLItemProvider;
   indexId: string;
+  indexSource: string;
   indexingRule: string;
   indexedFieldIds: string[];
   ruleEngine: JssRuleEngine
@@ -36,12 +37,18 @@ export function concatenateItemFields(itemData: any, indexedFieldIds: string[]):
 }
 
 export async function indexSitecoreItem(options: IndexSitecoreItemOptions) {
-  const { itemId, itemProvider, indexingRule, indexedFieldIds, indexId } = options;
+  const { itemId, itemProvider, indexingRule, indexSource, indexedFieldIds, indexId } = options;
 
     // 2. Get children of RootItemId
   
   console.log('Getting ', itemId)
   const itemInfo = await itemProvider.getItemById(itemId);
+
+  if(!itemInfo.path.indexOf(indexSource)){
+    console.log('Not part of RAG index. Skipping.');
+    return;
+  }
+
   const children = itemInfo?.item?.children?.results || [];
 
   const dbServiceOptions = getDatabaseServiceOptions();
