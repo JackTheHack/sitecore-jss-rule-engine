@@ -54,7 +54,7 @@ export async function indexSitecoreItem(options: IndexSitecoreItemOptions) {
 
   console.log('Indexing check: ', itemInfo?.item.path, indexSourceItem?.item.path);
 
-  if(!itemInfo?.item.path.indexOf(indexSourceItem?.item.path)){
+  if(itemInfo?.item.path.indexOf(indexSourceItem?.item.path) < 0){
     console.log('Not part of RAG index. Skipping.', itemInfo.path, indexSource);
     return;
   }
