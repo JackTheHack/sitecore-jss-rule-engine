@@ -89,3 +89,4 @@ apps/nextjs-demo/local.db
 !.yarn/releases
 .npmrc
 .yarnrc.yml
+/apps/tg-demo
