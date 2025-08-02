@@ -1,7 +1,7 @@
 import React from 'react';
 import ChatBot from "react-chatbotify";
 import SitecoreChatPlugin from "../client/plugins/sitecoreChatPluginFactory"
-import { SitecoreChatBlock } from "../client/plugins/SitecoreChatBlock";
+import { SitecoreChatBlock } from 'src/client/plugins/SitecoreChatBlock';
 
 interface ChatBotWidgetProps {
 	welcomeMessage: string;
@@ -18,10 +18,13 @@ export const ChatBotWidget = ({ welcomeMessage, startOptions, iconUrl, flowId, t
 	const flow = {
 		start: {
 			message: welcomeMessage,
-			opstions: {
-				items: startOptions
+			options: {
+				items: startOptions,
+				reusable: true
 			},
-			chatDisabled: true,
+			chatDisabled: false,
+			start: true,
+			waitForAnswer: false,
 			transition: 0,
 			path: "loop"
 		},
@@ -29,6 +32,8 @@ export const ChatBotWidget = ({ welcomeMessage, startOptions, iconUrl, flowId, t
 			flowId: flowId
 		} as SitecoreChatBlock
 	}
+
+	console.log('Chatbot flow: ', flow, flowId, startOptions);
 
 	const styles = {
 		// ...other styles
@@ -79,6 +84,8 @@ export const ChatBotWidget = ({ welcomeMessage, startOptions, iconUrl, flowId, t
 			flow={flow}
 			settings={chatBotSettings}
 			styles={styles}
+			id='chatbot-widget'
+			key={`chatbot-widget-${flowId}`}
 			plugins={[SitecoreChatPlugin({ autoConfig: true, hostUrl: process.env.PUBLIC_URL })]} />
 	);
 };
