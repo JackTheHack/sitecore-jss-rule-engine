@@ -70,7 +70,7 @@ export async function ragItemsIndexingHandler({
             const source = fields?.find((x:any) => x.name == "Source")?.value;
 
             console.log(`Processing RAG Index: ${ragIndex.id}`);
-            console.log(`Indexing rule:`, indexingRule, indexedFieldIdsRaw, enabled);
+            console.log(`Indexing rule:`, indexingRule, indexedFieldIdsRaw, enabled, source);
 
             const indexedFieldIds = indexedFieldIdsRaw
                 .split(',')
