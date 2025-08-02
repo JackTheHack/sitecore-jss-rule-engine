@@ -1,7 +1,7 @@
 import React from 'react';
 import ChatBot from "react-chatbotify";
 import SitecoreChatPlugin from "../client/plugins/sitecoreChatPluginFactory"
-import { SitecoreChatBlock } from 'src/client/plugins/SitecoreChatBlock';
+import { SitecoreChatBlock } from '../../src/client/plugins/SitecoreChatBlock';
 
 interface ChatBotWidgetProps {
 	welcomeMessage: string;
