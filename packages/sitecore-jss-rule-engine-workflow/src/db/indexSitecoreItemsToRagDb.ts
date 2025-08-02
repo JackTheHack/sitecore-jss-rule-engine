@@ -45,7 +45,7 @@ export async function indexSitecoreItem(options: IndexSitecoreItemOptions) {
   const itemInfo = await itemProvider.getItemById(itemId);
 
   if(!itemInfo.path.indexOf(indexSource)){
-    console.log('Not part of RAG index. Skipping.');
+    console.log('Not part of RAG index. Skipping.', itemInfo.path, indexSource);
     return;
   }
 
