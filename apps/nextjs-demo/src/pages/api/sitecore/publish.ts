@@ -18,7 +18,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try {
         // Parse the webhook payload
-        const event = JSON.parse(req.body);
+
+        let event:any = {};
+
+        if (typeof req.body === 'string') {
+            try {
+              event = JSON.parse(req.body);
+            } catch (e) {
+              // Handle JSON parsing error, if necessary
+              console.error('Error parsing JSON:', e);
+            }
+          }else {
+            event = req.body;
+          }
+          
+
         console.log('Received Sitecore publish webhook:', event);
 
         const eventType = event.EventName;
