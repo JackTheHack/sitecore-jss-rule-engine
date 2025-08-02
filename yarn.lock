@@ -7179,9 +7179,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"grammy-demo@workspace:apps/grammy-demo":
+"grammy-demo@workspace:apps/tg-demo":
   version: 0.0.0-use.local
-  resolution: "grammy-demo@workspace:apps/grammy-demo"
+  resolution: "grammy-demo@workspace:apps/tg-demo"
   dependencies:
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
