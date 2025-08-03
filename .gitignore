@@ -90,3 +90,4 @@ apps/nextjs-demo/local.db
 .npmrc
 .yarnrc.yml
 /apps/tg-demo
+.vercel
